@@ -4,5 +4,6 @@
 int main()
 {
 	bang_size_ao();
+	cout << "test";
 	return 0;
 }
