@@ -409,22 +409,154 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 }
 
 
-//void test()
-//{
-//	Admin a;
-//	for (node_hoa_don* k = a.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
-//	{
-//
-//	}
-//	for (node_hoa_don* k = a.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
-//	{
-//
-//	}
-//	if (a.quan_li_ds_kh.t != NULL)
-//	{
-//		for (node_hoa_don* k = a.quan_li_ds_kh.t->data.don_mua_hang.pHead; k != NULL; k = k->pNext)
-//		{
-//
-//		}
-//	}
-//}
+// Xuat san pham moi
+void sanPhammoi(DS_Hang_Hoa x)
+{
+	cout << "= San pham moi =\n";
+
+	for (int i = x.ds_ao.size() - 1; i > x.ds_ao.size() - 5; i--)
+	{
+		xuat_tt_hh_ngan_gon(x.ds_ao.at(i));
+	}
+}
+
+// Xuat san pham hot
+void sanPhamhot(DS_HOA_DON a)
+{
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
+
+	cout << "Best seller \n";
+	for (node_hoa_don* k = a.pHead; k != NULL; k = k->pNext)
+	{
+		if (k->data.ma_hoa_don[0] == 'X')
+		{
+			if (k->data.sl_mua >= 100 && (1 + ltm->tm_mon) - stoi(k->data.ngay_lap_hd.substr(3, 2)) <= 1)
+			{
+				xuat_tt_hh_ngan_gon(k->data.thong_tin_hang);
+			}
+		}
+	}
+}
+
+// loc hang hoa
+void loc_HangHoa(DS_Hang_Hoa x)
+{
+	int loc, min, max;
+	string ten;
+	int ngay;
+	cout << "\t- Bo loc -\n";
+	cout << "1. Theo khoang gia.\n";
+	cout << "2. Theo ten.\n";
+	cout << "3. Theo ngay.\n";
+	cout << "Nhap lua chon: ";  cin >> loc;
+	if (loc == 1)
+	{
+		cout << "Nhap khoang gia muon tim: \n";
+		cout << "-Tu: "; cin >> min;
+		cout << "-Den: "; cin >> max;
+		for (int i = 0; i < x.ds_ao.size(); i++)
+		{
+			if (x.ds_ao.at(i).gia > min && x.ds_ao.at(i).gia < max)
+			{
+				xuat_tt_hh_ngan_gon(x.ds_ao.at(i));
+			}
+		}
+		for (int i = 0; i < x.ds_quan.size(); i++)
+		{
+			if (x.ds_quan.at(i).gia > min && x.ds_quan.at(i).gia < max)
+			{
+				xuat_tt_hh_ngan_gon(x.ds_quan.at(i));
+			}
+		}
+	}
+	else if (loc == 2)
+	{
+		cin.ignore();
+		cout << "Nhap ten hang hoa: "; getline(cin, ten);
+		check_Ten(ten);
+		regex check(ten);
+		for (int i = 0; i < x.ds_ao.size(); i++)
+		{
+			if (regex_search(x.ds_ao.at(i).ten_hh, check) == true)
+			{
+				xuat_tt_hh_ngan_gon(x.ds_ao.at(i));
+			}
+		}
+		for (int i = 0; i < x.ds_quan.size(); i++)
+		{
+			if (regex_search(x.ds_quan.at(i).ten_hh, check) == true)
+			{
+				xuat_tt_hh_ngan_gon(x.ds_quan.at(i));
+			}
+		}
+	}
+	else if (loc == 3)
+	{
+		cin.ignore();
+		cout << "Nhap ngay muon tim: ";
+		cin >> ngay;
+		// kiem tra 
+
+		for (int i = 0; i < x.ds_ao.size(); i++)
+		{
+			if (ngay == stoi(x.ds_ao.at(i).thoi_gian_nhap_hang.substr(0, 2)))
+			{
+				xuat_tt_hh_ngan_gon(x.ds_ao.at(i));
+			}
+		}
+		for (int i = 0; i < x.ds_quan.size(); i++)
+		{
+			if (ngay == stoi(x.ds_quan.at(i).thoi_gian_nhap_hang.substr(0, 2)))
+			{
+				xuat_tt_hh_ngan_gon(x.ds_quan.at(i));
+			}
+		}
+	}
+}
+
+//sap xep theo bang chu cai 
+bool soSanhGiamDan_Ten(HangHoa x1, HangHoa x2)
+{
+	return x1.ten_hh > x2.ten_hh;
+}
+void sapXepThuTu(DS_Hang_Hoa x)
+{
+	for (int i = 0; i < x.ds_ao.size(); i++)
+	{
+		sort(x.ds_ao.begin(), x.ds_ao.end(), soSanhGiamDan_Ten);
+	}
+	cout << "== Danh sach ao sau khi sap ==\n";
+	for (int i = 0; i < x.ds_ao.size(); i++)
+	{
+		xuat_tt_hh_ngan_gon(x.ds_ao.at(i));
+	}
+	for (int i = 0; i < x.ds_quan.size(); i++)
+	{
+		sort(x.ds_quan.begin(), x.ds_quan.end(), soSanhGiamDan_Ten);
+	}
+	cout << "== Danh sach quan sau khi sap ==\n";
+	for (int i = 0; i < x.ds_quan.size(); i++)
+	{
+		xuat_tt_hh_ngan_gon(x.ds_quan.at(i));
+	}
+}
+
+//xuat ca danh sach
+void xuatDS_Hang(DS_Hang_Hoa x)
+{
+	// xuat danh sach ao
+	cout << "= Danh sach ao = \n";
+	for (int i = 0; i < x.ds_ao.size(); i++)
+	{
+		xuat_tt_hh_ngan_gon(x.ds_ao.at(i));
+
+	}
+	// xuat danh sach quan
+	cout << "= Danh sach quan =\n";
+	for (int i = 0; i < x.ds_quan.size(); i++)
+	{
+		xuat_tt_hh_ngan_gon(x.ds_quan.at(i));
+
+	}
+}
