@@ -5,5 +5,5 @@ int main()
 {
 	bang_size_ao();
 	return 0;
+	cout << "Thien dep traiq+";
 }
-dinh test
