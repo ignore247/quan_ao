@@ -1,7 +1,165 @@
 ﻿#pragma once
 #include "Check_du_lieu_nhap.h"
 #include "Xu_li_do_hoa.h"
+//-----------Load thông tin----------
+//===Khach hang===//
+void duyet_NLR_xuat_thong_tin_KH(TREE t) {
+	if (t != NULL) {
+		cout << t->data.ten << endl;
+		duyet_NLR_xuat_thong_tin_KH(t->pLeft);
+		duyet_NLR_xuat_thong_tin_KH(t->pRight);
+	}
+}
+void them_khachhang_vao_cay(TREE& t, KH data) {
+	if (t == NULL) {
+		node_kh* p = new node_kh;
+		p->data = data;
+		p->pLeft = NULL;
+		p->pRight = NULL;
+		t = p;
+	}
+	else if (t != NULL) {
+		if (stoi(data.maKh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4))) {
+			them_khachhang_vao_cay(t->pLeft, data);
+		}
+		else if (stoi(data.maKh.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4))) {
+			them_khachhang_vao_cay(t->pRight, data);
+		}
+	}
+}
+void load_thong_tin_khach_hang(TREE& t) {
+	ifstream fileinThongTinKH("thong_tin_khach_hang.txt", ios::in);
+	int soLuong;
+	fileinThongTinKH >> soLuong;
+	cin.ignore();
+	cout << endl;
+	while (fileinThongTinKH.eof() == false) {
+		KH a;
+		getline(fileinThongTinKH, a.email, ',');
+		getline(fileinThongTinKH, a.mat_khau, ',');
+		getline(fileinThongTinKH, a.maKh, ',');
+		getline(fileinThongTinKH, a.ten, ',');
+		getline(fileinThongTinKH, a.diaChi, ',');
+		getline(fileinThongTinKH, a.sdt);
+		them_khachhang_vao_cay(t, a);
+	}
+	fileinThongTinKH.close();
+}
+//===Danh sach hoa don===//
+void xuat_ds_hd_nhap(DS_HOA_DON dshd) {
+	if (dshd.pHead == NULL) {
+		cout << "Danh sach hoa don trong!" << endl;
+		system("pause");
+	}
+	else {
+		for (node_hoa_don* k = dshd.pHead; k != NULL; k = k->pNext) {
+			cout << k->data.ma_hoa_don << endl;
+		}
+	}
 
+}
+node_hoa_don* KhoiTaoNodeHD(HoaDon a) {
+	node_hoa_don* p = new node_hoa_don;
+	p->data = a;
+	p->pNext = NULL;
+	return p;
+}
+void them_HoaDonNhap_vao_ds(DS_HOA_DON& dshd, HoaDon& a) {
+	node_hoa_don* p = KhoiTaoNodeHD(a);
+	if (dshd.pHead == NULL) {
+		dshd.pHead = dshd.pTail = p;
+	}
+	else {
+		dshd.pTail->pNext = p;
+		dshd.pTail = p;
+	}
+}
+void load_thong_tin_hoadon_nhap(DS_HOA_DON& dshd) {
+	ifstream fileinThongTinHDN("thong_tin_hoa_don_nhap_hang.txt", ios::in);
+	while (fileinThongTinHDN.eof() == false) {
+		HoaDon a;
+		getline(fileinThongTinHDN, a.ma_hoa_don, ',');
+		cout << a.ma_hoa_don << endl;
+
+		getline(fileinThongTinHDN, a.ma_hang_hoa, ',');
+		cout << a.ma_hang_hoa << endl;
+
+		getline(fileinThongTinHDN, a.thong_tin_hang.ten_hh, ',');
+		cout << a.thong_tin_hang.ten_hh << endl;
+
+		fileinThongTinHDN >> a.thong_tin_hang.gia;
+		cout << a.thong_tin_hang.gia << endl;
+		fileinThongTinHDN.ignore();
+
+		getline(fileinThongTinHDN, a.thong_tin_hang.size, ',');
+		cout << a.thong_tin_hang.size << endl;
+
+		fileinThongTinHDN >> a.sl_mua;
+		cout << a.sl_mua << endl;
+		fileinThongTinHDN.ignore();
+
+		getline(fileinThongTinHDN, a.ngay_lap_hd, ',');
+		cout << a.ngay_lap_hd << endl;
+
+		fileinThongTinHDN >> a.tong_tien;
+		cout << a.tong_tien << endl;
+		fileinThongTinHDN.ignore();
+		them_HoaDonNhap_vao_ds(dshd, a);
+	}
+	fileinThongTinHDN.close();
+}
+void load_thong_tin_hoadon_xuat() {
+	//chưa làm
+}
+//===Thong Tin San Pham===//
+void xuat_thong_tin_quan_ao(DS_Hang_Hoa dshh) {
+	for (int i = 0; i < dshh.ds_quan.size(); i++) {
+		cout << dshh.ds_quan[i].ma_hh << endl;
+	}
+	for (int i = 0; i < dshh.ds_ao.size(); i++) {
+		cout << dshh.ds_ao[i].ma_hh << endl;
+	}
+}
+void load_thong_tin_quan_ao(DS_Hang_Hoa& dshh) {
+
+	ifstream fileinThongTinQuan("quan.txt", ios::in);
+	while (fileinThongTinQuan.eof() == false) {
+		HangHoa a;
+		getline(fileinThongTinQuan, a.ma_hh, ',');
+		cout << a.ma_hh << endl;
+		getline(fileinThongTinQuan, a.ten_hh, ',');
+		cout << a.ten_hh << endl;
+		fileinThongTinQuan >> a.soLuongTonKho;
+
+		fileinThongTinQuan.ignore();
+		fileinThongTinQuan >> a.gia;
+		fileinThongTinQuan.ignore();
+		fileinThongTinQuan >> a.size;
+		fileinThongTinQuan.ignore();
+		getline(fileinThongTinQuan, a.mo_ta_sp, '.');
+		getline(fileinThongTinQuan, a.thoi_gian_nhap_hang);
+
+		dshh.ds_quan.push_back(a);
+	}
+	fileinThongTinQuan.close();
+	ifstream fileinThongTinAo("ao.txt", ios::in);
+	while (fileinThongTinAo.eof() == false) {
+		HangHoa a;
+		getline(fileinThongTinAo, a.ma_hh, ',');
+		getline(fileinThongTinAo, a.ten_hh, ',');
+		fileinThongTinAo >> a.soLuongTonKho;
+		fileinThongTinAo.ignore();
+		fileinThongTinAo >> a.gia;
+		fileinThongTinAo.ignore();
+		fileinThongTinAo >> a.size;
+		fileinThongTinAo.ignore();
+		getline(fileinThongTinAo, a.mo_ta_sp, '.');
+		getline(fileinThongTinAo, a.thoi_gian_nhap_hang);
+		dshh.ds_ao.push_back(a);
+	}
+	fileinThongTinAo.close();
+}
+//==================================================================
 void nhapHangHoa(HangHoa& a, DS_Hang_Hoa b)
 {
 	// mã : Q,A
