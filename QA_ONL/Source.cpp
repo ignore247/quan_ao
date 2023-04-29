@@ -6,4 +6,3 @@ int main()
 	bang_size_ao();
 	return 0;
 }
-dinh test
