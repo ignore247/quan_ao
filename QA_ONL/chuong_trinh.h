@@ -231,11 +231,6 @@ void xuatHoaDonNhapHang(HoaDon a)
 
 istream& operator >> (istream& in, KhachHang& a)
 {
-	// mã : SA (mặc định nếu là acc mới tạo) DO / BA / VA / KC
-	/*ds_kh b;
-	a.maKh = "SA";
-	a.maKh = a.maKh + tao_ma_khach_hang(b);*/ // sai r ddcm m BARO
-	// mã kh = mã + số random (tách chuỗi số thành số)
 	cout << "Nhap ten: "; getline(in, a.ten);
 	check_Ten(a.ten);
 
@@ -285,6 +280,20 @@ void them_cuoi_ds_hoa_don(DS_HOA_DON& a, HoaDon x)
 		a.pTail = p;
 	}
 	a.sl++;
+}
+
+void them_dau_ds_hoa_don(DS_HOA_DON& a, HoaDon x)
+{
+	node_hoa_don* p = khoi_tao_node_hoa_don(x);
+	if (a.pHead == NULL)
+	{
+		a.pHead = a.pTail = p;
+	}
+	else
+	{
+		p->pNext = a.pHead;
+		a.pHead = p;
+	}
 }
 
 // Hàm xếp hạng khách hàng theo số tiền đã tiêu
@@ -408,33 +417,53 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 	check_email(a.email);
 }
 
-
-// Xuat san pham moi
-void sanPhammoi(DS_Hang_Hoa x)
-{
-	cout << "= San pham moi =\n";
-
-	for (int i = x.ds_ao.size() - 1; i > x.ds_ao.size() - 5; i--)
-	{
-		xuat_tt_hh_ngan_gon(x.ds_ao.at(i));
-	}
-}
-
 // Xuat san pham hot
-void sanPhamhot(DS_HOA_DON a)
+void sanPhamHot(Admin& a)
 {
+	// xac dinh thoi gian hien tai
 	time_t now = time(0);
 	tm* ltm = localtime(&now);
 
-	cout << "Best seller \n";
-	for (node_hoa_don* k = a.pHead; k != NULL; k = k->pNext)
+	// tao vector b chua hoa don trong 1 thang 
+	vector <node_hoa_don*> b;
+	// tim san pham trong vong 1 thang
+	for (node_hoa_don* k = a.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 	{
-		if (k->data.ma_hoa_don[0] == 'X')
+		if ((1 + ltm->tm_mon) - stoi(k->data.ngay_lap_hd.substr(3, 2)) <= 1)
 		{
-			if (k->data.sl_mua >= 100 && (1 + ltm->tm_mon) - stoi(k->data.ngay_lap_hd.substr(3, 2)) <= 1)
+			b.push_back(k);
+		}
+	}
+
+	// xet tung phan tu trong vector b
+	for (int i = 0; i < b.size(); i++)
+	{
+		// so luong mua o ma hang dau tien
+		int sl_tong = b[i]->data.sl_mua;
+
+		for (node_hoa_don* k = b[i]->pNext; k != NULL; k = k->pNext)
+		{
+			if (b[i]->data.ma_hang_hoa == k->data.ma_hang_hoa)
 			{
-				xuat_tt_hh_ngan_gon(k->data.thong_tin_hang);
+				sl_tong += k->data.sl_mua;
 			}
+		}
+		if (sl_tong >= 100)
+		{
+			for (int ia = 0; ia < a.quan_li_ds_hang_hoa.ds_ao.size(); i++)
+			{
+				if (b[i]->data.ma_hang_hoa == a.quan_li_ds_hang_hoa.ds_ao.at(ia).ma_hh)
+				{
+					cout << a.quan_li_ds_hang_hoa.ds_ao.at(ia).ten_hh;
+				}
+			}
+			for (int iq = 0; iq < a.quan_li_ds_hang_hoa.ds_quan.size(); i++)
+			{
+				if (b[i]->data.ma_hang_hoa == a.quan_li_ds_hang_hoa.ds_quan.at(iq).ma_hh)
+				{
+					cout << a.quan_li_ds_hang_hoa.ds_quan.at(iq).ten_hh;
+				}
+			}	
 		}
 	}
 }
