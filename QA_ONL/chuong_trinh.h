@@ -46,6 +46,22 @@ void xuat_tt_hh_ngan_gon(HangHoa a)
 	cout << "So luong con trong kho: " << a.soLuongTonKho << endl;
 }
 
+void xuat_thong_tin_quan(DS_Hang_Hoa dshh) 
+{
+	for (int i = 0; i < dshh.ds_quan.size(); i++)
+	{
+		xuat_tt_hh_ngan_gon(dshh.ds_quan.at(i));
+	}
+}
+
+void xuat_thong_tin_ao(DS_Hang_Hoa dshh) 
+{
+	for (int i = 0; i < dshh.ds_quan.size(); i++) 
+	{
+		xuat_tt_hh_ngan_gon(dshh.ds_ao.at(i));
+	}
+}
+
 void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 {
 	string loai_hd;
@@ -159,7 +175,7 @@ void xuatHoaDonBanHang(HoaDon a, DS_Hang_Hoa c)
 	cout << "Ma khach hang: " << a.ma_kh << endl;
 	cout << "\tThong tin hang hoa: " << endl;
 	cout << "Ma hang hoa: " << a.ma_hang_hoa << endl;
-	for (int i = 0; c.ds_ao.size(); i++)
+	for (int i = 0;i < c.ds_ao.size(); i++)
 	{
 		if (a.ma_hang_hoa == c.ds_ao.at(i).ma_hh)
 		{
@@ -170,7 +186,7 @@ void xuatHoaDonBanHang(HoaDon a, DS_Hang_Hoa c)
 			break;
 		}
 	}
-	for (int i = 0; c.ds_quan.size(); i++)
+	for (int i = 0; i < c.ds_quan.size(); i++)
 	{
 		if (a.ma_hang_hoa == c.ds_quan.at(i).ma_hh)
 		{
@@ -183,7 +199,7 @@ void xuatHoaDonBanHang(HoaDon a, DS_Hang_Hoa c)
 	}
 	cout << "So luong mua: " << a.sl_mua << endl;
 	cout << "Ngay lap hoa don: " << a.ngay_lap_hd << endl;
-	if (a.ma_kh.substr(0, 2) == "DO")
+	/*if (a.ma_kh.substr(0, 2) == "DO")
 	{
 		a.tong_tien = (tien * a.sl_mua) * 0, 01;
 		a.giam_gia_theo_hang = 0, 01;
@@ -207,8 +223,8 @@ void xuatHoaDonBanHang(HoaDon a, DS_Hang_Hoa c)
 	{
 		a.tong_tien = tien * a.sl_mua;
 		a.giam_gia_theo_hang = 0;
-	}
-	cout << endl;
+	}*/
+	//cout << endl;
 	cout << "Gia duoc giam: " << a.giam_gia_theo_hang << endl;
 	cout << "Tong tien: " << a.tong_tien;
 	cout << "Trang thai: " << a.trang_thai << endl;
@@ -284,11 +300,10 @@ void them_cuoi_ds_hoa_don(DS_HOA_DON& a, HoaDon x)
 		a.pTail->pNext = p;
 		a.pTail = p;
 	}
-	a.sl++;
 }
 
 // Hàm xếp hạng khách hàng theo số tiền đã tiêu
-void xep_hang_khach_hang_theo_tien(TREE t)
+void xep_hang_khach_hang_theo_tien(TREE &t)
 {
 	long long tong_tien_da_tieu = 0;
 	if (t != NULL)
@@ -326,12 +341,12 @@ void xep_hang_khach_hang_theo_tien(TREE t)
 }
 
 // =============================GIO HANG============================= 
-// Hàm khởi tạo danh sách giỏ hàng
+
 void KhoiTao_DanhSach_GioHang(ds_hh_trong_gio_hang& ds_gh) {
 	ds_gh.pHead = NULL;
 	ds_gh.pTail = NULL;
 }
-// Hàm khỏi tạo 1 node
+
 node_gio_hang* khoiTao_node_gio_hang(gio_hang a) {
 	node_gio_hang* p = new node_gio_hang;
 	if (p == NULL)
@@ -339,13 +354,11 @@ node_gio_hang* khoiTao_node_gio_hang(gio_hang a) {
 		cout << "Khong du bo nho de cap phat" << endl;
 		return NULL;
 	}
-	else {
-		p->data = a;
-		p->pNext = NULL;
-		return p;
-	}
+	p->data = a;
+	p->pNext = NULL;
+	return p;
 }
-// Hàm thêm vào đầu danh sách giỏ hàng 
+ 
 void ThemVaoDau_DanhSach_GioHang(ds_hh_trong_gio_hang& ds_gh, gio_hang a) {
 	// danh sach rong 
 	node_gio_hang* p = khoiTao_node_gio_hang(a);
@@ -357,8 +370,7 @@ void ThemVaoDau_DanhSach_GioHang(ds_hh_trong_gio_hang& ds_gh, gio_hang a) {
 		ds_gh.pHead = p;
 	}
 }
-
-//  Hàm xoá hàng hoá ở vị trí bất kì trong danh sách giỏi hàng 
+ 
 void Xoa_hangHoa_ViTriBatKi(ds_hh_trong_gio_hang& ds_gh, string vt)
 {
 	node_gio_hang* h = NULL;
@@ -391,6 +403,14 @@ void Xoa_hangHoa_ViTriBatKi(ds_hh_trong_gio_hang& ds_gh, string vt)
 	}
 }
 
+void XuatGioHang(ds_hh_trong_gio_hang l,HangHoa a)
+{
+	for (node_gio_hang* k = l.pHead; k != NULL; k = k->pNext) 
+	{
+		xuat_tt_hh_ngan_gon(k->data.data);
+	}
+}
+// ==================== Khách hàng ====================== //
 
 void nhap_khach_hang(KhachHang& a, Admin b)
 {
@@ -407,6 +427,210 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 	cout << "Nhap email: "; cin >> a.email;//example@gmail.com
 	check_email(a.email);
 }
+
+void them_khachhang_vao_cay(TREE& t, KH data) {
+	if (t == NULL) {
+		node_kh* p = new node_kh;
+		p->data = data;
+		p->pLeft = NULL;
+		p->pRight = NULL;
+		t = p;
+	}
+	else if (t != NULL) {
+		if (stoi(data.maKh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4))) {
+			them_khachhang_vao_cay(t->pLeft, data);
+		}
+		else if (stoi(data.maKh.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4))) {
+			them_khachhang_vao_cay(t->pRight, data);
+		}
+	}
+}
+
+// =================== Xóa cây ================================
+
+void node_the_mang(node_kh*& k, TREE& t)
+{
+	if (k->pRight == NULL)
+	{
+		t->data = k->data;
+		node_kh* tam = k;
+		k = k->pLeft; // đưa node hoặc null lên
+		delete tam;
+	}
+	else
+	{
+		node_the_mang(k->pRight, t);
+	}
+}
+
+
+void xoa_khach_hang_theo_ma(TREE &t, string a)
+{
+	if (t != NULL)
+	{
+		if (t->data.maKh == a)
+		{
+			//--- xoá ----
+			if (t->pRight != NULL && t->pLeft != NULL)//2 con
+			{
+				node_the_mang(t->pLeft, t);
+			}
+			else if (t->pLeft == NULL && t->pRight == NULL)  //la
+			{
+				delete t;
+				t = NULL;
+			}
+			else  //1 con
+			{
+				node_kh* tam = t;
+				if (t->pLeft != NULL)
+				{
+					t = t->pLeft;
+				}
+				else if (t->pRight != NULL)
+				{
+					t = t->pRight;
+				}
+
+				delete tam;
+			}
+		}
+		else if (stoi (a.substr(2,4) ) > stoi(t->data.maKh.substr(2,4)))
+		{
+			xoa_khach_hang_theo_ma(t->pRight, a);
+		}
+		else
+		{
+			xoa_khach_hang_theo_ma(t->pLeft, a);
+		}
+	}
+}
+
+// ============ Cân bằng cây ======================
+
+int tim_chieu_cao_cay(TREE t) // kiểm tra node con xem ai lớn hơn thì trả về thằng lớn hơn
+{
+	if (t == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		int h_trai = tim_chieu_cao_cay(t->pLeft);
+		int h_phai = tim_chieu_cao_cay(t->pRight);
+		return (h_phai > h_trai) ? 1 + h_phai : 1 + h_trai;
+	}
+}
+
+bool kt_lech_p(TREE t, char& checkp)
+{
+	int h_trai = tim_chieu_cao_cay(t->pLeft);
+	int h_phai = tim_chieu_cao_cay(t->pRight);
+	int x = h_trai - h_phai;
+
+	if (x >= -1 && x <= 1) // lệch không quá 1 tầng
+	{
+		return false; // cây đã cân bằng
+	}
+	else
+	{
+		checkp = (h_trai > h_phai) ? 'L' : 'R';
+		return true; // cây mất cân bằng
+	}
+}
+
+char kt_lech_q(TREE t, char checkp)
+{
+	int h_trai = tim_chieu_cao_cay(t->pLeft);
+	int h_phai = tim_chieu_cao_cay(t->pRight);
+
+	if (h_trai > h_phai) // Lệch trái
+	{
+		return 'L';
+	}
+	else if (h_trai < h_phai)
+	{
+		return 'R';
+	}
+	else // bằng => chọn 1 trong 2 => chon theo p để thành LL / RR
+	{
+		return checkp;
+	}
+}
+
+void quay_phai(TREE& p, TREE& q)
+{
+	// p sẽ làm cây con phải q
+	// cây con phải của q sẽ làm cây con trái của p
+
+
+	node_kh* tam = q->pRight; // cho tam giữ cây con phải của q
+	q->pRight = p; // cho cây con phải của q là p
+	p->pLeft = tam; // cây con trái của p là tạm
+
+}
+
+void quay_trai(TREE& p, TREE& q)
+{
+	// p sẽ làm cây con trái q
+	// cây con trái của q sẽ làm cây con phải của p
+
+
+
+	node_kh* tam = q->pLeft; // cho tam giữ cây con trái của q
+	q->pLeft = p; // cho cây con trái của q là p
+	p->pRight = tam; // cây con phai của p là tạm
+
+
+}
+
+void can_bang_cay(TREE& t) // duyệt node left right NLR
+{
+	if (t != NULL)
+	{
+		// ------- NODE --------------
+		char checkp = '0'; //  tạo giá trị ban đầu khác L , R
+		if (kt_lech_p(t, checkp) == true) // cây mất cân bằng
+		{
+			node_kh* p = t;
+			node_kh* q = (checkp == 'L') ? p->pLeft : p->pRight; // kiểm tra p lệch loại gì thì q sẽ là cây con thep hướng đó của p
+			char checkq = kt_lech_q(q, checkp); // kiểm qua q là loại gì 
+
+			if (checkp == 'L' && checkq == 'L')
+			{
+				quay_phai(p, q);
+
+			}
+			else if (checkp == 'R' && checkq == 'R')
+			{
+				quay_trai(p, q);
+			}
+			else if (checkp == 'L' && checkq == 'R')
+			{
+				node_kh* tam = q->pRight;
+				quay_trai(q, q->pRight);
+				q = tam;
+				t->pLeft = q;
+				can_bang_cay(t);
+			}
+			else if (checkp == 'R' && checkq == 'L')
+			{
+				node_kh* tam = q->pLeft;
+				quay_trai(q, q->pLeft);
+				q = tam;
+				t->pRight = q;
+				can_bang_cay(t);
+			}
+			t = q;
+
+		}
+		// ------------ Left----------------
+		can_bang_cay(t->pLeft);
+		// -------------Right---------------
+		can_bang_cay(t->pRight);
+	}
+}
+
 
 
 //void test()

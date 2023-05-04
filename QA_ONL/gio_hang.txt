@@ -1,0 +1,12 @@
+DO1237
+1
+A1324,Ao,42,245000,S,Dai lam nha
+DO1235
+2
+A1324,Ao,42,245000,S,Dai lam nha
+BA1236
+3
+A1888,Ao,23,300000,L,Nhieu size
+DO1234
+2
+A1888,Ao,23,300000,L,Nhieu size
