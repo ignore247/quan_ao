@@ -346,12 +346,11 @@ void dang_nhap()
 	}
 }
 
-void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Hang_Hoa c)
+void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x,int vi_tri_y, HoaDon a, ds_hoa_don b, DS_Hang_Hoa c)
 {
-
 	//========= Khung ============== //
 	SetColor(11);
-	gotoXY(vi_tri_x, 0);
+	gotoXY(vi_tri_x, vi_tri_y);
 	for (int i = 0; i < 80; i++)
 	{
 		if (i == 0)
@@ -368,16 +367,16 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 	}
 	for (int j = 1; j < 31; j++)
 	{
-		gotoXY(vi_tri_x, j);
+		gotoXY(vi_tri_x, vi_tri_y +j);
 		cout << char(179);
 	}
 
 	for (int j = 1; j < 31; j++)
 	{
-		gotoXY(vi_tri_x + 79, j);
+		gotoXY(vi_tri_x + 79, vi_tri_y + j);
 		cout << char(179);
 	}
-	gotoXY(vi_tri_x, 31);
+	gotoXY(vi_tri_x, vi_tri_y+31);
 	for (int i = 0; i < 80; i++)
 	{
 		if (i == 0)
@@ -392,16 +391,16 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 		}
 		cout << char(196);
 	}
-	box(vi_tri_x + 5, 32, 12, 2, 11, 3, "   Enter");
-	box(vi_tri_x + 60, 32, 12, 2, 11, 3, "    Esc");
+	box(vi_tri_x + 5, vi_tri_y+32, 12, 2, 11, 3, "   Enter");
+	box(vi_tri_x + 60, vi_tri_y+32, 12, 2, 11, 3, "    Esc");
 
 	// ================== Nội dung ================= //
 	textcolor(252);
-	gotoXY(vi_tri_x + 30, 1);
+	gotoXY(vi_tri_x + 30, vi_tri_y + 1);
 	cout << "HOA DON NHAP HANG";
 	textcolor(0);
 	SetColor(11);
-	gotoXY(vi_tri_x, 2);
+	gotoXY(vi_tri_x, vi_tri_y+ 2);
 	for (int i = 0; i < 79; i++)
 	{
 		if (i == 0)
@@ -416,54 +415,54 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 		cout << char(196);
 	}
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, 4);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 4);
 	cout << "Nhap ma hang hoa (Q/A): ";
-	box(vi_tri_x + 45, 3, 30, 2, 11, 1, a.ma_hang_hoa);
+	box(vi_tri_x + 45, vi_tri_y + 3, 30, 2, 11, 1, a.ma_hang_hoa);
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, 8);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 8);
 	cout << "Nhap ten hang hoa: ";
-	box(vi_tri_x + 45, 7, 30, 2, 11, 1, a.thong_tin_hang.ten_hh);
+	box(vi_tri_x + 45, vi_tri_y + 7, 30, 2, 11, 1, a.thong_tin_hang.ten_hh);
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, 12);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 12);
 	cout << "Nhap size: ";
-	box(vi_tri_x + 45, 11, 30, 2, 11, 1, a.thong_tin_hang.size);
+	box(vi_tri_x + 45, vi_tri_y + 11, 30, 2, 11, 1, a.thong_tin_hang.size);
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, 16);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 16);
 	cout << "Nhap gia: ";
-	box(vi_tri_x + 45, 15, 30, 2, 11, 1, "                             ");
+	box(vi_tri_x + 45, vi_tri_y + 15, 30, 2, 11, 1, "                             ");
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, 20);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 20);
 	cout << "Nhap so luong mua: ";
-	box(vi_tri_x + 45, 19, 30, 2, 11, 1, "                             ");
+	box(vi_tri_x + 45, vi_tri_y + 19, 30, 2, 11, 1, "                             ");
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, 24);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 24);
 	cout << "Nhap phuong thuc thanh toan (Cod/Bank): ";
 	SetColor(7);
-	box(vi_tri_x + 45, 23, 30, 2, 11, 1, a.pptt);
+	box(vi_tri_x + 45, vi_tri_y + 23, 30, 2, 11, 1, a.pptt);
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, 28);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 28);
 	cout << "Trang thai: ";
-	box(vi_tri_x + 45, 27, 30, 2, 11, 1, a.trang_thai);
+	box(vi_tri_x + 45, vi_tri_y + 27, 30, 2, 11, 1, a.trang_thai);
 
 	SetColor(7);
-	gotoXY(vi_tri_x + 46, 4);
+	gotoXY(vi_tri_x + 46, vi_tri_y + 4);
 	cin >> a.ma_hang_hoa;
 	regex check_ma("([QqAa])");
 	while (true)
 	{
 		if (regex_match(a.ma_hang_hoa, check_ma) == false)
 		{
-			box(vi_tri_x + 45, 3, 30, 2, 12, 1, a.ma_hang_hoa);
+			box(vi_tri_x + 45, vi_tri_y + 3, 30, 2, 12, 1, a.ma_hang_hoa);
 			SetColor(12);
-			gotoXY(vi_tri_x + 50, 6); cout << "Nhap khong hop le!";
-			box(vi_tri_x + 45, 3, 30, 2, 12, 1, "                            ");
+			gotoXY(vi_tri_x + 50, vi_tri_y + 6); cout << "Nhap khong hop le!";
+			box(vi_tri_x + 45, vi_tri_y + 3, 30, 2, 12, 1, "                            ");
 			SetColor(7);
-			gotoXY(vi_tri_x + 46, 4); cin >> a.ma_hang_hoa;
+			gotoXY(vi_tri_x + 46, vi_tri_y + 4); cin >> a.ma_hang_hoa;
 		}
 		else
 		{
-			box(vi_tri_x + 45, 3, 30, 2, 11, 1, a.ma_hang_hoa);
-			gotoXY(vi_tri_x + 50, 6); cout << "                   ";
+			box(vi_tri_x + 45, vi_tri_y + 3, 30, 2, 11, 1, a.ma_hang_hoa);
+			gotoXY(vi_tri_x + 50, vi_tri_y + 6); cout << "                   ";
 			SetColor(7);
 			break;
 		}
@@ -471,7 +470,7 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 	}
 	a.ma_hang_hoa[0] = toupper(a.ma_hang_hoa[0]);
 	cin.ignore();
-	gotoXY(vi_tri_x + 46, 8);
+	gotoXY(vi_tri_x + 46, vi_tri_y + 8);
 	getline(cin, a.thong_tin_hang.ten_hh);
 	chuanHoa(a.thong_tin_hang.ten_hh);
 	regex check_ten("^[^0-9]+$");
@@ -479,24 +478,24 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 	{
 		if (regex_match(a.thong_tin_hang.ten_hh, check_ten) == false)
 		{
-			box(vi_tri_x + 45, 7, 30, 2, 12, 1, a.thong_tin_hang.ten_hh);
+			box(vi_tri_x + 45, vi_tri_y + 7, 30, 2, 12, 1, a.thong_tin_hang.ten_hh);
 			SetColor(12);
 			gotoXY(vi_tri_x + 50, 10); cout << "Nhap khong hop le!";
-			box(vi_tri_x + 45, 7, 30, 2, 12, 1, "                            ");
+			box(vi_tri_x + 45, vi_tri_y + 7, 30, 2, 12, 1, "                            ");
 			SetColor(7);
-			gotoXY(vi_tri_x + 46, 8);
+			gotoXY(vi_tri_x + 46, vi_tri_y + 8);
 			getline(cin, a.thong_tin_hang.ten_hh);
 		}
 		else
 		{
-			box(vi_tri_x + 45, 7, 30, 2, 11, 1, a.thong_tin_hang.ten_hh);
-			gotoXY(vi_tri_x + 50, 10); cout << "                    ";
+			box(vi_tri_x + 45, vi_tri_y + 7, 30, 2, 11, 1, a.thong_tin_hang.ten_hh);
+			gotoXY(vi_tri_x + 50, vi_tri_y + 10); cout << "                    ";
 			SetColor(7);
 			break;
 		}
 	}
 
-	gotoXY(vi_tri_x + 46, 12);
+	gotoXY(vi_tri_x + 46, vi_tri_y + 12);
 	cin >> a.thong_tin_hang.size;
 	regex check_size_ao("([SsMmLl])");
 	regex check_size_quan("(26|27|28|29|30|31|32|33|34|35|36)");
@@ -506,18 +505,18 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 		{
 			if (regex_match(a.thong_tin_hang.size, check_size_ao) == false)
 			{
-				box(vi_tri_x + 45, 11, 30, 2, 12, 1, a.thong_tin_hang.size);
+				box(vi_tri_x + 45, vi_tri_y + 11, 30, 2, 12, 1, a.thong_tin_hang.size);
 				SetColor(12);
-				gotoXY(vi_tri_x + 50, 10); cout << "Nhap khong hop le!";
-				box(vi_tri_x + 45, 11, 30, 2, 12, 1, "                            ");
+				gotoXY(vi_tri_x + 50, vi_tri_y + 10); cout << "Nhap khong hop le!";
+				box(vi_tri_x + 45, vi_tri_y + 11, 30, 2, 12, 1, "                            ");
 				SetColor(7);
-				gotoXY(vi_tri_x + 46, 12);
+				gotoXY(vi_tri_x + 46, vi_tri_y + 12);
 				cin >> a.thong_tin_hang.size;
 			}
 			else
 			{
-				box(vi_tri_x + 45, 11, 30, 2, 11, 1, a.thong_tin_hang.size);
-				gotoXY(vi_tri_x + 50, 14); cout << "                    ";
+				box(vi_tri_x + 45, vi_tri_y + 11, 30, 2, 11, 1, a.thong_tin_hang.size);
+				gotoXY(vi_tri_x + 50, vi_tri_y + 14); cout << "                    ";
 				SetColor(7);
 				break;
 			}
@@ -530,18 +529,18 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 
 			if (regex_match(a.thong_tin_hang.size, check_size_quan) == false)
 			{
-				box(vi_tri_x + 45, 11, 30, 2, 12, 1, a.thong_tin_hang.size);
+				box(vi_tri_x + 45, vi_tri_y + 11, 30, 2, 12, 1, a.thong_tin_hang.size);
 				SetColor(12);
-				gotoXY(vi_tri_x + 50, 14); cout << "Nhap khong hop le!";
-				box(vi_tri_x + 45, 11, 30, 2, 12, 1, "                            ");
+				gotoXY(vi_tri_x + 50, vi_tri_y + 14); cout << "Nhap khong hop le!";
+				box(vi_tri_x + 45, vi_tri_y + 11, 30, 2, 12, 1, "                            ");
 				SetColor(7);
-				gotoXY(vi_tri_x + 46, 12);
+				gotoXY(vi_tri_x + 46, vi_tri_y + 12);
 				cin >> a.thong_tin_hang.size;
 			}
 			else
 			{
-				box(vi_tri_x + 45, 11, 30, 2, 11, 1, a.thong_tin_hang.size);
-				gotoXY(vi_tri_x + 50, 14); cout << "                    ";
+				box(vi_tri_x + 45, vi_tri_y + 11, 30, 2, 11, 1, a.thong_tin_hang.size);
+				gotoXY(vi_tri_x + 50, vi_tri_y + 14); cout << "                    ";
 				SetColor(7);
 				break;
 			}
@@ -552,56 +551,56 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 	}
 
 	string tam;
-	gotoXY(vi_tri_x + 46, 16);
+	gotoXY(vi_tri_x + 46, vi_tri_y + 16);
 	cin >> tam;
 	regex check_gia("^[0-9]+$");
 	while (true)
 	{
 		if (regex_match(tam, check_gia) == false || tam == "0")
 		{
-			box(vi_tri_x + 45, 15, 30, 2, 12, 1, "                            ");
+			box(vi_tri_x + 45, vi_tri_y + 15, 30, 2, 12, 1, "                            ");
 			SetColor(12);
-			gotoXY(vi_tri_x + 50, 18); cout << "Nhap khong hop le!";
-			box(vi_tri_x + 45, 15, 30, 2, 12, 1, "                            ");
+			gotoXY(vi_tri_x + 50, vi_tri_y + 18); cout << "Nhap khong hop le!";
+			box(vi_tri_x + 45, vi_tri_y + 15, 30, 2, 12, 1, "                            ");
 			SetColor(7);
-			gotoXY(vi_tri_x + 46, 16); cin >> tam;
+			gotoXY(vi_tri_x + 46, vi_tri_y + 16); cin >> tam;
 		}
 		else
 		{
 			a.thong_tin_hang.gia = stoll(tam);
-			box(vi_tri_x + 45, 15, 30, 2, 11, 1, to_string(a.thong_tin_hang.gia));
-			gotoXY(vi_tri_x + 50, 18); cout << "                    ";
+			box(vi_tri_x + 45, vi_tri_y + 15, 30, 2, 11, 1, to_string(a.thong_tin_hang.gia));
+			gotoXY(vi_tri_x + 50, vi_tri_y + 18); cout << "                    ";
 			SetColor(7);
 			break;
 		}
 	}
 
 	string tam1;
-	gotoXY(vi_tri_x + 46, 20);
+	gotoXY(vi_tri_x + 46, vi_tri_y + 20);
 	cin >> tam1;
 	while (true)
 	{
 		if (regex_match(tam1, check_gia) == false || tam1 == "0")
 		{
-			box(vi_tri_x + 45, 19, 30, 2, 12, 1, "                            ");
+			box(vi_tri_x + 45, vi_tri_y + 19, 30, 2, 12, 1, "                            ");
 			SetColor(12);
-			gotoXY(vi_tri_x + 50, 22); cout << "Nhap khong hop le!";
-			box(vi_tri_x + 45, 19, 30, 2, 12, 1, "                            ");
+			gotoXY(vi_tri_x + 50, vi_tri_y + 22); cout << "Nhap khong hop le!";
+			box(vi_tri_x + 45, vi_tri_y + 19, 30, 2, 12, 1, "                            ");
 			SetColor(7);
-			gotoXY(vi_tri_x + 46, 20); cin >> tam1;
+			gotoXY(vi_tri_x + 46, vi_tri_y + 20); cin >> tam1;
 		}
 		else
 		{
 			a.sl_mua = stoi(tam1);
-			box(vi_tri_x + 45, 19, 30, 2, 11, 1, to_string(a.sl_mua));
-			gotoXY(vi_tri_x + 50, 22); cout << "                    ";
+			box(vi_tri_x + 45, vi_tri_y + 19, 30, 2, 11, 1, to_string(a.sl_mua));
+			gotoXY(vi_tri_x + 50, vi_tri_y + 22); cout << "                    ";
 			SetColor(7);
 			break;
 		}
 	}
 
 
-	gotoXY(vi_tri_x + 46, 24);
+	gotoXY(vi_tri_x + 46, vi_tri_y + 24);
 	cin >> a.pptt;
 	chuanHoa(a.pptt);
 	regex check_pttt("(Cod|Bank)");
@@ -609,18 +608,18 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 	{
 		if (regex_match(a.pptt, check_pttt) == false)
 		{
-			box(vi_tri_x + 45, 23, 30, 2, 12, 1, a.pptt);
+			box(vi_tri_x + 45, vi_tri_y + 23, 30, 2, 12, 1, a.pptt);
 			SetColor(12);
-			gotoXY(vi_tri_x + 50, 26); cout << "Nhap khong hop le!";
-			box(vi_tri_x + 45, 23, 30, 2, 12, 1, "                            ");
+			gotoXY(vi_tri_x + 50, vi_tri_y + 26); cout << "Nhap khong hop le!";
+			box(vi_tri_x + 45, vi_tri_y + 23, 30, 2, 12, 1, "                            ");
 			SetColor(7);
-			gotoXY(vi_tri_x + 46, 24); cin >> a.pptt;
+			gotoXY(vi_tri_x + 46, vi_tri_y + 24); cin >> a.pptt;
 			chuanHoa(a.pptt);
 		}
 		else
 		{
-			box(vi_tri_x + 45, 23, 30, 2, 11, 1, a.pptt);
-			gotoXY(vi_tri_x + 50, 26); cout << "                    ";
+			box(vi_tri_x + 45, vi_tri_y + 23, 30, 2, 11, 1, a.pptt);
+			gotoXY(vi_tri_x + 50, vi_tri_y + 26); cout << "                    ";
 			SetColor(7);
 			break;
 
@@ -629,34 +628,32 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Han
 	}
 
 	cin.ignore();
-	gotoXY(vi_tri_x + 46, 28);
+	gotoXY(vi_tri_x + 46, vi_tri_y + 28);
 	getline(cin, a.trang_thai);
 	while (true)
 	{
 		if (regex_match(a.trang_thai, check_ten) == false)
 		{
-			box(vi_tri_x + 45, 27, 30, 2, 12, 1, a.pptt);
+			box(vi_tri_x + 45, vi_tri_y + 27, 30, 2, 12, 1, a.pptt);
 			SetColor(12);
-			gotoXY(vi_tri_x + 50, 30); cout << "Nhap khong hop le!";
-			box(vi_tri_x + 45, 27, 30, 2, 12, 1, "                            ");
+			gotoXY(vi_tri_x + 50, vi_tri_y + 30); cout << "Nhap khong hop le!";
+			box(vi_tri_x + 45, vi_tri_y + 27, 30, 2, 12, 1, "                            ");
 			SetColor(7);
-			gotoXY(vi_tri_x + 46, 28); getline(cin, a.trang_thai);
+			gotoXY(vi_tri_x + 46, vi_tri_y + 28); getline(cin, a.trang_thai);
 		}
 		else
 		{
-			box(vi_tri_x + 45, 27, 30, 2, 11, 1, a.trang_thai);
-			gotoXY(vi_tri_x + 50, 30); cout << "                    ";
+			box(vi_tri_x + 45, vi_tri_y + 27, 30, 2, 11, 1, a.trang_thai);
+			gotoXY(vi_tri_x + vi_tri_y + 50, 30); cout << "                    ";
 			SetColor(7);
 			break;
 		}
 	}
-
-
-
 }
 
 void ve_nhap_hoa_don_ban_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 {
+	long long tien;
 	//========= Khung ============== //
 	SetColor(11);
 	gotoXY(vi_tri_x, 0);
@@ -870,6 +867,47 @@ void ve_nhap_hoa_don_ban_hang(int vi_tri_x, HoaDon a, ds_hoa_don b, DS_Hang_Hoa 
 			break;
 		}
 	}
+	for (int i = 0; i < c.ds_ao.size(); i++)
+	{
+		if (a.ma_hang_hoa == c.ds_ao.at(i).ma_hh)
+		{
+			tien = c.ds_ao.at(i).gia;
+			break;
+		}
+	}
+	for (int i = 0; i < c.ds_quan.size(); i++)
+	{
+		if (a.ma_hang_hoa == c.ds_quan.at(i).ma_hh)
+		{
+			tien = c.ds_quan.at(i).gia;
+			break;
+		}
+	}
+	if (a.ma_kh.substr(0, 2) == "DO")
+	{
+		a.tong_tien = (tien * a.sl_mua) * 0, 01;
+		a.giam_gia_theo_hang = 0, 01;
+	}
+	else if (a.ma_kh.substr(0, 2) == "BA")
+	{
+		a.tong_tien = (tien * a.sl_mua) * 0, 03;
+		a.giam_gia_theo_hang = 0, 03;
+	}
+	else if (a.ma_kh.substr(0, 2) == "VA")
+	{
+		a.tong_tien = (tien * a.sl_mua) * 0, 05;
+		a.giam_gia_theo_hang = 0, 05;
+	}
+	else if (a.ma_kh.substr(0, 2) == "KC")
+	{
+		a.tong_tien = (tien * a.sl_mua) * 0, 1;
+		a.giam_gia_theo_hang = 0, 1;
+	}
+	else
+	{
+		a.tong_tien = tien * a.sl_mua;
+		a.giam_gia_theo_hang = 0;
+	}
 }
 
 void xuat_hoa_don_nhap_hang(int vi_tri_x, int vi_tri_y, HoaDon a)
@@ -997,10 +1035,9 @@ void xuat_hoa_don_nhap_hang(int vi_tri_x, int vi_tri_y, HoaDon a)
 
 void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 {
-	float tien;
 	//========= Khung ============== //
 	SetColor(11);
-	gotoXY(vi_tri_x, vi_tri_y * 17);
+	gotoXY(vi_tri_x,  vi_tri_y * 17);
 	for (int i = 0; i < 60; i++)
 	{
 		if (i == 0)
@@ -1094,7 +1131,6 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 			cout << "Ten hang hoa: " << c.ds_ao.at(i).ten_hh << endl;
 			gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 8);
 			cout << "Gia: " << c.ds_ao.at(i).gia << endl;
-			tien = c.ds_ao.at(i).gia;
 			gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 9);
 			cout << "Size: " << c.ds_ao.at(i).size << endl;
 			break;
@@ -1108,12 +1144,13 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 			cout << "Ten hang hoa: " << c.ds_ao.at(i).ten_hh << endl;
 			gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 8);
 			cout << "Gia: " << c.ds_ao.at(i).gia << endl;
-			tien = c.ds_ao.at(i).gia;
 			gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 9);
 			cout << "Size: " << c.ds_ao.at(i).size << endl;
 			break;
 		}
 	}
+	SetColor(11);
+	gotoXY(vi_tri_x, vi_tri_y * 17 + 10);
 	for (int i = 0; i < 59; i++)
 	{
 		if (i == 0)
@@ -1131,31 +1168,6 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 11);
 	cout << "So luong mua: " << a.sl_mua;
 	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 12);
-	if (a.ma_kh.substr(0, 2) == "DO")
-	{
-		a.tong_tien = (tien * a.sl_mua) * 0, 01;
-		a.giam_gia_theo_hang = 0, 01;
-	}
-	else if (a.ma_kh.substr(0, 2) == "BA")
-	{
-		a.tong_tien = (tien * a.sl_mua) * 0, 03;
-		a.giam_gia_theo_hang = 0, 03;
-	}
-	else if (a.ma_kh.substr(0, 2) == "VA")
-	{
-		a.tong_tien = (tien * a.sl_mua) * 0, 05;
-		a.giam_gia_theo_hang = 0, 05;
-	}
-	else if (a.ma_kh.substr(0, 2) == "KC")
-	{
-		a.tong_tien = (tien * a.sl_mua) * 0, 1;
-		a.giam_gia_theo_hang = 0, 1;
-	}
-	else
-	{
-		a.tong_tien = tien * a.sl_mua;
-		a.giam_gia_theo_hang = 0;
-	}
 	cout << "Gia duoc giam: " << a.giam_gia_theo_hang;
 	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 13);
 	cout << "Tong tien: " << a.tong_tien;
@@ -1167,3 +1179,27 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 	cout << "Trang thai: " << a.trang_thai;
 }
 
+void ve_khung_console()
+{
+	SetColor(11);
+	for (int i = 0; i < 209; i++)
+	{
+		gotoXY(i, 0);
+		cout << char(219);
+	}
+	for (int i = 0; i < 209; i++)
+	{
+		gotoXY(i, 54);
+		cout << char(219);
+	}
+	for (int i = 0; i < 54; i++)
+	{
+		gotoXY(0, i);
+		cout << char(219);
+	}
+	for (int i = 0; i < 54; i++)
+	{
+		gotoXY(209, i);
+		cout << char(219);
+	}
+}

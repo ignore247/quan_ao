@@ -1,5 +1,5 @@
 4
-ducthien@khachhang.com,123456,DO1237,Tran Duc Thien,141/16 Phuoc Long B TPHCM,0345607321
-quangdinh@khachhang.com,123456,DO1235,Le Quang Dinh,142/16 Phuoc Long B TPHCM,0345607322
-trungnghia@khachhang.com,123456,DO1236,Nguyen Trung Nghia,143/16 Phuoc Long B TPHCM,0345607323
-chibao@khachhang.com,123456,DO1234,Nguyen Chi Bao,144/16 Phuoc Long B TPHCM,0345607324
+ducthien@khachhang.com,DO1237,Tran Duc Thien,141/16 Phuoc Long B TPHCM,0345607321,ducthien123,ducthien123
+quangdinh@khachhang.com,DO1235,Le Quang Dinh,142/16 Phuoc Long B TPHCM,0345607322,quangdinh123,quangdinh123
+trungnghia@khachhang.com,BA1236,Nguyen Trung Nghia,143/16 Phuoc Long B TPHCM,0345607323,trungnghia123,trungnghia123
+chibao@khachhang.com,DO1234,Nguyen Chi Bao,144/16 Phuoc Long B TPHCM,0345607324,chibao123,chibao123

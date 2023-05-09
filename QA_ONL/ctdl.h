@@ -1,5 +1,5 @@
 ﻿#pragma once
-#pragma once
+
 #include<iostream>
 #include<string>
 #include<cstdlib>//rand,srand
@@ -48,7 +48,7 @@ struct HoaDon
 	string ngay_lap_hd;
 	string trang_thai;
 	float giam_gia_theo_hang;
-	float tong_tien;
+	long long tong_tien;
 
 };
 typedef struct HoaDon HoaDon;
@@ -75,6 +75,7 @@ typedef struct ds_hoa_don DS_HOA_DON;
 typedef struct gio_hang
 {
 	HangHoa data;
+	int soluongHang;
 }gio_hang;
 
 struct node_gio_hang
@@ -86,8 +87,8 @@ typedef struct node_gio_hang node_gio_hang;
 
 struct ds_hh_trong_gio_hang
 {
-	node_gio_hang* pHead;
-	node_gio_hang* pTail;
+	node_gio_hang* pHead=NULL;
+	node_gio_hang* pTail=NULL;
 	int sl = 0;
 };
 
@@ -98,7 +99,7 @@ struct KhachHang {
 	string diaChi;
 	string sdt;
 	string email;
-	string hang_tv;
+	
 
 	//DS_Don_Mua ds_mua_hang; 
 	ds_hoa_don don_mua_hang;
@@ -152,5 +153,5 @@ typedef struct Admin Admin;
 
 void test()
 {
-
+	
 }
