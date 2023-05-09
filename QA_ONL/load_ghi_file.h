@@ -143,7 +143,6 @@ void duyet_load_don_mua(TREE& a, string tam, ifstream& fi)
 {
 	if (a != NULL)
 	{
-//		ifstream fi("don_mua_hang.txt", ios::in);
 		if (tam == a->data.maKh)
 		{
 			fi >> a->data.don_mua_hang.sl;
@@ -154,10 +153,6 @@ void duyet_load_don_mua(TREE& a, string tam, ifstream& fi)
 				getline(fi, b.ma_hoa_don, ',');
 				getline(fi, b.ma_kh, ',');
 				getline(fi, b.ma_hang_hoa, ',');
-				/*getline(fi, b.thong_tin_hang.ten_hh, ',');
-				fi >> b.thong_tin_hang.gia;
-				fi.ignore();
-				getline(fi, b.thong_tin_hang.size, ',');*/
 				fi >> b.sl_mua;
 				fi.ignore();
 				getline(fi, b.ngay_lap_hd, ',');
@@ -168,7 +163,6 @@ void duyet_load_don_mua(TREE& a, string tam, ifstream& fi)
 				getline(fi, b.trang_thai);
 				them_cuoi_ds_hoa_don(a->data.don_mua_hang, b);
 			}
-//			fi.close();
 		}
 		if (stoi(tam.substr(2, 4)) < stoi(a->data.maKh.substr(2, 4)))
 		{
@@ -197,7 +191,6 @@ void load_file_don_mua_kh(TREE &a)
 		fi.ignore();
 		duyet_load_don_mua(a, tam, fi);
 	}
-
 	fi.close();
 }
 
@@ -254,37 +247,29 @@ void ghi_gio_hang_kh(ds_khach_hang a)
 {
 
 }
-// ------Gio hang-----
+
+// ============ Gio hang ============
 void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi)
 {
 	if (a != NULL)
 	{
-		
-		//		ifstream fi("don_mua_hang.txt", ios::in);
 		if (tam == a->data.maKh)
 		{
 			fi >> a->data.hh_gio_hang.sl;
-			cout << a->data.hh_gio_hang.sl << endl;
 			fi.ignore();
-			
 			for (int i = 0; i < a->data.hh_gio_hang.sl; i++)
 			{
 				gio_hang b;
 				getline(fi, b.data.ma_hh, ',');
-				cout << b.data.ma_hh << endl;
 				getline(fi, b.data.ten_hh, ',');
-				cout << b.data.ten_hh << endl;
 				fi >> b.data.soLuongTonKho;
-				cout << b.data.soLuongTonKho << endl;
 				fi.ignore();
 				fi >> b.data.gia;
-				cout << b.data.gia << endl;
 				fi.ignore();
 				getline(fi, b.data.size, ',');
 				getline(fi, b.data.mo_ta_sp);
-				//ThemVaoDau_DanhSach_GioHang(a->data.hh_gio_hang, b);
+				ThemVaoDau_DanhSach_GioHang(a->data.hh_gio_hang, b);
 			}
-			//			fi.close();
 		}
 		if (stoi(tam.substr(2, 4)) < stoi(a->data.maKh.substr(2, 4)))
 		{
@@ -310,13 +295,12 @@ void load_file_gio_hang(TREE& a)
 	{
 		string tam;
 		fi >> tam;
-		cout << tam << endl;
 		fi.ignore();
 		duyet_load_gio_hang(a, tam, fi);
 	}
-
 	fi.close();
 }
+
 // ============== Quan Ao ================
 void load_file_thong_tin_quan(DS_Hang_Hoa& dshh) 
 {

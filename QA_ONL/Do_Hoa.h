@@ -94,4 +94,16 @@ void SetWindowSize(SHORT width, SHORT height)
 	SetConsoleWindowInfo(hStdout, 1, &WindowSize);
 }
 
+BOOL ShowScrollBar(
+	HWND hWnd,
+	int  wBar,
+	BOOL bShow
+);
+
+void ShowScrollbar(BOOL Show)
+{
+	HWND hWnd = GetConsoleWindow();
+	ShowScrollBar(hWnd, SB_BOTH, Show);
+}
+
 

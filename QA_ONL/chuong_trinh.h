@@ -2,6 +2,7 @@
 #include "Check_du_lieu_nhap.h"
 #include "Xu_li_do_hoa.h"
 
+// ================== Hàng Hóa =====================
 void nhapHangHoa(HangHoa& a, DS_Hang_Hoa b)
 {
 	// mã : Q,A
@@ -62,6 +63,7 @@ void xuat_thong_tin_ao(DS_Hang_Hoa dshh)
 	}
 }
 
+//=================== Hóa Đơn =========================
 void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 {
 	string loai_hd;
@@ -79,7 +81,7 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 	a.ma_hoa_don = a.ma_hoa_don + tao_ma_hoa_don(b);
 	if (loai_hd == "Xuat")
 	{
-
+		long long tien;
 		cout << "Nhap ma khach hang: ";
 		cin >> a.ma_kh;
 		a.ma_kh[0] = toupper(a.ma_kh[0]);
@@ -117,6 +119,47 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 				break;
 			}
 		}
+		for (int i = 0; i < c.ds_ao.size(); i++)
+		{
+			if (a.ma_hang_hoa == c.ds_ao.at(i).ma_hh)
+			{
+				tien = c.ds_ao.at(i).gia;
+				break;
+			}
+		}
+		for (int i = 0; i < c.ds_quan.size(); i++)
+		{
+			if (a.ma_hang_hoa == c.ds_quan.at(i).ma_hh)
+			{
+				tien = c.ds_quan.at(i).gia;
+				break;
+			}
+		}
+		if (a.ma_kh.substr(0, 2) == "DO")
+		{
+			a.tong_tien = (tien * a.sl_mua) * 0, 01;
+			a.giam_gia_theo_hang = 0, 01;
+		}
+		else if (a.ma_kh.substr(0, 2) == "BA")
+		{
+			a.tong_tien = (tien * a.sl_mua) * 0, 03;
+			a.giam_gia_theo_hang = 0, 03;
+		}
+		else if (a.ma_kh.substr(0, 2) == "VA")
+		{
+			a.tong_tien = (tien * a.sl_mua) * 0, 05;
+			a.giam_gia_theo_hang = 0, 05;
+		}
+		else if (a.ma_kh.substr(0, 2) == "KC")
+		{
+			a.tong_tien = (tien * a.sl_mua) * 0, 1;
+			a.giam_gia_theo_hang = 0, 1;
+		}
+		else
+		{
+			a.tong_tien = tien * a.sl_mua;
+			a.giam_gia_theo_hang = 0;
+		}
 	}
 	else
 	{
@@ -124,12 +167,10 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 		check_Ma_Hang_Hoa(a.ma_hang_hoa);
 		cin.ignore();
 		a.thong_tin_hang.ma_hh = a.thong_tin_hang.ma_hh + tao_ma_hang_hoa(c);
-
 		cout << "Nhap ten hang hoa: ";
 		getline(cin, a.thong_tin_hang.ten_hh);
 		chuanHoa(a.thong_tin_hang.ten_hh);
 		check_Ten(a.thong_tin_hang.ten_hh);
-
 		cout << "Nhap size: ";
 		cin >> a.thong_tin_hang.size;
 		check_Size(a.thong_tin_hang.size);
@@ -155,7 +196,6 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 	cin.ignore();
 	cout << "Trang thai: ";
 	getline(cin, a.trang_thai);
-
 }
 
 void taoHoaDonKhiKhachDatHang(HoaDon& a, ds_hoa_don b, HangHoa c)
@@ -170,7 +210,6 @@ void taoHoaDonKhiKhachDatHang(HoaDon& a, ds_hoa_don b, HangHoa c)
 
 void xuatHoaDonBanHang(HoaDon a, DS_Hang_Hoa c)
 {
-	float tien;
 	cout << "Ma hoa don: " << a.ma_hoa_don << endl;
 	cout << "Ma khach hang: " << a.ma_kh << endl;
 	cout << "\tThong tin hang hoa: " << endl;
@@ -181,7 +220,6 @@ void xuatHoaDonBanHang(HoaDon a, DS_Hang_Hoa c)
 		{
 			cout << "Ten hang hoa: " << c.ds_ao.at(i).ten_hh << endl;
 			cout << "Gia: " << c.ds_ao.at(i).gia << endl;
-			tien = c.ds_ao.at(i).gia;
 			cout << "Size: " << c.ds_ao.at(i).size << endl;
 			break;
 		}
@@ -192,42 +230,16 @@ void xuatHoaDonBanHang(HoaDon a, DS_Hang_Hoa c)
 		{
 			cout << "Ten hang hoa: " << c.ds_quan.at(i).ten_hh << endl;
 			cout << "Gia: " << c.ds_quan.at(i).gia << endl;
-			tien = c.ds_quan.at(i).gia;
 			cout << "Size: " << c.ds_quan.at(i).size << endl;
 			break;
 		}
 	}
 	cout << "So luong mua: " << a.sl_mua << endl;
 	cout << "Ngay lap hoa don: " << a.ngay_lap_hd << endl;
-	/*if (a.ma_kh.substr(0, 2) == "DO")
-	{
-		a.tong_tien = (tien * a.sl_mua) * 0, 01;
-		a.giam_gia_theo_hang = 0, 01;
-	}
-	else if (a.ma_kh.substr(0, 2) == "BA")
-	{
-		a.tong_tien = (tien * a.sl_mua) * 0, 03;
-		a.giam_gia_theo_hang = 0, 03;
-	}
-	else if (a.ma_kh.substr(0, 2) == "VA")
-	{
-		a.tong_tien = (tien * a.sl_mua) * 0, 05;
-		a.giam_gia_theo_hang = 0, 05;
-	}
-	else if (a.ma_kh.substr(0, 2) == "KC")
-	{
-		a.tong_tien = (tien * a.sl_mua) * 0, 1;
-		a.giam_gia_theo_hang = 0, 1;
-	}
-	else
-	{
-		a.tong_tien = tien * a.sl_mua;
-		a.giam_gia_theo_hang = 0;
-	}*/
-	//cout << endl;
 	cout << "Gia duoc giam: " << a.giam_gia_theo_hang << endl;
-	cout << "Tong tien: " << a.tong_tien;
+	cout << "Tong tien: " << a.tong_tien << endl;
 	cout << "Trang thai: " << a.trang_thai << endl;
+	cout << "\n\t\t=============\n";
 }
 
 void xuatHoaDonNhapHang(HoaDon a)
@@ -244,6 +256,358 @@ void xuatHoaDonNhapHang(HoaDon a)
 	cout << "Tong tien: " << a.tong_tien << endl;
 	cout << "Trang thai: " << a.trang_thai << endl;
 }
+
+node_hoa_don* khoi_tao_node_hoa_don(HoaDon a)
+{
+	node_hoa_don* p = new node_hoa_don;
+	if (p == NULL)
+	{
+		cout << "Khong du bo nho de cap phat";
+		return NULL;
+	}
+	p->data = a;
+	p->pNext = NULL;
+	return p;
+}
+
+void them_cuoi_ds_hoa_don(DS_HOA_DON& a, HoaDon x)
+{
+	node_hoa_don* p = khoi_tao_node_hoa_don(x);
+	if (a.pHead == NULL)
+	{
+		a.pHead = a.pTail = p;
+	}
+	else
+	{
+		a.pTail->pNext = p;
+		a.pTail = p;
+	}
+}
+
+void xoa_hd_xuat_theo_ma(DS_HOA_DON& a, string b)
+{
+	node_hoa_don* h = NULL;
+	for (node_hoa_don* k = a.pHead; k != NULL;)
+	{
+		// vt nằm ở đầu danh sách
+		if (k->data.ma_hoa_don == b && k == a.pHead)
+		{
+			a.pHead = a.pHead->pNext;
+			delete k;
+			k = a.pHead;
+		}
+		else
+		{
+			// xoá vị trí bất kì(ko ở đầu)
+			if (k->data.ma_hoa_don == b)
+			{
+				h->pNext = k->pNext;
+				delete k;
+				k = h;
+				// sau khi xoá vt nằm ở cuối
+				if (h->pNext == NULL) 
+				{
+					a.pTail = h;
+					return;
+				}
+			}
+			h = k;
+			k = k->pNext;
+		}
+	}
+	a.sl--;
+}
+
+// ============== Sửa thông tin hóa đơn ==================
+void duyet_cay_sua_thong_tin(TREE& t,string ma_hd_sua, string ma_kh, string a)
+{
+	if (t != NULL)
+	{
+		if (ma_kh == t->data.maKh)
+		{
+			for (node_hoa_don* k = t->data.don_mua_hang.pHead; k != NULL; k = k->pNext)
+			{
+				if (k->data.ma_hoa_don == ma_hd_sua)
+				{
+					k->data.ma_hang_hoa = a;
+					break;
+				}
+			}
+		}
+		if (stoi(ma_kh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_sua_thong_tin(t->pLeft, ma_hd_sua, ma_kh, a);
+		}
+		else if (stoi(ma_kh.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_sua_thong_tin(t->pRight, ma_hd_sua, ma_kh, a);
+		}
+	}
+}
+
+void duyet_cay_xoa_hd_theo_ma(TREE& t, string ma_kh_cu, string ma_hoa_don)
+{
+	if (t != NULL)
+	{
+		if (t->data.maKh == ma_kh_cu)
+		{
+			xoa_hd_xuat_theo_ma(t->data.don_mua_hang, ma_hoa_don);
+		}
+		if (stoi(ma_kh_cu.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_xoa_hd_theo_ma(t->pLeft, ma_kh_cu, ma_hoa_don);
+		}
+		else if (stoi(ma_kh_cu.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_xoa_hd_theo_ma(t->pRight, ma_kh_cu, ma_hoa_don);
+		}
+	}
+}
+
+void duyet_cay_them_hd(TREE& t, string ma_moi, HoaDon a)
+{
+	if (t != NULL)
+	{
+		if (t->data.maKh == ma_moi)
+		{
+			them_cuoi_ds_hoa_don(t->data.don_mua_hang, a);
+			t->data.don_mua_hang.sl++;
+		}
+		if (stoi(ma_moi.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_them_hd(t->pLeft, ma_moi, a);
+		}
+		else if (stoi(ma_moi.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_them_hd(t->pRight, ma_moi, a);
+		}
+	}
+}
+
+void sua_thong_tin_hoa_don(Admin &ad)
+{
+	string b;
+	int c;
+	bool check = true;
+	cout << "Nhap ma hoa don muon sua: ";
+	cin >> b;
+	b[0] = toupper(b[0]);
+	while (check_trung_ma_hd(b,ad.quan_li_ds_hoa_don_nhap) > -1 || check_trung_ma_hd(b, ad.quan_li_ds_hoa_don_xuat) > -1)
+	{
+		cout << "Ma hoa don khong ton tai!";
+		cout << "Nhap ma hoa don muon sua: ";
+		cin >> b;
+	}
+	if (b[0] == 'N')
+	{
+		while (check == true)
+		{
+			cout << "\n1.Sua ngay lap hoa don" << endl;
+			cout << "2.Sua trang thai cua hoa don" << endl;
+			cout << "\n0.Thoat";
+			do
+			{
+				cout << "Chon loai thong tin muon sua: ";
+				cin >> c;
+			} while (c < 0);
+				
+			switch (c)
+			{
+				case 1:
+				{
+					string str;
+					cout << "Nhap ngay lap hoa don: ";
+					cin >> str;
+					do
+					{
+						if (check_date(str) == false)
+						{
+							cout << "Ngay thang nhap khong hop le!\n";
+							cout << "Nhap ngay lap hoa don: ";
+							cin >> str;
+						}
+						else
+						{
+							break;
+						}
+					} while (true);
+					for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+					{
+						if (k->data.ma_hoa_don == b)
+						{
+							k->data.ngay_lap_hd = str;
+							break;
+						}
+					}
+					break;
+				}
+				case 2:
+				{
+					string str;
+					cout << "Nhap trang thai moi cua hoa don: ";
+					cin >> str;
+					for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+					{
+						if (k->data.ma_hoa_don == b)
+						{
+							k->data.trang_thai = str;
+							break;
+						}
+					}
+					break;
+				}
+				case 0:
+				{
+					check = false;
+					break;
+				}
+			}
+
+		}
+
+	}
+	else
+	{
+		while (check == true)
+		{
+			cout << "\n1.Sua ma hang hoa" << endl;
+			cout << "2.Sua ma hang Khach hang" << endl;
+			cout << "3.Sua ngay lap hoa don" << endl;
+			cout << "4.Sua trang thai cua hoa don" << endl;
+			cout << "\n0.Thoat";
+			do
+			{
+				cout << "Chon loai thong tin muon sua: ";
+				cin >> c;
+			} while (c < 0);
+
+			switch (c)
+			{
+			case 1:
+			{
+				string str,tam;
+				cout << "Nhap ma hang hoa : ";
+				cin >> str;
+				str[0] = toupper(str[0]);
+				do
+				{
+					if (check_ma_hh(str, ad.quan_li_ds_hang_hoa) == -1)
+					{
+						cout << "Hang hoa khong ton tai!\n";
+						cout << "Nhap ma hang hoa: ";
+						cin >> str;
+						str[0] = toupper(str[0]);
+					}
+					else
+					{
+						break;
+					}
+				} while (true);
+
+				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+				{
+					if (k->data.ma_hoa_don == b)
+					{
+						duyet_cay_sua_thong_tin(ad.quan_li_ds_kh.t, b, k->data.ma_kh, str);
+						k->data.ma_hang_hoa = str;
+						break;
+					}
+				}
+				break;
+			}
+			case 2:
+			{
+				string str,ma_cu;
+				cout << "Nhap ma khach hang muon sua: ";
+				cin >> str;
+				str[0] = toupper(str[0]);
+				str[1] = toupper(str[1]);
+				do
+				{
+					if (check_ma_kh(str,ad.quan_li_ds_kh.t) == -1)
+					{
+						cout << "Khach hang khong ton tai!" << endl;
+						cout << "Nhap ma khach hang muon sua: ";
+						cin >> str;
+						str[0] = toupper(str[0]);
+						str[1] = toupper(str[1]);
+					}
+					else
+					{
+						break;
+					}
+				} while (true);
+				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+				{
+					if (k->data.ma_hoa_don == b)
+					{
+						duyet_cay_xoa_hd_theo_ma(ad.quan_li_ds_kh.t, k->data.ma_kh,b);
+						k->data.ma_kh = str;
+						duyet_cay_them_hd(ad.quan_li_ds_kh.t,str,k->data);
+						break;
+					}
+				}
+				xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
+				break;
+			}
+			case 3:
+			{
+				string str,tam;
+				cout << "Nhap ngay lap hoa don: ";
+				cin >> str;
+				do
+				{
+					if (check_date(str) == false)
+					{
+						cout << "Ngay thang nhap khong hop le!\n";
+						cout << "Nhap ngay lap hoa don: ";
+						cin >> str;
+					}
+					else
+					{
+						break;
+					}
+				} while (true);
+				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+				{
+					if (k->data.ma_hoa_don == b)
+					{
+						k->data.ngay_lap_hd = str;
+						duyet_cay_sua_thong_tin(ad.quan_li_ds_kh.t, b, k->data.ma_kh, str);
+						break;
+					}
+				}
+				break;
+			}
+			case 4:
+			{
+				string str,tam;
+				cout << "Nhap trang thai moi cua hoa don: ";
+				cin >> str;
+				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+				{
+					if (k->data.ma_hoa_don == b)
+					{
+						duyet_cay_sua_thong_tin(ad.quan_li_ds_kh.t, b, k->data.ma_kh, str);
+						k->data.trang_thai = str;
+						break;
+					}
+				}
+				break;
+			}
+			case 0:
+			{
+				check = false;
+				break;
+			}
+
+			}
+
+		}
+	}
+}
+
+// ================== Khách Hàng =====================
 
 istream& operator >> (istream& in, KhachHang& a)
 {
@@ -273,33 +637,6 @@ ostream& operator << (ostream& out, KhachHang a)
 	out << "SDT: " << a.sdt << endl;
 	out << "Email: " << a.email << endl;
 	return out;
-}
-
-node_hoa_don* khoi_tao_node_hoa_don(HoaDon a)
-{
-	node_hoa_don* p = new node_hoa_don;
-	if (p == NULL)
-	{
-		cout << "Khong du bo nho de cap phat";
-		return NULL;
-	}
-	p->data = a;
-	p->pNext = NULL;
-	return p;
-}
-
-void them_cuoi_ds_hoa_don(DS_HOA_DON& a, HoaDon x)
-{
-	node_hoa_don* p = khoi_tao_node_hoa_don(x);
-	if (a.pHead == NULL)
-	{
-		a.pHead = a.pTail = p;
-	}
-	else
-	{
-		a.pTail->pNext = p;
-		a.pTail = p;
-	}
 }
 
 // Hàm xếp hạng khách hàng theo số tiền đã tiêu
@@ -340,13 +677,7 @@ void xep_hang_khach_hang_theo_tien(TREE &t)
 
 }
 
-// =============================GIO HANG============================= 
-
-void KhoiTao_DanhSach_GioHang(ds_hh_trong_gio_hang& ds_gh) {
-	ds_gh.pHead = NULL;
-	ds_gh.pTail = NULL;
-}
-
+// ========================= GIO HANG ========================== 
 node_gio_hang* khoiTao_node_gio_hang(gio_hang a) {
 	node_gio_hang* p = new node_gio_hang;
 	if (p == NULL)
@@ -377,7 +708,7 @@ void Xoa_hangHoa_ViTriBatKi(ds_hh_trong_gio_hang& ds_gh, string vt)
 	for (node_gio_hang* k = ds_gh.pHead; k != NULL;)
 	{
 		// vt nằm ở đầu danh sách
-		if (_stricmp(k->data.data.ma_hh.c_str(), vt.c_str()) == 0 && k == ds_gh.pHead)
+		if (k->data.data.ma_hh == vt && k == ds_gh.pHead)
 		{
 			ds_gh.pHead = ds_gh.pHead->pNext;
 			delete k;
@@ -386,7 +717,7 @@ void Xoa_hangHoa_ViTriBatKi(ds_hh_trong_gio_hang& ds_gh, string vt)
 		else
 		{
 			// xoá vị trí bất kì(ko ở đầu)
-			if (_stricmp(k->data.data.ma_hh.c_str(), vt.c_str()) == 0)
+			if (k->data.data.ma_hh == vt)
 			{
 				h->pNext = k->pNext;
 				delete k;
@@ -411,7 +742,6 @@ void XuatGioHang(ds_hh_trong_gio_hang l,HangHoa a)
 	}
 }
 // ==================== Khách hàng ====================== //
-
 void nhap_khach_hang(KhachHang& a, Admin b)
 {
 	// mã : SA (mặc định nếu là acc mới tạo) DO / BA / VA / KC
@@ -447,7 +777,6 @@ void them_khachhang_vao_cay(TREE& t, KH data) {
 }
 
 // =================== Xóa cây ================================
-
 void node_the_mang(node_kh*& k, TREE& t)
 {
 	if (k->pRight == NULL)
@@ -462,7 +791,6 @@ void node_the_mang(node_kh*& k, TREE& t)
 		node_the_mang(k->pRight, t);
 	}
 }
-
 
 void xoa_khach_hang_theo_ma(TREE &t, string a)
 {
@@ -506,8 +834,7 @@ void xoa_khach_hang_theo_ma(TREE &t, string a)
 	}
 }
 
-// ============ Cân bằng cây ======================
-
+// =================== Cân bằng cây ===========================
 int tim_chieu_cao_cay(TREE t) // kiểm tra node con xem ai lớn hơn thì trả về thằng lớn hơn
 {
 	if (t == NULL)
@@ -562,26 +889,18 @@ void quay_phai(TREE& p, TREE& q)
 {
 	// p sẽ làm cây con phải q
 	// cây con phải của q sẽ làm cây con trái của p
-
-
 	node_kh* tam = q->pRight; // cho tam giữ cây con phải của q
 	q->pRight = p; // cho cây con phải của q là p
 	p->pLeft = tam; // cây con trái của p là tạm
-
 }
 
 void quay_trai(TREE& p, TREE& q)
 {
 	// p sẽ làm cây con trái q
 	// cây con trái của q sẽ làm cây con phải của p
-
-
-
 	node_kh* tam = q->pLeft; // cho tam giữ cây con trái của q
 	q->pLeft = p; // cho cây con trái của q là p
 	p->pRight = tam; // cây con phai của p là tạm
-
-
 }
 
 void can_bang_cay(TREE& t) // duyệt node left right NLR
@@ -599,7 +918,6 @@ void can_bang_cay(TREE& t) // duyệt node left right NLR
 			if (checkp == 'L' && checkq == 'L')
 			{
 				quay_phai(p, q);
-
 			}
 			else if (checkp == 'R' && checkq == 'R')
 			{
@@ -622,7 +940,6 @@ void can_bang_cay(TREE& t) // duyệt node left right NLR
 				can_bang_cay(t);
 			}
 			t = q;
-
 		}
 		// ------------ Left----------------
 		can_bang_cay(t->pLeft);
@@ -630,8 +947,6 @@ void can_bang_cay(TREE& t) // duyệt node left right NLR
 		can_bang_cay(t->pRight);
 	}
 }
-
-
 
 //void test()
 //{
