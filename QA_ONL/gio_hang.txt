@@ -1,0 +1,16 @@
+DO1237
+1
+A1324,Ao,42,245000,S,Dai lam nha
+DO1235
+2
+A1324,Ao,42,245000,S,Dai lam nha
+Q0101,Quan Dai Thun,10,100000,26,Chat lieu co gian, san xuat tai Viet Nam
+BA1236
+3
+A1888,Ao,23,300000,L,Nhieu size
+Q0101,Quan Dai Thun,10,100000,26,Chat lieu co gian, san xuat tai Viet Nam
+Q4567,Quan Thun,33,160000,32,Mat me thich hop su dung vao mua he, tre trung nang dong
+DO1234
+2
+A1888,Ao,23,300000,L,Nhieu size
+Q4567,Quan Thun,33,160000,32,Mat me thich hop su dung vao mua he, tre trung nang dong

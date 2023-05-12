@@ -134,8 +134,19 @@
     <ClInclude Include="chuong_trinh.h" />
     <ClInclude Include="ctdl.h" />
     <ClInclude Include="Do_Hoa.h" />
+    <ClInclude Include="load_ghi_file.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Xu_li_do_hoa.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Ao.txt" />
+    <Text Include="don_mua_hang.txt" />
+    <Text Include="gio_hang.txt" />
+    <Text Include="Quan.txt" />
+    <Text Include="test.txt" />
+    <Text Include="thong_tin_hoa_don_ban_hang.txt" />
+    <Text Include="thong_tin_hoa_don_nhap_hang.txt" />
+    <Text Include="thong_tin_khach_hang.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

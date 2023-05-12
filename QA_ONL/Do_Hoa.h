@@ -94,4 +94,26 @@ void SetWindowSize(SHORT width, SHORT height)
 	SetConsoleWindowInfo(hStdout, 1, &WindowSize);
 }
 
+BOOL ShowScrollBar(
+	HWND hWnd,
+	int  wBar,
+	BOOL bShow
+);
+
+void ShowScrollbar(BOOL Show)
+{
+	HWND hWnd = GetConsoleWindow();
+	ShowScrollBar(hWnd, SB_BOTH, Show);
+}
+
+void XoaManHinh()
+{
+	HANDLE hOut;
+	COORD Position;
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	Position.X = 0;
+	Position.Y = 0;
+	SetConsoleCursorPosition(hOut, Position);
+}
+
 
