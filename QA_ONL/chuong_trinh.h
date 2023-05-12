@@ -419,7 +419,7 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 }
  
 // Xuat san pham hot
-void sanPhamHot(Admin& a, vector<HangHoa> ten_hang_best_seller)
+void sanPhamHot(Admin& a, vector<HoaDon> best_seller)
 {
 	// xac dinh thoi gian hien tai
 	time_t now = time(0);
@@ -436,8 +436,6 @@ void sanPhamHot(Admin& a, vector<HangHoa> ten_hang_best_seller)
 			them_cuoi_ds_hoa_don(ds_1_thang, k->data);
 		}
 	}
-
- 	vector<HoaDon> best_seller;
 	for (node_hoa_don* k = ds_1_thang.pHead; k != NULL; k = k->pNext)
 	{
 		int tong_sl_mua = k->data.sl_mua;
