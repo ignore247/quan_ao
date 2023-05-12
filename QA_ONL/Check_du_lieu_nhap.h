@@ -333,8 +333,7 @@ int kt_trung_ma_kh(string a, TREE t)
 }
 
 bool check_ma_kh(string a, TREE t)
-{
-	
+{	
 	if (t != NULL) 
 	{
 		if (t->data.maKh == a)
@@ -345,8 +344,7 @@ bool check_ma_kh(string a, TREE t)
 		{
 			return check_ma_kh(a, t->pLeft);
 		}
-		else
-			return check_ma_kh(a, t->pRight);
+		else return check_ma_kh(a, t->pRight);
 	}
 	else
 	{

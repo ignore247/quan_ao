@@ -249,57 +249,7 @@ void ghi_gio_hang_kh(ds_khach_hang a)
 }
 
 // ============ Gio hang ============
-void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi)
-{
-	if (a != NULL)
-	{
-		if (tam == a->data.maKh)
-		{
-			fi >> a->data.hh_gio_hang.sl;
-			fi.ignore();
-			for (int i = 0; i < a->data.hh_gio_hang.sl; i++)
-			{
-				gio_hang b;
-				getline(fi, b.data.ma_hh, ',');
-				getline(fi, b.data.ten_hh, ',');
-				fi >> b.data.soLuongTonKho;
-				fi.ignore();
-				fi >> b.data.gia;
-				fi.ignore();
-				getline(fi, b.data.size, ',');
-				getline(fi, b.data.mo_ta_sp);
-				ThemVaoDau_DanhSach_GioHang(a->data.hh_gio_hang, b);
-			}
-		}
-		if (stoi(tam.substr(2, 4)) < stoi(a->data.maKh.substr(2, 4)))
-		{
-			duyet_load_gio_hang(a->pLeft, tam, fi);
-		}
-		else if (stoi(tam.substr(2, 4)) > stoi(a->data.maKh.substr(2, 4)))
-		{
-			duyet_load_gio_hang(a->pRight, tam, fi);
-		}
-	}
-}
-void load_file_gio_hang(TREE& a)
-{
-	ifstream fi;
-	fi.open("gio_hang.txt", ios::in);
-	if (fi.fail() == true)
-	{
-		cout << "Khong mo duoc!" << endl;
-		fi.close();
-		return;
-	}
-	while (fi.eof() == false)
-	{
-		string tam;
-		fi >> tam;
-		fi.ignore();
-		duyet_load_gio_hang(a, tam, fi);
-	}
-	fi.close();
-}
+
 
 // ============== Quan Ao ================
 void load_file_thong_tin_quan(DS_Hang_Hoa& dshh) 
@@ -343,6 +293,49 @@ void load_file_thong_tin_ao(DS_Hang_Hoa &dshh)
 	}
 	fi.close();
 }
+
+void ghi_file_quan(DS_Hang_Hoa &dshh) {
+	ofstream fo("quan.txt", ios::app);
+	for (int i = 0; i < dshh.ds_quan.size(); i++) {
+		fo << dshh.ds_quan.at(i).ma_hh;
+		fo << ",";
+		fo << dshh.ds_quan.at(i).ten_hh;
+		fo << ",";
+		fo << dshh.ds_quan.at(i).soLuongTonKho;
+		fo << ",";
+		fo << dshh.ds_quan.at(i).gia;
+		fo << ",";
+		fo << dshh.ds_quan.at(i).size;
+		fo << ",";
+		fo << dshh.ds_quan.at(i).mo_ta_sp;
+		fo << ".";
+		fo << dshh.ds_quan.at(i).thoi_gian_nhap_hang;
+		fo << endl;
+	}
+	fo.close();
+}
+
+void ghi_file_ao(DS_Hang_Hoa& dshh) {
+	ofstream fo("ao.txt", ios::app);
+	for (int i = 0; i < dshh.ds_ao.size(); i++) {
+		fo << dshh.ds_ao.at(i).ma_hh;
+		fo << ",";
+		fo << dshh.ds_ao.at(i).ten_hh;
+		fo << ",";
+		fo << dshh.ds_ao.at(i).soLuongTonKho;
+		fo << ",";
+		fo << dshh.ds_ao.at(i).gia;
+		fo << ",";
+		fo << dshh.ds_ao.at(i).size;
+		fo << ",";
+		fo << dshh.ds_ao.at(i).mo_ta_sp;
+		fo << ".";
+		fo << dshh.ds_ao.at(i).thoi_gian_nhap_hang;
+		fo << endl;
+	}
+	fo.close();
+}
+
 
 //================ Đơn hàng chờ =====================
 void load_file_don_hang_cho(ds_don_hang_cho &a) {
