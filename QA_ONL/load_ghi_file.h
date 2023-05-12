@@ -93,10 +93,10 @@ void load_file_hoa_don_xuat(ds_hoa_don &a)
 		getline(fi, b.ma_hoa_don, ',');
 		getline(fi, b.ma_kh, ',');
 		getline(fi, b.ma_hang_hoa, ',');
-		/*getline(fi, b.thong_tin_hang.ten_hh, ',');*/
-		/*fi >> b.thong_tin_hang.gia;*/
-		/*fi.ignore();*/
-		/*getline(fi, b.thong_tin_hang.size, ',');*/
+		getline(fi, b.thong_tin_hang.ten_hh, ',');
+		fi >> b.thong_tin_hang.gia;
+		fi.ignore();
+		getline(fi, b.thong_tin_hang.size, ',');
 		fi >> b.sl_mua;
 		fi.ignore();
 		getline(fi, b.ngay_lap_hd,',');
