@@ -1,4 +1,13 @@
+BA1236
 3
-N1234,A1234,ao ba lo,100000,S,10,12/04/2023,1000000,da thanh toan
-N1235,A1324,ao thun,120000,M,10,20/05/2023,1200000,da thanh toan
-N1233,A1111,ao tai dai,130000,L,10,21/05/2023,1300000,da thanh toan
+Q4567,Quan Thun,33,160000,32,Mat me thich hop su dung vao mua he, tre trung nang dong,15/10/2022
+Q0101,Quan Dai Thun,10,100000,26,Chat lieu co gian, san xuat tai Viet Nam,01/01/2022
+A1888,Ao Ba Lo,23,300000,L,Nhieu size,05/06/2022DO1235
+2
+Q0101,Quan Dai Thun,10,100000,26,Chat lieu co gian, san xuat tai Viet Nam,01/01/2022
+A1324,Ao Dai,42,245000,S,Dai lam nha,12/10/2022DO1234
+2
+Q4567,Quan Thun,33,160000,32,Mat me thich hop su dung vao mua he, tre trung nang dong,15/10/2022
+A1888,Ao Ba Lo,23,300000,L,Nhieu size,05/06/2022DO1237
+1
+A1324,Ao Dai,42,245000,S,Dai lam nha,12/10/2022

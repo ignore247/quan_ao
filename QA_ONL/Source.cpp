@@ -5,7 +5,23 @@
 
 mutex bk;
 
+void xuat_gio_hang1(TREE t)
+{
+	if (t != NULL)
+	{
+		cout << t->data.maKh << endl;
+			for (int i = 0; i < t->data.data_gh.hh.size(); i++)
+			{
+				xuat_tt_hh_ngan_gon(t->data.data_gh.hh.at(i));
+			}
+			
+			xuat_gio_hang1(t->pLeft);
 
+	
+			xuat_gio_hang1(t->pRight);
+
+	}
+}
 void ve_chu_QAOL(int x, int y)
 {
 	while (true)
@@ -56,45 +72,23 @@ void ve_chu_QAOL(int x, int y)
 	//	bk.unlock();
 	}
 }
-void xuat_hoa_don_mua_khach_hang(TREE a, DS_Hang_Hoa b)
-{
-	if (a != NULL)
-	{
-		for (node_hoa_don* k = a->data.don_mua_hang.pHead; k != NULL; k = k->pNext)
-		{
-			xuatHoaDonBanHang(k->data, b);
-		}
-		xuat_hoa_don_mua_khach_hang(a->pLeft, b);
-		xuat_hoa_don_mua_khach_hang(a->pRight, b);
 
-	}
-}
-void xuat_gio_hang_kh(TREE a, ds_hh_trong_gio_hang b)
-{
-	if (a != NULL)
-	{
-		cout << "\t\t" << a->data.maKh << endl;
-		for (node_gio_hang* k = a->data.hh_gio_hang.pHead; k != NULL; k = k->pNext)
-		{
-			XuatGioHang(b, k->data.data);
-			cout << "\n\t\t==============================\n";
-		}
-
-		xuat_gio_hang_kh(a->pLeft, b);
-		xuat_gio_hang_kh(a->pRight, b);
-
-	}
-}
-
-void test(TREE t)
+void NLR(TREE t)
 {
 	if (t != NULL)
 	{
-		cout << t->data.maKh << endl;
-		test(t->pLeft);
-		test(t->pRight);
+	
+		for (node_hoa_don* k = t->data.don_mua_hang.pHead; k != NULL; k = k->pNext)
+		{
+
+			xuatHoaDonBanHang(k->data);
+		}
+		NLR(t->pLeft);
+		NLR(t->pRight);
+
 	}
 }
+
 int main()
 {
 	
@@ -108,8 +102,8 @@ int main()
 	//load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
 	//load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
 	load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
-	//load_file_don_mua_kh(ad.quan_li_ds_kh.t);
-	//load_file_gio_hang(ad.quan_li_ds_kh.t);
+	load_file_don_mua_kh(ad.quan_li_ds_kh.t);
+	load_file_gio_hang(ad.quan_li_ds_kh.t);
 	//xuat_hoa_don_mua_khach_hang(ad.quan_li_ds_kh.t, ad.quan_li_ds_hang_hoa);
 	//xuat_gio_hang_kh(ad.quan_li_ds_kh.t,ad.quan_li_ds_kh.t->data.hh_gio_hang);
 	SetWindowSize(209, 54);
@@ -138,12 +132,20 @@ int main()
 	}*/
 	//dang_nhap();
 	//gotoXY(0,54);
-	test(ad.quan_li_ds_kh.t);
-	if (check_ma_kh("DO1237", ad.quan_li_ds_kh.t) == true)
+	/*for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 	{
-		cout << "alo alo1";
-	}
-	
+
+		xuatHoaDonBanHang(k->data);
+
+	}*/
+	//ghi_don_mua_cua_dskh(ad.quan_li_ds_kh.t);
+	//ghi_file_quan(ad.quan_li_ds_hang_hoa);
+	//ghi_file_ao(ad.quan_li_ds_hang_hoa);
+	//ghi_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
+	//ghi_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
+	//ghi_thong_tin_kh(ad.quan_li_ds_kh);
+	ghi_gio_hang_cua_dskh(ad.quan_li_ds_kh.t);
+
 	
 	system("pause");
 	return 0;

@@ -214,7 +214,7 @@ void taoHoaDonKhiKhachDatHang(HoaDon& a, ds_hoa_don b, HangHoa c)
 	thoiGianThuc(a.ngay_lap_hd);
 }
 
-void xuatHoaDonBanHang(HoaDon a, DS_Hang_Hoa c)
+void xuatHoaDonBanHang(HoaDon a)
 {
 	cout << "Ma hoa don: " << a.ma_hoa_don << endl;
 	cout << "Ma khach hang: " << a.ma_kh << endl;
@@ -235,7 +235,7 @@ void xuatHoaDonNhapHang(HoaDon a)
 {
 	cout << "Ma hoa don: " << a.ma_hoa_don << endl;
 	cout << "Thong tin hang hoa: " << endl;
-	cout << "Ma hang hoa: " << a.thong_tin_hang.ma_hh << endl;
+	cout << "Ma hang hoa: " << a.ma_hang_hoa << endl;
 	cout << "Ten hang hoa: " << a.thong_tin_hang.ten_hh << endl;
 	cout << "Gia: " << a.thong_tin_hang.gia << endl;
 	cout << "Size: " << a.thong_tin_hang.size << endl;
@@ -747,67 +747,29 @@ void them_khachhang_vao_cay(TREE &t, KH data) {
 }
 
 // ========================= GIO HANG ========================== 
-node_gio_hang* khoiTao_node_gio_hang(gio_hang a) {
-	node_gio_hang* p = new node_gio_hang;
-	if (p == NULL)
-	{
-		cout << "Khong du bo nho de cap phat" << endl;
-		return NULL;
-	}
-	p->data = a;
-	p->pNext = NULL;
-	return p;
-}
- 
-void ThemVaoDau_DanhSach_GioHang(ds_hh_trong_gio_hang& ds_gh, gio_hang a) {
-	// danh sach rong 
-	node_gio_hang* p = khoiTao_node_gio_hang(a);
-	if (ds_gh.pHead == NULL) {
-		ds_gh.pHead = ds_gh.pTail = p;
-	}
-	else {
-		p->pNext = ds_gh.pHead;
-		ds_gh.pHead = p;
-	}
-}
- 
-void Xoa_hangHoa_ViTriBatKi(ds_hh_trong_gio_hang& ds_gh, string vt)
+void xuat_gio_hang(TREE t, string ma_kh)
 {
-	node_gio_hang* h = NULL;
-	for (node_gio_hang* k = ds_gh.pHead; k != NULL;)
+	if (t != NULL)
 	{
-		// vt nằm ở đầu danh sách
-		if (k->data.data.ma_hh == vt && k == ds_gh.pHead)
+		
+		if (ma_kh == t->data.maKh)
 		{
-			ds_gh.pHead = ds_gh.pHead->pNext;
-			delete k;
-			k = ds_gh.pHead;
+			for (int i = 0; i < t->data.data_gh.hh.size(); i++)
+			{
+				xuat_tt_hh_ngan_gon(t->data.data_gh.hh.at(i));
+			}
+			return;
+		}
+		else if (stoi(ma_kh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			xuat_gio_hang(t->pLeft, ma_kh);
+
 		}
 		else
 		{
-			// xoá vị trí bất kì(ko ở đầu)
-			if (k->data.data.ma_hh == vt)
-			{
-				h->pNext = k->pNext;
-				delete k;
-				k = h;
-				// sau khi xoá vt nằm ở cuối
-				if (h->pNext == NULL) {
-					ds_gh.pTail = h;
-					return;
-				}
-			}
-			h = k;
-			k = k->pNext;
-		}
-	}
-}
+			xuat_gio_hang(t->pRight, ma_kh);
 
-void XuatGioHang(ds_hh_trong_gio_hang l,HangHoa a)
-{
-	for (node_gio_hang* k = l.pHead; k != NULL; k = k->pNext) 
-	{
-		xuat_tt_hh_ngan_gon(k->data.data);
+		}
 	}
 }
 
