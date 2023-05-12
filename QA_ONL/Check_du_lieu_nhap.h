@@ -332,22 +332,26 @@ int kt_trung_ma_kh(string a, TREE t)
 	return check;
 }
 
-int check_ma_kh(string a, TREE t)
+bool check_ma_kh(string a, TREE t)
 {
-	int check = -1;
-	int i = 0;
+	
 	if (t != NULL) 
 	{
 		if (t->data.maKh == a)
 		{
-			check = i;
-			return check;
+			return true;
 		}
-		i++;
-		kt_trung_ma_kh(a, t->pLeft);
-		kt_trung_ma_kh(a, t->pRight);
+		else if (stoi(a.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			return check_ma_kh(a, t->pLeft);
+		}
+		else
+			return check_ma_kh(a, t->pRight);
 	}
-	return check;
+	else
+	{
+		return false;
+	}
 }
 
 // ==========Tạo mã khách hàng==========

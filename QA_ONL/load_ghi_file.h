@@ -34,7 +34,7 @@ void load_file_hoa_don_nhap(DS_HOA_DON &a)
 	fi.close();
 }
 
-void ghi_file_hoa_don_nhap(DS_HOA_DON a)
+void ghi_file_hoa_don_nhap(DS_HOA_DON &a)
 {
 	//ofstream fo("thong_tin_hoa_don_nhap_hang.txt", ios::app);
 	ofstream fo;
@@ -344,3 +344,56 @@ void load_file_thong_tin_ao(DS_Hang_Hoa &dshh)
 	fi.close();
 }
 
+//================ Đơn hàng chờ =====================
+void load_file_don_hang_cho(ds_don_hang_cho &a) {
+	ifstream fi("don_hang_cho.txt", ios::in);
+	if (fi.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fi.close();
+		return;
+	}
+	while (fi.eof() == false) {
+		don_hang_cho k;
+		int n;
+		fi >> n;
+		cin.ignore();
+		getline(fi, k.hoa_don.ma_hoa_don, ',');
+		getline(fi, k.hoa_don.ma_kh, ',');
+		getline(fi, k.hoa_don.ma_hang_hoa, ',');
+		fi >> k.hoa_don.sl_mua;
+		fi.ignore();
+		getline(fi, k.hoa_don.ngay_lap_hd, ',');
+		fi >> k.hoa_don.giam_gia_theo_hang;
+		fi.ignore();
+		fi >> k.hoa_don.tong_tien;
+		fi.ignore();
+		getline(fi, k.hoa_don.trang_thai);
+		a.don_cho.push_back(k);
+	}
+}
+void ghi_file_don_hang_cho(ds_don_hang_cho a,don_hang_cho b) {
+	
+	ofstream fo("don_hang_cho.txt", ios::app, ios::out);
+	for (int i = 0; i < a.don_cho.size(); i++) {
+		fo << b.hoa_don.ma_hoa_don;
+		fo << ',';
+		fo << b.hoa_don.thong_tin_hang.ma_hh;
+		fo << ',';
+		fo << b.hoa_don.thong_tin_hang.ten_hh;
+		fo << ',';
+		fo << b.hoa_don.thong_tin_hang.gia;
+		fo << ',';
+		fo << b.hoa_don.thong_tin_hang.size;
+		fo << ',';
+		fo << b.hoa_don.sl_mua;
+		fo << ',';
+		fo << b.hoa_don.ngay_lap_hd;
+		fo << ',';
+		fo << b.hoa_don.tong_tien;
+		fo << ',';
+		fo << b.hoa_don.trang_thai;
+		fo << endl;
+	}
+	fo.close();
+}

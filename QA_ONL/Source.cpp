@@ -30,31 +30,48 @@ void xuat_gio_hang_kh(TREE a, ds_hh_trong_gio_hang b)
 
 	}
 }
+
+
+int voi(int a,int  b)
+{
+	if (a == 1)
+	{
+		return a + b;
+	}
+	return b;
+}
 int main()
 {
-	//Admin ad;
+	Admin ad;
 	//HoaDon a;
 	//DS_HOA_DON b;
 	//DS_Hang_Hoa c;
 	//
-	////load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
-	////load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
-	////load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
-	////load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
-	////load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
-	////load_file_don_mua_kh(ad.quan_li_ds_kh.t);
-	////load_file_gio_hang(ad.quan_li_ds_kh.t);
-	////xuat_hoa_don_mua_khach_hang(ad.quan_li_ds_kh.t, ad.quan_li_ds_hang_hoa);
-	////xuat_gio_hang_kh(ad.quan_li_ds_kh.t,ad.quan_li_ds_kh.t->data.hh_gio_hang);
+	//load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
+	//load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
+	//load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
+	//load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
+	load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
+	//load_file_don_mua_kh(ad.quan_li_ds_kh.t);
+	//load_file_gio_hang(ad.quan_li_ds_kh.t);
+	//xuat_hoa_don_mua_khach_hang(ad.quan_li_ds_kh.t, ad.quan_li_ds_hang_hoa);
+	//xuat_gio_hang_kh(ad.quan_li_ds_kh.t,ad.quan_li_ds_kh.t->data.hh_gio_hang);
 	//SetWindowSize(209, 54);
-	////ShowScrollbar(0);
+	//ShowScrollbar(0);
 	//ve_khung_console();
-	//
+	
 	//ve_nhap_bang_hoa_don_nhap_hang(10,4,a,b,c);
-	//
+	//duyet_NLR_xuat_thong_tin_KH(ad.quan_li_ds_kh.t);
 
 	//gotoXY(0, 51);
-	system("pause");
-	return 0;
-	cout << "Thien dep traiq+";
+	/*system("pause");
+	return 0;*/
+	// suaThongTinKh(ad.quan_li_ds_kh.t);
+	string a = "DO1237";
+	if( check_ma_kh(a, ad.quan_li_ds_kh.t) ==true )
+	{
+		cout << "alo";
+	}
+	
+	
 }
