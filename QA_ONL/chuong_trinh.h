@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Check_du_lieu_nhap.h"
 #include "Xu_li_do_hoa.h"
+#include "utility"
 
 void nhapHangHoa(HangHoa& a, DS_Hang_Hoa b)
 {
@@ -416,57 +417,44 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 	cout << "Nhap email: "; cin >> a.email;//example@gmail.com
 	check_email(a.email);
 }
-
+ 
 // Xuat san pham hot
-void sanPhamHot(Admin& a)
+void sanPhamHot(Admin& a, vector<HangHoa> ten_hang_best_seller)
 {
 	// xac dinh thoi gian hien tai
 	time_t now = time(0);
 	tm* ltm = localtime(&now);
 
-	// tao vector b chua hoa don trong 1 thang 
-	vector <node_hoa_don*> b;
-	// tim san pham trong vong 1 thang
+	// tao 1 danh sach hoa don b chua hoa don trong 1 thang 
+	DS_HOA_DON ds_1_thang;
+
+	// tim san pham trong vong 1 thang va luu vao b
 	for (node_hoa_don* k = a.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 	{
 		if ((1 + ltm->tm_mon) - stoi(k->data.ngay_lap_hd.substr(3, 2)) <= 1)
 		{
-			b.push_back(k);
+			them_cuoi_ds_hoa_don(ds_1_thang, k->data);
 		}
 	}
 
-	// xet tung phan tu trong vector b
-	for (int i = 0; i < b.size(); i++)
+ 	vector<HoaDon> best_seller;
+	for (node_hoa_don* k = ds_1_thang.pHead; k != NULL; k = k->pNext)
 	{
-		// so luong mua o ma hang dau tien
-		int sl_tong = b[i]->data.sl_mua;
-
-		for (node_hoa_don* k = b[i]->pNext; k != NULL; k = k->pNext)
+		int tong_sl_mua = k->data.sl_mua;
+		for (node_hoa_don* k2 = k->pNext; k2 != NULL; k2 = k2->pNext)
 		{
-			if (b[i]->data.ma_hang_hoa == k->data.ma_hang_hoa)
+			if (k->data.thong_tin_hang.ten_hh == k2->data.thong_tin_hang.ten_hh)
 			{
-				sl_tong += k->data.sl_mua;
+				tong_sl_mua += k2->data.sl_mua;
 			}
 		}
-		if (sl_tong >= 100)
+		if (tong_sl_mua >= 50)
 		{
-			for (int ia = 0; ia < a.quan_li_ds_hang_hoa.ds_ao.size(); i++)
-			{
-				if (b[i]->data.ma_hang_hoa == a.quan_li_ds_hang_hoa.ds_ao.at(ia).ma_hh)
-				{
-					cout << a.quan_li_ds_hang_hoa.ds_ao.at(ia).ten_hh;
-				}
-			}
-			for (int iq = 0; iq < a.quan_li_ds_hang_hoa.ds_quan.size(); i++)
-			{
-				if (b[i]->data.ma_hang_hoa == a.quan_li_ds_hang_hoa.ds_quan.at(iq).ma_hh)
-				{
-					cout << a.quan_li_ds_hang_hoa.ds_quan.at(iq).ten_hh;
-				}
-			}	
+			best_seller.push_back(k->data);
 		}
 	}
 }
+
 
 // loc hang hoa
 void loc_HangHoa(DS_Hang_Hoa x)
@@ -589,3 +577,7 @@ void xuatDS_Hang(DS_Hang_Hoa x)
 
 	}
 }
+
+
+
+
