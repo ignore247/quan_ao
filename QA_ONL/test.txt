@@ -2,12 +2,15 @@ BA1236
 3
 Q4567,Quan Thun,33,160000,32,Mat me thich hop su dung vao mua he, tre trung nang dong,15/10/2022
 Q0101,Quan Dai Thun,10,100000,26,Chat lieu co gian, san xuat tai Viet Nam,01/01/2022
-A1888,Ao Ba Lo,23,300000,L,Nhieu size,05/06/2022DO1235
+A1888,Ao Ba Lo,23,300000,L,Nhieu size,05/06/2022
+DO1235
 2
 Q0101,Quan Dai Thun,10,100000,26,Chat lieu co gian, san xuat tai Viet Nam,01/01/2022
-A1324,Ao Dai,42,245000,S,Dai lam nha,12/10/2022DO1234
+A1324,Ao Dai,42,245000,S,Dai lam nha,12/10/2022
+DO1234
 2
 Q4567,Quan Thun,33,160000,32,Mat me thich hop su dung vao mua he, tre trung nang dong,15/10/2022
-A1888,Ao Ba Lo,23,300000,L,Nhieu size,05/06/2022DO1237
+A1888,Ao Ba Lo,23,300000,L,Nhieu size,05/06/2022
+DO1237
 1
 A1324,Ao Dai,42,245000,S,Dai lam nha,12/10/2022

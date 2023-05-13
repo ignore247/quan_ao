@@ -4,7 +4,7 @@
 //================ Hàng Hóa ====================
 void load_file_thong_tin_quan(DS_Hang_Hoa& dshh) 
 {
-	ifstream fi("quan.txt", ios::in);
+	ifstream fi("Quan.txt", ios::in);
 	while (fi.eof() == false) {
 		HangHoa a;
 		getline(fi, a.ma_hh, ',');
@@ -27,7 +27,7 @@ void load_file_thong_tin_quan(DS_Hang_Hoa& dshh)
 void ghi_file_quan(DS_Hang_Hoa dshh) 
 {
 	ofstream fo;
-	fo.open("test.txt", ios::out);
+	fo.open("Quan.txt", ios::out);
 	if (fo.fail() == true)
 	{
 		cout << "Khong mo duoc!" << endl;
@@ -36,7 +36,7 @@ void ghi_file_quan(DS_Hang_Hoa dshh)
 	}
 	fo << "";
 	fo.close();
-	fo.open("test.txt", ios::app);
+	fo.open("Quan.txt", ios::app);
 	for (int i = 0; i < dshh.ds_quan.size(); i++) 
 	{
 		fo << dshh.ds_quan.at(i).ma_hh;
@@ -64,7 +64,7 @@ void ghi_file_quan(DS_Hang_Hoa dshh)
 
 void load_file_thong_tin_ao(DS_Hang_Hoa &dshh)
 {
-	ifstream fi("ao.txt", ios::in);
+	ifstream fi("Ao.txt", ios::in);
 	while (fi.eof() == false) 
 	{
 		HangHoa a;
@@ -85,7 +85,7 @@ void load_file_thong_tin_ao(DS_Hang_Hoa &dshh)
 void ghi_file_ao(DS_Hang_Hoa dshh) 
 {
 	ofstream fo;
-	fo.open("test.txt", ios::out);
+	fo.open("Ao.txt", ios::out);
 	if (fo.fail() == true)
 	{
 		cout << "Khong mo duoc!" << endl;
@@ -94,7 +94,7 @@ void ghi_file_ao(DS_Hang_Hoa dshh)
 	}
 	fo << "";
 	fo.close();
-	fo.open("test.txt", ios::app);
+	fo.open("Ao.txt", ios::app);
 	for (int i = 0; i < dshh.ds_ao.size(); i++) 
 	{
 		fo << dshh.ds_ao.at(i).ma_hh;
@@ -446,7 +446,7 @@ void load_file_don_mua_kh(TREE &a)
 void ghi_don_mua_cua_1_kh(KhachHang a)
 {
 	ofstream fo;
-	fo.open("test.txt", ios::app);
+	fo.open("don_mua_hang.txt", ios::app);
 	if (fo.fail() == true)
 	{
 		cout << "Khong mo duoc!" << endl;
@@ -560,8 +560,6 @@ void ghi_don_mua_cua_dskh(TREE t)
 	fo.close();
 	duyet_cay_ghi_don_mua(t,dc);
 }
-
-
 
 // =================== Gio hang =================
 void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi, int size)
@@ -697,13 +695,14 @@ void duyet_cay_ghi_gio_hang(TREE t,node_kh*dc)
 			}
 		}
 		ghi_gio_hang_cua_1_kh(t->data);
-		duyet_cay_ghi_gio_hang(t->pLeft);
-		duyet_cay_ghi_gio_hang(t->pRight);
+		duyet_cay_ghi_gio_hang(t->pLeft,dc);
+		duyet_cay_ghi_gio_hang(t->pRight,dc);
 	}
 }
 void ghi_gio_hang_cua_dskh(TREE t)
 {
 	node_kh* dc = NULL;
+	tim_diem_cuoi_cua_duyet_cay_NLR(t, dc);
 	ofstream fo;
 	fo.open("test.txt", ios::out);
 	if (fo.fail() == true)
