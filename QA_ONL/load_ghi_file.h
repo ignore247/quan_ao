@@ -619,7 +619,7 @@ void load_file_gio_hang(TREE& a)
 void ghi_gio_hang_cua_1_kh(KhachHang a)
 {
 	ofstream fo;
-	fo.open("test.txt", ios::app);
+	fo.open("gio_hang.txt", ios::app);
 	if (fo.fail() == true)
 	{
 		cout << "Khong mo duoc!" << endl;
@@ -655,7 +655,7 @@ void duyet_cay_ghi_gio_hang(TREE t,node_kh*dc)
 		if (dc == t)
 		{
 			ofstream fo;
-			fo.open("test.txt", ios::app);
+			fo.open("gio_hang.txt", ios::app);
 			if (fo.fail() == true)
 			{
 				cout << "Khong mo duoc!" << endl;
@@ -704,7 +704,7 @@ void ghi_gio_hang_cua_dskh(TREE t)
 	node_kh* dc = NULL;
 	tim_diem_cuoi_cua_duyet_cay_NLR(t, dc);
 	ofstream fo;
-	fo.open("test.txt", ios::out);
+	fo.open("gio_hang.txt", ios::out);
 	if (fo.fail() == true)
 	{
 		cout << "Khong mo duoc!" << endl;
