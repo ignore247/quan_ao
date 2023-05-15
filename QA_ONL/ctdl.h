@@ -91,7 +91,7 @@ struct KhachHang {
 	ds_hoa_don don_mua_hang;
 
 	//Gio_Hang mua_hang
-	gio_hang hh_gh;
+	gio_hang data_gh;
 
 	//account 
 	string ten_dang_nhap;

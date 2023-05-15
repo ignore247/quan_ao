@@ -1,4 +1,4 @@
-﻿#pragma once
+﻿﻿#pragma once
 #include "ctdl.h"
 
 void chuanHoa(string& a)
@@ -213,10 +213,10 @@ int check_trung_ma_hd(string a, ds_hoa_don b)
 	return check;
 }
 
-string tao_ma_hoa_don(ds_hoa_don b) 
+string tao_ma_hoa_don(ds_hoa_don b)
 {
 	string a = "0000";
-	do 
+	do
 	{
 		for (int i = 0; i < a.length(); i++)
 		{
@@ -246,10 +246,10 @@ void check_Ten(string& a)
 
 void check_Size(string& a)
 {
-	if (a[0] == 'A') 
+	if (a[0] == 'A')
 	{
 		regex check_size_ao("([SsMmLl])");
-		while (regex_match(a, check_size_ao) == false) 
+		while (regex_match(a, check_size_ao) == false)
 		{
 			cout << "Nhap size: "; cin >> a;
 		}
@@ -266,16 +266,16 @@ void check_Size(string& a)
 	}
 }
 
-void check_So(string& a) 
+void check_So(string& a)
 {
 	regex check_gia("^[0-9]+$");
-	while (regex_match(a, check_gia) == false || a == "0") 
+	while (regex_match(a, check_gia) == false || a == "0")
 	{
 		cout << "Gia: "; cin >> a;
 	}
 }
 
-void check_Loai_Hoa_Don(string& a) 
+void check_Loai_Hoa_Don(string& a)
 {
 	regex check_ma("(Nhap|Xuat)");
 	while (regex_match(a, check_ma) == false)
@@ -285,56 +285,61 @@ void check_Loai_Hoa_Don(string& a)
 	}
 }
 
-void check_PTTT(string& a) 
+void check_PTTT(string& a)
 {
 	regex check_pttt("(Cod|Bank)");
-	while (regex_match(a, check_pttt) == false) 
+	while (regex_match(a, check_pttt) == false)
 	{
 		cout << "Nhap phuong thuc thanh toan (Cod/Bank): "; cin >> a;
 		chuanHoa(a);
 	}
 }
 
-void check_Sdt(string& a) 
+void check_Sdt(string& a)
 {
 	regex check_sdt("^(0[3-9][0-9]{8})$");
-	while (regex_match(a, check_sdt) == false) 
+	while (regex_match(a, check_sdt) == false)
 	{
 		cout << "Nhap so dien thoai: "; cin >> a;
 	}
 }
 
-void check_email(string& a) 
+void check_email(string& a)
 {
 	regex check_email("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\.[a-zA-Z]{2,}$");
-	while (regex_match(a, check_email) == false) 
+	while (regex_match(a, check_email) == false)
 	{
 		cout << "Nhap email:"; cin >> a;
 	}
 }
 
 // Hàm kiểm tra mã khách hàng trùng
-int kt_trung_ma_kh(string a, TREE t) 
+bool kt_trung_ma_kh(string a, TREE t)
 {
-	int check = -1;
-	int i = 0;
-	if (t != NULL) 
+	if (t != NULL)
 	{
-		if (t->data.maKh.substr(2, 4) == a) 
+		if (t->data.maKh.substr(2, 4) == a)
 		{
-			check = i;
-			return check;
+			return true;
 		}
-		i++;
-		kt_trung_ma_kh(a, t->pLeft);
-		kt_trung_ma_kh(a, t->pRight);
+		else if (stoi(a.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			return kt_trung_ma_kh(a, t->pLeft);
+		}
+		else if (stoi(a.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4)))
+		{
+			return kt_trung_ma_kh(a, t->pRight);
+		}
 	}
-	return check;
+	else
+	{
+		return false;
+	}
 }
 
 bool check_ma_kh(string a, TREE t)
-{	
-	if (t != NULL) 
+{
+	if (t != NULL)
 	{
 		if (t->data.maKh == a)
 		{
@@ -344,16 +349,20 @@ bool check_ma_kh(string a, TREE t)
 		{
 			return check_ma_kh(a, t->pLeft);
 		}
-		else return check_ma_kh(a, t->pRight);
+		else if (stoi(a.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4)))
+		{
+			return check_ma_kh(a, t->pRight);
+		}
 	}
 	else
 	{
 		return false;
 	}
+
 }
 
 // ==========Tạo mã khách hàng==========
-string tao_ma_khach_hang(ds_khach_hang b) 
+string tao_ma_khach_hang(ds_khach_hang b)
 {
 	string a = "0000";
 	do
@@ -363,7 +372,7 @@ string tao_ma_khach_hang(ds_khach_hang b)
 			a[i] = rand() % (57 - 48 + 1) + 48; // 0 -> 9 : 48 -> 57 (mã ascii)
 		}
 
-	} while (kt_trung_ma_kh(a, b.t) > -1);
+	} while (kt_trung_ma_kh(a, b.t) == true);
 	return a;
 
 }

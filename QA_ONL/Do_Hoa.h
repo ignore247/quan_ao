@@ -1,5 +1,4 @@
-﻿#pragma once
-#pragma once
+﻿﻿#pragma once
 #include <stdio.h>
 #include <conio.h>
 #include<ctime> /* thư viện hỗ trợ về thời gian thực */
@@ -106,4 +105,12 @@ void ShowScrollbar(BOOL Show)
 	ShowScrollBar(hWnd, SB_BOTH, Show);
 }
 
-
+void XoaManHinh()
+{
+	HANDLE hOut;
+	COORD Position;
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	Position.X = 0;
+	Position.Y = 0;
+	SetConsoleCursorPosition(hOut, Position);
+}
