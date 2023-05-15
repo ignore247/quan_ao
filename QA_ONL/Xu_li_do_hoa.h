@@ -2,6 +2,62 @@
 #include "Do_Hoa.h"
 #include "chuong_trinh.h"
 
+void ve_khung_console()
+{
+	SetColor(11);
+	// ============= ngang ========
+	for (int i = 0; i < 209; i++)
+	{
+		if (i == 0)
+		{
+			gotoXY(i, 0);
+			cout << char(221);
+			continue;
+		}
+		gotoXY(i, 0);
+		cout << char(219);
+	}
+	for (int i = 0; i < 209; i++)
+	{
+		gotoXY(i, 54);
+		cout << char(219);
+	}
+	// =========== dọc =============
+	for (int i = 0; i < 54; i++)
+	{
+		gotoXY(0, i);
+		cout << char(219);
+		gotoXY(1, i);
+		cout << char(219);
+	}
+	for (int i = 0; i < 54; i++)
+	{
+		gotoXY(209, i);
+		cout << char(219);
+		gotoXY(207, i);
+		cout << char(219);
+	}
+	SetColor(7);
+	gotoXY(13, 2);
+	cout << "Su dung bon phim "<< char(30) << " " << char(31) << " " << char(16) << " " << char(17);
+	gotoXY(18, 3);
+	cout << "de dieu khien";
+	gotoXY(13, 4);
+	cout << "Enter: Chon    ESC: Huy";
+	SetColor(11);
+	for (int i = 0; i < 54; i++)
+	{
+		gotoXY(48, i);
+		cout << char(219);
+		gotoXY(49, i);
+		cout << char(219);
+	}
+	for (int i = 0; i < 49; i++)
+	{
+		gotoXY(i, 6);
+		cout << char(219);
+	}
+}
 
 void box(int x, int y, int w, int h, int t_color, int b_color, string nd)
 {
@@ -13,7 +69,7 @@ void box(int x, int y, int w, int h, int t_color, int b_color, string nd)
 			gotoXY(ix, iy); cout << " ";
 		}
 	}
-	SetColor(7);
+	SetColor(11);
 	gotoXY(x + 1, y + 1);
 	cout << nd;
 
@@ -1039,11 +1095,11 @@ void xuat_hoa_don_nhap_hang(int vi_tri_x, int vi_tri_y, HoaDon a)
 	cout << "Ngay lap hoa don: " << a.ngay_lap_hd;
 }
 
-void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
+void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a)
 {
 	//========= Khung ============== //
 	SetColor(11);
-	gotoXY(vi_tri_x,  vi_tri_y * 17);
+	gotoXY(vi_tri_x,  vi_tri_y );
 	for (int i = 0; i < 60; i++)
 	{
 		if (i == 0)
@@ -1058,18 +1114,18 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 		}
 		cout << char(196);
 	}
-	for (int j = vi_tri_y * 17 + 1; j < vi_tri_y * 17 + 16; j++)
+	for (int j = vi_tri_y + 1; j < vi_tri_y + 16; j++)
 	{
 		gotoXY(vi_tri_x, j);
 		cout << char(179);
 	}
 
-	for (int j = vi_tri_y * 17 + 1; j < vi_tri_y * 17 + 16; j++)
+	for (int j = vi_tri_y  + 1; j < vi_tri_y + 16; j++)
 	{
 		gotoXY(vi_tri_x + 59, j);
 		cout << char(179);
 	}
-	gotoXY(vi_tri_x, vi_tri_y * 17 + 16);
+	gotoXY(vi_tri_x, vi_tri_y + 16);
 	for (int i = 0; i < 60; i++)
 	{
 		if (i == 0)
@@ -1086,11 +1142,11 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 	}
 	//=============== Nội dung =================//
 	textcolor(252);
-	gotoXY(vi_tri_x + 22, vi_tri_y * 17 + 1);
+	gotoXY(vi_tri_x + 22, vi_tri_y + 1);
 	cout << "HOA DON BAN HANG";
 	textcolor(0);
 	SetColor(11);
-	gotoXY(vi_tri_x, vi_tri_y * 17 + 2);
+	gotoXY(vi_tri_x, vi_tri_y + 2);
 	for (int i = 0; i < 59; i++)
 	{
 		if (i == 0)
@@ -1105,12 +1161,12 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 		cout << char(196);
 	}
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 3);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 3);
 	cout << "Ma hoa don: " << a.ma_hoa_don;
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 4);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 4);
 	cout << "Ma khach hang: " << a.ma_kh;
 	SetColor(11);
-	gotoXY(vi_tri_x, vi_tri_y * 17 + 5);
+	gotoXY(vi_tri_x, vi_tri_y + 5);
 	for (int i = 0; i < 59; i++)
 	{
 		if (i == 0)
@@ -1124,19 +1180,19 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 		}
 		cout << char(196);
 	}
-	gotoXY(vi_tri_x + 20, vi_tri_y * 17 + 5);
+	gotoXY(vi_tri_x + 20, vi_tri_y + 5);
 	cout << " Thong tin hang hoa ";
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 6);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 6);
 	cout << "Ma hang hoa: " << a.ma_hang_hoa;
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 7);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 7);
 	cout << "Ten hang hoa: " << a.thong_tin_hang.ten_hh << endl;
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 8);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 8);
 	cout << "Gia: " << a.thong_tin_hang.gia << endl;
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 9);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 9);
 	cout << "Size: " << a.thong_tin_hang.size << endl;
 	SetColor(11);
-	gotoXY(vi_tri_x, vi_tri_y * 17 + 10);
+	gotoXY(vi_tri_x, vi_tri_y + 10);
 	for (int i = 0; i < 59; i++)
 	{
 		if (i == 0)
@@ -1151,26 +1207,45 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 		cout << char(196);
 	}
 	SetColor(7);
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 11);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 11);
 	cout << "So luong mua: " << a.sl_mua;
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 12);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 12);
 	cout << "Gia duoc giam: " << a.giam_gia_theo_hang;
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 13);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 13);
 	cout << "Tong tien: " << a.tong_tien;
 	thoiGianThuc(a.ngay_lap_hd);
 	chuan_hoa_tg(a.ngay_lap_hd);
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 14);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 14);
 	cout << "Ngay lap hoa don: " << a.ngay_lap_hd;
-	gotoXY(vi_tri_x + 2, vi_tri_y * 17 + 15);
+	gotoXY(vi_tri_x + 2, vi_tri_y + 15);
 	cout << "Trang thai: " << a.trang_thai;
+}
+
+void xuat_1_trang_hd_nhap_hang(int trang_ht, vector < vector <HoaDon> > ds_tam)
+{
+	int tt = 0;
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			xuat_hoa_don_nhap_hang(65 + (70 * j), 7 + (i * 17), ds_tam.at(trang_ht-1).at(tt));
+			if (tt == ds_tam.at(trang_ht-1).size() - 1)
+			{
+				tt = 0;
+				return;
+			}
+			tt++;
+		}
+	}
 }
 
 void xuat_ds_hoa_don_nhap(Admin ad)
 {
-	int hang = 0;
-	int cot = 0;
+	bool cl = true;
+	int trang_ht = 1;
 	int trang;
-	int tt = 0;
+	int dem = 0;
+	bool kt = true;
 	if (ad.quan_li_ds_hoa_don_nhap.sl % 4 == 0)
 	{
 		trang = (ad.quan_li_ds_hoa_don_nhap.sl / 4);
@@ -1180,77 +1255,308 @@ void xuat_ds_hoa_don_nhap(Admin ad)
 		trang = (ad.quan_li_ds_hoa_don_nhap.sl / 4) + 1;
 	}
 	vector <HoaDon> tam;
+	vector < vector <HoaDon> > ds_tam;
 	for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
 	{
-		tam.push_back(k->data);
-	}
-	for (int i = hang; i < 1; i++)
-	{
-		for (int j = cot; j < 1; j++)
+		dem++;
+		if (trang - ds_tam.size() == 1)
 		{
-			xuat_hoa_don_nhap_hang(60 * cot + 10, 2 + (hang * 17), tam.at(tt));
+			if (dem > ds_tam.size() * 4)
+			{
+				if (k->pNext == NULL)
+				{
+					tam.push_back(k->data);
+					ds_tam.push_back(tam);
+					tam.clear();
+					break;
+				}
+				tam.push_back(k->data);
+				continue;
+			}
+		}
+		tam.push_back(k->data);
+		if (tam.size() == 4)
+		{
+			ds_tam.push_back(tam);
+			tam.clear();
+		}
+	}
+	
+	if (trang == 1)
+	{
+		while (true)
+		{
+			xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+			box(190, 50, 10, 2, 11, 3, "   Esc");
+			if (_kbhit())
+			{
+				char c = _getch();
+				
+				if (c == 27)
+				{
+					box(190, 50, 10, 2, 11, 58, "   Esc");
+					Sleep(120);
+					break;
+				}
+			}
+		}
+		return;
+	}
+
+
+	xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+	box(118, 42, 5, 2, 11, 1, " <<");
+	box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(1));
+	box(118 + 13, 42, 5, 2, 11, 1, " >>");
+	box(190, 50, 10, 2, 11, 3, "   Esc");
+	while (kt == true)
+	{
+		if (_kbhit())
+		{
+			char c = _getch();
+			if (c == -32)
+			{
+				cl = true;// đã bấm
+				c = _getch();
+				if (c == 75) // mũi tên trái
+				{
+					if (trang_ht == 1)
+					{
+						box(118, 42, 5, 2, 11, 58, " <<");
+						Sleep(120);
+						system("cls");
+						ve_khung_console();
+						trang_ht = trang;
+						xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+						box(118, 42, 5, 2, 11, 1, " <<");
+						box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(trang_ht));
+						box(118 + 13, 42, 5, 2, 11, 1, " >>");
+						box(190, 50, 10, 2, 11, 3, "   Esc");
+
+					}
+					else
+					{
+						box(118, 42, 5, 2, 11, 58, " <<");
+						Sleep(120);
+						system("cls");
+						ve_khung_console();
+						trang_ht--;
+						xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+						box(118, 42, 5, 2, 11, 1, " <<");
+						box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(trang_ht));
+						box(118 + 13, 42, 5, 2, 11, 1, " >>");
+						box(190, 50, 10, 2, 11, 3, "   Esc");
+					}
+				}
+				else if (c == 77) // mũi tên phải 
+				{
+					if (trang_ht == trang)
+					{
+						box(118 + 13, 42, 5, 2, 11, 58, " >>");
+						Sleep(120);
+						system("cls");
+						ve_khung_console();
+						trang_ht = 1;	
+						xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+						box(118, 42, 5, 2, 11, 1, " <<");
+						box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(trang_ht));
+						box(118 + 13, 42, 5, 2, 11, 1, " >>");
+						box(190, 50, 10, 2, 11, 3, "   Esc");
+					}
+					else
+					{
+						box(118 + 13, 42, 5, 2, 11, 58, " >>");
+						Sleep(120);
+						system("cls");
+						ve_khung_console();
+						trang_ht++;	
+						xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+						box(118, 42, 5, 2, 11, 1, " <<");
+						box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(trang_ht));
+						box(118 + 13, 42, 5, 2, 11, 1, " >>");
+						box(190, 50, 10, 2, 11, 3, "   Esc");
+					}
+				}
+			}
+			else if (c == 27)
+			{
+				box(190, 50, 10, 2, 11, 58, "   Esc");
+				Sleep(120);
+				kt = false;
+			}
+		}
+	}
+
+}
+
+void xuat_1_trang_hd_ban_hang(int trang_ht, vector < vector <HoaDon> > ds_tam)
+{
+	int tt = 0;
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			xuat_hoa_don_ban_hang(60 + (70 * j), 7 + (i * 17), ds_tam.at(trang_ht - 1).at(tt));
+			if (tt == ds_tam.at(trang_ht - 1).size() - 1)
+			{
+				tt = 0;
+				return;
+			}
 			tt++;
 		}
 	}
-	// tính 4 ô đã hiện lấy (i - 3) % 4 
 }
 
-void ve_khung_console()
+void xuat_ds_hoa_don_ban(Admin ad)
 {
-	SetColor(11);
-	// ============= ngang ========
-	for (int i = 0; i < 209; i++)
+	bool cl = true;
+	int trang_ht = 1;
+	int trang;
+	int dem = 0;
+	bool kt = true;
+	if (ad.quan_li_ds_hoa_don_xuat.sl % 4 == 0)
 	{
-		if (i == 0)
+		trang = (ad.quan_li_ds_hoa_don_xuat.sl / 4);
+	}
+	else
+	{
+		trang = (ad.quan_li_ds_hoa_don_xuat.sl / 4) + 1;
+	}
+	vector <HoaDon> tam;
+	vector < vector <HoaDon> > ds_tam;
+	for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+	{
+		dem++;
+		if (trang - ds_tam.size() == 1)
 		{
-			gotoXY(i, 0);
-			cout << char(221);
-			continue;
+			if (dem > ds_tam.size() * 4)
+			{
+				if (k->pNext == NULL)
+				{
+					tam.push_back(k->data);
+					ds_tam.push_back(tam);
+					tam.clear();
+					break;
+				}
+				tam.push_back(k->data);
+				continue;
+			}
 		}
-		gotoXY(i, 0);
-		cout << char(219);
+		tam.push_back(k->data);
+		if (tam.size() == 4)
+		{
+			ds_tam.push_back(tam);
+			tam.clear();
+		}
 	}
-	for (int i = 0; i < 209; i++)
+
+	if (trang == 1)
 	{
-		gotoXY(i, 54);
-		cout << char(219);
+		while (true)
+		{
+			xuat_1_trang_hd_ban_hang(trang, ds_tam);
+			box(190, 50, 10, 2, 11, 3, "   Esc");
+			if (_kbhit())
+			{
+				char c = _getch();
+
+				if (c == 27)
+				{
+					box(190, 50, 10, 2, 11, 58, "   Esc");
+					Sleep(120);
+					break;
+				}
+			}
+		}
+		return;
 	}
-	// =========== dọc =============
-	for (int i = 0; i < 54; i++)
+
+
+	xuat_1_trang_hd_ban_hang(trang_ht, ds_tam);
+	box(118, 42, 5, 2, 11, 1, " <<");
+	box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(1));
+	box(118 + 13, 42, 5, 2, 11, 1, " >>");
+	box(190, 50, 10, 2, 11, 3, "   Esc");
+	while (kt == true)
 	{
-		gotoXY(0, i);
-		cout << char(219);
-		gotoXY(1, i);
-		cout << char(219);
+		if (_kbhit())
+		{
+			char c = _getch();
+			if (c == -32)
+			{
+				cl = true;// đã bấm
+				c = _getch();
+				if (c == 75) // mũi tên trái
+				{
+					if (trang_ht == 1)
+					{
+						box(118, 42, 5, 2, 11, 58, " <<");
+						Sleep(120);
+						system("cls");
+						ve_khung_console();
+						trang_ht = trang;
+						xuat_1_trang_hd_ban_hang(trang_ht, ds_tam);
+						box(118, 42, 5, 2, 11, 1, " <<");
+						box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(trang_ht));
+						box(118 + 13, 42, 5, 2, 11, 1, " >>");
+						box(190, 50, 10, 2, 11, 3, "   Esc");
+
+					}
+					else
+					{
+						box(118, 42, 5, 2, 11, 58, " <<");
+						Sleep(120);
+						system("cls");
+						ve_khung_console();
+						trang_ht--;
+						xuat_1_trang_hd_ban_hang(trang_ht, ds_tam);
+						box(118, 42, 5, 2, 11, 1, " <<");
+						box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(trang_ht));
+						box(118 + 13, 42, 5, 2, 11, 1, " >>");
+						box(190, 50, 10, 2, 11, 3, "   Esc");
+					}
+				}
+				else if (c == 77) // mũi tên phải 
+				{
+					if (trang_ht == trang)
+					{
+						box(118 + 13, 42, 5, 2, 11, 58, " >>");
+						Sleep(120);
+						system("cls");
+						ve_khung_console();
+						trang_ht = 1;
+						xuat_1_trang_hd_ban_hang(trang_ht, ds_tam);
+						box(118, 42, 5, 2, 11, 1, " <<");
+						box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(trang_ht));
+						box(118 + 13, 42, 5, 2, 11, 1, " >>");
+						box(190, 50, 10, 2, 11, 3, "   Esc");
+					}
+					else
+					{
+						box(118 + 13, 42, 5, 2, 11, 58, " >>");
+						Sleep(120);
+						system("cls");
+						ve_khung_console();
+						trang_ht++;
+						xuat_1_trang_hd_ban_hang(trang_ht, ds_tam);
+						box(118, 42, 5, 2, 11, 1, " <<");
+						box(118 + 6, 42, 6, 2, 11, 1, "  " + to_string(trang_ht));
+						box(118 + 13, 42, 5, 2, 11, 1, " >>");
+						box(190, 50, 10, 2, 11, 3, "   Esc");
+					}
+				}
+			}
+			else if (c == 27)
+			{
+				box(190, 50, 10, 2, 11, 58, "   Esc");
+				Sleep(120);
+				kt = false;
+			}
+		}
 	}
-	for (int i = 0; i < 54; i++)
-	{
-		gotoXY(209, i);
-		cout << char(219);
-		gotoXY(207, i);
-		cout << char(219);
-	}
-	SetColor(7);
-	gotoXY(13, 2);
-	cout << "Su dung bon phim "<< char(30) << " " << char(31) << " " << char(16) << " " << char(17);
-	gotoXY(18, 3);
-	cout << "de dieu khien";
-	gotoXY(13, 4);
-	cout << "Enter: Chon    ESC: Huy";
-	SetColor(11);
-	for (int i = 0; i < 54; i++)
-	{
-		gotoXY(48, i);
-		cout << char(219);
-		gotoXY(49, i);
-		cout << char(219);
-	}
-	for (int i = 0; i < 49; i++)
-	{
-		gotoXY(i, 6);
-		cout << char(219);
-	}
+
 }
+
 
 
 

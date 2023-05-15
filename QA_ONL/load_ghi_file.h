@@ -501,7 +501,7 @@ void duyet_cay_ghi_don_mua(TREE t,node_kh* dc)
 			fo << t->data.maKh;
 			fo << endl;
 			fo << t->data.don_mua_hang.sl;
-			if (t->data.don_mua_hang.sl == 0)
+			if (t->data.don_mua_hang.sl == 0 && dc == t)
 			{
 				fo.close();
 				return;
@@ -580,7 +580,7 @@ void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi, int size)
 				getline(fi, b.size, ',');
 				getline(fi, b.mo_ta_sp, '.');
 				getline(fi, b.thoi_gian_nhap_hang);
-				a->data.data_gh.hh.insert(a->data.data_gh.hh.begin(), b);
+				a->data.data_gh.hh.push_back(b);
 			}
 		}
 		else if (stoi(tam.substr(2, 4)) < stoi(a->data.maKh.substr(2, 4)))
@@ -665,7 +665,7 @@ void duyet_cay_ghi_gio_hang(TREE t,node_kh*dc)
 			fo << t->data.maKh;
 			fo << endl;
 			fo << t->data.data_gh.hh.size();
-			if (t->data.data_gh.hh.size() == 0)
+			if (t->data.data_gh.hh.size() == 0 && dc == t )
 			{
 				fo.close();
 				return;

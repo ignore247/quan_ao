@@ -5,6 +5,20 @@
 
 mutex bk;
 
+
+
+void xuat_dm(TREE t)
+{
+	if (t != NULL)
+	{
+		for (node_hoa_don* k = t->data.don_mua_hang.pHead; k != NULL; k = k->pNext)
+		{
+			cout << k->data.ma_hoa_don << endl;
+		}
+		xuat_dm(t->pLeft);
+		xuat_dm(t->pRight);
+	}
+}
 void xuat_gio_hang1(TREE t)
 {
 	if (t != NULL)
@@ -24,10 +38,10 @@ void xuat_gio_hang1(TREE t)
 }
 void ve_chu_QAOL(int x, int y)
 {
-	while (true)
+	bool ht = true;
+	while (ht == true)
 	{	
-		
-	//	bk.lock();
+		bk.lock();
 		for (int i = 0; i < 13; i++)
 		{
 			SetColor(i);
@@ -69,7 +83,119 @@ void ve_chu_QAOL(int x, int y)
 			Sleep(60);
 			XoaManHinh();
 		}
-	//	bk.unlock();
+		bk.unlock();
+		if (_kbhit())
+		{
+			char c = _getch();
+			if (c == 13)
+			{
+				system("cls");
+				cout << "enter";
+				ht = false;
+			
+			}
+			else if (c == 27)
+			{
+				ht = true;
+			}
+		}
+	}
+
+}
+
+void ve_chu_QAOL1()
+{
+	bool ht = true;
+	while (ht == true)
+	{
+		bk.lock();
+		for (int i = 0; i < 13; i++)
+		{
+		if (_kbhit())
+		{
+			char c = _getch();
+			if (c == 13)
+			{
+				system("cls");
+				cout << "enter";
+
+			}
+			else if (c == 27)
+			{
+				ht = true;
+			}
+		}
+			cout << endl << endl << endl << endl << endl;
+			SetColor(i);
+			cout << R"(                                                                                            ____  _   _    _     _     _        _     ____   )" << endl;
+			SetColor(i + 1);
+			cout << R"(                                                                                           / __ \| | | |  / \   | \   | |      / \   /    \  )" << endl;
+			SetColor(i + 2);
+			cout << R"(                                                                                          | |  | | | | | / _ \  | |\  | |     / _ \ |  __  | )" << endl;
+			SetColor(i + 3);
+			cout << R"(                                                                                          | |  | | | | |/ /_\ \ | | \ | |    / / \ \| |  | | )" << endl;
+			SetColor(i + 4);
+			cout << R"(                                                                                          | |__| | |_|_/ /   \ \| |  \| |   / /___\ |  --  | )" << endl;
+			SetColor(i + 5);
+			cout << R"(                                                                                           \____\_\___/_/     \_|_|   \_|  /_/     \_\____/  )" << endl << endl;;
+			SetColor(i + 6);
+			cout << R"(                                                                                                                            ____  _     _ _     (O)_     _ _____  )" << endl;
+			SetColor(i + 7);
+			cout << R"(                                                                                                                           /    \| \   | | |    | | \   | |  ___| )" << endl;
+			SetColor(i + 8);
+			cout << R"(                                                                                                                          |  __  | |\  | | |    | | |\  | | |___  )" << endl;
+			SetColor(i + 10);
+			cout << R"(                                                                                                                          | |  | | | \ | | |    | | | \ | |  ___| )" << endl;
+			SetColor(i + 11);
+			cout << R"(                                                                                                                          |  --  | |  \| | |____| | |  \| | |___  )" << endl;
+			SetColor(i + 12);
+			cout << R"(                                                                                                                           \____/|_|   \_|______|_|_|   \_|_____| )" << endl;
+			Sleep(60);
+			XoaManHinh();
+		}
+		bk.unlock();
+	}
+}
+
+void load_trang(int vi_tri_x,int vi_tri_y, int trang)
+{
+	bool kt = true;
+	bool cl = true;
+	box(vi_tri_x, vi_tri_y, 5, 2, 11,1 , " <<");
+	box(vi_tri_x+6, vi_tri_y, 6, 2, 11, 1,"  " + to_string(trang));
+	box(vi_tri_x+13, vi_tri_y, 5, 2, 11, 1, " >>");
+	while (kt == true)
+	{
+		if (_kbhit())
+		{
+			char c = _getch();
+			if (c == -32)
+			{
+				cl = true;// đã bấm
+				c = _getch();
+				if (c == 75) // mũi tên trái
+				{
+					box(vi_tri_x, vi_tri_y, 5, 2, 11, 58, " <<");
+					Sleep(120);
+					trang--;
+					box(vi_tri_x, vi_tri_y, 5, 2, 11, 1, " <<");
+					box(vi_tri_x+6, vi_tri_y, 6, 2, 11, 1, "  " + to_string(trang));
+				}
+				else if (c == 77) // mũi tên phải 
+				{
+					box(vi_tri_x+13, vi_tri_y, 5, 2, 11, 58, " >>");
+					Sleep(120);
+					trang++;
+					box(vi_tri_x+13, vi_tri_y, 5, 2, 11, 1, " >>");
+					box(vi_tri_x+6, vi_tri_y, 6, 2, 11, 1, "  " + to_string(trang));
+
+				}
+			}
+			else if (c == 27)
+			{
+				kt = false;
+			}
+		}
 	}
 }
 
@@ -99,54 +225,29 @@ int main()
 	//
 	//load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
 	//load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
-	//load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
-	//load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
+	load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
+	load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
 	load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
 	load_file_don_mua_kh(ad.quan_li_ds_kh.t);
-	load_file_gio_hang(ad.quan_li_ds_kh.t);
+	//load_file_gio_hang(ad.quan_li_ds_kh.t);
 	//xuat_hoa_don_mua_khach_hang(ad.quan_li_ds_kh.t, ad.quan_li_ds_hang_hoa);
 	//xuat_gio_hang_kh(ad.quan_li_ds_kh.t,ad.quan_li_ds_kh.t->data.hh_gio_hang);
 	SetWindowSize(209, 54);
 	ShowScrollbar(0);
-	//thread th1(dang_nhap);
-	//thread th2(ve_chu_QAOL,90,5);
-	//ve_chu_QAOL(90, 5);
-	//ve_khung_console();
-	//th1.join();
-	//th2.join();
+	ve_khung_console();
+	/*thread th1(dang_nhap1);
+	thread th2(ve_chu_QAOL1);
 	
-	//ve_nhap_bang_hoa_don_nhap_hang(85,4,a,b,c);
-	/*xuat_hoa_don_nhap_hang(60,2,a);
-	xuat_hoa_don_nhap_hang(130,2,a);
-	xuat_hoa_don_nhap_hang(60,2  + 17,a);*/
-	//xuat_hoa_don_nhap_hang(130,2 + 17,a);
-	/*int hang = 0;
-	int cot = 0;
-	int tt = 0;
-	for (int i = hang; i < 1; i++)
-	{
-		for (int j = cot; j < 1; j++)
-		{
-			xuat_hoa_don_nhap_hang(60*cot +10 , 2+ (hang*17), a);
-		}
-	}*/
-	//dang_nhap();
-	//gotoXY(0,54);
-	/*for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
-	{
+	th1.join();
+	th2.join();*/
+	//xuat_ds_hoa_don_nhap(ad);
+	//load_trang(110, 45, 0);
 
-		xuatHoaDonBanHang(k->data);
-
-	}*/
-	//ghi_don_mua_cua_dskh(ad.quan_li_ds_kh.t);
-	//ghi_file_quan(ad.quan_li_ds_hang_hoa);
-	//ghi_file_ao(ad.quan_li_ds_hang_hoa);
-	//ghi_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
-	//ghi_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
-	//ghi_thong_tin_kh(ad.quan_li_ds_kh);
-	ghi_gio_hang_cua_dskh(ad.quan_li_ds_kh.t);
+	xuat_ds_hoa_don_ban(ad);
 
 	
-	system("pause");
+	
+
+	
 	return 0;
 }
