@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ao.txt" />
+    <Text Include="gio_hang.txt" />
     <Text Include="quan.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

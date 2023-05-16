@@ -523,13 +523,13 @@ void ghi_don_mua_cua_dskh(TREE t)
 
 // ============ Gio hang ============
 
-void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi, int size)
+void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi, gio_hang b)
 {
 	if (a != NULL)
 	{
 		if (tam == a->data.maKh)
 		{
-			for (int i = 0; i < size; i++)
+			for (int i = 0; i < b.hh.size(); i++)
 			{
 				HangHoa b;
 				getline(fi, b.ma_hh, ',');
@@ -546,17 +546,18 @@ void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi, int size)
 		}
 		else if (stoi(tam.substr(2, 4)) < stoi(a->data.maKh.substr(2, 4)))
 		{
-			duyet_load_gio_hang(a->pLeft, tam, fi, size);
+			duyet_load_gio_hang(a->pLeft, tam, fi, b);
 		}
 		else if (stoi(tam.substr(2, 4)) > stoi(a->data.maKh.substr(2, 4)))
 		{
-			duyet_load_gio_hang(a->pRight, tam, fi, size);
+			duyet_load_gio_hang(a->pRight, tam, fi, b);
 		}
 	}
 }
 
 void load_file_gio_hang(TREE& a)
 {
+	gio_hang b;
 	ifstream fi;
 	fi.open("gio_hang.txt", ios::in);
 	{
@@ -574,7 +575,7 @@ void load_file_gio_hang(TREE& a)
 			int size;//SỐ LƯỢNG ĐƠN HÀNG
 			fi >> size;
 			fi.ignore();
-			duyet_load_gio_hang(a, tam, fi, size);
+			duyet_load_gio_hang(a, tam, fi, b);
 		}
 	}
 }

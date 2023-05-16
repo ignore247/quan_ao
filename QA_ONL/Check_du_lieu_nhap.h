@@ -391,7 +391,8 @@ void check_dinh_dang_ma_kh(string& a)
 void check_full_maHH(string& a)
 {
 	regex ma_hh(R"([aA-zZ]{1}\d{4})"); 
-	while (/*a[0] = toupper(a[0]) &&*/ regex_match(a, ma_hh) == false)
+	a[0] = toupper(a[0]);
+	while (regex_match(a, ma_hh) == false)
 	{
 		cout << "Nhap sai:";
 		getline(cin, a);

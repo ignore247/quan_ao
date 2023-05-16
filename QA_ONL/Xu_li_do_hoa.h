@@ -1168,7 +1168,7 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 }
 
 // =============== Gio Hang ===============
-void khung_gio_hang(int x, int y, int w, int h, int mau_khung, int mau_chu, string nd) {
+void khung_chu_gio_hang(int x, int y, int w, int h, int mau_khung, int mau_chu, string nd) {
 	if (h <= 1) return;
 	textcolor(mau_chu);
 	for (int iy = y; iy <= y + h - 1; iy++) {
@@ -1206,7 +1206,7 @@ void thanh_sang(int x, int y, int w, int h, int mau_khung, gio_hang a) {
 	}
 	for (int i = 0; i < a.hh.size(); i++) {
 		SetColor(7);
-		gotoXY(x + 7, y + 1);
+		gotoXY(x + 1, y + 1);
 		cout << a.hh.at(i).ten_hh;
 	}
 }
@@ -1252,9 +1252,8 @@ void n_khung_hang_hoa_trong_gio(int x, int y, int w, int h, int mau_khung, int m
 }
 
 // di chuyen thanh sang 
-
 void di_chuyen_thanh_sang(int x, int y, int w, int h, int mau_khung, gio_hang a) {
-	int px = x; int py = y; // toa do thanh sajg
+	int px = x; int py = y; // toa do thanh sang
 	int xcu = px; int ycu = py;
 	bool kt = true;
 	while (true) {
@@ -1306,19 +1305,3 @@ void di_chuyen_thanh_sang(int x, int y, int w, int h, int mau_khung, gio_hang a)
 	}
 }
 
-void menu_gio_hang() {
-	ShowCur(0);
-	khung_gio_hang(50, 5, 20, 2, 11, 1, "GIO HANG");
-	/*int x = 45; int y = 15;
-	int w = 30; int h = 2;
-	int mau_khung = 11;
-	int mau_chu = 1;
-	int mau_khung_sang = 75;*/
-	gio_hang a;
-	n_khung_hang_hoa_trong_gio(45,15, 30, 2, 11, 1, a);
-	thanh_sang(45,15, 30, 2, 75, a);
-	textcolor(11);
-	gotoXY(25, 12); cout << "Dung mui ten len va xuong den di chuyen, nhan Enter de chon xem hang.";
-	// ============= di chuyen thanh sang =============
-	di_chuyen_thanh_sang(45, 15, 30, 2, 11, a);
-}

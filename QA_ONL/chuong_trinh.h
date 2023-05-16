@@ -736,7 +736,6 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 
 // ========================= GIO HANG ========================== 
 
-
 // =================== Xóa cây ================================
 void node_the_mang(node_kh*& k, TREE& t)
 {
@@ -908,8 +907,8 @@ void can_bang_cay(TREE& t) // duyệt node left right NLR
 		can_bang_cay(t->pRight);
 	}
 }
-// =================== (ADMIN) Sửa Thông Tin Khach Hang ===========================
 
+// =================== (ADMIN) Sửa Thông Tin Khach Hang ===========================
 bool doiMatKhau(string maKh, TREE t, string matkhauMoi)
 {
 	if (t != NULL) {
@@ -1146,7 +1145,6 @@ void suaThongTinKh(TREE& t) {
 }
 
 // =========== (ADMIN) Sua thong tin hang hoa ===========
-
 // ============ AO ============
 bool sua_ten_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string ten_ao_moi) {
 
@@ -1530,8 +1528,6 @@ void sua_hang_hoa(DS_Hang_Hoa& a) {
 
 }
 
-
-
 // =================== (KHACH HANG) Sửa Thông Tin ===========================
 
 void thanh_toan_hang()
@@ -1554,6 +1550,7 @@ void xoa_sp_khoi_gio_hang(gio_hang& gh)
 	string ma_sp_xoa;
 	cout << "Nhap ma san pham can xoa: ";
 	cin >> ma_sp_xoa;
+	check_full_maHH(ma_sp_xoa);
 	for (int i = 0; i < gh.hh.size(); i++) {
 		if (gh.hh[i].ma_hh == ma_sp_xoa) {
 			gh.hh.erase(gh.hh.begin() + i);
@@ -1567,7 +1564,9 @@ void xoa_sp_khoi_gio_hang(gio_hang& gh)
 void them_sp_vao_gio_hang(DS_Hang_Hoa dshh, gio_hang& gh)
 {
 	bool kt_menu = true;
-	int lua_chon;
+	regex ktra_luachon(R"(\d)");
+	int luaChon;
+	string lua_chon;
 	int so_luong_mua;
 
 	while (kt_menu) {
@@ -1576,12 +1575,25 @@ void them_sp_vao_gio_hang(DS_Hang_Hoa dshh, gio_hang& gh)
 		cout << "3.Thoat." << endl;
 		cout << "Lua chon:";
 		cin >> lua_chon;
-		switch (lua_chon) {
+
+		do {
+			if (regex_match(lua_chon, ktra_luachon) == false || stoi(lua_chon) < 0 || stoi(lua_chon) > 3) {
+				cout << "Nhap khong hop le!\n";
+				cout << "Nhap lua chon:";
+				cin >> lua_chon;
+			}
+			else {
+				luaChon = stoi(lua_chon);
+				break;
+			}
+		} while (true);
+		switch (luaChon) {
 		case 1:
 		{
 			string ma_ao_mua;
 			cout << "Nhap ma ao mua:";
 			cin >> ma_ao_mua;
+			check_full_maHH(ma_ao_mua);
 			for (int i = 0; i < dshh.ds_ao.size(); i++) {
 				if (dshh.ds_ao[i].ma_hh == ma_ao_mua) {
 					cout << "Nhap so luong: ";
