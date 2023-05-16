@@ -3,7 +3,6 @@
 #include "Xu_li_do_hoa.h"
 
 //-----------Load thông tin----------
-//===Khach hang===//
 
 void them_khachhang_vao_cay(TREE& t, KH data) {
 	if (t == NULL) {
@@ -23,14 +22,13 @@ void them_khachhang_vao_cay(TREE& t, KH data) {
 	}
 }
 
-//===Danh sach hoa don===//
-
 node_hoa_don* KhoiTaoNodeHD(HoaDon a) {
 	node_hoa_don* p = new node_hoa_don;
 	p->data = a;
 	p->pNext = NULL;
 	return p;
 }
+
 void them_HoaDonNhap_vao_ds(DS_HOA_DON& dshd, HoaDon& a) {
 	node_hoa_don* p = KhoiTaoNodeHD(a);
 	if (dshd.pHead == NULL) {
@@ -45,34 +43,36 @@ void them_HoaDonNhap_vao_ds(DS_HOA_DON& dshd, HoaDon& a) {
 // ================== Hàng Hóa =====================
 void nhapHangHoa(HangHoa& a, DS_Hang_Hoa b)
 {
-	// mã : Q,A
-	cout << "Nhap ma hang hoa (Q/A): "; getline(cin, a.ma_hh);
-	check_Ma_Hang_Hoa(a.ma_hh);
-	a.ma_hh = toupper(a.ma_hh[0]);
-	//mã hh = mã + số random
-	a.ma_hh = a.ma_hh + tao_ma_hang_hoa(b);
-	cout << "Nhap ten hang hoa: "; getline(cin, a.ten_hh);
-	check_Ten(a.ten_hh);
-	chuanHoa(a.ten_hh);
+	
+	cout << "Nhap ma hang hoa (Q/A): "; getline(cin, a.ma_hh);// mã : Q,A
+	while_ma_hh(a.ma_hh);
+	a.ma_hh = a.ma_hh + tao_ma_hang_hoa(b);//mã hh = mã + số random
 
+	cout << "Nhap ten hang hoa: "; getline(cin, a.ten_hh);
+	while_ten(a.ten_hh);
+	
 	cout << "Nhap size: "; getline(cin , a.size);
 	if (a.ma_hh[0] == 'A')
 	{
-		check_size_ao(a.size);
+		while_size_ao(a.size);
 	}
 	else
 	{
-		check_size_quan(a.size);
+		while_size_quan(a.size);
 	}
+
 	string tam;
 	cout << "Gia: "; getline(cin, tam);
-	check_So(tam);
+	while_so(tam);
 	a.gia = stoll(tam);
-	cout << "Nhap mo ta san pham: "; getline(cin, a.mo_ta_sp);
-	// mô tả k cần nhập kích thước chi tiết vì đã kẻ bảng
+
+	cout << "Nhap mo ta san pham: "; getline(cin, a.mo_ta_sp);// mô tả k cần nhập kích thước chi tiết vì đã kẻ bảng
+	while_ten(a.mo_ta_sp);
+
 	cout << "Nhap so luong trong kho: "; getline(cin, tam);
-	check_So(tam);
+	while_so(tam);
 	a.soLuongTonKho = stoi(tam);
+
 	// thời  gian nhập hàng : lấy thời gian máy tính
 	a.thoi_gian_nhap_hang = thoiGianThuc(a.thoi_gian_nhap_hang);
 }
@@ -107,8 +107,7 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 {
 	string loai_hd;
 	cout << "Nhap loai hoa don (Xuat/Nhap) : "; getline(cin, loai_hd); // cho nhập Xuat / Nhap
-	chuanHoa(loai_hd);
-	check_Loai_Hoa_Don(loai_hd);
+	while_loai_hd(loai_hd);
 	if (loai_hd == "Xuat")
 	{
 		a.ma_hoa_don = 'X';
@@ -123,7 +122,7 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 		long long tien;
 		cout << "Nhap ma khach hang: ";
 		getline(cin,a.ma_kh);
-		check_dinh_dang_ma_kh(a.ma_kh);
+		while_ma_kh(a.ma_kh);
 		// ktra mã khách hàng xem có tồn tại không
 		while (true)
 		{
@@ -132,15 +131,16 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 				cout << "Khach hang khong ton tai!";
 				cout << "\nNhap ma khach hang: ";
 				getline(cin, a.ma_kh);
-				check_dinh_dang_ma_kh(a.ma_kh);
+				while_ma_kh(a.ma_kh);
 			}
 			else
 			{
 				break;
 			}
 		}
+
 		cout << "Nhap ma hang hoa: "; getline(cin, a.ma_hang_hoa);
-		check_full_maHH(a.ma_hang_hoa);
+		while_full_ma_hh(a.ma_hang_hoa);
 		// ktra hh có tồn tại hay không 
 		while (true)
 		{
@@ -149,7 +149,7 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 				cout << "Hang hao khong ton tai!";
 				cout << "\nNhap ma hang hoa: ";
 				getline(cin, a.ma_hang_hoa);
-				check_full_maHH(a.ma_hang_hoa);
+				while_full_ma_hh(a.ma_hang_hoa);
 			}
 			else
 			{
@@ -164,93 +164,99 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 				break;
 			}
 		}
-		for (int i = 0; i < c.ds_quan.size(); i++)
-		{
-			if (a.ma_hang_hoa == c.ds_quan.at(i).ma_hh)
-			{
-				tien = c.ds_quan.at(i).gia;
-				break;
-			}
-		}
-		if (a.ma_kh.substr(0, 2) == "DO")
-		{
-			a.tong_tien = (tien * a.sl_mua) * 0, 01;
-			a.giam_gia_theo_hang = 0, 01;
-		}
-		else if (a.ma_kh.substr(0, 2) == "BA")
-		{
-			a.tong_tien = (tien * a.sl_mua) * 0, 03;
-			a.giam_gia_theo_hang = 0, 03;
-		}
-		else if (a.ma_kh.substr(0, 2) == "VA")
-		{
-			a.tong_tien = (tien * a.sl_mua) * 0, 05;
-			a.giam_gia_theo_hang = 0, 05;
-		}
-		else if (a.ma_kh.substr(0, 2) == "KC")
-		{
-			a.tong_tien = (tien * a.sl_mua) * 0, 1;
-			a.giam_gia_theo_hang = 0, 1;
-		}
-		else
-		{
-			a.tong_tien = tien * a.sl_mua;
-			a.giam_gia_theo_hang = 0;
-		}
+for (int i = 0; i < c.ds_quan.size(); i++)
+{
+	if (a.ma_hang_hoa == c.ds_quan.at(i).ma_hh)
+	{
+		tien = c.ds_quan.at(i).gia;
+		break;
+	}
+}
+if (a.ma_kh.substr(0, 2) == "DO")
+{
+		a.tong_tien = (tien * a.sl_mua) * 0, 01;
+		a.giam_gia_theo_hang = 0, 01;
+}
+else if (a.ma_kh.substr(0, 2) == "BA")
+{
+		a.tong_tien = (tien * a.sl_mua) * 0, 03;
+		a.giam_gia_theo_hang = 0, 03;
+}
+else if (a.ma_kh.substr(0, 2) == "VA")
+{
+		a.tong_tien = (tien * a.sl_mua) * 0, 05;
+		a.giam_gia_theo_hang = 0, 05;
+}
+else if (a.ma_kh.substr(0, 2) == "KC")
+{
+		a.tong_tien = (tien * a.sl_mua) * 0, 1;
+		a.giam_gia_theo_hang = 0, 1;
+}
+else
+{
+		a.tong_tien = tien * a.sl_mua;
+		a.giam_gia_theo_hang = 0;
+}
 	}
 	else
 	{
 		cout << "Nhap ma hang hoa (Q/A): "; getline(cin, a.ma_hang_hoa);
-		check_Ma_Hang_Hoa(a.ma_hang_hoa);
-		a.thong_tin_hang.ma_hh = a.thong_tin_hang.ma_hh + tao_ma_hang_hoa(c);
+		while_ma_hh(a.ma_hang_hoa);
+		a.ma_hang_hoa = a.ma_hang_hoa + tao_ma_hang_hoa(c);
+
 		cout << "Nhap ten hang hoa: ";
 		getline(cin, a.thong_tin_hang.ten_hh);
-		chuanHoa(a.thong_tin_hang.ten_hh);
-		check_Ten(a.thong_tin_hang.ten_hh);
+		while_ten(a.thong_tin_hang.ten_hh);
+	
 		cout << "Nhap size: ";
 		getline(cin, a.thong_tin_hang.size);
-		if (a.thong_tin_hang.ma_hh[0] == 'A')
-		{
-			check_size_ao(a.thong_tin_hang.size);
-		}
-		else
-		{
-			check_size_quan(a.thong_tin_hang.size);
-		}
-		a.thong_tin_hang.size[0] = toupper(a.thong_tin_hang.size[0]);
+	if (a.thong_tin_hang.ma_hh[0] == 'A')
+	{
+		while_size_ao(a.thong_tin_hang.size);
+	}
+	else
+	{
+		while_size_quan(a.thong_tin_hang.size);
+	}
+
 		string gia;
 		cout << "Nhap gia: ";
 		cin >> gia;
-		check_So(gia);
+		while_so(gia);
 		a.gia_nhap = stoll(gia);
 	}
 	string tam;
-	cout << "Nhap so luong mua: "; getline( cin, tam);
-	check_So(tam);
+	cout << "Nhap so luong mua: "; getline(cin, tam);
+	while_so(tam);
 	a.sl_mua = stoi(tam);
 
 	cout << "Nhap phuong thuc thanh toan( Cod/Bank ): "; getline(cin, a.pptt);
-	chuanHoa(a.pptt);
-	check_PTTT(a.pptt);
+	while_pttt(a.pptt);
 
 	// ngày lập hóa đơn : lấy thời gian máy tính
 	thoiGianThuc(a.ngay_lap_hd);
 	chuan_hoa_tg(a.ngay_lap_hd);
-	
+
 	cout << "Trang thai: ";
 	getline(cin, a.trang_thai);
+	while_trang_thai(a.trang_thai);
 }
 
 void taoHoaDonKhiKhachDatHang(HoaDon& a, ds_hoa_don b, HangHoa c)
 {
 	a.ma_hoa_don = 'X' + tao_ma_hoa_don(b);
 	a.ma_hang_hoa = c.ma_hh;
+
 	string tam;
 	cout << "Nhap so luong mua: "; 
 	getline(cin, tam);
-	check_So(tam);
+	while_so(tam);
 	a.sl_mua = stoi(tam);
+
 	cout << "Nhap phuong thuc thanh toan( COD/Bank ): "; getline(cin,a.pptt);
+	chuanHoa(a.pptt);
+	while_pttt(a.pptt);
+
 	// ngày lập hóa đơn : lấy thời gian máy tính
 	thoiGianThuc(a.ngay_lap_hd);
 }
@@ -500,6 +506,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 		cout << "Ma hoa don khong ton tai!";
 		cout << "Nhap ma hoa don muon sua: ";
 		getline(cin, b);
+		b[0] = toupper(b[0]);
 	}
 	if (b[0] == 'N')
 	{
@@ -513,9 +520,9 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				cout << "Chon loai thong tin muon sua: ";
 				cin >> c;
 				string k = to_string(c);
-				check_So(k);
+				while_so(k);
 				c = stoi(k);
-			} while (c < 0);
+			} while (c < 0 || c>2);
 				
 			switch (c)
 			{
@@ -552,8 +559,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 					string str;
 					cout << "Nhap trang thai moi cua hoa don: ";
 					getline(cin, str);
-					check_trang_thai(str);
-
+					while_trang_thai(str);
 					for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
 					{
 						if (k->data.ma_hoa_don == b)
@@ -588,10 +594,10 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				cout << "Chon loai thong tin muon sua: ";
 				cin >> c;
 				string k = to_string(c);
-				check_So(k);
+				while_so(k);
 				c = stoi(k);
 
-			} while (c < 0);
+			} while (c < 0||c>4);
 
 			switch (c)
 			{
@@ -600,7 +606,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				string str,tam;
 				cout << "Nhap ma hang hoa : ";
 				getline(cin , str);
-				check_full_maHH(str);
+				while_full_ma_hh(str);
 				do
 				{
 					if (check_ma_hh(str, ad.quan_li_ds_hang_hoa) == -1)
@@ -608,7 +614,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 						cout << "Hang hoa khong ton tai!\n";
 						cout << "Nhap ma hang hoa: ";
 						getline(cin , str);
-						check_full_maHH(str);
+						while_full_ma_hh(str);
 					}
 					else
 					{
@@ -632,7 +638,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				string str,ma_cu;
 				cout << "Nhap ma khach hang muon sua: ";
 				getline(cin, str);
-				check_dinh_dang_ma_kh(str);
+				while_ma_kh(str);
 				int asd = 0;
 				do
 				{
@@ -641,7 +647,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 						cout << "Khach hang khong ton tai!" << endl;
 						cout << "Nhap ma khach hang muon sua: ";
 						getline(cin , str);
-						check_dinh_dang_ma_kh(str);
+						while_ma_kh(str);
 					}
 					else
 					{
@@ -695,7 +701,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				string str,tam;
 				cout << "Nhap trang thai moi cua hoa don: ";
 				getline(cin, str);
-				check_trang_thai(str);
+				while_trang_thai(str);
 				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 				{
 					if (k->data.ma_hoa_don == b)
@@ -729,13 +735,14 @@ istream& operator >> (istream& in, KhachHang& a)
 	a.maKh = a.maKh + tao_ma_khach_hang(b);*/ // sai r ddcm m BARO
 	// mã kh = mã + số random (tách chuỗi số thành số)
 	cout << "Nhap ten: "; getline(in, a.ten);
-	check_Ten(a.ten);
+	while_ten(a.ten);
 	cout << "Nhap dia chi: "; getline(in, a.diaChi);
-	check_Ten(a.diaChi);
+	//while_ten(a.diaChi);
 	cout << "Nhap so dien thoai: "; getline(in , a.sdt);// số đầu tiên là số 0, số thứ 2 là 3-9, 8 số còn lại 0-9
-	check_Sdt(a.sdt);
+	while_Sdt(a.sdt);
 	cout << "Nhap email: "; getline(in ,a.email);//example@gmail.com
-	check_email(a.email);
+	while_email(a.email);
+
 	return in;
 }
 
@@ -756,13 +763,16 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 	a.maKh = a.maKh + tao_ma_khach_hang(b.quan_li_ds_kh);
 	// mã kh = mã + số random (tách chuỗi số thành số)
 	cout << "Nhap ten: "; getline(cin, a.ten);
-	check_Ten(a.ten);
+	while_ten(a.ten);
+	
 	cout << "Nhap dia chi: "; getline(cin, a.diaChi);
-	check_Ten(a.diaChi);
+	//while_ten(a.diaChi);
+
 	cout << "Nhap so dien thoai: "; getline(cin , a.sdt);// số đầu tiên là số 0, số thứ 2 là 3-9, 8 số còn lại 0-9
-	check_Sdt(a.sdt);
-	cout << "Nhap email: "; cin >> a.email;//example@gmail.com
-	check_email(a.email);
+	while_Sdt(a.sdt);
+
+	cout << "Nhap email: "; getline (cin, a.email);//example@gmail.com
+	while_email(a.email);
 }
 
 void xuat_thong_tin_khach_hang(TREE t)
@@ -1086,16 +1096,16 @@ bool suaTenKh(string maKh,TREE t,string tenMoi) {
 void suaThongTinKh(TREE &t) {
 	bool kt_menu = true;
 	int chon;
-	//regex ktra_luachon(R"(\d)");
 	cout << "Nhap ma Khach hang can sua:";
 	string maKh;
 	getline(cin, maKh);
-	check_dinh_dang_ma_kh(maKh);
+	while_ma_kh(maKh);
 	while (check_ma_kh(maKh, t) == false )
 	{
 		cout << "Khong tim thay ma khach hang." << endl;
 		cout << "Nhap lai:";
 		getline(cin, maKh);
+		while_ma_kh(maKh);
 	}
 	while (kt_menu==true) {
 		cout << "1.Sua ten " << endl;
@@ -1109,10 +1119,10 @@ void suaThongTinKh(TREE &t) {
 			cout << "Nhap lua chon:";
 			cin >> chon;
 			string tam = to_string(chon);
-			check_So(tam);
+			while_so(tam);
 			chon = stoi(tam);
 
-		} while (chon<0||chon>6);
+		} while (chon<0||chon>5);
 		
 		switch (chon) 
 		{
@@ -1122,7 +1132,7 @@ void suaThongTinKh(TREE &t) {
 			cout << "Nhap ten moi:";
 			cin.ignore();
 			getline(cin, tenMoi);
-			check_Ten(tenMoi);
+			while_ten(tenMoi);
 			if (suaTenKh(maKh, t, tenMoi) == true) {
 				cout << "Sua thanh conng ten moi!" << endl;
 			}
@@ -1138,7 +1148,7 @@ void suaThongTinKh(TREE &t) {
 			cout << "Nhap dia chi moi:";
 			cin.ignore();
 			getline(cin, diaChiMoi);
-			check_Ten(diaChiMoi);
+			//while_ten(diaChiMoi);
 			if (suaDiaChi(maKh, t, diaChiMoi)==true) {
 				cout << "Sua thanh conng ten moi!" << endl;
 			}
@@ -1154,7 +1164,7 @@ void suaThongTinKh(TREE &t) {
 			cout << "Nhap so dien thoai moi:";
 			cin.ignore();
 			getline(cin, sdtMoi);
-			check_Sdt(sdtMoi);
+			while_Sdt(sdtMoi);
 			if (suaSdt(maKh, t, sdtMoi) == true) {
 				cout << "Sua thanh conng ten moi!" << endl;
 			}
@@ -1170,7 +1180,7 @@ void suaThongTinKh(TREE &t) {
 			cout << "Nhap email moi:";
 			cin.ignore();
 			getline(cin, emailMoi);
-			check_email(emailMoi);
+			while_email(emailMoi);
 			if (suaEmail(maKh, t, emailMoi) == true) {
 				cout << "Sua thanh conng ten moi!" << endl;
 			}
