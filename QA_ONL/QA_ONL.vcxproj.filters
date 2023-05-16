@@ -38,5 +38,16 @@
     <ClInclude Include="Xu_li_do_hoa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="load_ghi_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ao.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="quan.txt">
+      <Filter>Header Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

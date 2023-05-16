@@ -134,8 +134,13 @@
     <ClInclude Include="chuong_trinh.h" />
     <ClInclude Include="ctdl.h" />
     <ClInclude Include="Do_Hoa.h" />
+    <ClInclude Include="load_ghi_file.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Xu_li_do_hoa.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ao.txt" />
+    <Text Include="quan.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

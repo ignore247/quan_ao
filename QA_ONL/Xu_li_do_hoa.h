@@ -1167,3 +1167,158 @@ void xuat_hoa_don_ban_hang(int vi_tri_x, int vi_tri_y, HoaDon a, DS_Hang_Hoa c)
 	cout << "Trang thai: " << a.trang_thai;
 }
 
+// =============== Gio Hang ===============
+void khung_gio_hang(int x, int y, int w, int h, int mau_khung, int mau_chu, string nd) {
+	if (h <= 1) return;
+	textcolor(mau_chu);
+	for (int iy = y; iy <= y + h - 1; iy++) {
+		for (int ix = x; ix <= x + w - 1; ix++) {
+			gotoXY(ix, iy); cout << " ";
+		}
+	}
+	
+	SetColor(11);
+	gotoXY(x + 7, y + 1);
+	cout << nd;
+	// ==================== ve khung ====================
+	textcolor(1);
+	SetColor(mau_khung);
+	for (int ix = x; ix <= x + w; ix++) {
+		gotoXY(ix, y); cout << char(196);
+		gotoXY(ix, y + h); cout << char(196);
+	}
+	for (int iy = y; iy <= y + h; iy++) {
+		gotoXY(x, iy); cout << char(179);
+		gotoXY(x + w, iy); cout << char(179);
+	}
+	gotoXY(x, y); cout << char(218);
+	gotoXY(x + w, y); cout << char(191);
+	gotoXY(x, y + h); cout << char(192);
+	gotoXY(x + w, y + h); cout << char(217);
+}
+
+void thanh_sang(int x, int y, int w, int h, int mau_khung, gio_hang a) {
+	textcolor(mau_khung);
+	for (int iy = y + 1; iy <= y + h - 1; iy++) {
+		for (int ix = x + 1; ix <= x + w - 1; ix++) {
+			gotoXY(ix, iy); cout << " ";
+		}
+	}
+	for (int i = 0; i < a.hh.size(); i++) {
+		SetColor(7);
+		gotoXY(x + 7, y + 1);
+		cout << a.hh.at(i).ten_hh;
+	}
+}
+
+void khung_hang_hoa_trong_gio(int x, int y, int w, int h, int mau_khung, int mau_chu, gio_hang a) {
+	if (h <= 1) return;
+	textcolor(mau_chu);
+	for (int iy = y; iy <= y + h - 1; iy++) {
+		for (int ix = x; ix <= x + w - 1; ix++) {
+			gotoXY(ix, iy); cout << " ";
+		}
+	}
+	for (int i = 0; i < a.hh.size(); i++) {
+		SetColor(7);
+		gotoXY(x + 7, y + 1);
+		cout << a.hh.at(i).ten_hh;
+	}
+	// ==================== ve khung ====================
+	textcolor(1);
+	SetColor(mau_khung);
+	for (int ix = x; ix <= x + w; ix++) {
+		gotoXY(ix, y); cout << char(196);
+		gotoXY(ix, y + h); cout << char(196);
+	}
+	for (int iy = y; iy <= y + h; iy++) {
+		gotoXY(x, iy); cout << char(179);
+		gotoXY(x + w, iy); cout << char(179);
+	}
+	gotoXY(x, y); cout << char(218);
+	gotoXY(x + w, y); cout << char(191);
+	gotoXY(x, y + h); cout << char(192);
+	gotoXY(x + w, y + h); cout << char(217);
+}
+
+void n_khung_hang_hoa_trong_gio(int x, int y, int w, int h, int mau_khung, int mau_chu, gio_hang a) {
+	for (int i = 0; i < a.hh.size(); i++) {
+		khung_hang_hoa_trong_gio(x, y + (i * 2), w, h, mau_khung, mau_chu, a);
+		if (i != 0) {
+			gotoXY(x, y + (i * 2)); cout << char(195);
+			gotoXY(x + w, y + (i * 2)); cout << char(180);
+		}
+	}
+}
+
+// di chuyen thanh sang 
+
+void di_chuyen_thanh_sang(int x, int y, int w, int h, int mau_khung, gio_hang a) {
+	int px = x; int py = y; // toa do thanh sajg
+	int xcu = px; int ycu = py;
+	bool kt = true;
+	while (true) {
+		if (kt == true) {
+			// back space 
+			gotoXY(xcu, ycu);
+			thanh_sang(xcu, ycu, w, h, mau_khung, a); // reset thanh sang
+			xcu = px; ycu = py;
+			// in
+			int mau_khung_sang = 75;
+			thanh_sang(px, py, w, h, mau_khung_sang, a);
+			kt = false;
+		}
+		if (_kbhit()) {
+			char c = _getch();
+			if (c == -32) {
+				kt = true;
+				c = _getch();
+				if (c == 72)
+				{
+					if (py != y) {
+						py = py - 2;
+					}
+					else {
+						py = y + h * (a.hh.size() - 1);
+					}
+				}
+				else if (c == 80) {
+					if (py != y + h * (a.hh.size() - 1)) {
+						py = py + 2;
+					}
+					else {
+						py = y;
+					}
+				}
+			}
+			// chi tiet hang trong gio hang
+			for (int i = 0; i < a.hh.size(); i++) {
+				if (c == 13) {
+					system("cls");
+					textcolor(11);
+					gotoXY(x - 40, y + 5 + h * a.hh.size()); 
+					xuat_tt_hh_ngan_gon(a.hh[i]);
+				}
+			}
+
+		}
+
+	}
+}
+
+void menu_gio_hang() {
+	ShowCur(0);
+	khung_gio_hang(50, 5, 20, 2, 11, 1, "GIO HANG");
+	/*int x = 45; int y = 15;
+	int w = 30; int h = 2;
+	int mau_khung = 11;
+	int mau_chu = 1;
+	int mau_khung_sang = 75;*/
+	gio_hang a;
+	n_khung_hang_hoa_trong_gio(45,15, 30, 2, 11, 1, a);
+	thanh_sang(45,15, 30, 2, 75, a);
+	textcolor(11);
+	gotoXY(25, 12); cout << "Dung mui ten len va xuong den di chuyen, nhan Enter de chon xem hang.";
+	// ============= di chuyen thanh sang =============
+	di_chuyen_thanh_sang(45, 15, 30, 2, 11, a);
+}

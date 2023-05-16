@@ -1,0 +1,7 @@
+﻿Q0101,Quan Dai Thun,10,100000,26,Chat lieu co gian, san xuat tai Viet Nam.01/01/2022
+Q0052,Quan Dui Jean,21,150000,27,Chat lieu jean nhap khau My, mat me.12/05/2022
+Q0773,Quan Dai Jean,24,230000,33,Phong cach hiphop, tre trung nang dong cho nhung nguoi tuoi tre.11/03/2022
+Q0894,Quan Kaki,23,400000,29,Phu hop voi moi loai trang phuc hang ngay,bền, mát, không nhăn, co giãn.25/01/2022
+Q1234,Quan Tay,30,250000,31,Phu hop voi trang phuc lich su.21/09/2022
+Q4567,Quan Thun,33,160000,32,Mat me thich hop su dung vao mua he, tre trung nang dong.15/10/2022
+Q6789,Quan Ong Jean Rong,29,740000,28,Thich hop voi nhung ban tre, tao cam giac thoai mai khi su dung.12/07/2022

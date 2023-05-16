@@ -74,22 +74,9 @@ typedef struct ds_hoa_don DS_HOA_DON;
 
 typedef struct gio_hang
 {
-	HangHoa data;
+	vector <HangHoa>  hh;
 }gio_hang;
 
-struct node_gio_hang
-{
-	gio_hang data;
-	node_gio_hang* pNext;
-};
-typedef struct node_gio_hang node_gio_hang;
-
-struct ds_hh_trong_gio_hang
-{
-	node_gio_hang* pHead;
-	node_gio_hang* pTail;
-	int sl = 0;
-};
 
 struct KhachHang {
 	//data
@@ -104,8 +91,7 @@ struct KhachHang {
 	ds_hoa_don don_mua_hang;
 
 	//Gio_Hang mua_hang
-	ds_hh_trong_gio_hang hh_gio_hang;
-
+	gio_hang data_gh;
 	//account 
 	string ten_dang_nhap;
 	string mat_khau;
