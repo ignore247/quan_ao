@@ -1,4 +1,4 @@
-﻿﻿#pragma once
+﻿#pragma once
 #include "ctdl.h"
 
 void chuanHoa(string& a)
@@ -231,7 +231,7 @@ void check_Ma_Hang_Hoa(string& a)
 	regex check_ma("([QqAa])");
 	while (regex_match(a, check_ma) == false)
 	{
-		cout << "Nhap ma hang hoa (Q/A): "; cin >> a;
+		cout << "Nhap ma hang hoa (Q/A): "; getline(cin,a);
 	}
 }
 
@@ -240,29 +240,26 @@ void check_Ten(string& a)
 	regex check_ten("^[^0-9]+$"); // ( ^ sau ngoặc [ là phủ định)
 	while (regex_match(a, check_ten) == false)
 	{
-		cout << "Nhap ten hang hoa: "; getline(cin, a);
+		cout << "Ten khong phu hop, nhap lai:"; getline(cin, a);
 	}
 }
 
-void check_Size(string& a)
+void check_size_ao(string& a)
 {
-	if (a[0] == 'A')
+	regex check_size_ao("([SsMmLl])");
+	a[0] = toupper(a[0]);
+	while (regex_match(a, check_size_ao) == false)
 	{
-		regex check_size_ao("([SsMmLl])");
-		while (regex_match(a, check_size_ao) == false)
-		{
-			cout << "Nhap size: "; cin >> a;
-		}
+		cout << "Size khong phu hop, nhap lai: "; getline(cin, a);
 	}
-	if (a[0] == 'Q')
+}
+
+void check_size_quan(string& a)
+{
+	regex check_size_quan("(26|27|28|29|30|31|32|33|34|35|36)");
+	while (regex_match(a, check_size_quan) == false)
 	{
-		regex check_size_quan("(26|27|28|29|30|31|32|33|34|35|36)");
-
-		while (regex_match(a, check_size_quan) == false)
-		{
-			cout << "Nhap size: "; cin >> a;
-		}
-
+		cout << "Size khong phu hop, nhap lai: "; getline(cin,a);
 	}
 }
 
@@ -271,7 +268,7 @@ void check_So(string& a)
 	regex check_gia("^[0-9]+$");
 	while (regex_match(a, check_gia) == false || a == "0")
 	{
-		cout << "Gia: "; cin >> a;
+		cout << "Khong phu hop, vui long nhap gia tri [0-9]:"; getline(cin,a);
 	}
 }
 
@@ -280,7 +277,7 @@ void check_Loai_Hoa_Don(string& a)
 	regex check_ma("(Nhap|Xuat)");
 	while (regex_match(a, check_ma) == false)
 	{
-		cout << "Nhap loai hoa don: "; cin >> a;
+		cout << "Khong phu hop! Nhap loai hoa don: "; getline(cin,a);
 		chuanHoa(a);
 	}
 }
@@ -290,7 +287,7 @@ void check_PTTT(string& a)
 	regex check_pttt("(Cod|Bank)");
 	while (regex_match(a, check_pttt) == false)
 	{
-		cout << "Nhap phuong thuc thanh toan (Cod/Bank): "; cin >> a;
+		cout << "Nhap phuong thuc thanh toan (Cod/Bank): "; getline(cin,a);
 		chuanHoa(a);
 	}
 }
@@ -300,7 +297,7 @@ void check_Sdt(string& a)
 	regex check_sdt("^(0[3-9][0-9]{8})$");
 	while (regex_match(a, check_sdt) == false)
 	{
-		cout << "Nhap so dien thoai: "; cin >> a;
+		cout << "Nhap so dien thoai: "; getline(cin,a);
 	}
 }
 
@@ -309,7 +306,7 @@ void check_email(string& a)
 	regex check_email("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\.[a-zA-Z]{2,}$");
 	while (regex_match(a, check_email) == false)
 	{
-		cout << "Nhap email:"; cin >> a;
+		cout << "Nhap email:"; getline(cin,a);
 	}
 }
 
@@ -375,4 +372,40 @@ string tao_ma_khach_hang(ds_khach_hang b)
 	} while (kt_trung_ma_kh(a, b.t) == true);
 	return a;
 
+}
+
+void check_dinh_dang_ma_kh(string &a)
+{
+	regex ma_kh(R"([aA-zZ]{2}\d{4})");
+	a[1] = toupper(a[1]);
+	a[0] = toupper(a[0]);
+	while (regex_match(a, ma_kh) == false)
+	{
+		cout << "Nhap sai:";
+		getline(cin, a);
+		a[1] = toupper(a[1]);
+		a[0] = toupper(a[0]);
+	}
+}
+
+void check_full_maHH(string &a)
+{
+	regex ma_hh(R"([aA-zZ]{1}\d{4})");
+	a[0] = toupper(a[0]);
+	while (regex_match(a, ma_hh) == false)
+	{
+		cout << "Nhap sai:";
+		getline(cin, a);
+		a[0] = toupper(a[0]);
+	}
+
+}
+
+void check_trang_thai(string& a)
+{
+	regex trang_thai("(da nhan hang|chua nhan hang)");
+	while (regex_match(a, trang_thai) == false)
+	{
+		cout << "Khong hop le! Nhap lai:"; getline(cin, a);
+	}
 }
