@@ -119,7 +119,6 @@ void ghi_file_ao(DS_Hang_Hoa dshh)
 	}
 }
 
-
 //================ Hóa Đơn =====================
 
 void load_file_hoa_don_nhap(DS_HOA_DON &a)
@@ -427,7 +426,6 @@ void duyet_load_don_mua(TREE& a, string tam, ifstream& fi)
 		}
 	}
 }
-
 void load_file_don_mua_kh(TREE& a)
 {
 	ifstream fi;
@@ -598,7 +596,6 @@ void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi, int size)
 		}
 	}
 }
-
 void load_file_gio_hang(TREE& a)
 {
 	ifstream fi;

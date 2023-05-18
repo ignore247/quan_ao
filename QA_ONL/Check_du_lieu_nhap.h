@@ -345,14 +345,12 @@ bool check_email(string& a)
 
 
 // Hàm kiểm tra mã khách hàng trùng
-bool kt_trung_ma_kh(string a, TREE t)
 bool kt_trung_ma_kh(string a, TREE t) 
 {
-	if (t != NULL)
-	if (t != NULL) 
-	int i = 0;
 	if (t != NULL) 
 	{
+		if (stoi(a.substr(2, 4)) == stoi(t->data.maKh.substr(2, 4)))
+		{
 			return true;
 		}
 		else if (stoi(a.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
@@ -367,22 +365,7 @@ bool kt_trung_ma_kh(string a, TREE t)
 	else
 	{
 		return false;
-			return true;
-		}
-		else if (stoi(a.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
-		{
-			return kt_trung_ma_kh(a, t->pLeft);
-		}
-		else if (stoi(a.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4)))
-		{
-			return kt_trung_ma_kh(a, t->pRight);
-		}
-	}
-	else
-	{
-		return false;
-		kt_trung_ma_kh(a, t->pLeft);
-		kt_trung_ma_kh(a, t->pRight);
+		
 	}
 }
 
@@ -390,6 +373,8 @@ bool check_ma_kh(string a, TREE t)
 {
 	if (t != NULL)
 	{
+		if ( a == t->data.maKh)
+		{
 			return true;
 		}
 		else if (stoi(a.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
@@ -404,28 +389,10 @@ bool check_ma_kh(string a, TREE t)
 	else
 	{
 		return false;
-			return true;
-		}
-		else if (stoi(a.substr(2,4) ) < stoi(t->data.maKh.substr(2,4)))
-		{
-			return check_ma_kh(a, t->pLeft);
-		}
-		else if(stoi(a.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4)))
-		{
-			return check_ma_kh(a, t->pRight);
-		}
 	}
-	else
-	{
-		return false;
-		kt_trung_ma_kh(a, t->pLeft);
-
-	
-	}
-	return check;
 }
 
-// ==========Tạo mã khách hàng==========
+//==========Tạo mã khách hàng==========
 string tao_ma_khach_hang(ds_khach_hang b)
 {
 	string a = "0000";
@@ -494,13 +461,7 @@ void while_so(string& a)
 		cout << "Nhap gia tri [0-9], nhap lai :"; getline(cin, a);
 	}
 }
-//void while_diachi(string& a)
-//{
-//	while (check_Ten(a) == false)
-//	{
-//		cout << "Nhap khong hop le, nhap lai:"; getline(cin, a);
-//	}
-//}
+
 void while_Sdt(string& a)
 {
 	while (check_Sdt(a) == false)

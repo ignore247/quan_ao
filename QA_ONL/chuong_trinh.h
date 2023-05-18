@@ -2,43 +2,7 @@
 #include "Check_du_lieu_nhap.h"
 #include "Xu_li_do_hoa.h"
 
-//-----------Load thông tin----------
 
-void them_khachhang_vao_cay(TREE& t, KH data) {
-	if (t == NULL) {
-		node_kh* p = new node_kh;
-		p->data = data;
-		p->pLeft = NULL;
-		p->pRight = NULL;
-		t = p;
-	}
-	else if (t != NULL) {
-		if (stoi(data.maKh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4))) {
-			them_khachhang_vao_cay(t->pLeft, data);
-		}
-		else if (stoi(data.maKh.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4))) {
-			them_khachhang_vao_cay(t->pRight, data);
-		}
-	}
-}
-
-node_hoa_don* KhoiTaoNodeHD(HoaDon a) {
-	node_hoa_don* p = new node_hoa_don;
-	p->data = a;
-	p->pNext = NULL;
-	return p;
-}
-
-void them_HoaDonNhap_vao_ds(DS_HOA_DON& dshd, HoaDon& a) {
-	node_hoa_don* p = KhoiTaoNodeHD(a);
-	if (dshd.pHead == NULL) {
-		dshd.pHead = dshd.pTail = p;
-	}
-	else {
-		dshd.pTail->pNext = p;
-		dshd.pTail = p;
-	}
-}
 
 // ================== Hàng Hóa =====================
 void nhapHangHoa(HangHoa& a, DS_Hang_Hoa b)
@@ -102,6 +66,108 @@ void xuat_thong_tin_ao(DS_Hang_Hoa dshh)
 	}
 }
 
+// =========== sua thong tin hang hoa ===========
+//  AO 
+void sua_ten_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string ten_ao_moi) {
+
+	for (int i = 0; i < a.ds_ao.size(); i++) {
+		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
+			a.ds_ao.at(i).ten_hh = ten_ao_moi;
+		}
+	}
+}
+
+void sua_so_luong_ao_ton_kho(string ma_hang_hoa, DS_Hang_Hoa& a, unsigned short sl_ao_moi) {
+	
+	for (int i = 0; i < a.ds_ao.size(); i++) {
+		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
+			a.ds_ao.at(i).soLuongTonKho = sl_ao_moi;
+		}
+	}
+}
+
+void sua_gia_ao(string ma_hang_hoa, DS_Hang_Hoa& a, long long gia_ao_moi) {
+	for (int i = 0; i < a.ds_ao.size(); i++) {
+		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
+			a.ds_ao.at(i).gia = gia_ao_moi;
+		}
+	}
+}
+
+void sua_size_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string size_ao_moi) {
+	for (int i = 0; i < a.ds_ao.size(); i++) {
+		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
+			a.ds_ao.at(i).size = size_ao_moi;
+		}
+	}
+}
+
+void sua_mo_ta_sp_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string mo_ta_ao) {
+	for (int i = 0; i < a.ds_ao.size(); i++) {
+		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
+			a.ds_ao.at(i).mo_ta_sp = mo_ta_ao;
+		}
+	}
+}
+
+void sua_thoi_gian_nhap_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string thoi_gian_nhap_ao) {
+	for (int i = 0; i < a.ds_ao.size(); i++) {
+		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
+			a.ds_ao.at(i).thoi_gian_nhap_hang = thoi_gian_nhap_ao;
+		}
+	}
+}
+// 	QUAN 
+void sua_ten_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string ten_quan_moi) {
+	
+	for (int i = 0; i < a.ds_quan.size(); i++) {
+		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
+			a.ds_ao.at(i).ten_hh = ten_quan_moi;
+		}
+	}
+}
+
+void sua_so_luong_quan_ton_kho(string ma_hang_hoa, DS_Hang_Hoa& a, unsigned short sl_quan_moi) {
+	
+	for (int i = 0; i < a.ds_quan.size(); i++) {
+		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
+			a.ds_quan.at(i).soLuongTonKho = sl_quan_moi;
+		}
+	}
+}
+
+void sua_gia_quan(string ma_hang_hoa, DS_Hang_Hoa& a, long long gia_quan_moi) {
+	for (int i = 0; i < a.ds_quan.size(); i++) {
+		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
+			a.ds_quan.at(i).gia = gia_quan_moi;
+		}
+	}
+}
+
+void sua_size_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string size_quan_moi) {
+	for (int i = 0; i < a.ds_quan.size(); i++) {
+		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
+			a.ds_quan.at(i).size = size_quan_moi;
+		}
+	}
+}
+
+void sua_mo_ta_sp_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string mo_ta_quan) {
+	for (int i = 0; i < a.ds_quan.size(); i++) {
+		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
+			a.ds_quan.at(i).mo_ta_sp = mo_ta_quan;
+		}
+	}
+}
+
+void sua_thoi_gian_nhap_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string thoi_gian_nhap_quan) {
+	for (int i = 0; i < a.ds_quan.size(); i++) {
+		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
+			a.ds_quan.at(i).thoi_gian_nhap_hang = thoi_gian_nhap_quan;
+		}
+	}
+}
+
 //=================== Hóa Đơn =========================
 void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 {
@@ -119,7 +185,6 @@ void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 	a.ma_hoa_don = a.ma_hoa_don + tao_ma_hoa_don(b);
 	if (loai_hd == "Xuat")
 	{
-		long long tien;
 		cout << "Nhap ma khach hang: ";
 		getline(cin,a.ma_kh);
 		while_ma_kh(a.ma_kh);
@@ -687,8 +752,6 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			}
 
 		}
-
-	}
 	else
 	{
 		while (check == true)
@@ -883,7 +946,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			}
 
 		}
-	}
+	
 }
 
 // ================== Khách Hàng ==========================
@@ -966,6 +1029,10 @@ void xuat_gio_hang(TREE t, string ma_kh)
 		else
 		{
 			xuat_gio_hang(t->pRight, ma_kh);
+		}
+	}
+}
+
 void nhap_khach_hang(KhachHang& a, Admin b)
 {
 	// mã : SA (mặc định nếu là acc mới tạo) DO / BA / VA / KC
@@ -982,25 +1049,29 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 	check_email(a.email);
 }
 
-void them_khachhang_vao_cay(TREE &t, KH data) {
-	if (t == NULL) {
+void them_khachhang_vao_cay(TREE &t, KH data) 
+{
+	if (t == NULL) 
+	{
 		node_kh* p = new node_kh;
 		p->data = data;
 		p->pLeft = NULL;
 		p->pRight = NULL;
 		t = p;
 	}
-	else if (t != NULL) {
-		if (stoi(data.maKh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4))) {
+	else if (t != NULL) 
+	{
+		if (stoi(data.maKh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4))) 
+		{
 			them_khachhang_vao_cay(t->pLeft, data);
 		}
-		else if (stoi(data.maKh.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4))) {
+		else if (stoi(data.maKh.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4))) 
+		{
 			them_khachhang_vao_cay(t->pRight, data);
 		}
 	}
 }
 
-// ========================= GIO HANG ========================== 
 void xuat_gio_hang(TREE t, string ma_kh)
 {
 	if (t != NULL)
@@ -1198,8 +1269,8 @@ void can_bang_cay(TREE& t) // duyệt node left right NLR
 		can_bang_cay(t->pRight);
 	}
 }
-// =================== (ADMIN) Sửa Thông Tin Khach Hang ===========================
 
+// =================== (ADMIN) Sửa Thông Tin Khach Hang ===========================
 bool doiMatKhau(string maKh, TREE t, string matkhauMoi)
 {
 	if (t != NULL) {
@@ -1433,12 +1504,6 @@ void suaThongTinKh(TREE &t) {
 }
 
 // =================== (KHACH HANG) Sửa Thông Tin ===========================
-
-void thanh_toan_hang()
-{
-
-}
-
 void hien_thi_gio_hang(gio_hang gh)
 {
 	for (int i = 0; i < gh.hh.size(); i++) {
@@ -1589,109 +1654,6 @@ void chuc_nang_khach_hang(KhachHang a,DS_Hang_Hoa dshh,gio_hang gh)
 		}
 	}
 }
-
-// =========== sua thong tin hang hoa ===========
-//  AO 
-void sua_ten_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string ten_ao_moi) {
-
-	for (int i = 0; i < a.ds_ao.size(); i++) {
-		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
-			a.ds_ao.at(i).ten_hh = ten_ao_moi;
-		}
-	}
-}
-
-void sua_so_luong_ao_ton_kho(string ma_hang_hoa, DS_Hang_Hoa& a, unsigned short sl_ao_moi) {
-	
-	for (int i = 0; i < a.ds_ao.size(); i++) {
-		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
-			a.ds_ao.at(i).soLuongTonKho = sl_ao_moi;
-		}
-	}
-}
-
-void sua_gia_ao(string ma_hang_hoa, DS_Hang_Hoa& a, long long gia_ao_moi) {
-	for (int i = 0; i < a.ds_ao.size(); i++) {
-		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
-			a.ds_ao.at(i).gia = gia_ao_moi;
-		}
-	}
-}
-
-void sua_size_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string size_ao_moi) {
-	for (int i = 0; i < a.ds_ao.size(); i++) {
-		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
-			a.ds_ao.at(i).size = size_ao_moi;
-		}
-	}
-}
-
-void sua_mo_ta_sp_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string mo_ta_ao) {
-	for (int i = 0; i < a.ds_ao.size(); i++) {
-		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
-			a.ds_ao.at(i).mo_ta_sp = mo_ta_ao;
-		}
-	}
-}
-
-void sua_thoi_gian_nhap_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string thoi_gian_nhap_ao) {
-	for (int i = 0; i < a.ds_ao.size(); i++) {
-		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
-			a.ds_ao.at(i).thoi_gian_nhap_hang = thoi_gian_nhap_ao;
-		}
-	}
-}
-// 	QUAN 
-void sua_ten_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string ten_quan_moi) {
-	
-	for (int i = 0; i < a.ds_quan.size(); i++) {
-		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
-			a.ds_ao.at(i).ten_hh = ten_quan_moi;
-		}
-	}
-}
-
-void sua_so_luong_quan_ton_kho(string ma_hang_hoa, DS_Hang_Hoa& a, unsigned short sl_quan_moi) {
-	
-	for (int i = 0; i < a.ds_quan.size(); i++) {
-		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
-			a.ds_quan.at(i).soLuongTonKho = sl_quan_moi;
-		}
-	}
-}
-
-void sua_gia_quan(string ma_hang_hoa, DS_Hang_Hoa& a, long long gia_quan_moi) {
-	for (int i = 0; i < a.ds_quan.size(); i++) {
-		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
-			a.ds_quan.at(i).gia = gia_quan_moi;
-		}
-	}
-}
-
-void sua_size_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string size_quan_moi) {
-	for (int i = 0; i < a.ds_quan.size(); i++) {
-		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
-			a.ds_quan.at(i).size = size_quan_moi;
-		}
-	}
-}
-
-void sua_mo_ta_sp_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string mo_ta_quan) {
-	for (int i = 0; i < a.ds_quan.size(); i++) {
-		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
-			a.ds_quan.at(i).mo_ta_sp = mo_ta_quan;
-		}
-	}
-}
-
-void sua_thoi_gian_nhap_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string thoi_gian_nhap_quan) {
-	for (int i = 0; i < a.ds_quan.size(); i++) {
-		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
-			a.ds_quan.at(i).thoi_gian_nhap_hang = thoi_gian_nhap_quan;
-		}
-	}
-}
-// ========================
 
 void sua_hang_hoa(DS_Hang_Hoa& a) {
 	bool kt_menu = true;
