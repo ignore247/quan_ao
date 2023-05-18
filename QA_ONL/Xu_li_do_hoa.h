@@ -790,7 +790,7 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x,int vi_tri_y, HoaDon a, ds_hoa_
 	}
 	for (int j = 1; j < 31; j++)
 	{
-		gotoXY(vi_tri_x, vi_tri_y +j);
+		gotoXY(vi_tri_x, vi_tri_y + j);
 		cout << char(179);
 	}
 
@@ -799,7 +799,7 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x,int vi_tri_y, HoaDon a, ds_hoa_
 		gotoXY(vi_tri_x + 79, vi_tri_y + j);
 		cout << char(179);
 	}
-	gotoXY(vi_tri_x, vi_tri_y+31);
+	gotoXY(vi_tri_x, vi_tri_y + 31);
 	for (int i = 0; i < 80; i++)
 	{
 		if (i == 0)
@@ -823,7 +823,7 @@ void ve_nhap_bang_hoa_don_nhap_hang(int vi_tri_x,int vi_tri_y, HoaDon a, ds_hoa_
 	cout << "HOA DON NHAP HANG";
 	textcolor(0);
 	SetColor(11);
-	gotoXY(vi_tri_x, vi_tri_y+ 2);
+	gotoXY(vi_tri_x, vi_tri_y + 2);
 	for (int i = 0; i < 79; i++)
 	{
 		if (i == 0)

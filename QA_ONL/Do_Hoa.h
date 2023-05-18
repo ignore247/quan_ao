@@ -1,5 +1,4 @@
-﻿#pragma once
-#pragma once
+﻿﻿#pragma once
 #include <stdio.h>
 #include <conio.h>
 #include<ctime> /* thư viện hỗ trợ về thời gian thực */

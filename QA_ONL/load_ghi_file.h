@@ -121,6 +121,7 @@ void ghi_file_ao(DS_Hang_Hoa dshh)
 
 
 //================ Hóa Đơn =====================
+
 void load_file_hoa_don_nhap(DS_HOA_DON &a)
 {
 	ifstream fi("thong_tin_hoa_don_nhap_hang.txt",ios::in);
@@ -152,7 +153,7 @@ void load_file_hoa_don_nhap(DS_HOA_DON &a)
 	fi.close();
 }
 
-void ghi_file_hoa_don_nhap(DS_HOA_DON a)
+void ghi_file_hoa_don_nhap(DS_HOA_DON &a)
 {
 	ofstream fo;
 	fo.open("thong_tin_hoa_don_nhap_hang.txt", ios::out);
@@ -293,6 +294,7 @@ void ghi_file_hoa_don_xuat(DS_HOA_DON a)
 }
 
 // ============== Khách hàng ================
+
 void load_file_thong_tin_khach_hang(ds_khach_hang &a)
 {
 		ifstream fi("thong_tin_khach_hang.txt", ios::in);
@@ -396,6 +398,8 @@ void duyet_load_don_mua(TREE& a, string tam, ifstream& fi)
 			{
 				HoaDon b;
 				getline(fi, b.ma_hoa_don, ',');
+				cout << b.ma_hoa_don << endl;
+				system("pause");
 				getline(fi, b.ma_kh, ',');
 				getline(fi, b.ma_hang_hoa, ',');
 				getline(fi, b.thong_tin_hang.ten_hh, ',');
@@ -415,15 +419,16 @@ void duyet_load_don_mua(TREE& a, string tam, ifstream& fi)
 		}
 		else if (stoi(tam.substr(2, 4)) < stoi(a->data.maKh.substr(2, 4)))
 		{
-			duyet_load_don_mua(a->pLeft,tam,fi);
+			duyet_load_don_mua(a->pLeft, tam, fi);
 		}
 		else if (stoi(tam.substr(2, 4)) > stoi(a->data.maKh.substr(2, 4)))
 		{
-			duyet_load_don_mua(a->pRight,tam,fi);
+			duyet_load_don_mua(a->pRight, tam, fi);
 		}
 	}
 }
-void load_file_don_mua_kh(TREE &a)
+
+void load_file_don_mua_kh(TREE& a)
 {
 	ifstream fi;
 	fi.open("don_mua_hang.txt", ios::in);
@@ -593,6 +598,7 @@ void duyet_load_gio_hang(TREE& a, string tam, ifstream& fi, int size)
 		}
 	}
 }
+
 void load_file_gio_hang(TREE& a)
 {
 	ifstream fi;
@@ -613,7 +619,6 @@ void load_file_gio_hang(TREE& a)
 		fi.ignore();
 		duyet_load_gio_hang(a, tam, fi,size);
 	}
-	fi.close();
 }
 
 void ghi_gio_hang_cua_1_kh(KhachHang a)

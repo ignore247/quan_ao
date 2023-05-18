@@ -1,4 +1,4 @@
-﻿#include "Xu_li_do_hoa.h"
+﻿﻿#include "Xu_li_do_hoa.h"
 #include "load_ghi_file.h"
 #include <thread>
 
