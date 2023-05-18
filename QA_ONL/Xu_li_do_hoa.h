@@ -480,6 +480,7 @@ bool nhap_us_pass_v2(string& username, string& password)
 							vi_tri_x = 118;
 							vi_tri_y = 44;
 							box(118, 44, 14, 2, 11, 70,7, "  Dang nhap");
+							SetColor(7);
 							continue;
 						}
 						else if (vi_tri_y == 44 && vi_tri_x == 118)
@@ -487,6 +488,7 @@ bool nhap_us_pass_v2(string& username, string& password)
 							vi_tri_x = 138;
 							box(118, 44, 14, 2, 11, 3,7, "  Dang nhap");
 							box(138, 44, 14, 2, 11, 70,7, "    Thoat");
+							SetColor(7);
 							continue;
 						}
 					}
@@ -497,6 +499,7 @@ bool nhap_us_pass_v2(string& username, string& password)
 							vi_tri_x = 118;
 							box(138, 44, 14, 2, 11, 3,7, "    Thoat");
 							box(118, 44, 14, 2, 11, 70,7, "  Dang nhap");
+							SetColor(7);
 							continue;
 						}
 						else if (vi_tri_y == 44 && vi_tri_x == 118)
@@ -506,6 +509,7 @@ bool nhap_us_pass_v2(string& username, string& password)
 							box(138, 44, 14, 2, 11, 3,7, "    Thoat");
 							box(118, 44, 14, 2, 11, 3,7, "  Dang nhap");
 							gotoXY(vi_tri_x, vi_tri_y);
+							SetColor(7);
 							continue;
 						}
 						else if(vi_tri_y == 40) // đang ở passwword
@@ -559,7 +563,6 @@ bool nhap_us_pass_v2(string& username, string& password)
 				}
 				else if (c == 77) // qua phải
 					{
-						
 						if (vi_tri_y == 44 && vi_tri_x == 118)
 						{
 							vi_tri_x = 138;

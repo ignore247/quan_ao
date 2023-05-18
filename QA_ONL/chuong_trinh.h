@@ -171,6 +171,7 @@ void sua_thoi_gian_nhap_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string thoi_gia
 //=================== Hóa Đơn =========================
 void nhapHoaDon(HoaDon& a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_hang d)
 {
+	long long tien;
 	string loai_hd;
 	cout << "Nhap loai hoa don (Xuat/Nhap) : "; getline(cin, loai_hd); // cho nhập Xuat / Nhap
 	while_loai_hd(loai_hd);
@@ -603,43 +604,6 @@ void xep_hang_khach_hang_theo_tien(TREE& t)
 
 }
 
-void xep_hang_khach_hang_theo_tien(TREE &t)
-{
-	long long tong_tien_da_tieu = 0;
-	if (t != NULL)
-	{
-		xep_hang_khach_hang_theo_tien(t->pLeft);
-		for (node_hoa_don* k = t->data.don_mua_hang.pHead; k != NULL; k = k->pNext)
-		{
-			tong_tien_da_tieu = tong_tien_da_tieu + k->data.tong_tien;
-		}
-		if (tong_tien_da_tieu <= 500000)
-		{
-			t->data.maKh.replace(0, 2, "SA");
-			tong_tien_da_tieu = 0;
-		}
-		else if (tong_tien_da_tieu > 500000 && tong_tien_da_tieu <= 1000000) {
-			t->data.maKh.replace(0, 2, "DO");
-			tong_tien_da_tieu = 0;
-		}
-		else if (tong_tien_da_tieu > 1000000 && tong_tien_da_tieu <= 2000000) {
-			t->data.maKh.replace(0, 2, "BA");
-			tong_tien_da_tieu = 0;
-		}
-		else if (tong_tien_da_tieu > 2000000 && tong_tien_da_tieu <= 5000000) {
-			t->data.maKh.replace(0, 2, "VA");
-			tong_tien_da_tieu = 0;
-		}
-		else
-		{
-			t->data.maKh.replace(0, 2, "KC");
-			tong_tien_da_tieu = 0;
-		}
-		xep_hang_khach_hang_theo_tien(t->pRight);
-	}
-
-}
-
 void sua_thong_tin_hoa_don(Admin &ad)
 {
 	string b,tam;
@@ -777,16 +741,16 @@ void sua_thong_tin_hoa_don(Admin &ad)
 					cout << "Lua chon khong hop le!\n";
 					cout << "Chon loai thong tin muon sua: ";
 					getline(cin, tam);
-
-			} while (c < 0||c>4);
-
 				}
 				else
 				{
 					c = stoi(tam);
 					break;
 				}
-			} while (true);
+
+			} while (c < 0 || c>4);
+
+
 
 			switch (c)
 			{
@@ -794,7 +758,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			{
 				string str;
 				cout << "Nhap ma hang hoa : ";
-				getline(cin , str);
+				getline(cin, str);
 				while_full_ma_hh(str);
 				getline(cin, str);
 				str[0] = toupper(str[0]);
@@ -804,7 +768,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 					{
 						cout << "Hang hoa khong ton tai!\n";
 						cout << "Nhap ma hang hoa: ";
-						getline(cin , str);
+						getline(cin, str);
 						while_full_ma_hh(str);
 						getline(cin, str);
 						str[0] = toupper(str[0]);
@@ -828,8 +792,8 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			}
 			case 2:
 			{
-				string str,ma_cu;
-				regex kt_ma_kh (R"([aA-zZ]{2}\d{4}})");
+				string str, ma_cu;
+				regex kt_ma_kh(R"([aA-zZ]{2}\d{4}})");
 				cout << "Nhap ma khach hang muon sua: ";
 				getline(cin, str);
 				while_ma_kh(str);
@@ -848,29 +812,29 @@ void sua_thong_tin_hoa_don(Admin &ad)
 
 				do
 				{
-					if (check_ma_kh(str,ad.quan_li_ds_kh.t) == false)
-					if (check_ma_kh(str,ad.quan_li_ds_kh.t) == 0)
-					{
-						cout << "Khach hang khong ton tai!" << endl;
-						cout << "Nhap ma khach hang muon sua: ";
-						getline(cin , str);
-						while_ma_kh(str);
-						getline(cin, str);
-						str[0] = toupper(str[0]);
-						str[1] = toupper(str[1]);
-					}
-					else
-					{
-						break;
-					}
+					if (check_ma_kh(str, ad.quan_li_ds_kh.t) == false)
+						if (check_ma_kh(str, ad.quan_li_ds_kh.t) == 0)
+						{
+							cout << "Khach hang khong ton tai!" << endl;
+							cout << "Nhap ma khach hang muon sua: ";
+							getline(cin, str);
+							while_ma_kh(str);
+							getline(cin, str);
+							str[0] = toupper(str[0]);
+							str[1] = toupper(str[1]);
+						}
+						else
+						{
+							break;
+						}
 				} while (true);
 				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 				{
 					if (k->data.ma_hoa_don == b)
 					{
-						duyet_cay_xoa_hd_theo_ma(ad.quan_li_ds_kh.t, k->data.ma_kh,b);
+						duyet_cay_xoa_hd_theo_ma(ad.quan_li_ds_kh.t, k->data.ma_kh, b);
 						k->data.ma_kh = str;
-						duyet_cay_them_hd(ad.quan_li_ds_kh.t,str,k->data);
+						duyet_cay_them_hd(ad.quan_li_ds_kh.t, str, k->data);
 						break;
 					}
 				}
@@ -946,6 +910,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			}
 
 		}
+	}
 	
 }
 
@@ -1033,22 +998,6 @@ void xuat_gio_hang(TREE t, string ma_kh)
 	}
 }
 
-void nhap_khach_hang(KhachHang& a, Admin b)
-{
-	// mã : SA (mặc định nếu là acc mới tạo) DO / BA / VA / KC
-	a.maKh = "SA";
-	a.maKh = a.maKh + tao_ma_khach_hang(b.quan_li_ds_kh);
-	// mã kh = mã + số random (tách chuỗi số thành số)
-	cout << "Nhap ten: "; getline(cin, a.ten);
-	check_Ten(a.ten);
-	cout << "Nhap dia chi: "; getline(cin, a.diaChi);
-	cin.ignore();
-	cout << "Nhap so dien thoai: "; cin >> a.sdt;// số đầu tiên là số 0, số thứ 2 là 3-9, 8 số còn lại 0-9
-	check_Sdt(a.sdt);
-	cout << "Nhap email: "; cin >> a.email;//example@gmail.com
-	check_email(a.email);
-}
-
 void them_khachhang_vao_cay(TREE &t, KH data) 
 {
 	if (t == NULL) 
@@ -1068,32 +1017,6 @@ void them_khachhang_vao_cay(TREE &t, KH data)
 		else if (stoi(data.maKh.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4))) 
 		{
 			them_khachhang_vao_cay(t->pRight, data);
-		}
-	}
-}
-
-void xuat_gio_hang(TREE t, string ma_kh)
-{
-	if (t != NULL)
-	{
-		
-		if (ma_kh == t->data.maKh)
-		{
-			for (int i = 0; i < t->data.data_gh.hh.size(); i++)
-			{
-				xuat_tt_hh_ngan_gon(t->data.data_gh.hh.at(i));
-			}
-			return;
-		}
-		else if (stoi(ma_kh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
-		{
-			xuat_gio_hang(t->pLeft, ma_kh);
-
-		}
-		else
-		{
-			xuat_gio_hang(t->pRight, ma_kh);
-
 		}
 	}
 }
