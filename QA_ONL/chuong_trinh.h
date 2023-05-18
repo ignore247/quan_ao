@@ -417,15 +417,17 @@ void sua_thong_tin_hoa_don(Admin &ad)
 	string b,tam;
 	int c;
 	regex ktra_nhap(R"(\d)");
+	regex ktra_dinh_dang(R"([aA-zZ]{1}\d{4})");
 	bool check = true;
 	cout << "Nhap ma hoa don muon sua: ";
-	cin >> b;
+	getline(cin, b);
 	b[0] = toupper(b[0]);
-	while (check_trung_ma_hd(b,ad.quan_li_ds_hoa_don_nhap) == -1 || check_trung_ma_hd(b, ad.quan_li_ds_hoa_don_xuat) == -1)
+	while ( (check_trung_ma_hd(b,ad.quan_li_ds_hoa_don_nhap) == -1 || check_trung_ma_hd(b, ad.quan_li_ds_hoa_don_xuat) == -1) && regex_match(b,ktra_dinh_dang) == false )
 	{
 		cout << "Ma hoa don khong ton tai!";
 		cout << "Nhap ma hoa don muon sua: ";
-		cin >> b;
+		getline(cin, b);
+		b[0] = toupper(b[0]);
 	}
 	if (b[0] == 'N')
 	{
@@ -437,7 +439,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			cout << "\n0.Thoat";
 			
 			cout << "Chon loai thong tin muon sua: ";
-			cin >> tam;
+			getline(cin, tam);
 			
 			do
 			{
@@ -445,7 +447,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				{
 					cout << "Lua chon khong hop le!\n";
 					cout << "Chon loai thong tin muon sua: ";
-					cin >> tam;
+					getline(cin, tam);
 				}
 				else
 				{
@@ -460,14 +462,14 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				{
 					string str;
 					cout << "Nhap ngay lap hoa don: ";
-					cin >> str;
+					getline(cin, str);
 					do
 					{
 						if (check_date(str) == false)
 						{
 							cout << "Ngay thang nhap khong hop le!\n";
 							cout << "Nhap ngay lap hoa don: ";
-							cin >> str;
+							getline(cin, str);
 						}
 						else
 						{
@@ -488,7 +490,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				{
 					string str;
 					cout << "Nhap trang thai moi cua hoa don: ";
-					cin >> str;
+					getline(cin, str);
 					for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
 					{
 						if (k->data.ma_hoa_don == b)
@@ -525,7 +527,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			cout << "5.Xoa hoa don" << endl;
 			cout << "\n0.Thoat";
 			cout << "Chon loai thong tin muon sua: ";
-			cin >> tam;
+			getline(cin, tam);
 
 			do
 			{
@@ -533,7 +535,8 @@ void sua_thong_tin_hoa_don(Admin &ad)
 				{
 					cout << "Lua chon khong hop le!\n";
 					cout << "Chon loai thong tin muon sua: ";
-					cin >> tam;
+					getline(cin, tam);
+
 				}
 				else
 				{
@@ -548,7 +551,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			{
 				string str;
 				cout << "Nhap ma hang hoa : ";
-				cin >> str;
+				getline(cin, str);
 				str[0] = toupper(str[0]);
 				do
 				{
@@ -556,7 +559,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 					{
 						cout << "Hang hoa khong ton tai!\n";
 						cout << "Nhap ma hang hoa: ";
-						cin >> str;
+						getline(cin, str);
 						str[0] = toupper(str[0]);
 					}
 					else
@@ -579,17 +582,27 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			case 2:
 			{
 				string str,ma_cu;
+				regex kt_ma_kh (R"([aA-zZ]{2}\d{4}})");
 				cout << "Nhap ma khach hang muon sua: ";
-				cin >> str;
+				getline(cin, str);
 				str[0] = toupper(str[0]);
 				str[1] = toupper(str[1]);
+				while (regex_match(str, kt_ma_kh) == false)
+				{
+					cout << "Khach hang khong ton tai!" << endl;
+					cout << "Nhap ma khach hang muon sua: ";
+					getline(cin, str);
+					str[0] = toupper(str[0]);
+					str[1] = toupper(str[1]);
+				}
+
 				do
 				{
 					if (check_ma_kh(str,ad.quan_li_ds_kh.t) == 0)
 					{
 						cout << "Khach hang khong ton tai!" << endl;
 						cout << "Nhap ma khach hang muon sua: ";
-						cin >> str;
+						getline(cin, str);
 						str[0] = toupper(str[0]);
 						str[1] = toupper(str[1]);
 					}
@@ -615,14 +628,14 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			{
 				string str;
 				cout << "Nhap ngay lap hoa don: ";
-				cin >> str;
+				getline(cin, str);
 				do
 				{
 					if (check_date(str) == false)
 					{
 						cout << "Ngay thang nhap khong hop le!\n";
 						cout << "Nhap ngay lap hoa don: ";
-						cin >> str;
+						getline(cin, str);
 					}
 					else
 					{
@@ -644,7 +657,7 @@ void sua_thong_tin_hoa_don(Admin &ad)
 			{
 				string str;
 				cout << "Nhap trang thai moi cua hoa don: ";
-				cin >> str;
+				getline(cin, str);
 				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 				{
 					if (k->data.ma_hoa_don == b)

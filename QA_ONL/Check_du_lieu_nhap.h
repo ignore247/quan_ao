@@ -376,3 +376,43 @@ string tao_ma_khach_hang(ds_khach_hang b)
 	return a;
 
 }
+
+bool check_dinh_dang_tk(string a)
+{
+	regex check_username("^[a-zA-Z0-9@_]+$");
+	if (regex_match(a,check_username) == true)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool check_tk_mk(string a, string b ,TREE t)
+{
+	if (t != NULL)
+	{
+		if ( t->data.ten_dang_nhap  == a && b == t->data.mat_khau)
+		{
+			return true;
+		}
+		else if (t->data.ten_dang_nhap == a && b != t->data.mat_khau)
+		{
+			return false;
+		}
+		else if (a > t->data.ten_dang_nhap)
+		{
+			return check_tk_mk(a, b, t->pLeft);
+		}
+		else
+		{
+			return check_tk_mk(a, b, t->pRight);
+		}
+	}
+	else
+	{
+		return false;
+	}
+}

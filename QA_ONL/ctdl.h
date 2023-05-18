@@ -111,7 +111,7 @@ typedef struct node_kh* TREE;
 
 struct DS_KH {
 	TREE t = NULL;
-	int sl;  //so luong khach hang
+	int sl = 0;  //so luong khach hang
 };
 typedef struct DS_KH ds_khach_hang;
 
