@@ -1,4 +1,4 @@
-﻿#pragma once﻿
+﻿
 #include "Xu_li_do_hoa.h"
 #include "load_ghi_file.h"
 #include <thread>
@@ -167,7 +167,7 @@ int main()
 	//xuat_gio_hang_kh(ad.quan_li_ds_kh.t,ad.quan_li_ds_kh.t->data.hh_gio_hang);
 	SetWindowSize(209, 54);
 	ShowScrollbar(0);
-	//ve_khung_console();
+	ve_khung_console();
 	//thread th2(ve_chu_QAOL);
 	//thread th1(dang_nhap);
 	
@@ -201,10 +201,19 @@ int main()
 	//		}
 	//	}
 	//}
-	dang_nhap(ad.quan_li_ds_kh.t);
+	//dang_nhap(ad.quan_li_ds_kh.t);
 	
+	sua_tt_hd(ad);
+
+
 	
-	gotoXY(0, 54);
 	system("pause");
 	return 0; 
 }
+
+
+// lên   72
+// xuống 80
+// trái  75
+// phải  77
+// enter 13

@@ -397,8 +397,6 @@ void duyet_load_don_mua(TREE& a, string tam, ifstream& fi)
 			{
 				HoaDon b;
 				getline(fi, b.ma_hoa_don, ',');
-				cout << b.ma_hoa_don << endl;
-				system("pause");
 				getline(fi, b.ma_kh, ',');
 				getline(fi, b.ma_hang_hoa, ',');
 				getline(fi, b.thong_tin_hang.ten_hh, ',');

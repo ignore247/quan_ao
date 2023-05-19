@@ -343,7 +343,6 @@ bool check_email(string& a)
 	}
 }
 
-
 // Hàm kiểm tra mã khách hàng trùng
 bool kt_trung_ma_kh(string a, TREE t) 
 {
@@ -427,14 +426,15 @@ bool check_full_maHH(string a)
 	{
 		return false;
 	}
-	else {
+	else 
+	{
 		return true;
 	}
 }
 
 bool check_trang_thai(string a)
 {
-	regex trang_thai("(da nhan hang|chua nhan hang)");
+	regex trang_thai("(Da Nhan Hang|Chua Nhan Hang)");
 	if (regex_match(a, trang_thai) == false)
 	{
 		return false;
@@ -544,8 +544,9 @@ void while_trang_thai(string& a)
 {
 	while (check_trang_thai(a) == false)
 	{
-		cout << "da nhan hang|chua nhan hang" << endl;
+		cout << "Da Nhan Hang|Chua Nhan Hang" << endl;
 		cout << "Trang thai khong phu hop, nhap lai:"; getline(cin, a);
+		chuanHoa(a);
 	}
 }
 
