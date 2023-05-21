@@ -53,5 +53,11 @@
     <Text Include="don_mua_hang.txt" />
     <Text Include="gio_hang.txt" />
     <Text Include="thong_tin_hoa_don_ban_hang.txt" />
+    <Text Include="DS_hh_xoa.txt" />
+    <Text Include="DS_khach_hang_xoa.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="DS_hoa_don_xuat_xoa.txt" />
+    <Text Include="DS_hoa_don_nhap_xoa.txt" />
   </ItemGroup>
 </Project>

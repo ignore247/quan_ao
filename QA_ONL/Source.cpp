@@ -138,9 +138,7 @@ void NLR(TREE t)
 {
 	if (t != NULL)
 	{
-	
-		cout << t->data.ten_dang_nhap << endl;
-		cout << t->data.mat_khau<<endl;
+		cout << t->data.maKh << endl;
 		NLR(t->pLeft);
 		NLR(t->pRight);
 
@@ -155,57 +153,34 @@ int main()
 	HoaDon a;
 	DS_HOA_DON b;
 	DS_Hang_Hoa c;
-	//
-	//load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
-	//load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
+	ds_khach_hang d;
+	load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
+	load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
 	load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
 	load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
 	load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
 	load_file_don_mua_kh(ad.quan_li_ds_kh.t);
+	load_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
+	load_file_hoa_don_xuat_xoa(ad.quan_li_hd_xuat_xoa);
 	//load_file_gio_hang(ad.quan_li_ds_kh.t);
 	//xuat_hoa_don_mua_khach_hang(ad.quan_li_ds_kh.t, ad.quan_li_ds_hang_hoa);
 	//xuat_gio_hang_kh(ad.quan_li_ds_kh.t,ad.quan_li_ds_kh.t->data.hh_gio_hang);
 	SetWindowSize(209, 54);
 	ShowScrollbar(0);
-	ve_khung_console();
+//	ve_khung_console();
 	//thread th2(ve_chu_QAOL);
 	//thread th1(dang_nhap);
 	
-	
 	//th2.join();
 	//th1.join();
-	//menu_sua_tt_hd();
-	//box(85, 2, 50, 2, 0, 58, "Sua ngay lap hoa don");
-	//box(85, 4, 50, 2, 0, 0, "Sua trang thai cua hoa don");
-	//box(85, 6, 50, 2, 0, 0, "Xoa hoa don");
-
-	//bool kt = true;
-	//bool cl = true;
-	//while (kt == true)
-	//{
-	//	if (_kbhit())
-	//	{
-	//		char c = _getch();
-	//		if (c == -32)
-	//		{
-	//			cl = true;// đã bấm
-	//			c = _getch();
-	//			if (c =)
-	//			{
-	//			}
-	//		else if (c == 27)
-	//		{
-	//			box(190, 50, 10, 2, 11, 58, "   Esc");
-	//			Sleep(120);
-	//			kt = false;
-	//		}
-	//	}
-	//}
+	//box(80, 3, 80, 23, 11, 0, 11, "");
 	//dang_nhap(ad.quan_li_ds_kh.t);
-	
-	sua_tt_hd(ad);
+	//xuat_ds_hoa_don_ban(ad);
+	//thong_ke_hoa_don(ad);
+	//sua_thong_tin_hoa_don(ad);
 
-
+	//xuat_ds_hoa_don_ban_hang_xoa(ad.quan_li_hd_xuat_xoa);
+	//ghi_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
 	
 	system("pause");
 	return 0; 

@@ -63,7 +63,7 @@ bool kt_nam_nhuan(string a)
 		return false;
 }
 
-bool check_date(string a)
+bool check_date(string &a)
 {
 	regex date(R"((\d{1,2})/(\d{1,2})/(\d{4}))");
 	if (regex_match(a, date) == false)
@@ -285,8 +285,8 @@ bool check_size_quan(string& a)
 
 bool check_So(string& a)
 {
-	regex check_gia("^[0-9]+$");
-	if (regex_match(a, check_gia) == false || a == "0")
+	regex check_so("^[0-9]+$");
+	if (regex_match(a, check_so) == false)
 	{
 		return false;
 	}
@@ -297,12 +297,13 @@ bool check_So(string& a)
 
 bool check_Loai_Hoa_Don(string& a)
 {
-	regex check_ma("(Nhap|Xuat)");
+	regex check_ma("(Nhap|Ban)");
 	if (regex_match(a, check_ma) == false)
 	{
 		return false;
 	}
-	else {
+	else 
+	{
 		return true;
 	}
 }
@@ -333,7 +334,7 @@ bool check_Sdt(string& a)
 
 bool check_email(string& a)
 {
-	regex check_email("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\.[a-zA-Z]{2,}$");
+	regex check_email("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\\.[a-zA-Z]{2,}$");
 	if (regex_match(a, check_email) == false)
 	{
 		return false;
@@ -503,7 +504,7 @@ void while_loai_hd(string &a)
 	chuanHoa(a);
 	while (check_Loai_Hoa_Don(a) == false)
 	{
-		cout << "Nhap loai hoa don chi co (Xuat/Nhap):"; getline(cin, a);
+		cout << "Nhap loai hoa don chi co (Ban/Nhap):"; getline(cin, a);
 		chuanHoa(a);
 	}
 }

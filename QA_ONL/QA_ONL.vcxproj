@@ -141,6 +141,10 @@
   <ItemGroup>
     <Text Include="Ao.txt" />
     <Text Include="don_mua_hang.txt" />
+    <Text Include="DS_hh_xoa.txt" />
+    <Text Include="DS_hoa_don_nhap_xoa.txt" />
+    <Text Include="DS_hoa_don_xuat_xoa.txt" />
+    <Text Include="DS_khach_hang_xoa.txt" />
     <Text Include="gio_hang.txt" />
     <Text Include="Quan.txt" />
     <Text Include="test.txt" />

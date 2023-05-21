@@ -33,6 +33,19 @@ struct DS_Hang_Hoa
 };
 typedef struct DS_Hang_Hoa DS_Hang_Hoa;
 
+struct Hang_Hoa_Xoa
+{
+	HangHoa hh;
+	string ngay_xoa;
+};
+typedef struct Hang_Hoa_Xoa Hang_Hoa_Xoa;
+
+struct DS_Hang_Hoa_Xoa
+{
+	vector <Hang_Hoa_Xoa> ds;
+};
+typedef struct DS_Hang_Hoa_Xoa DS_Hang_Hoa_Xoa;
+
 // ===============================HÓA ĐƠN============================================//
 struct HoaDon
 {
@@ -52,6 +65,13 @@ struct HoaDon
 };
 typedef struct HoaDon HoaDon;
 
+struct HoaDonXoa
+{
+	HoaDon hd;
+	string ngay_xoa;
+};
+typedef struct HoaDonXoa HoaDonXoa;
+
 struct node_hoa_don
 {
 	HoaDon data;
@@ -67,7 +87,20 @@ struct ds_hoa_don
 };
 typedef struct ds_hoa_don DS_HOA_DON;
 
+struct node_hoa_don_xoa
+{
+	HoaDonXoa hdx;
+	node_hoa_don_xoa* pNext;
+};
+typedef struct node_hoa_don_xoa node_hoa_don_xoa;
 
+struct ds_hoa_don_xoa
+{
+	node_hoa_don_xoa* pHead = NULL;
+	node_hoa_don_xoa* pTail = NULL;
+	int sl = 0;
+};
+typedef struct ds_hoa_don_xoa DS_HOA_DON_XOA;
 
 //============================= Khách hàng ============================================//
 
@@ -99,6 +132,13 @@ struct KhachHang {
 };
 typedef struct KhachHang KH;
 
+struct KhachHangXoa
+{
+	KhachHang kh;
+	string ngay_xoa;
+};
+typedef struct KhachHang KH;
+
 struct node_kh
 {
 	KH data;
@@ -108,11 +148,28 @@ struct node_kh
 typedef struct node_kh node_kh;
 typedef struct node_kh* TREE;
 
-struct DS_KH {
+struct DS_KH 
+{
 	TREE t = NULL;
 	int sl = 0;  //so luong khach hang
 };
 typedef struct DS_KH ds_khach_hang;
+
+struct node_kh_xoa
+{
+	KhachHangXoa khx;
+	struct node_kh_xoa* pLeft;
+	struct node_kh_xoa* pRight;
+};
+typedef struct node_kh_xoa node_kh_xoa;
+typedef struct node_kh_xoa* TREE_XOA;
+
+struct DS_KH_XOA
+{
+	TREE_XOA t = NULL;
+	int sl = 0;  //so luong khach hang
+};
+typedef struct DS_KH_XOA ds_khach_hang_xoa;
 
 //============================ Admin ============================================//
 
@@ -133,6 +190,11 @@ struct Admin
 	DS_HOA_DON quan_li_ds_hoa_don_xuat;
 	DS_HOA_DON quan_li_ds_hoa_don_nhap;
 	ds_don_hang_cho quan_li_don_hang_cho;
+	
+	DS_HOA_DON_XOA quan_li_hd_nhap_xoa;
+	DS_HOA_DON_XOA quan_li_hd_xuat_xoa;
+	DS_Hang_Hoa_Xoa quan_li_hh_xoa;
+	ds_khach_hang_xoa quan_li_kh_xoa;
 };
 typedef struct Admin Admin;
 

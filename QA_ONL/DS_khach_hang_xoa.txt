@@ -1,0 +1,5 @@
+4
+nghianguyen@khachhang.com,BA1265,Nguyen Trung Nghia,167/15 Phuoc Long A TPHCM,0328607423,minmin123,trungnghia123,20/05/2022
+chibao@khachhang.com,DO5234,Nguyen Chi Bao,446/69 Long Binh Bien Hoa,0375607327,baonguyen123,chibao123,06/06/2022
+thientran@khachhang.com,VA1953,Tran Duc Thien,177/32 Phuoc Long B TPHCM,0334244001,ivan246,thien123,04/07/2022
+dinh@khachhang.com,BA1762,Le Quang Dinh,432/08 Le Van Viet TPHCM,0398822145,bangkieu135,dinh123,07/12/2022
