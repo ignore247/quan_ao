@@ -160,8 +160,10 @@ int main()
 	load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
 	load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
 	load_file_don_mua_kh(ad.quan_li_ds_kh.t);
+	load_file_thong_tin_hh_xoa(ad.quan_li_hh_xoa);
 	load_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
 	load_file_hoa_don_xuat_xoa(ad.quan_li_hd_xuat_xoa);
+	load_file_thong_tin_khach_hang_xoa(ad.quan_li_kh_xoa);
 	//load_file_gio_hang(ad.quan_li_ds_kh.t);
 	//xuat_hoa_don_mua_khach_hang(ad.quan_li_ds_kh.t, ad.quan_li_ds_hang_hoa);
 	//xuat_gio_hang_kh(ad.quan_li_ds_kh.t,ad.quan_li_ds_kh.t->data.hh_gio_hang);
@@ -178,9 +180,8 @@ int main()
 	//xuat_ds_hoa_don_ban(ad);
 	//thong_ke_hoa_don(ad);
 	//sua_thong_tin_hoa_don(ad);
-
-	//xuat_ds_hoa_don_ban_hang_xoa(ad.quan_li_hd_xuat_xoa);
-	//ghi_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
+	xuat_thong_tin_khach_hang_xoa(ad.quan_li_kh_xoa.t);
+	
 	
 	system("pause");
 	return 0; 

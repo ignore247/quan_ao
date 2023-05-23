@@ -8,11 +8,8 @@ void load_file_thong_tin_quan(DS_Hang_Hoa& dshh)
 	while (fi.eof() == false) {
 		HangHoa a;
 		getline(fi, a.ma_hh, ',');
-		
 		getline(fi, a.ten_hh, ',');
-		
 		fi >> a.soLuongTonKho;
-
 		fi.ignore();
 		fi >> a.gia;
 		fi.ignore();
@@ -111,6 +108,66 @@ void ghi_file_ao(DS_Hang_Hoa dshh)
 		fo << ',';
 		fo << dshh.ds_ao.at(i).thoi_gian_nhap_hang;
 		if (i == dshh.ds_ao.size() - 1)
+		{
+			fo.close();
+			return;
+		}
+		fo << endl;
+	}
+}
+
+//================ Hàng Hóa Xóa ====================
+void load_file_thong_tin_hh_xoa(DS_Hang_Hoa_Xoa& dshh)
+{
+	ifstream fi("DS_hh_xoa.txt", ios::in);
+	while (fi.eof() == false) {
+		Hang_Hoa_Xoa a;
+		getline(fi, a.hh.ma_hh, ',');
+		getline(fi, a.hh.ten_hh, ',');
+		fi >> a.hh.soLuongTonKho;
+		fi.ignore();
+		fi >> a.hh.gia;
+		fi.ignore();
+		getline(fi, a.hh.size, ',');
+		getline(fi, a.hh.mo_ta_sp, '.');
+		getline(fi, a.hh.thoi_gian_nhap_hang,',');
+		getline(fi, a.ngay_xoa);
+		dshh.ds.push_back(a);
+	}
+	fi.close();
+}
+
+void ghi_file_hh_xoa(DS_Hang_Hoa_Xoa dshh)
+{
+	ofstream fo;
+	fo.open("DS_hh_xoa.txt", ios::out);
+	if (fo.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fo.close();
+		return;
+	}
+	fo << "";
+	fo.close();
+	fo.open("DS_hh_xoa.txt", ios::app);
+	for (int i = 0; i < dshh.ds.size(); i++)
+	{
+		fo << dshh.ds.at(i).hh.ma_hh;
+		fo << ',';
+		fo << dshh.ds.at(i).hh.ten_hh;
+		fo << ',';
+		fo << dshh.ds.at(i).hh.soLuongTonKho;
+		fo << ',';
+		fo << dshh.ds.at(i).hh.gia;
+		fo << ',';
+		fo << dshh.ds.at(i).hh.size;
+		fo << ',';
+		fo << dshh.ds.at(i).hh.mo_ta_sp;
+		fo << ',';
+		fo << dshh.ds.at(i).hh.thoi_gian_nhap_hang;
+		fo << ',';
+		fo << dshh.ds.at(i).ngay_xoa;
+		if (i == dshh.ds.size() - 1)
 		{
 			fo.close();
 			return;
@@ -471,7 +528,6 @@ void ghi_file_hoa_don_xuat_xoa(DS_HOA_DON_XOA a)
 }
 
 // ============== Khách hàng ================
-
 void load_file_thong_tin_khach_hang(ds_khach_hang &a)
 {
 		ifstream fi("thong_tin_khach_hang.txt", ios::in);
@@ -558,6 +614,99 @@ void ghi_thong_tin_kh(ds_khach_hang a)
 	fo << a.sl;
 	fo << endl;
 	duyet_ghi_tt_kh(a.t,dc);
+	fo.close();
+}
+
+// ============== Khách hàng xóa ================
+void load_file_thong_tin_khach_hang_xoa(ds_khach_hang_xoa& a)
+{
+	ifstream fi("DS_khach_hang_xoa.txt", ios::in);
+	if (fi.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fi.close();
+		return;
+	}
+	fi >> a.sl;
+	fi.ignore();
+	for (int i = 0; i < a.sl; i++)
+	{
+		KHX b;
+		getline(fi, b.kh.email, ',');
+		getline(fi, b.kh.maKh, ',');
+		getline(fi, b.kh.ten, ',');
+		getline(fi, b.kh.diaChi, ',');
+		getline(fi, b.kh.sdt, ',');
+		getline(fi, b.kh.ten_dang_nhap, ',');
+		getline(fi, b.kh.mat_khau,',');
+		getline(fi, b.ngay_xoa);
+		them_KhachHangXoa_vao_cay(a.t, b);
+		can_bang_cay_xoa(a.t);
+	}
+	fi.close();
+}
+
+void tim_diem_cuoi_cua_duyet_cay_xoa_NLR(TREE_XOA t, node_kh_xoa*& dc)
+{
+	if (t != NULL)
+	{
+		dc = t;
+		tim_diem_cuoi_cua_duyet_cay_xoa_NLR(t->pLeft, dc);
+		tim_diem_cuoi_cua_duyet_cay_xoa_NLR(t->pRight, dc);
+	}
+	return;
+}
+void duyet_ghi_tt_kh_xoa(TREE_XOA t, node_kh_xoa* dc)
+{
+	ofstream fo("DS_khach_hang_xoa.txt", ios::app);
+	if (fo.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fo.close();
+		return;
+	}
+	if (t != NULL)
+	{
+		fo << t->khx.kh.email;
+		fo << ',';
+		fo << t->khx.kh.maKh;
+		fo << ',';
+		fo << t->khx.kh.ten;
+		fo << ',';
+		fo << t->khx.kh.diaChi;
+		fo << ',';
+		fo << t->khx.kh.sdt;
+		fo << ',';
+		fo << t->khx.kh.ten_dang_nhap;
+		fo << ',';
+		fo << t->khx.kh.mat_khau;
+		fo << ',';
+		fo << t->khx.ngay_xoa;
+		if (dc == t)
+		{
+			fo.close();
+			return;
+		}
+		fo << endl;
+		duyet_ghi_tt_kh_xoa(t->pLeft, dc);
+		duyet_ghi_tt_kh_xoa(t->pRight, dc);
+	}
+	fo.close();
+}
+void ghi_thong_tin_kh(ds_khach_hang_xoa a)
+{
+	node_kh_xoa* dc = NULL;
+	tim_diem_cuoi_cua_duyet_cay_xoa_NLR(a.t, dc);
+	ofstream fo("DS_khach_hang_xoa.txt", ios::out);
+	if (fo.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fo.close();
+		return;
+	}
+	fo << a.sl;
+	fo << endl;
+	duyet_ghi_tt_kh_xoa(a.t, dc);
 	fo.close();
 }
 

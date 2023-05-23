@@ -2575,7 +2575,7 @@ void sua_tt_hd(Admin& ad)
 	b[0] = toupper(b[0]);
 	do
 	{
-		if ((check_trung_ma_hd(b, ad.quan_li_ds_hoa_don_nhap) == -1 || check_trung_ma_hd(b, ad.quan_li_ds_hoa_don_xuat) == -1) && regex_match(b, ktra_dinh_dang) == false)
+		if ( (check_trung_ma_hd(b, ad.quan_li_ds_hoa_don_nhap) == -1 && check_trung_ma_hd(b, ad.quan_li_ds_hoa_don_xuat) == -1  )|| regex_match(b, ktra_dinh_dang) == false)
 		{
 			box(120, 19, 50, 2, 12, 0,7, b);
 			gotoXY(131, 22);

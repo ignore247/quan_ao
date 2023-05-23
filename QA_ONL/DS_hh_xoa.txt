@@ -5,4 +5,4 @@ Q0054,Quan Jean Ong Xuong,21,350000,30,Chat lieu jean nhap khau My.12/05/2022,01
 Q0703,Quan Dai Jean,50,237000,33,Tre trung nang dong cho nhung nguoi tuoi tre.11/03/2022,20/03/2022
 A8815,Ao Da Banh,53,110000,L,Ngan.05/09/2022,20/09/2022
 A1058,Ao Len,23,429000,M,Giu am tot.07/03/2022,30/03/2022
-Q2084,Quan Kaki,60,410000,29,Mat,không nhăn,co giãn.26/01/2022,12/02/1022
+Q2084,Quan Kaki,60,410000,29,Mat,khong nhan,co gian.26/01/2022,12/02/1022

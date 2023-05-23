@@ -1,7 +1,5 @@
-6
-X6207,BA3236,Q6589,Quan Ong Jean Rong,30000,28,1,01/05/2021,0,300000,da nhan hang,16/05/2021
-X3275,DO8235,Q6101,Quan Dai Thun,200000,32,2,05/01/2022,0,400000,da nhan hang,20/01/2022
-X4265,DO6435,Q7043,Quan Dai Jean,230000,30,3,08/03/2022,0,690000,da nhan hang,26/03/2022
-X6237,BA3236,A5589,Ao Jean Rong,30000,S,1,25/05/2021,0,300000,da nhan hang,12/06/2021
-X1274,DO8235,A9101,Ao Thun,200000,M,2,17/01/2022,0,400000,da nhan hang,20/01/2022
-X5765,DO6435,A7083,Ao Khoac Jean,230000,L,3,08/04/2022,0,690000,da nhan hang,26/04/2022
+4
+thientran@khachhang.com,VA1953,Tran Duc Thien,177/32 Phuoc Long B TPHCM,0334244001,ivan246,thien123,04/07/2022
+nghianguyen@khachhang.com,BA1265,Nguyen Trung Nghia,167/15 Phuoc Long A TPHCM,0328607423,minmin123,trungnghia123,20/05/2022
+dinh@khachhang.com,BA1762,Le Quang Dinh,432/08 Le Van Viet TPHCM,0398822145,bangkieu135,dinh123,07/12/2022
+chibao@khachhang.com,DO5234,Nguyen Chi Bao,446/69 Long Binh Bien Hoa,0375607327,baonguyen123,chibao123,06/06/2022

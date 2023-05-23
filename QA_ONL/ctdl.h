@@ -137,7 +137,7 @@ struct KhachHangXoa
 	KhachHang kh;
 	string ngay_xoa;
 };
-typedef struct KhachHang KH;
+typedef struct KhachHangXoa KHX;
 
 struct node_kh
 {
@@ -173,15 +173,10 @@ typedef struct DS_KH_XOA ds_khach_hang_xoa;
 
 //============================ Admin ============================================//
 
-typedef struct don_hang_cho
+typedef struct ds_don_hang_cho
 {
-	HoaDon hoa_don;
-}don_hang_cho;
-
-struct ds_don_hang_cho
-{
-	vector <don_hang_cho> don_cho;
-};
+	vector <HoaDon> don_cho;
+}ds_dh_cho;
 
 struct Admin
 {
@@ -189,7 +184,7 @@ struct Admin
 	DS_Hang_Hoa quan_li_ds_hang_hoa;
 	DS_HOA_DON quan_li_ds_hoa_don_xuat;
 	DS_HOA_DON quan_li_ds_hoa_don_nhap;
-	ds_don_hang_cho quan_li_don_hang_cho;
+	ds_dh_cho quan_li_don_hang_cho;
 	
 	DS_HOA_DON_XOA quan_li_hd_nhap_xoa;
 	DS_HOA_DON_XOA quan_li_hd_xuat_xoa;
