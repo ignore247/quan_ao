@@ -548,7 +548,8 @@ void load_file_thong_tin_khach_hang(ds_khach_hang &a)
 			getline(fi, b.diaChi, ',');
 			getline(fi, b.sdt,',');
 			getline(fi, b.ten_dang_nhap, ',');
-			getline(fi, b.mat_khau);
+			getline(fi, b.mat_khau,',');
+			getline(fi, b.ngay_dk);
 			them_khachhang_vao_cay(a.t, b);
 			can_bang_cay(a.t);
 		}
@@ -589,6 +590,8 @@ void duyet_ghi_tt_kh(TREE t, node_kh*dc)
 		fo << t->data.ten_dang_nhap;
 		fo << ',';
 		fo << t->data.mat_khau;
+		fo << ',';
+		fo << t->data.ngay_dk;
 		if (dc == t)
 		{
 			fo.close();

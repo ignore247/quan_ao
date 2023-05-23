@@ -117,7 +117,7 @@ struct KhachHang {
 	string diaChi;
 	string sdt;
 	string email;
-	
+	string ngay_dk;
 
 	//DS_Don_Mua ds_mua_hang; 
 	ds_hoa_don don_mua_hang;
@@ -185,6 +185,7 @@ struct Admin
 	DS_HOA_DON quan_li_ds_hoa_don_xuat;
 	DS_HOA_DON quan_li_ds_hoa_don_nhap;
 	ds_dh_cho quan_li_don_hang_cho;
+	DS_HOA_DON quan_li_don_hang_tra;
 	
 	DS_HOA_DON_XOA quan_li_hd_nhap_xoa;
 	DS_HOA_DON_XOA quan_li_hd_xuat_xoa;

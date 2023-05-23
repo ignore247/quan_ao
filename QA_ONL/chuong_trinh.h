@@ -1646,6 +1646,7 @@ ostream& operator << (ostream& out, KhachHang a)
 	out << "Dia chi :" << a.diaChi << endl;
 	out << "SDT: " << a.sdt << endl;
 	out << "Email: " << a.email << endl;
+	out << "Ngay dang ky: " << a.ngay_dk << endl;
 	return out;
 }
 
@@ -1666,6 +1667,8 @@ void nhap_khach_hang(KhachHang& a, Admin b)
 
 	cout << "Nhap email: "; getline (cin, a.email);//example@gmail.com
 	while_email(a.email);
+
+	thoiGianThuc(a.ngay_dk);
 }
 
 void xuat_thong_tin_khach_hang(TREE t)
@@ -1708,6 +1711,7 @@ ostream& operator << (ostream& out, KHX a)
 	out << "Dia chi :" << a.kh.diaChi << endl;
 	out << "SDT: " << a.kh.sdt << endl;
 	out << "Email: " << a.kh.email << endl;
+	out << "Ngay dang ky: " << a.kh.ngay_dk << endl;
 	out << "Ngay xoa: " << a.ngay_xoa << endl;
 	return out;
 }
@@ -2743,6 +2747,93 @@ void thong_ke_don_mua_hang(Admin ad, string makh)
 	}
 }
 
+bool duyet_cay_tra_hang(TREE t, string makh, string &mahd)
+{
+	if (t != NULL)
+	{
+		if (makh == t->data.maKh)
+		{
+			regex ktra_dinh_dang(R"([xX]{1}\d{4})");
+			while (regex_match(mahd,ktra_dinh_dang) == false || check_trung_ma_hd(mahd,t->data.don_mua_hang) == -1  )
+			{
+				cout << "\nHoa don khong ton tai!";
+				cout << "\nNhap ma hoa don muon tra hang: ";
+				getline(cin, mahd);
+			}
+			for (node_hoa_don* k = t->data.don_mua_hang.pHead; k != NULL; k = k->pNext)
+			{
+				if (mahd == k->data.ma_hoa_don)
+				{
+					if (k->data.trang_thai == "Da Nhan Hang")
+					{
+						cout << "\Don hang khong the tra hang!";
+						return false;
+					}
+					else if (k->data.trang_thai == "Chua nhan hang")
+					{
+						string luachon;
+						cout << "Ban co xac nhan tra hang lai?";
+						cout << "\n1.Co";
+						cout << "\n2.Khong";
+						getline(cin, luachon);
+						while (check_So(luachon) == false || luachon != "1" || luachon != "2")
+						{
+							cout << "\nNhap khong hop le!";
+							cout << "\nNhap lai lua chon: ";
+							getline(cin, luachon);
+						}
+						if (luachon != "1")
+						{
+							k->data.trang_thai = "Tra Hang";
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					}
+				}
+			}
+			return;
+		}
+		else if (stoi(makh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_thong_ke_theo_ngay_hien_tai(t->pLeft, makh);
+		}
+		else
+		{
+			duyet_cay_thong_ke_theo_ngay_hien_tai(t->pRight, makh);
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void tra_hang(Admin ad, string makh)
+{
+	string str;
+	regex ktra_dinh_dang(R"([xX]{1}\d{4})");
+	cout << "\nNhap ma hoa don muon tra hang: ";
+	getline(cin, str);
+	if (duyet_cay_tra_hang(ad.quan_li_ds_kh.t, makh, str) == true) // đã xác nhận trả hàng
+	{
+		for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+		{
+			if (str == k->data.ma_hoa_don)
+			{
+				k->data.trang_thai = "Tra Hang";
+				them_cuoi_ds_hoa_don(ad.quan_li_don_hang_tra, k->data);
+				ad.quan_li_don_hang_tra.sl++;
+				xoa_hd_theo_ma(ad.quan_li_ds_hoa_don_xuat, str);
+				ad.quan_li_ds_hoa_don_xuat.sl--;
+				return;
+			}
+		}
+	}
+	
+}
 
 //============================== Khách hàng mua hang ============================
 void duyet_cay_them_don_mua_hang(TREE& t, string ma_kh,HoaDon a)
@@ -2788,7 +2879,7 @@ void xuat_ds_don_hang_cho(ds_dh_cho a)
 	}
 }
 
-void xu_ly_don_hang_cho(Admin &ad)
+void xu_ly_don_hang_cho(Admin& ad)
 {
 	int luachon;
 	string tam;
@@ -2814,4 +2905,54 @@ void xu_ly_don_hang_cho(Admin &ad)
 		return;
 	}
 
+};
+
+// =================== Đơn hàng trả ===========================
+
+void xuat_ds_don_hang_tra(Admin ad)
+{
+	for (node_hoa_don* k = ad.quan_li_don_hang_tra.pHead; k != NULL; k = k->pNext)
+	{
+		xuatHoaDonBanHang(k->data);
+	}
 }
+
+void xac_nhan_da_nhan_hang_tra(Admin ad)
+{
+	string str; 
+	regex ktra_dinh_dang(R"([xX]{1}\d{4})");
+	cout << "\nNhap hoa don muon xac nhan hang da tra ve: ";
+	getline(cin, str);
+	str[0] = toupper(str[0]);
+	while (regex_match(str, ktra_dinh_dang) == false || check_trung_ma_hd(str, ad.quan_li_don_hang_tra) == -1)
+	{
+		cout << "\nDon hang khong ton tai!";
+		cout << "\nNhap hoa don muon xac nhan hang da tra ve: ";
+		getline(cin, str);
+		str[0] = toupper(str[0]);
+	}
+	for (node_hoa_don* k = ad.quan_li_don_hang_tra.pHead; k != NULL; k = k->pNext)
+	{
+		if (k->data.ma_hoa_don == str)
+		{
+			k->data.trang_thai = "Da Nhan Hang Hoan";
+			if (k->data.ma_hoa_don[0] == 'Q')
+			{
+				for (int i = 0; i < ad.quan_li_ds_hang_hoa.ds_quan.size(); i++)
+				{
+					ad.quan_li_ds_hang_hoa.ds_quan.at(i).soLuongTonKho = ad.quan_li_ds_hang_hoa.ds_quan.at(i).soLuongTonKho + k->data.sl_mua;
+				}
+				return;
+			}
+			else
+			{
+				for (int i = 0; i < ad.quan_li_ds_hang_hoa.ds_ao.size(); i++)
+				{
+					ad.quan_li_ds_hang_hoa.ds_ao.at(i).soLuongTonKho = ad.quan_li_ds_hang_hoa.ds_ao.at(i).soLuongTonKho + k->data.sl_mua;
+				}
+				return;
+			}
+		}
+	}
+}
+
