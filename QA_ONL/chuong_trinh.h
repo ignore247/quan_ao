@@ -785,6 +785,24 @@ void xuat_thong_tin_khach_hang(TREE t)
 	}
 }
 
+void hien_thi_thong_tin_ca_nhan(TREE t, string ma_kh) {
+	if (t != NULL) {
+		if (ma_kh == t->data.maKh) {
+			cout << "Ten : " << t->data.ten << endl;
+			cout << "Ten dang nhap : " << t->data.ten_dang_nhap << endl;
+			cout << "So dien thoai : " << t->data.sdt << endl;
+			cout << "Dia chi : " << t->data.diaChi << endl;
+			cout << "Email : " << t->data.email << endl;
+		}
+		else if (stoi(ma_kh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			hien_thi_thong_tin_ca_nhan(t->pLeft, ma_kh);
+		}
+		else {
+			hien_thi_thong_tin_ca_nhan(t->pRight, ma_kh);
+		}
+	}	
+}
 // ========================= GIO HANG ========================== 
 
 void xuat_gio_hang(TREE t, string ma_kh)
@@ -1738,6 +1756,44 @@ void sua_hang_hoa(DS_Hang_Hoa& a) {
 				kt_menu = false;
 				return;
 			}
+			}
+		}
+	}
+}
+
+void xoa_hang_hoa(DS_Hang_Hoa& a) {
+	string ma_hh_xoa;
+	cout << "Nhap ma hang hao can xoa : ";
+	getline(cin, ma_hh_xoa);
+	while_full_ma_hh(ma_hh_xoa);
+	while (check_ma_hh(ma_hh_xoa, a) == -1)
+	{
+		cout << "Khong tim thay ma hang hoa." << endl;
+		cout << "Nhap lai:";
+		getline(cin, ma_hh_xoa);
+		while_full_ma_hh(ma_hh_xoa);
+	}
+	if (ma_hh_xoa[0] == 'A') {
+		for (int i = 0; i < a.ds_ao.size(); i++) {
+			if (ma_hh_xoa == a.ds_ao.at(i).ma_hh) {
+				a.ds_ao.erase(a.ds_ao.begin() + i);
+				cout << "Da xoa hang hoa khoi danh sach.\n";
+				return;
+			}
+			else {
+				cout << "Xoa khong thanh cong.\n";
+			}
+		}
+	}
+	if (ma_hh_xoa[0] == 'Q') {
+		for (int i = 0; i < a.ds_quan.size(); i++) {
+			if (ma_hh_xoa == a.ds_quan.at(i).ma_hh) {
+				a.ds_quan.erase(a.ds_quan.begin() + i);
+				cout << "Da xoa hang hoa khoi danh sach.\n";
+				return;
+			}
+			else {
+				cout << "Xoa khong thanh cong.\n";
 			}
 		}
 	}
