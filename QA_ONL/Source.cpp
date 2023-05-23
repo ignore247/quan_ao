@@ -22,21 +22,32 @@ void menu_gio_hang() {
 int main()
 {
 	//bang_size_ao();
-	//Admin ad;
+	
+	Admin ad;
 	//load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
 	//load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
 	//ghi_file_ao(ad.quan_li_ds_hang_hoa);
 	//ghi_file_quan(ad.quan_li_ds_hang_hoa);
 	//sua_hang_hoa(ad.quan_li_ds_hang_hoa);
+	//xoa_hang_hoa(ad.quan_li_ds_hang_hoa);
 	//xuat_thong_tin_ao(ad.quan_li_ds_hang_hoa);
 	//xuat_thong_tin_quan(ad.quan_li_ds_hang_hoa);
-	/*TREE b;
-	string tam;
-	ifstream fi;
-	gio_hang a;
-	duyet_load_gio_hang(b, tam, fi, a);
-	load_file_gio_hang(b);*/
-	menu_gio_hang();
+
+	//============================
+	/*SetWindowSize(209, 54);
+	TREE t;
+	string ma_kh = "BA1236";
+	xuat_gio_hang(ad.quan_li_ds_kh.t, ma_kh);
+	khung_gio_hang(30, 5, 30, 2, 11, 3, 3 ,t);*/
+	//==================
+	//menuAdmin(ad);
+	//menuKH(a);
+
+	//===========
+	/*ds_khach_hang a;
+	string ma_kh = "DO1237";
+	load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
+	hien_thi_thong_tin_ca_nhan(ad.quan_li_ds_kh.t,ma_kh);*/
 	system("pause");
 	return 0;
 }
