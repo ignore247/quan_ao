@@ -18,7 +18,7 @@ void menuAdmin(Admin &ad)
 		system("cls");
 		cout << "\n1. Muc Khach hang.";
 		cout << "\n2. Muc hang hoa.";
-		cout << "\n3. Muc hoa don.";
+		cout << "\n3. Muc hoa don."; 
 		cout << "\n4. Muc thong ke.";
 		cout << "\n5. Muc hang cho.";
 		cout << "\n6. Muc hang tra.";
