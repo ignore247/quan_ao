@@ -1,6 +1,6 @@
 
 4
-ducthien@khachhang.com,DO1237,Tran Duc Thien,141/16 Phuoc Long B TPHCM,0345607321,ducthien123,ducthien123,
+ducthien@khachhang.com,DO1237,Tran Duc Thien,141/16 Phuoc Long B TPHCM,0345607321,ducthien123,ducthien123,28/05/2021
 quangdinh@khachhang.com,DO1235,Le Quang Dinh,142/16 Phuoc Long B TPHCM,0345607322,quangdinh123,quangdinh123,03/01/2022
 trungnghia@khachhang.com,BA1236,Nguyen Trung Nghia,143/16 Phuoc Long B TPHCM,0345607323,trungnghia123,trungnghia123,04/05/2021
 chibao@khachhang.com,DO1234,Nguyen Chi Bao,144/16 Phuoc Long B TPHCM,0345607324,chibao123,chibao123,05/09/2022

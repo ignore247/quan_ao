@@ -572,12 +572,13 @@ bool check_dinh_dang_tk(string a)
 	}
 }
 
-bool check_tk_mk(string a, string b ,TREE t)
+bool check_tk_mk(string a, string b ,TREE t,string& makh)
 {
 	if (t != NULL)
 	{
 		if ( t->data.ten_dang_nhap  == a && b == t->data.mat_khau)
 		{
+			makh = t->data.maKh;
 			return true;
 		}
 		else if (t->data.ten_dang_nhap == a && b != t->data.mat_khau)
@@ -586,11 +587,11 @@ bool check_tk_mk(string a, string b ,TREE t)
 		}
 		else if (a > t->data.ten_dang_nhap)
 		{
-			return check_tk_mk(a, b, t->pLeft);
+			return check_tk_mk(a, b, t->pLeft,makh);
 		}
 		else
 		{
-			return check_tk_mk(a, b, t->pRight);
+			return check_tk_mk(a, b, t->pRight,makh);
 		}
 	}
 	else

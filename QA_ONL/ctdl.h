@@ -79,6 +79,13 @@ struct node_hoa_don
 };
 typedef struct node_hoa_don node_hoa_don;
 
+struct node_hoa_don_xoa
+{
+	HoaDonXoa hdx;
+	node_hoa_don_xoa* pNext;
+};
+typedef struct node_hoa_don_xoa node_hoa_don_xoa;
+
 struct ds_hoa_don
 {
 	node_hoa_don* pHead = NULL;
@@ -86,13 +93,6 @@ struct ds_hoa_don
 	int sl = 0;
 };
 typedef struct ds_hoa_don DS_HOA_DON;
-
-struct node_hoa_don_xoa
-{
-	HoaDonXoa hdx;
-	node_hoa_don_xoa* pNext;
-};
-typedef struct node_hoa_don_xoa node_hoa_don_xoa;
 
 struct ds_hoa_don_xoa
 {

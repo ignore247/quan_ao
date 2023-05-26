@@ -527,6 +527,96 @@ void ghi_file_hoa_don_xuat_xoa(DS_HOA_DON_XOA a)
 	fo.close();
 }
 
+// ============== Đơn hàng trả ================
+void load_file_don_hang_tra(DS_HOA_DON& a)
+{
+	ifstream fi("don_hang_tra.txt", ios::in);
+	if (fi.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fi.close();
+		return;
+	}
+	fi >> a.sl;
+	fi.ignore();
+	for (int i = 0; i < a.sl; i++)
+	{
+		HoaDon b;
+		getline(fi, b.ma_hoa_don, ',');
+		getline(fi, b.ma_kh, ',');
+		getline(fi, b.ma_hang_hoa, ',');
+		getline(fi, b.thong_tin_hang.ten_hh, ',');
+		fi >> b.thong_tin_hang.gia;
+		fi.ignore();
+		getline(fi, b.thong_tin_hang.size, ',');
+		fi >> b.sl_mua;
+		fi.ignore();
+		getline(fi, b.ngay_lap_hd, ',');
+		fi >> b.giam_gia_theo_hang;
+		fi.ignore();
+		fi >> b.tong_tien;
+		fi.ignore();
+		getline(fi, b.trang_thai);
+		them_cuoi_ds_hoa_don(a, b);
+	}
+	fi.close();
+}
+
+void ghi_file_don_hang_tra(DS_HOA_DON a)
+{
+	ofstream fo;
+	fo.open("don_hang_tra.txt", ios::out);
+	if (fo.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fo.close();
+		return;
+	}
+	fo << "";
+	fo.close();
+
+	fo.open("don_hang_tra.txt", ios::app);
+	if (fo.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fo.close();
+		return;
+	}
+	fo << a.sl;
+	fo << endl;
+	for (node_hoa_don* k = a.pHead; k != NULL; k = k->pNext)
+	{
+		fo << k->data.ma_hoa_don;
+		fo << ',';
+		fo << k->data.ma_kh;
+		fo << ',';
+		fo << k->data.ma_hang_hoa;
+		fo << ',';
+		fo << k->data.thong_tin_hang.ten_hh;
+		fo << ',';
+		fo << k->data.thong_tin_hang.gia;
+		fo << ',';
+		fo << k->data.thong_tin_hang.size;
+		fo << ',';
+		fo << k->data.sl_mua;
+		fo << ',';
+		fo << k->data.ngay_lap_hd;
+		fo << ',';
+		fo << k->data.giam_gia_theo_hang;
+		fo << ',';
+		fo << k->data.tong_tien;
+		fo << ',';
+		fo << k->data.trang_thai;
+		if (k->pNext == NULL)
+		{
+			fo.close();
+			return;
+		}
+		fo << endl;
+	}
+	fo.close();
+}
+
 // ============== Khách hàng ================
 void load_file_thong_tin_khach_hang(ds_khach_hang &a)
 {
@@ -696,7 +786,7 @@ void duyet_ghi_tt_kh_xoa(TREE_XOA t, node_kh_xoa* dc)
 	}
 	fo.close();
 }
-void ghi_thong_tin_kh(ds_khach_hang_xoa a)
+void ghi_thong_tin_kh_xoa(ds_khach_hang_xoa a)
 {
 	node_kh_xoa* dc = NULL;
 	tim_diem_cuoi_cua_duyet_cay_xoa_NLR(a.t, dc);
@@ -1046,3 +1136,35 @@ void ghi_gio_hang_cua_dskh(TREE t)
 }
 
 
+void load_full(Admin& ad)
+{
+	load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
+	load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
+	load_file_thong_tin_hh_xoa(ad.quan_li_hh_xoa);
+	load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
+	load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
+	load_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
+	load_file_hoa_don_xuat_xoa(ad.quan_li_hd_xuat_xoa);
+	load_file_don_hang_tra(ad.quan_li_don_hang_tra);
+	load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
+	load_file_don_mua_kh(ad.quan_li_ds_kh.t);
+	load_file_gio_hang(ad.quan_li_ds_kh.t);
+	load_file_thong_tin_khach_hang_xoa(ad.quan_li_kh_xoa);
+}
+
+void ghi_full(Admin ad)
+{
+	ghi_file_quan(ad.quan_li_ds_hang_hoa);
+	ghi_file_ao(ad.quan_li_ds_hang_hoa);
+	ghi_file_hh_xoa(ad.quan_li_hh_xoa);
+	ghi_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
+	ghi_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
+	ghi_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
+	ghi_file_hoa_don_xuat_xoa(ad.quan_li_hd_xuat_xoa);
+	ghi_file_don_hang_tra(ad.quan_li_don_hang_tra);
+	ghi_thong_tin_kh(ad.quan_li_ds_kh);
+	ghi_don_mua_cua_dskh(ad.quan_li_ds_kh.t);
+	ghi_gio_hang_cua_dskh(ad.quan_li_ds_kh.t);
+	ghi_thong_tin_kh_xoa(ad.quan_li_kh_xoa);
+
+}
