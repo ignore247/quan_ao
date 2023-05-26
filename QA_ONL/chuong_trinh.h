@@ -3286,6 +3286,46 @@ void sp_Best(Admin &a)
 	}
 }
 
+void tim_kiem_khach_hang_ten(TREE t, string ten_tim) {
+	if (t != NULL) {
+		size_t found = t->data.ten.find(ten_tim);
+		if (found != string::npos) {
+			cout << t->data << endl;
+		}
+		tim_kiem_khach_hang_ten(t->pLeft, ten_tim);
+		tim_kiem_khach_hang_ten(t->pRight, ten_tim);
+	}
+}
+
+void tim_kiem_hang_hoa_quan_ten(DS_Hang_Hoa& dshh, string ten_tim) {
+	for (int i = 0; i < dshh.ds_quan.size(); i++) {
+		size_t found = dshh.ds_quan.at(i).ten_hh.find(ten_tim);
+		if (found != string::npos) {
+			xuat_tt_hh_ngan_gon(dshh.ds_quan.at(i));
+		}
+	}
+}
+
+void tim_kiem_hang_hoa_ao_ten(DS_Hang_Hoa& dshh, string ten_tim) {
+	for (int i = 0; i < dshh.ds_ao.size(); i++) {
+		size_t found = dshh.ds_ao.at(i).ten_hh.find(ten_tim);
+		if (found != string::npos) {
+			xuat_tt_hh_ngan_gon(dshh.ds_ao.at(i));
+		}
+	}
+}
+
+void tim_kiem_ma_kh_hoa_don_ban(DS_HOA_DON& hd, string maKh) {
+	for (node_hoa_don* k = hd.pHead; k != NULL; k = k->pNext) {
+		size_t found = k->data.ma_kh.find(maKh);
+		if (found != string::npos) {
+			xuatHoaDonBanHang(k->data);
+		}
+	}
+}
+
+
+
 // loc hang hoa
 void loc_HangHoa(DS_Hang_Hoa x)
 {
