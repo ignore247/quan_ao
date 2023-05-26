@@ -38,5 +38,49 @@
     <ClInclude Include="Xu_li_do_hoa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="docFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="thong_tin_hoa_don_nhap_hang.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="thong_tin_don_mua_hang.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="don_hang_cho.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="DS_hh_xoa.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="DS_hoa_don_nhap_xoa.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="DS_hoa_don_xuat_xoa.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="DS_khach_hang_xoa.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="gio_hang.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="test.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="thong_tin_khach_hang.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="Ao.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="Quan.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="thong_tin_hoa_don_ban_hang.txt">
+      <Filter>Header Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

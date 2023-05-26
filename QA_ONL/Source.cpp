@@ -1,61 +1,55 @@
 ﻿#include "Xu_li_do_hoa.h"
+#include "docFile.h"
+#include "Menu.h"
 
-
-// tạo box
-void box1(int x, int y, int w, int h, int t_color, int b_color, string nd)
-{
-	DS_Hang_Hoa a;
-	textcolor(b_color);
-	for (int iy = y; iy < y + h; iy++)
-	{
-		for (int ix = x; ix < x + w; ix++)
-		{
-			gotoXY(ix, iy); cout << " ";
-		}
-	}
-
-	// ===== noi dung ====='
-	for (int i = 0; i < a.ds_ao.size(); i++)
-	{
-		SetColor(7);
-		gotoXY(x + 1 + i, y + 1 + i);
-		sanPhammoi(a); 
-		// ===== ve vien =====
-		textcolor(1);
-		SetColor(t_color);
-		if (h <= 1 || w <= 1) return;
-		for (int ix = x; ix < x + w; ix++)
-		{
-			gotoXY(ix, y);
-			cout << char(196);
-			gotoXY(ix, y + h);
-			cout << char(196);
-		}
-		for (int iy = y; iy <= y + h; iy++)
-		{
-			gotoXY(x, iy);
-			cout << char(179);
-			gotoXY(x + w, iy);
-			cout << char(179);
-		}
-		gotoXY(x, y); cout << char(218);
-		gotoXY(x + w, y); cout << char(191);
-		gotoXY(x, y + h); cout << char(192);
-		gotoXY(x + w, y + h); cout << char(217);
-	}
-}
 int main()
-{
-	//box1(2, 5, 10, 10, 11, 1, a);
-	/*HoaDon a;
-	ds_hoa_don b;
-	DS_Hang_Hoa c;
+{		
+	Admin ad;
+	// --- Load thông tin áo quần ---
+	load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
+	load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
+	// --- Load thông tin khách hàng ---
+	load_file_thong_tin_khach_hang(ad.quan_li_ds_kh);
+	load_file_don_mua_kh(ad.quan_li_ds_kh.t);
+	load_file_gio_hang(ad.quan_li_ds_kh.t);
+	// --- Load thông tin hóa đơn nhập xuất
+	load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
+	load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
+	// --- Load thông tin hóa đơn đã xóa
+	load_file_hoa_don_xuat_xoa(ad.quan_li_hd_xuat_xoa);
+	load_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
+
 	
-	
-	ve_nhap_bang_hoa_don_nhap_hang(0,a, b, c);
-	gotoXY(0, 100);
-	ve_nhap_bang_hoa_don_nhap_hang(80,a, b, c);
-	*/
-	cout << " nghia test";
+	//chuong_trinh(ad);
+
+	// ghi file;
+	ghi_thong_tin_kh(ad.quan_li_ds_kh);
+	ghi_file_quan(ad.quan_li_ds_hang_hoa);
+	ghi_file_ao(ad.quan_li_ds_hang_hoa);
+	ghi_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
+	ghi_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
+	ghi_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
+	ghi_file_hoa_don_xuat_xoa(ad.quan_li_hd_xuat_xoa);
+	ghi_don_mua_cua_1_kh(ad.quan_li_ds_kh.t->data);
+	ghi_don_mua_cua_dskh(ad.quan_li_ds_kh.t);
+	ghi_gio_hang_cua_1_kh(ad.quan_li_ds_kh.t->data);
+	ghi_gio_hang_cua_dskh(ad.quan_li_ds_kh.t);
+
+	string dia_chi;
+	cout << "Nhap dia chi: ";
+	getline(cin, dia_chi);
+	regex check_dia_chi("^[0-9]+[\w\s]+(Pho | pho | Duong | duong | Hem | hem | Ngo | ngo | Quoc lo | quoc lo | Xa | xa | Phuong | phuong | Quan | quan | Huyen | huyen) + [\w\s] + ((Quan\s[A-Za-z\s]*[1-9][0-9] *) | (Huyen\s[A-Za-z\s]*[1-9][0-9] *) | (Xa\s[A-Za-z\s]*[1-9][0-9] *) | (Phuong\s[A-Za-z\s]*[1-9][0-9] *)) + (, [\w\s] + (Tinh | Thanh pho)\s[A - Za - z\s] + ) ? $");
+	if (regex_match(dia_chi, check_dia_chi) == true)
+	{
+		cout << "dung!\n";
+	}
+	else
+	{
+		cout << "Sai!\n";
+	}
+
+	//sp_Best(ad);
+
+	system("pause");
 	return 0;
 }
