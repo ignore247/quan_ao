@@ -152,6 +152,7 @@
     <Text Include="thong_tin_hoa_don_ban_hang.txt" />
     <Text Include="thong_tin_hoa_don_nhap_hang.txt" />
     <Text Include="thong_tin_khach_hang.txt" />
+    <Text Include="tk_mk_ad.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

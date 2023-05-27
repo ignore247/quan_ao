@@ -153,9 +153,7 @@ int main()
 	load_full(ad);
 	chuong_trinh(ad);
 	
-
-
-
+	
 	//SetWindowSize(209, 54);
 	//ShowScrollbar(0);
 	//ve_khung_console();

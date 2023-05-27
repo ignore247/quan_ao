@@ -459,7 +459,7 @@ void while_so(string& a)
 {
 	while (check_So(a) == false)
 	{
-		cout << "Nhap gia tri [0-9], nhap lai :"; getline(cin, a);
+		cout << "Nhap gia tri so , nhap lai :"; getline(cin, a);
 	}
 }
 
@@ -571,6 +571,28 @@ bool check_dinh_dang_tk(string a)
 		return false;
 	}
 }
+
+bool check_dinh_dang_mk(string a)
+{
+	regex mat_khau("^[a-zA-Z0-9!@#$%^&*()-=_+]{1,}$");
+	if (regex_match(a, mat_khau) == false)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+void while_mk(string& a)
+{
+	while (check_dinh_dang_mk(a) == false)
+	{
+		cout << "Nhap khong dung dinh dang! Nhap lai:"; getline(cin, a);
+	}
+}
+
 
 bool check_tk_mk(string a, string b ,TREE t,string& makh)
 {

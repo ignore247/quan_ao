@@ -718,59 +718,59 @@ bool nhap_us_pass_v2(string& username, string& password)
 string username;
 string password;
 
-void dang_nhap(TREE t)
-{
-
-	bk.lock();
-	SetColor(11);
-	gotoXY(110, 38);
-	cout << " Username ";
-	gotoXY(110, 40);
-	cout << " Password ";
-	gotoXY(110, 40);
-	box(120, 37, 30, 2, 11, 3,7, username);
-	box(120, 39, 30, 2, 11, 3,7, password);
-	gotoXY(120, 39); cout << char(195);
-	gotoXY(120 + 30, 39); cout << char(180);
-	//_getch();
-
-	box(118, 44, 14, 2, 11, 3,7, "Dang nhap");
-	box(138, 44, 14, 2, 11, 3,7, "Thoat");
-	//_getch();
-	
-	bk.unlock();
-	if (nhap_us_pass_v2(username, password) == false)
-	{
-		return;
-	}
-	while (check_dinh_dang_tk(username) == false || password == "\0" || username == "\0" || check_tk_mk(username,password,t) == false)
-	{
-		username.clear();
-		password.clear();
-		SetColor(12);
-		gotoXY(118, 42);
-		cout << "Tai khoan hoac mat khau khung dung!";
-		box(120, 37, 30, 2, 12, 3,7, "                            ");
-		box(120, 39, 30, 2, 12, 3,7, "                            ");
-		gotoXY(120, 39); cout << char(195);
-		gotoXY(120 + 30, 39); cout << char(180);
-		box(118, 44, 14, 2, 11, 3,7, "Dang nhap");
-		nhap_us_pass_v2(username, password);
-	}
-
-	box(120, 37, 30, 2, 11, 3,7, username);
-	box(120, 39, 30, 2, 11, 3,7, password);
-	gotoXY(120, 39); cout << char(195);
-	gotoXY(120 + 30, 39); cout << char(180);
-	gotoXY(118, 42);
-	cout << "                                   ";
-	
-	box(85, 15, 90, 20, 0, 233,7, "");
-	gotoXY(98 + 22, 25);
-	textcolor(236);
-	cout << "Dang nhap thanh cong!";
-
-}
+//void dang_nhap(TREE t)
+//{
+//
+//	bk.lock();
+//	SetColor(11);
+//	gotoXY(110, 38);
+//	cout << " Username ";
+//	gotoXY(110, 40);
+//	cout << " Password ";
+//	gotoXY(110, 40);
+//	box(120, 37, 30, 2, 11, 3,7, username);
+//	box(120, 39, 30, 2, 11, 3,7, password);
+//	gotoXY(120, 39); cout << char(195);
+//	gotoXY(120 + 30, 39); cout << char(180);
+//	//_getch();
+//
+//	box(118, 44, 14, 2, 11, 3,7, "Dang nhap");
+//	box(138, 44, 14, 2, 11, 3,7, "Thoat");
+//	//_getch();
+//	
+//	bk.unlock();
+//	if (nhap_us_pass_v2(username, password) == false)
+//	{
+//		return;
+//	}
+//	while (check_dinh_dang_tk(username) == false || password == "\0" || username == "\0" || check_tk_mk(username,password,t) == false)
+//	{
+//		username.clear();
+//		password.clear();
+//		SetColor(12);
+//		gotoXY(118, 42);
+//		cout << "Tai khoan hoac mat khau khung dung!";
+//		box(120, 37, 30, 2, 12, 3,7, "                            ");
+//		box(120, 39, 30, 2, 12, 3,7, "                            ");
+//		gotoXY(120, 39); cout << char(195);
+//		gotoXY(120 + 30, 39); cout << char(180);
+//		box(118, 44, 14, 2, 11, 3,7, "Dang nhap");
+//		nhap_us_pass_v2(username, password);
+//	}
+//
+//	box(120, 37, 30, 2, 11, 3,7, username);
+//	box(120, 39, 30, 2, 11, 3,7, password);
+//	gotoXY(120, 39); cout << char(195);
+//	gotoXY(120 + 30, 39); cout << char(180);
+//	gotoXY(118, 42);
+//	cout << "                                   ";
+//	
+//	box(85, 15, 90, 20, 0, 233,7, "");
+//	gotoXY(98 + 22, 25);
+//	textcolor(236);
+//	cout << "Dang nhap thanh cong!";
+//
+//}
 //============== Hóa đơn ===========================
 void ve_nhap_bang_hoa_don_nhap_hang( HoaDon a, ds_hoa_don b, DS_Hang_Hoa c)
 {

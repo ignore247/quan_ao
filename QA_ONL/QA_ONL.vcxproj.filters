@@ -60,5 +60,6 @@
     <Text Include="DS_hoa_don_xuat_xoa.txt" />
     <Text Include="DS_hoa_don_nhap_xoa.txt" />
     <Text Include="don_hang_tra.txt" />
+    <Text Include="tk_mk_ad.txt" />
   </ItemGroup>
 </Project>

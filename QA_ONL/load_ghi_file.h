@@ -1135,6 +1135,40 @@ void ghi_gio_hang_cua_dskh(TREE t)
 	duyet_cay_ghi_gio_hang(t,dc);
 }
 
+//================== Admin =================
+void load_tk_mk(string &tk, string &mk)
+{
+	ifstream fi;
+	fi.open("tk_mk_ad.txt", ios::in);
+	if (fi.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fi.close();
+		return;
+	}
+	while (fi.eof() == false)
+	{
+		getline(fi, tk);
+		getline(fi, mk);
+	}
+	fi.close();
+}
+
+void ghi_tk_mk_ad(string tk, string mk)
+{
+	ofstream fo;
+	fo.open("tk_mk_ad.txt", ios::out);
+	if (fo.fail() == true)
+	{
+		cout << "Khong mo duoc!" << endl;
+		fo.close();
+		return;
+	}
+	fo << tk;
+	fo << endl;
+	fo << mk;
+	fo.close();
+}
 
 void load_full(Admin& ad)
 {
