@@ -1059,6 +1059,26 @@ void thong_ke_doanh_so_theo_ngay_hien_tai(DS_HOA_DON a)
 	cout << "Tong doanh thu: " << doanh_thu;
 }
 
+void thong_ke_doanh_so_theo_khoang_ngay(DS_HOA_DON dshd_xuat, string ngay_min, string ngay_max)
+{
+	int min = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_min);
+	int max = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_max);
+	int tam3 = 0;
+	long long tong_tien = 0;
+	for (node_hoa_don* k = dshd_xuat.pHead; k != NULL; k = k->pNext)
+	{
+		tam3 = tinh_giay_cua_ngay_nhap_tu_nam_1900(k->data.ngay_lap_hd);
+		cout << tam3 << endl;
+		if (min <= tam3 && tam3 <= max)
+		{
+			xuatHoaDonBanHang(k->data);
+			tong_tien += k->data.tong_tien;
+		}
+	}
+	cout << "Tong so tien ban hang tu " << ngay_min << " den ngay " << ngay_max << "	:" << tong_tien;
+
+}
+
 void thong_ke_don_hang_nhap_theo_ngay_thang_nam(DS_HOA_DON a, string ngay)
 {
 	long long tien_nhap_hang = 0;
@@ -1117,6 +1137,24 @@ void thong_ke_don_hang_nhap_theo_ngay_hien_tai(DS_HOA_DON a)
 	cout << "Tong tien nhap hang: " << tien_nhap_hang;
 }
 
+void thong_ke_so_tien_nhap_hang_theo_khoang_ngay(DS_HOA_DON dshd_nhap, string ngay_min, string ngay_max)
+{
+	int min = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_min);
+	int max = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_max);
+	int tam3 = 0;
+	long long tong_tien = 0;
+	for (node_hoa_don* k = dshd_nhap.pHead; k != NULL; k = k->pNext)
+	{
+		tam3 = tinh_giay_cua_ngay_nhap_tu_nam_1900(k->data.ngay_lap_hd);
+		if (min <= tam3 && tam3 <= max)
+		{
+			xuatHoaDonNhapHang(k->data);
+			tong_tien += k->data.tong_tien;
+		}
+	}
+	cout << "Tong so tien nhap hang tu " << ngay_min << " den ngay " << ngay_max << "	:" << tong_tien;
+}
+
 void thong_ke_hoa_don(Admin ad)
 {
 	string str;
@@ -1134,19 +1172,18 @@ void thong_ke_hoa_don(Admin ad)
 			cout << "\n2.Thong ke doanh so theo thang";
 			cout << "\n3.Thong ke doanh so theo nam";
 			cout << "\n4.Thong ke doanh so theo ngay hien tai";
+			cout << "\n5.Thong ke doanh so theo khoang ngay";
 			cout << "\n0.Thoat";
 
 			int luachon;
 			string tam;
-			cout << "\nNhap lua chon: ";
-			getline(cin, tam);
-			while (check_So(tam) == false || stoi(tam) > 4)
+			do
 			{
-				cout << "\nLua chon khong hop le!";
 				cout << "\nNhap lua chon: ";
 				getline(cin, tam);
-			}
-			luachon = stoi(tam);
+				while_so(tam);
+				luachon = stoi(tam);
+			} while (luachon < 0 || luachon > 5);
 
 			switch (luachon)
 			{
@@ -1201,6 +1238,40 @@ void thong_ke_hoa_don(Admin ad)
 				system("pause");
 				break;
 			}
+			case 5:
+			{
+				string ngay_1;
+				string ngay_2;
+				cout << "Nhap khoang ngay: ";
+				cout << "\nNgay thu nhat: ";
+				getline(cin, ngay_1);
+				while (check_date(ngay_1) == false)
+				{
+					cout << "\nNgay khong hop le!";
+					cout << "\nNgay thu nhat: ";
+					getline(cin, ngay_1);
+				}
+				cout << "\nNgay thu nhat: ";
+				getline(cin, ngay_1);
+				while (check_date(ngay_1) == false)
+				{
+					cout << "\nNgay khong hop le!";
+					cout << "\nNgay thu nhat: ";
+					getline(cin, ngay_1);
+				}
+				int tam1 = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_1);
+				int tam2 = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_2);
+				if (tam1 == tam2)
+				{
+					thong_ke_doanh_so_theo_khoang_ngay(ad.quan_li_ds_hoa_don_xuat, ngay_1, ngay_2);
+				}
+				else
+				{
+					tam1 > tam2 ?
+						thong_ke_doanh_so_theo_khoang_ngay(ad.quan_li_ds_hoa_don_xuat, ngay_2, ngay_1) :
+						thong_ke_doanh_so_theo_khoang_ngay(ad.quan_li_ds_hoa_don_xuat, ngay_1, ngay_2);
+				}
+			}
 			case 0:
 			{
 				kt = false;
@@ -1218,19 +1289,18 @@ void thong_ke_hoa_don(Admin ad)
 			cout << "\n2.Thong ke don nhap hang theo thang";
 			cout << "\n3.Thong ke don nhap hang theo nam";
 			cout << "\n4.Thong ke don nhap hang theo ngay hien tai";
+			cout << "\n5.Thong ke don nhap hang theo khoang ngay";
 			cout << "\n0.Thoat";
 
 			int luachon;
 			string tam;
-			cout << "\nNhap lua chon: ";
-			getline(cin, tam);
-			while (check_So(tam) == false || stoi(tam) > 4)
+			do
 			{
-				cout << "\nLua chon khong hop le!";
 				cout << "\nNhap lua chon: ";
 				getline(cin, tam);
-			}
-			luachon = stoi(tam);
+				while_so(tam);
+				luachon = stoi(tam);
+			} while (luachon < 0 || luachon > 5);
 
 			switch (luachon)
 			{
@@ -1282,6 +1352,43 @@ void thong_ke_hoa_don(Admin ad)
 			case 4:
 			{
 				thong_ke_don_hang_nhap_theo_ngay_hien_tai(ad.quan_li_ds_hoa_don_nhap);
+				system("pause");
+				break;
+			}
+			case 5:
+			{
+				string ngay_1;
+				string ngay_2;
+				cout << "Nhap khoang ngay: ";
+				cout << "\nNgay thu nhat: ";
+				getline(cin, ngay_1);
+				while (check_date(ngay_1) == false)
+				{
+					cout << "\nNgay khong hop le!";
+					cout << "\nNgay thu nhat: ";
+					getline(cin, ngay_1);
+				}
+				cout << "\nNgay thu nhat: ";
+				getline(cin, ngay_1);
+				while (check_date(ngay_1) == false)
+				{
+					cout << "\nNgay khong hop le!";
+					cout << "\nNgay thu nhat: ";
+					getline(cin, ngay_1);
+				}
+				int tam1 = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_1);
+				int tam2 = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_2);
+				if (tam1 == tam2)
+				{
+					thong_ke_so_tien_nhap_hang_theo_khoang_ngay(ad.quan_li_ds_hoa_don_nhap, ngay_1, ngay_2);
+				}
+				else
+				{
+					tam1 > tam2 ?
+						thong_ke_so_tien_nhap_hang_theo_khoang_ngay(ad.quan_li_ds_hoa_don_nhap, ngay_2, ngay_1) :
+						thong_ke_so_tien_nhap_hang_theo_khoang_ngay(ad.quan_li_ds_hoa_don_nhap, ngay_1, ngay_2);	
+				}
+
 				system("pause");
 				break;
 			}
@@ -1539,15 +1646,13 @@ void sua_thong_tin_hoa_don(Admin& ad)
 			cout << "\nNhap lua chon: ";
 			
 			string k;
-			getline(cin, k);
-			c = stoi(k);
-			while (c< 0 || c > 3 || check_So(k) == false)
+			do
 			{
-				cout << "\nNhap khong hop le!";
 				cout << "\nNhap lua chon: ";
 				getline(cin, k);
+				while_so(k);
 				c = stoi(k);
-			}
+			} while (c > 3);
 
 			switch (c)
 			{
@@ -1623,15 +1728,14 @@ void sua_thong_tin_hoa_don(Admin& ad)
 			cout << "\nNhap lua chon: ";
 			
 			string k;
-			getline(cin, k);
-			c = stoi(k);
-			while (c < 0 || c > 5 || check_So(k) == false)
+			string k;
+			do
 			{
-				cout << "\nNhap khong hop le!";
 				cout << "\nNhap lua chon: ";
 				getline(cin, k);
+				while_so(k);
 				c = stoi(k);
-			}
+			} while (c > 5);
 
 			switch (c)
 			{
