@@ -248,6 +248,40 @@ void sp_Best(DS_HOA_DON hoa_don_ban, DS_Hang_Hoa dshh)
 
 }
 
+void sp_moi(DS_HOA_DON hoa_don_nhap, DS_Hang_Hoa dshh)
+{
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
+
+	for (node_hoa_don* k = hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+	{
+		if ((1 + ltm->tm_mon) - stoi(k->data.ngay_lap_hd.substr(3, 2)) <= 1)
+		{
+			if (k->data.ma_hang_hoa[0] == 'A')
+			{
+				for (int i = 0; i < dshh.ds_ao.size(); i++)
+				{
+					if (k->data.ma_hang_hoa == dshh.ds_ao[i].ma_hh)
+					{
+						xuat_tt_hh_ngan_gon(dshh.ds_ao[i]);
+					}
+				}
+			}
+			else
+			{
+				for (int i = 0; i < dshh.ds_quan.size(); i++)
+				{
+					if (k->data.ma_hang_hoa == dshh.ds_quan[i].ma_hh)
+					{
+						xuat_tt_hh_ngan_gon(dshh.ds_quan[i]);
+					}
+				}
+
+			}
+		}
+	}
+}
+
 //sap xep theo bang chu cai 
 bool soSanhGiamDan_Ten(HangHoa x1, HangHoa x2)
 {
@@ -1728,7 +1762,6 @@ void sua_thong_tin_hoa_don(Admin& ad)
 			cout << "\nNhap lua chon: ";
 			
 			string k;
-			string k;
 			do
 			{
 				cout << "\nNhap lua chon: ";
@@ -2100,9 +2133,8 @@ void them_khachhang_vao_cay(TREE& t, KH data)
 	}
 }
 
-void dang_ky_tai_khoan(DS_KH& dskh)
+void dang_ky_tai_khoan(DS_KH& dskh, KhachHang &a)
 {
-	KhachHang a;
 	cout << "Nhap ten khach hang: ";
 	getline(cin, a.ten);
 	chuanHoa(a.ten);
@@ -2602,7 +2634,8 @@ bool suaTenKh(string maKh,TREE t,string tenMoi) {
 	}
 }
 
-void suaThongTinKh(TREE &t) {
+void suaThongTinKh(TREE &t) 
+{
 	bool kt_menu = true;
 	int chon;
 	cout << "Nhap ma Khach hang can sua:";

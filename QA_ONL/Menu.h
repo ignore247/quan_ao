@@ -52,7 +52,8 @@ void menuAdmin(Admin& ad,string tk, string &mk)
 				{
 				case 1:
 				{
-					dang_ky_tai_khoan(ad.quan_li_ds_kh);
+					KhachHang a;
+					dang_ky_tai_khoan(ad.quan_li_ds_kh,a);
 					ad.quan_li_ds_kh.sl++;
 					break;
 				}
@@ -117,7 +118,8 @@ void menuAdmin(Admin& ad,string tk, string &mk)
 					}
 					break;
 				}
-				case 0: {
+				case 0:
+				{
 					check_case = false;
 					break;
 				}
@@ -683,7 +685,10 @@ void menuKH(Admin ad,string makh)
 		}
 		case 2:
 		{
-			
+			cout << "\n\t ============SP BEST SELLER============= " << endl;
+			sp_Best(ad.quan_li_ds_hoa_don_xuat, ad.quan_li_ds_hang_hoa);
+			cout << "\n\t ============SP HOT============= " << endl;
+			sp_moi(ad.quan_li_ds_hoa_don_nhap, ad.quan_li_ds_hang_hoa);
 			break;
 		}
 		case 3:
@@ -830,9 +835,8 @@ void chuong_trinh(Admin ad)
 		cout << "\nBan dang nhap voi tu cach: ";
 		cout << "\n1.Admin ";
 		cout << "\n2.Nguoi dung";
+		cout << "\n3.Xem hang (khong dang nhap)";
 		cout << "\n0.Thoat";
-
-		cout << "\n0. Thoat.";
 		do
 		{
 			cout << "\nNhap lua chon: ";
@@ -846,8 +850,8 @@ void chuong_trinh(Admin ad)
 		{
 		case 1:
 		{
-			dang_nhap_admin(tk,mk);
-			menuAdmin(ad,tk,mk);
+			dang_nhap_admin(tk, mk);
+			menuAdmin(ad, tk, mk);
 			break;
 		}
 		case 2:
@@ -861,14 +865,14 @@ void chuong_trinh(Admin ad)
 				cout << "\n0.Thoat";
 				string str;
 				int c;
-				
+
 				do
 				{
 					cout << "\nNhap lua chon: ";
 					getline(cin, str);
+					while_so(str);
 					c = stoi(str);
-
-				} while (c < 0 || c > 2 || check_So(str) == false);
+				} while (c < 0 || c > 2);
 
 				switch (c)
 				{
@@ -880,10 +884,8 @@ void chuong_trinh(Admin ad)
 				}
 				case 2:
 				{
-					cout << "\n\t ============SP BEST SELLER============= " << endl;
-					sp_Best(ad.quan_li_ds_hoa_don_xuat, ad.quan_li_ds_hang_hoa);
-					cout << "\n\t ============SP HOT============= " << endl;
-
+					KhachHang a;
+					dang_ky_tai_khoan(ad.quan_li_ds_kh, a);
 					system("pause");
 					break;
 				}
@@ -896,11 +898,167 @@ void chuong_trinh(Admin ad)
 			}
 			break;
 		}
+		case 3:
+		{
+			string makh;
+			int luaChon;
+			string k;
+			bool kt = true;
+			while (kt == true)
+			{
+				system("cls");
+				cout << "1.Xem hang hoa.";
+				cout << "\n2.Xem sam pham hot/best seller hang hoa.";
+				cout << "\n3.Tim kiem hang hoa";
+				cout << "\n4.Them san pham vao gio hang.";
+				cout << "\n5.Mua hang.";
+				cout << "\n0.Thoat";
+				do
+				{
+					cout << "\nNhap lua chon: ";
+					getline(cin, k);
+					while_so(k);
+					luaChon = stoi(k);
+				} while (luaChon < 0 || luaChon > 5);
+
+				switch (luaChon)
+				{
+				case 1:
+				{
+					cout << "\n\t\t===== Danh sach ao ===== \n";
+					xuat_thong_tin_quan(ad.quan_li_ds_hang_hoa);
+					cout << "\n\t\t===== Danh sach quan ===== \n";
+					xuat_thong_tin_ao(ad.quan_li_ds_hang_hoa);
+					system("pause");
+					break;
+				}
+				case 2:
+				{
+					cout << "\n\t ============SP BEST SELLER============= " << endl;
+					sp_Best(ad.quan_li_ds_hoa_don_xuat, ad.quan_li_ds_hang_hoa);
+					cout << "\n\t ============SP HOT============= " << endl;
+					sp_moi(ad.quan_li_ds_hoa_don_nhap, ad.quan_li_ds_hang_hoa);
+					break;
+				}
+				case 3:
+				{
+					loc_HangHoa(ad.quan_li_ds_hang_hoa);
+					break;
+				}
+				case 4:
+				{
+					bool kt = true;
+					while (kt == true)
+					{
+						system("cls");
+						cout << "\n1.Dang nhap ";
+						cout << "\n2.Dang ky";
+						cout << "\n0.Thoat";
+						string str;
+						int c;
+
+						do
+						{
+							cout << "\nNhap lua chon: ";
+							getline(cin, str);
+							while_so(str);
+							c = stoi(str);
+						} while (c < 0 || c > 2);
+
+						switch (c)
+						{
+						case 1:
+						{
+							dang_nhap_user(ad, makh);
+							them_sp_vao_gio_hang(ad.quan_li_ds_hang_hoa, ad.quan_li_ds_kh.t, makh);
+							cout << "\nThem thanh cong!";
+							menuKH(ad, makh);
+							break;
+						}
+						case 2:
+						{
+							KhachHang a;
+							dang_ky_tai_khoan(ad.quan_li_ds_kh, a);
+							ad.quan_li_ds_kh.sl++;
+							makh = a.maKh;
+							cout << "\nThem thanh cong!";
+							menuKH(ad, makh);
+							system("pause");
+							break;
+						}
+						case 0:
+						{
+							kt = false;
+							check = false;
+							break;
+						}
+						}
+					}
+					break;
+				}
+				case 5:
+				{
+					bool kt = true;
+					while (kt == true)
+					{
+						system("cls");
+						cout << "\n1.Dang nhap ";
+						cout << "\n2.Dang ky";
+						cout << "\n0.Thoat";
+						string str;
+						int c;
+
+						do
+						{
+							cout << "\nNhap lua chon: ";
+							getline(cin, str);
+							while_so(str);
+							c = stoi(str);
+						} while (c < 0 || c > 2);
+
+						switch (c)
+						{
+						case 1:
+						{
+							dang_nhap_user(ad, makh);
+							mua_hang(ad, makh);
+							cout << "\nMua thanh cong!";
+							menuKH(ad, makh);
+							break;
+						}
+						case 2:
+						{
+							KhachHang a;
+							dang_ky_tai_khoan(ad.quan_li_ds_kh, a);
+							makh = a.maKh;
+							cout << "\nMua thanh cong!";
+							mua_hang(ad, makh);
+							system("pause");
+							break;
+						}
+						case 0:
+						{
+							kt = false;
+							check = false;
+							break;
+						}
+						}
+					}
+					break;
+				}
+				case 0:
+				{
+					check = false;
+					break;
+				}
+			}
+			break;
+		}
+		}
 		case 0:
 		{
 			check = false;
 			break;
-		}
 		}
 	}
 }

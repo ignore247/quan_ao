@@ -151,7 +151,7 @@ int main()
 {
 	Admin ad;
 	load_full(ad);
-	chuong_trinh(ad);
+	//chuong_trinh(ad);
 	
 	
 	//SetWindowSize(209, 54);
