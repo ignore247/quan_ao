@@ -178,7 +178,7 @@ void ghi_file_hh_xoa(DS_Hang_Hoa_Xoa dshh)
 
 //================ Hóa Đơn =====================
 
-void load_file_hoa_don_nhap(DS_HOA_DON &a)
+void load_file_hoa_don_nhap(DS_HOA_DON &a, DS_Hang_Hoa& ds)
 {
 	ifstream fi("thong_tin_hoa_don_nhap_hang.txt",ios::in);
 	if (fi.fail() == true)
@@ -205,6 +205,21 @@ void load_file_hoa_don_nhap(DS_HOA_DON &a)
 		fi.ignore();
 		getline(fi, k.trang_thai);
 		them_cuoi_ds_hoa_don(a, k);
+		HangHoa hh;
+		hh.ten_hh = k.thong_tin_hang.ten_hh;
+		hh.ma_hh = k.thong_tin_hang.ma_hh;
+		hh.gia = k.thong_tin_hang.gia;
+		hh.size = k.thong_tin_hang.size;
+		hh.soLuongTonKho = k.sl_mua;
+		hh.thoi_gian_nhap_hang = k.ngay_lap_hd;
+		if (hh.ma_hh[0] == 'Q')
+		{
+			ds.ds_quan.push_back(hh);
+		}
+		else
+		{
+			ds.ds_ao.push_back(hh);
+		}
 	}
 	fi.close();
 }
@@ -1175,7 +1190,7 @@ void load_full(Admin& ad)
 	load_file_thong_tin_ao(ad.quan_li_ds_hang_hoa);
 	load_file_thong_tin_quan(ad.quan_li_ds_hang_hoa);
 	load_file_thong_tin_hh_xoa(ad.quan_li_hh_xoa);
-	load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap);
+	load_file_hoa_don_nhap(ad.quan_li_ds_hoa_don_nhap,ad.quan_li_ds_hang_hoa);
 	load_file_hoa_don_xuat(ad.quan_li_ds_hoa_don_xuat);
 	load_file_hoa_don_nhap_xoa(ad.quan_li_hd_nhap_xoa);
 	load_file_hoa_don_xuat_xoa(ad.quan_li_hd_xuat_xoa);

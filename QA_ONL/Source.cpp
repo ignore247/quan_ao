@@ -139,7 +139,8 @@ void NLR(TREE t)
 {
 	if (t != NULL)
 	{
-		cout << t->data.maKh << endl;
+		cout << t->data.ten_dang_nhap << endl;
+		cout << t->data.mat_khau << endl;
 		NLR(t->pLeft);
 		NLR(t->pRight);
 
@@ -150,10 +151,13 @@ void NLR(TREE t)
 int main()
 {
 	Admin ad;
+	string b;
 	load_full(ad);
 	//chuong_trinh(ad);
 	
-	
+	sp_moi(ad.quan_li_ds_hoa_don_nhap,ad.quan_li_ds_hang_hoa);
+	//cout << ad.quan_li_ds_hang_hoa.ds_ao.size();
+	//dang_nhap(ad.quan_li_ds_kh.t,makh);
 	//SetWindowSize(209, 54);
 	//ShowScrollbar(0);
 	//ve_khung_console();
@@ -161,7 +165,7 @@ int main()
 	//thread th1(dang_nhap);
 	//th2.join();
 	//th1.join();
-	//system("pause");
+	system("pause");
 	return 0; 
 }
 

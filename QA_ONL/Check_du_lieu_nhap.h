@@ -344,6 +344,51 @@ bool check_email(string& a)
 	}
 }
 
+bool check_tk_mk(string a, string b, TREE t, string& makh)
+{
+	if (t != NULL)
+	{
+		if (t->data.ten_dang_nhap == a && b == t->data.mat_khau)
+		{
+			makh = t->data.maKh;
+			return true;
+		}
+		bool l = check_tk_mk(a, b, t->pLeft, makh);
+		bool r = check_tk_mk(a, b, t->pRight, makh);
+		return l || r;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool check_dinh_dang_tk(string a)
+{
+	regex check_username("^[a-zA-Z0-9@_]+$");
+	if (regex_match(a, check_username) == true)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool check_dinh_dang_mk(string a)
+{
+	regex mat_khau("^[a-zA-Z0-9!@#$%^&*()-=_+]{1,}$");
+	if (regex_match(a, mat_khau) == false)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
 // Hàm kiểm tra mã khách hàng trùng
 bool kt_trung_ma_kh(string a, TREE t) 
 {
@@ -422,12 +467,13 @@ bool check_dinh_dang_ma_kh(string a)
 
 bool check_full_maHH(string a)
 {
-	regex ma_hh(R"([aA-zZ]{1}\d{4})");
+
+	regex ma_hh(R"((A|Q){1}\d{4})");
 	if (regex_match(a, ma_hh) == false)
 	{
 		return false;
 	}
-	else 
+	else
 	{
 		return true;
 	}
@@ -559,65 +605,107 @@ void while_email(string& a)
 	}
 }
 
-bool check_dinh_dang_tk(string a)
-{
-	regex check_username("^[a-zA-Z0-9@_]+$");
-	if (regex_match(a,check_username) == true)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool check_dinh_dang_mk(string a)
-{
-	regex mat_khau("^[a-zA-Z0-9!@#$%^&*()-=_+]{1,}$");
-	if (regex_match(a, mat_khau) == false)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
-
 void while_mk(string& a)
 {
 	while (check_dinh_dang_mk(a) == false)
 	{
-		cout << "Nhap khong dung dinh dang! Nhap lai:"; getline(cin, a);
+		cout << "Nhap khong dung dinh dang! Nhap lai: "; getline(cin, a);
+	}
+}
+
+void while_tk(string& a)
+{
+	while (check_dinh_dang_tk(a) == false)
+	{
+		cout << "Nhap tai khoan khong phu hop! Nhap lai: "; getline(cin, a);
+	}
+}
+
+void while_nhap_ngay(string& a)
+{
+	chuan_hoa_tg(a);
+	while (check_date(a) == false)
+	{
+		cout << "Nhap ngay khong hop le. Nhap lai:"; getline(cin, a);
 	}
 }
 
 
-bool check_tk_mk(string a, string b ,TREE t,string& makh)
+bool check_trung_sdt(string a, TREE t)
 {
 	if (t != NULL)
 	{
-		if ( t->data.ten_dang_nhap  == a && b == t->data.mat_khau)
+		if (a == t->data.sdt)
 		{
-			makh = t->data.maKh;
 			return true;
 		}
-		else if (t->data.ten_dang_nhap == a && b != t->data.mat_khau)
-		{
-			return false;
-		}
-		else if (a > t->data.ten_dang_nhap)
-		{
-			return check_tk_mk(a, b, t->pLeft,makh);
-		}
-		else
-		{
-			return check_tk_mk(a, b, t->pRight,makh);
-		}
+		bool l = check_trung_sdt(a, t->pLeft);
+		bool r = check_trung_sdt(a, t->pRight);
+		return l || r;
 	}
 	else
 	{
 		return false;
 	}
 }
+
+void while_kt_trung_sdt(string& a, TREE t)
+{
+	while (check_trung_sdt(a, t) == true)
+	{
+		cout << "So dien thoai da ton tai! Hay nhap lai: "; getline(cin, a);
+	}
+}
+
+bool check_trung_email(string a, TREE t)
+{
+	if (t != NULL)
+	{
+		if (a == t->data.email)
+		{
+			return true;
+		}
+		bool l = check_trung_email(a, t->pLeft);
+		bool r = check_trung_email(a, t->pRight);
+		return l || r;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void while_kt_trung_email(string& a, TREE t)
+{
+	while (check_trung_email(a, t) == true)
+	{
+		cout << "Email da ton tai! Hay nhap lai: "; getline(cin, a);
+	}
+}
+
+bool check_trung_ten_dn(string a, TREE t)
+{
+	if (t != NULL)
+	{
+		if (a == t->data.ten_dang_nhap)
+		{
+			return true;
+		}
+		bool l = check_trung_ten_dn(a, t->pLeft);
+		bool r = check_trung_ten_dn(a, t->pRight);
+		return l || r;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void while_kt_trung_ten_dn(string& a, TREE t)
+{
+	while (check_trung_ten_dn(a, t) == true)
+	{
+		cout << "Ten da ton tai! Hay nhap lai: "; getline(cin, a);
+	}
+}
+
