@@ -18,7 +18,7 @@ using namespace std;
 struct HangHoa {
 	string ma_hh;
 	string ten_hh;
-	unsigned short soLuongTonKho;
+	int soLuongTonKho;
 	long long gia;
 	string size;
 	string mo_ta_sp;

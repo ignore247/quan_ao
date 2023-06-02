@@ -308,7 +308,7 @@ void sua_ten_ao(string ma_hang_hoa, DS_Hang_Hoa& a, string ten_ao_moi) {
 	}
 }
 
-void sua_so_luong_ao_ton_kho(string ma_hang_hoa, DS_Hang_Hoa& a, unsigned short sl_ao_moi) {
+void sua_so_luong_ao_ton_kho(string ma_hang_hoa, DS_Hang_Hoa& a, int sl_ao_moi) {
 	
 	for (int i = 0; i < a.ds_ao.size(); i++) {
 		if (ma_hang_hoa == a.ds_ao.at(i).ma_hh) {
@@ -358,7 +358,7 @@ void sua_ten_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string ten_quan_moi) {
 	}
 }
 
-void sua_so_luong_quan_ton_kho(string ma_hang_hoa, DS_Hang_Hoa& a, unsigned short sl_quan_moi) {
+void sua_so_luong_quan_ton_kho(string ma_hang_hoa, DS_Hang_Hoa& a, int sl_quan_moi) {
 	
 	for (int i = 0; i < a.ds_quan.size(); i++) {
 		if (ma_hang_hoa == a.ds_quan.at(i).ma_hh) {
@@ -399,22 +399,19 @@ void sua_thoi_gian_nhap_quan(string ma_hang_hoa, DS_Hang_Hoa& a, string thoi_gia
 	}
 }
 
-void sua_hang_hoa(DS_Hang_Hoa& a) {
+void sua_hang_hoa(DS_Hang_Hoa& a) 
+{
 	bool kt_menu = true;
 	int luaChon;
 	string tam;
-	regex ktra_luachon(R"(\d)");
-	cout << "Nhap ma hang hoa can sua:";
 	string ma_hh;
-	cin >> ma_hh;
-	while (check_ma_hh(ma_hh, a) == -1)
+	cout << "Nhap ma hang hoa can sua:";
+	getline(cin, ma_hh);
+	while_full_ma_hh(ma_hh);
+	
+	while (kt_menu == true) 
 	{
-		cout << "Khong tim thay ma khach hang." << endl;
-		cout << "Nhap lai:";
-		cin >> ma_hh;
-		//check
-	}
-	while (kt_menu == true) {
+		system("cls");
 		cout << "1.Sua ten hang hoa " << endl;
 		cout << "2.Sua so luong ton kho " << endl;
 		cout << "3.Sua gia " << endl;
@@ -423,28 +420,38 @@ void sua_hang_hoa(DS_Hang_Hoa& a) {
 		cout << "6.Sua thoi gian nhap hang " << endl;
 		cout << "0.Thoat" << endl;
 		cout << "Nhap lua chon:";
-		cin >> tam;
-		do {
-			if (regex_match(tam, ktra_luachon) == false || stoi(tam) < 0 || stoi(tam) > 5) {
-				cout << "Nhap khong hop le!\n";
-				cout << "Nhap lua chon:";
-				cin >> tam;
-			}
-			else {
-				luaChon = stoi(tam);
-				break;
-			}
-		} while (true);
-		switch (luaChon) {
-		case 1: {
-			while (true) {
+		do
+		{
+			cout << "\nNhap lua chon: ";
+			getline(cin, tam);
+			while_so(tam);
+			luaChon = stoi(tam);
+		} while (luaChon < 0 || luaChon > 6);
+
+
+		switch (luaChon) 
+		{
+		case 1: 
+		{
+			bool kt_menu = true;
+			int luaChon;
+			string tam;
+			while (kt_menu = true) 
+			{
+				system("cls");
 				cout << "\n1. Sua ten ao.";
 				cout << "\n2.Sua ten quan.";
-				cout << "\n3. Thoat.";
-				cout << "\nNhap lua chon :";
-				int chon1;
-				cin >> chon1;
-				switch (chon1) {
+				cout << "\n0. Thoat.";
+				do
+				{
+					cout << "\nNhap lua chon: ";
+					getline(cin, tam);
+					while_so(tam);
+					luaChon = stoi(tam);
+				} while (luaChon < 0 || luaChon > 2);
+
+				switch (luaChon)
+				{
 				case 1: {
 					string ao_moi;
 					cout << "\nNhap ten ao moi : "; getline(cin, ao_moi);
@@ -459,178 +466,282 @@ void sua_hang_hoa(DS_Hang_Hoa& a) {
 					sua_ten_quan(ma_hh, a, quan_moi);
 					break;
 				}
-				case 3: {
-					return;
+				case 0:
+				{
+					kt_menu = false;
+					break;
 				}
 				}
 			}
 			break;
 		}
-		case 2: {
-			while (true) {
+		case 2: 
+		{
+			bool kt_menu = true;
+			int luaChon;
+			string tam;
+			while (kt_menu = true)
+			{
+				system("cls");
 				cout << "\n1.Sua so luong ao ton kho.";
 				cout << "\n2.Sua so luong quan ton kho.";
-				cout << "\n3.Thoat";
-				cout << "\nNhap lua chon :";
-				int chon2;
-				cin >> chon2;
-				switch (chon2) {
-				case 1: {
-					unsigned short sl_ao_moi;
-					cout << "\nNhap so luong ao moi :"; cin >> sl_ao_moi;
-					//check;
-					sua_so_luong_ao_ton_kho(ma_hh, a, sl_ao_moi);
+				cout << "\n0.Thoat";
+				do
+				{
+					cout << "\nNhap lua chon: ";
+					getline(cin, tam);
+					while_so(tam);
+					luaChon = stoi(tam);
+				} while (luaChon < 0 || luaChon > 2);
+				
+				switch (luaChon) 
+				{
+				case 1: 
+				{
+					string sl_ao_moi;
+					int sl;
+					do
+					{
+						cout << "\nNhap so luong ao moi :"; getline(cin, sl_ao_moi);
+						while_so(sl_ao_moi);
+						sl = stoi(sl_ao_moi);
+					} while (sl == 0);
+					sua_so_luong_ao_ton_kho(ma_hh, a,sl);
 					break;
 				}
-				case 2: {
-					unsigned short sl_quan_moi;
-					cout << "\nNhap so luong quan moi :"; cin >> sl_quan_moi;
-					//check;
-					sua_so_luong_quan_ton_kho(ma_hh, a, sl_quan_moi);
+				case 2: 
+				{
+					string sl_quan_moi;
+					int sl;
+					do
+					{
+						cout << "\nNhap so luong quan moi :"; getline(cin, sl_quan_moi);
+						while_so(sl_quan_moi);
+						sl = stoi(sl_quan_moi);
+					} while (sl == 0);
+					sua_so_luong_quan_ton_kho(ma_hh, a, sl);
 					break;
 				}
-				case 3: {
-					return;
+				case 0:
+				{
+					kt_menu = false;
+					break;
 				}
 				}
 			}
 			break;
 		}
-		case 3: {
-			while (true) {
+		case 3:
+		{
+			bool kt_menu = true;
+			int luaChon;
+			string tam;
+			while (kt_menu = true)
+			{
+				system("cls");
 				cout << "\n1.Sua gia ao.";
 				cout << "\n2.Sua gia quan.";
-				cout << "\n3.Thoat.";
-				cout << "\nNhap lua chon :";
-				int chon3;
-				cin >> chon3;
-				switch (chon3) {
-				case 1: {
+				cout << "\n0.Thoat.";
+				do
+				{
+					cout << "\nNhap lua chon: ";
+					getline(cin, tam);
+					while_so(tam);
+					luaChon = stoi(tam);
+				} while ( luaChon < 0 || luaChon > 2);
+				switch (luaChon) 
+				{
+				case 1: 
+				{
 					long long gia_ao;
-					cout << "\nNhap gia ao moi : "; cin >> gia_ao;
-					//check;
+					string  tam;
+					do
+					{
+						cout << "\nNhap gia ao moi : ";
+						getline(cin, tam);
+						while_so(tam);
+						gia_ao = stoi(tam);
+					} while (gia_ao == 0);
 					sua_gia_ao(ma_hh, a, gia_ao);
 					break;
 				}
-				case 2: {
+				case 2: 
+				{
 					long long gia_quan;
-					cout << "\nNhap gia quan moi : "; cin >> gia_quan;
-					//check;
-					sua_gia_quan(ma_hh, a, gia_quan);
+					string  tam;
+					do
+					{
+						cout << "\nNhap gia quan moi : ";
+						getline(cin, tam);
+						while_so(tam);
+						gia_quan = stoi(tam);
+					} while (gia_quan == 0);
+					sua_gia_ao(ma_hh, a, gia_quan);
 					break;
 				}
-				case 3: {
-					return;
+				case 0:
+				{
+					kt_menu = false;
+					break;
 				}
 				}
 				break;
 			}
 		}
-		case 4: {
-			while (true) {
+		case 4:
+		{
+			bool kt_menu = true;
+			int luaChon;
+			string tam;
+			while (kt_menu = true)
+			{
 				cout << "\n1.Sua size ao moi.";
 				cout << "\n2.Sua size quan moi.";
-				cout << "\n3.Thoat.";
-				cout << "\nNhap lua chon : ";
-				int chon4;
-				cin >> chon4;
-				switch (chon4) {
-				case 1: {
+				cout << "\n0.Thoat.";
+				do
+				{
+					cout << "\nNhap lua chon: ";
+					getline(cin, tam);
+					while_so(tam);
+					luaChon = stoi(tam);
+				} while (luaChon < 0 || luaChon > 2);
+				switch (luaChon) 
+				{
+				case 1:
+				{
 					string size_ao_moi;
 					cout << "\nNhap size ao moi : ";
 					cin.ignore();
 					getline(cin, size_ao_moi);
-					//check
+					while_size_ao(size_ao_moi);
 					sua_size_ao(ma_hh, a, size_ao_moi);
 					break;
 				}
-				case 2: {
+				case 2:
+				{
 					string size_quan_moi;
 					cout << "\nNhap size quan moi : ";
-					cin.ignore();
 					getline(cin, size_quan_moi);
-					//check
+					while_size_quan(size_quan_moi);
 					sua_size_quan(ma_hh, a, size_quan_moi);
 					break;
 				}
-				case 3: {
-					return;
+				case 0:
+				{
+					kt_menu = false;
+					break;
 				}
 				}
 
 			}
 			break;
 		}
-		case 5: {
-			while (true) {
+		case 5: 
+		{
+			bool kt_menu = true;
+			int luaChon;
+			string tam;
+			while (kt_menu = true)
+			{
 				cout << "\n1.Sua mo ta ao.";
 				cout << "\n2.Sua mo ta quan.";
-				cout << "\n3.Thoat";
-				cout << "\nNhap lua chon : ";
-				int chon5;
-				cin >> chon5;
-				switch (chon5) {
-				case 1: {
+				cout << "\n0.Thoat";
+
+				do
+				{
+					cout << "\nNhap lua chon: ";
+					getline(cin, tam);
+					while_so(tam);
+					luaChon = stoi(tam);
+				} while (luaChon < 0 || luaChon > 2);
+				switch (luaChon) 
+				{
+				case 1: 
+				{
 					string mo_ta_ao;
 					cout << "\nNhap mo ta ao moi : ";
-					cin.ignore();
 					getline(cin, mo_ta_ao);
-					//check
 					sua_mo_ta_sp_ao(ma_hh, a, mo_ta_ao);
 					break;
 				}
-				case 2: {
+				case 2: 
+				{
 					string mo_ta_quan;
 					cout << "\nNhap mo ta quan moi : ";
-					cin.ignore();
 					getline(cin, mo_ta_quan);
-					//check
 					sua_mo_ta_sp_quan(ma_hh, a, mo_ta_quan);
 					break;
 				}
-				case 3: {
-					return;
+				case 0:
+				{
+					kt_menu = false;
+					break;
 				}
 				}
 			}
 			break;
 		}
-		case 6: {
-			while (true) {
+		case 6: 
+		{
+			bool kt_menu = true;
+			int luaChon;
+			string tam;
+			while (kt_menu = true)
+			{
+				system("cls");
 				cout << "\n1.Sua thoi gian nhap ao.";
 				cout << "\n2.Sua thoi gian nhap quan.";
-				cout << "\n3.Thoat";
-				cout << "\nNhap lua chon :";
-				int chon6;
-				cin >> chon6;
-				switch (chon6) {
-				case 1: {
+				cout << "\n0.Thoat";
+				do
+				{
+					cout << "\nNhap lua chon: ";
+					getline(cin, tam);
+					while_so(tam);
+					luaChon = stoi(tam);
+				} while (luaChon < 0 || luaChon > 2);
+				switch (luaChon)
+				{
+				case 1: 
+				{
 					string thoi_gian_nhap_ao;
 					cout << "\nNhap thoi gian nhap ao moi :";
-					cin.ignore();
 					getline(cin, thoi_gian_nhap_ao);
-					//check
+					while (check_date(thoi_gian_nhap_ao) == false)
+					{
+						cout << "Thoi gian khong hop le!";
+						cout << "\nNhap thoi gian nhap ao moi :";
+						getline(cin, thoi_gian_nhap_ao);
+					}
 					sua_thoi_gian_nhap_ao(ma_hh, a, thoi_gian_nhap_ao);
 					break;
 				}
-				case 2: {
+				case 2: 
+				{
 					string thoi_gian_nhap_quan;
 					cout << "\nNhap thoi gian nhap quan moi :";
-					cin.ignore();
 					getline(cin, thoi_gian_nhap_quan);
-					//check
+					while (check_date(thoi_gian_nhap_quan) == false)
+					{
+						cout << "Thoi gian khong hop le!";
+						cout << "\nNhap thoi gian nhap quan moi :";
+						getline(cin, thoi_gian_nhap_quan);
+					}
 					sua_thoi_gian_nhap_quan(ma_hh, a, thoi_gian_nhap_quan);
 					break;
 				}
-				case 3: {
-					return;
+				case 0:
+				{
+					kt_menu = false;
+					break;
 				}
 				}
 			}
 			break;
 		}
-		case 0: {
-			return;
+		case 0:
+		{
+			kt_menu = false;
+			break;
 		}
 		}
 	}
@@ -1582,6 +1693,32 @@ void duyet_cay_sua_thong_tin_trang_thai(TREE& t, string ma_hd_sua, string ma_kh,
 	}
 }
 
+void duyet_cay_sua_thong_tin_so_luong_mua(TREE& t, string ma_hd_sua, string ma_kh,int sl_mua)
+{
+	if (t != NULL)
+	{
+		if (ma_kh == t->data.maKh)
+		{
+			for (node_hoa_don* k = t->data.don_mua_hang.pHead; k != NULL; k = k->pNext)
+			{
+				if (k->data.ma_hoa_don == ma_hd_sua)
+				{
+					k->data.sl_mua = sl_mua;
+					return;
+				}
+			}
+		}
+		if (stoi(ma_kh.substr(2, 4)) < stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_sua_thong_tin_trang_thai(t->pLeft, ma_hd_sua, ma_kh, trang_thai_moi);
+		}
+		else if (stoi(ma_kh.substr(2, 4)) > stoi(t->data.maKh.substr(2, 4)))
+		{
+			duyet_cay_sua_thong_tin_trang_thai(t->pRight, ma_hd_sua, ma_kh, trang_thai_moi);
+		}
+	}
+}
+
 void duyet_cay_xoa_hd_theo_ma(TREE& t, string ma_kh_cu, string ma_hoa_don)
 {
 	if (t != NULL)
@@ -1688,7 +1825,8 @@ void sua_thong_tin_hoa_don(Admin& ad)
 		{
 			cout << "\n1.Sua ngay lap hoa don";
 			cout << "\n2.Sua trang thai cua hoa don";
-			cout << "\n3.Xoa hoa don";
+			cout << "\n3.Sua so luong mua cua hoa don";
+			cout << "\n4.Xoa hoa don";
 			cout << "\n0.Thoat";
 			cout << "\nNhap lua chon: ";
 			
@@ -1699,7 +1837,7 @@ void sua_thong_tin_hoa_don(Admin& ad)
 				getline(cin, k);
 				while_so(k);
 				c = stoi(k);
-			} while (c > 3);
+			} while (c > 4);
 
 			switch (c)
 			{
@@ -1749,6 +1887,28 @@ void sua_thong_tin_hoa_don(Admin& ad)
 			}
 			case 3:
 			{
+				int sl_mua;
+				string tam;
+				do
+				{
+					cout << "\nNhap so luong mua moi: ";
+					getline(cin, tam);
+					while_so(tam);
+					sl_mua = stoi(tam);
+				} while (sl_mua == 0);
+
+				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+				{
+					if (k->data.ma_hoa_don == b)
+					{
+						k->data.sl_mua = sl_mua;
+						break;
+					}
+				}
+				break;
+			}
+			case 4:
+			{
 				xoa_hd_theo_ma(ad.quan_li_ds_hoa_don_nhap, b);
 				break;
 			}
@@ -1770,7 +1930,8 @@ void sua_thong_tin_hoa_don(Admin& ad)
 			cout << "2.Sua ma hang khach hang" << endl;
 			cout << "3.Sua ngay lap hoa don" << endl;
 			cout << "4.Sua trang thai cua hoa don" << endl;
-			cout << "5.Xoa hoa don";
+			cout << "5.Sua so luong cua hoa don" << endl;
+			cout << "6.Xoa hoa don";
 			cout << "\n0.Thoat";
 			
 			
@@ -1781,7 +1942,7 @@ void sua_thong_tin_hoa_don(Admin& ad)
 				getline(cin, k);
 				while_so(k);
 				c = stoi(k);
-			} while (c > 5);
+			} while (c > 6);
 
 			switch (c)
 			{
@@ -1980,6 +2141,30 @@ void sua_thong_tin_hoa_don(Admin& ad)
 				break;
 			}
 			case 5:
+			{
+				int sl_mua;
+				string tam;
+				do
+				{
+					cout << "\nNhap so luong mua moi: ";
+					getline(cin, tam);
+					while_so(tam);
+					sl_mua = stoi(tam);
+				} while (sl_mua == 0);
+
+				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+				{
+					if (k->data.ma_hoa_don == b)
+					{
+						duyet_cay_sua_thong_tin_so_luong_mua(ad.quan_li_ds_kh.t, b, k->data.ma_kh, sl_mua);
+						k->data.sl_mua = sl_mua;
+						break;
+					}
+				}
+				xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
+				break;
+			}
+			case 6:
 			{
 				for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 				{

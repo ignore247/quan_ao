@@ -942,9 +942,9 @@ void chuong_trinh(Admin ad)
 				{
 				case 1:
 				{
-					cout << "\n\t\t===== Danh sach ao ===== \n";
-					xuat_thong_tin_quan(ad.quan_li_ds_hang_hoa);
 					cout << "\n\t\t===== Danh sach quan ===== \n";
+					xuat_thong_tin_quan(ad.quan_li_ds_hang_hoa);
+					cout << "\n\t\t===== Danh sach ao ===== \n";
 					xuat_thong_tin_ao(ad.quan_li_ds_hang_hoa);
 					system("pause");
 					break;
@@ -955,6 +955,7 @@ void chuong_trinh(Admin ad)
 					sp_Best(ad.quan_li_ds_hoa_don_xuat, ad.quan_li_ds_hang_hoa);
 					cout << "\n\t ============SP HOT============= " << endl;
 					sp_moi(ad.quan_li_ds_hoa_don_nhap, ad.quan_li_ds_hang_hoa);
+					system("pause");
 					break;
 				}
 				case 3:
