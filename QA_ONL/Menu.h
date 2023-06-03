@@ -801,7 +801,7 @@ void menuKH(Admin ad,string makh)
 	}
 }
 
-void dang_nhap_admin(string tk,string mk)
+bool dang_nhap_admin(string tk,string mk)
 {
 	string username;
 	string password;
@@ -809,17 +809,19 @@ void dang_nhap_admin(string tk,string mk)
 	getline(cin, username);
 	cout << "Nhap mat khau: ";
 	getline(cin, password);
-	while (check_dinh_dang_tk(username) == false || password == "\0" || username == "\0" || password != mk || username != tk)
+	if (check_dinh_dang_tk(username) == false || password == "\0" || username == "\0" || password != mk || username != tk)
 	{
-		cout << "Tai khoan hoac mat khau khung dung!";
+		/*cout << "Tai khoan hoac mat khau khung dung!";
 		cout << "\nNhap tai khoan:";
 		getline(cin, username);
 		cout << "Nhap mat khau: ";
-		getline(cin, password);
+		getline(cin, password);*/
+		return false;
 	}
+	return true;
 }
 
-void dang_nhap_user(Admin ad,string &makh)
+bool dang_nhap_user(Admin ad,string &makh)
 {
 	string username;
 	string password;
@@ -827,14 +829,16 @@ void dang_nhap_user(Admin ad,string &makh)
 	getline(cin, username);
 	cout << "Nhap mat khau: ";
 	getline(cin, password);
-	while (check_dinh_dang_tk(username) == false || password == "\0" || username == "\0" || check_tk_mk(username, password, ad.quan_li_ds_kh.t,makh) == false)
+	if (check_dinh_dang_tk(username) == false || password == "\0" || username == "\0" || check_tk_mk(username, password, ad.quan_li_ds_kh.t,makh) == false)
 	{
-		cout << "Tai khoan hoac mat khau khung dung!";
+		/*cout << "Tai khoan hoac mat khau khung dung!";
 		cout << "Nhap tai khoan:";
 		getline(cin, username);
 		cout << "Nhap mat khau: ";
-		getline(cin, password);
+		getline(cin, password);*/
+		return false;
 	}
+	return true;
 }
 
 void chuong_trinh(Admin ad)
@@ -867,8 +871,15 @@ void chuong_trinh(Admin ad)
 		{
 		case 1:
 		{
-			dang_nhap_admin(tk, mk);
-			menuAdmin(ad, tk, mk);
+			if (dang_nhap_admin(tk, mk) == true)
+			{
+				menuAdmin(ad, tk, mk);
+			}
+			else
+			{
+				cout << "Dang nhap that bai!" << endl;
+			}
+			system("pause");
 			break;
 		}
 		case 2:
@@ -895,8 +906,15 @@ void chuong_trinh(Admin ad)
 				{
 				case 1:
 				{
-					dang_nhap_user(ad, makh);
-					menuKH(ad, makh);
+					if (dang_nhap_user(ad, makh) == true)
+					{
+						menuKH(ad, makh);
+					}
+					else
+					{
+						cout << "Dang nhap khong thanh cong!" << endl;
+					}
+					system("pause");
 					break;
 				}
 				case 2:

@@ -153,9 +153,9 @@ int main()
 	Admin ad;
 	string b;
 	load_full(ad);
-	//chuong_trinh(ad);
+	chuong_trinh(ad);
 	
-	sp_moi(ad.quan_li_ds_hoa_don_nhap,ad.quan_li_ds_hang_hoa);
+	//sp_moi(ad.quan_li_ds_hoa_don_nhap,ad.quan_li_ds_hang_hoa);
 	//cout << ad.quan_li_ds_hang_hoa.ds_ao.size();
 	//dang_nhap(ad.quan_li_ds_kh.t,makh);
 	//SetWindowSize(209, 54);
