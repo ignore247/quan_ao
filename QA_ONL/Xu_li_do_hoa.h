@@ -1521,7 +1521,7 @@ void xu_li_1_muc_sua(string &a, int vi_tri_x_nhap_chuoi, int vi_tri_y_nhap_chuoi
 					huy = true;
 					return;
 				}
-				else if (vi_tri_x == 70)
+				else if (vi_tri_x == 190)
 				{
 					thoat = true;
 					return;
