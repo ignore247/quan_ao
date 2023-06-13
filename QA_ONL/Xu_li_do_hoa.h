@@ -1794,48 +1794,44 @@ void menu_sua_tt_hd(string b, Admin& ad)
 							gotoXY(118, 25);
 							SetColor(7);
 							xu_li_1_muc_sua(str, 118, 25, sua, huy, thoat);
-							if (sua == true)
+							while (sua == true)
 							{
-								while (true)
+								if (check_date(str) == false)
 								{
-									if (check_date(str) == false)
+									str.clear();
+									box(117, 24, 50, 2, 12, 0, 7, "                                                 ");
+									gotoXY(125, 27);
+									SetColor(12);
+									cout << "Ngay thang nhap khong hop le!";
+									SetColor(7);
+									sua = false;
+									xu_li_1_muc_sua(str, 118, 25, sua, huy, thoat);
+								}
+								else
+								{
+									box(117, 24, 50, 2, 11, 0, 7, str);
+									gotoXY(117, 25);
+									cout << "                             ";
+									for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
 									{
-										str.clear();
-										box(117, 24, 50, 2, 12, 0, 7, "                                                 ");
-										gotoXY(125, 27);
-										SetColor(12);
-										cout << "Ngay thang nhap khong hop le!";
-										SetColor(7);
-										sua = false;
-										xu_li_1_muc_sua(str, 118, 25, sua, huy, thoat);
+										if (k->data.ma_hoa_don == b)
+										{
+											k->data.ngay_lap_hd = str;
+											break;
+										}
+									}
+									if (khung_chon_tiep_tuc_sua_tt() == true)
+									{
+										box(70, 14, 130, 38, 0, 0, 7, "");
+										gotoXY(85, vi_tri_y);
+										break;
 									}
 									else
 									{
-										box(117, 24, 50, 2, 11, 0, 7, str);
-										gotoXY(117, 25);
-										cout << "                             ";
-										for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
-										{
-											if (k->data.ma_hoa_don == b)
-											{
-												k->data.ngay_lap_hd = str;
-												break;
-											}
-										}
-										if (khung_chon_tiep_tuc_sua_tt() == true)
-										{
-											box(70, 14, 130, 38, 0, 0, 7, "");
-											gotoXY(85, vi_tri_y);
-											break;
-										}
-										else
-										{
-											box(50, 1, 156, 51, 0, 0, 7, "");
-											return;
-										}
+										box(50, 1, 156, 51, 0, 0, 7, "");
+										return;
 									}
 								}
-								break;
 							}
 							if (huy == true)
 							{
@@ -1864,48 +1860,44 @@ void menu_sua_tt_hd(string b, Admin& ad)
 							box(106, 24, 77, 2, 11, 0, 7, "");
 							SetColor(7);
 							xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
-							if (sua == true)
+							while (sua == true)
 							{
-								while (true)
+								if (check_trang_thai(str) == false)
 								{
-									if (check_trang_thai(str) == false)
+									str.clear();
+									box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
+									gotoXY(109, 27);
+									SetColor(12);
+									cout << "Trang thai khong phu hop!";
+									gotoXY(107, 25);
+									SetColor(7);
+									xu_li_1_muc_sua(str, 118, 25, sua, huy, thoat);
+								}
+								else
+								{
+									box(70, 15, 115, 20, 11, 0, 7, str);
+									gotoXY(109, 27);
+									cout << "                          ";
+									for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
 									{
-										str.clear();
-										box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
-										gotoXY(109, 27);
-										SetColor(12);
-										cout << "Trang thai khong phu hop!";
-										gotoXY(107, 25);
-										SetColor(7);
-										xu_li_1_muc_sua(str, 118, 25, sua, huy, thoat);
+										if (k->data.ma_hoa_don == b)
+										{
+											k->data.trang_thai = str;
+											break;
+										}
+									}
+									if (khung_chon_tiep_tuc_sua_tt() == true)
+									{
+										box(70, 14, 130, 38, 0, 0, 7, "");
+										gotoXY(85, vi_tri_y);
+										break;
 									}
 									else
 									{
-										box(70, 15, 115, 20, 11, 0, 7, str);
-										gotoXY(109, 27);
-										cout << "                          ";
-										for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
-										{
-											if (k->data.ma_hoa_don == b)
-											{
-												k->data.trang_thai = str;
-												break;
-											}
-										}
-										if (khung_chon_tiep_tuc_sua_tt() == true)
-										{
-											box(70, 14, 130, 38, 0, 0, 7, "");
-											gotoXY(85, vi_tri_y);
-											break;
-										}
-										else
-										{
-											box(50, 1, 156, 51, 0, 0, 7, "");
-											return;
-										}
+										box(50, 1, 156, 51, 0, 0, 7, "");
+										return;
 									}
 								}
-								break;
 							}
 							if (huy == true)
 							{
@@ -1932,39 +1924,36 @@ void menu_sua_tt_hd(string b, Admin& ad)
 							box(106, 24, 77, 2, 11, 0, 7, "");
 							SetColor(7);
 							xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
-							if (sua == true)
+							while (sua == true)
 							{
-								while (true)
+								if (check_So(str) == false)
 								{
-									if (check_So(str) == false)
-									{
-										str.clear();
-										sua = false;
-										box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
-										gotoXY(109, 27);
-										SetColor(12);
-										cout << "So luong mua khong phu hop!";
-										SetColor(7);
-										xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
-									}
-									else
-									{
-										box(70, 15, 115, 20, 11, 0, 7, str);
-										gotoXY(109, 27);
-										cout << "                          ";
-										break;
-									}
-									if (khung_chon_tiep_tuc_sua_tt() == true)
-									{
-										box(70, 14, 130, 38, 0, 0, 7, "");
-										gotoXY(85, vi_tri_y);
-										break;
-									}
-									else
-									{
-										box(50, 1, 156, 51, 0, 0, 7, "");
-										return;
-									}
+									str.clear();
+									sua = false;
+									box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
+									gotoXY(109, 27);
+									SetColor(12);
+									cout << "So luong mua khong phu hop!";
+									SetColor(7);
+									xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
+								}
+								else
+								{
+									box(70, 15, 115, 20, 11, 0, 7, str);
+									gotoXY(109, 27);
+									cout << "                          ";
+									break;
+								}
+								if (khung_chon_tiep_tuc_sua_tt() == true)
+								{
+									box(70, 14, 130, 38, 0, 0, 7, "");
+									gotoXY(85, vi_tri_y);
+									break;
+								}
+								else
+								{
+									box(50, 1, 156, 51, 0, 0, 7, "");
+									return;
 								}
 							}
 							if (huy == true)
@@ -2172,104 +2161,101 @@ void menu_sua_tt_hd(string b, Admin& ad)
 							SetColor(7);
 							xu_li_1_muc_sua(str, 118, 28, sua, huy, thoat);
 							str[0] = toupper(str[0]);
-							if (sua == true)
+							while (sua == true)
 							{
-								while (true)
+								if (check_full_maHH(str) == false)
 								{
-									if (check_full_maHH(str) == false)
-									{
-										str.clear();
-										sua = false;
-										box(117, 27, 50, 2, 12, 0, 7, "                                                 ");
-										gotoXY(125, 30);
-										SetColor(12);
-										cout << "Hang hoa khong ton tai!";
-										SetColor(7);
-										xu_li_1_muc_sua(str, 118, 28, sua, huy, thoat);
-										str[0] = toupper(str[0]);
-									}
-									else
-									{
-										box(117, 28, 50, 2, 11, 0, 7, str);
-										gotoXY(125, 27);
-										cout << "                       ";
-										break;
-									}
-									for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
-									{
+									str.clear();
+									sua = false;
+									box(117, 27, 50, 2, 12, 0, 7, "                                                 ");
+									gotoXY(125, 30);
+									SetColor(12);
+									cout << "Hang hoa khong ton tai!";
+									SetColor(7);
+									xu_li_1_muc_sua(str, 118, 28, sua, huy, thoat);
+									str[0] = toupper(str[0]);
+								}
+								else
+								{
+									box(117, 28, 50, 2, 11, 0, 7, str);
+									gotoXY(125, 27);
+									cout << "                       ";
+									break;
+								}
+								for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+								{
 
-										if (k->data.ma_hoa_don == b)
-										{
-											long long tien = 0;
-											duyet_cay_sua_thong_tin_hh(ad.quan_li_ds_kh.t, b, k->data.ma_kh, str, ad.quan_li_ds_hang_hoa);
-											k->data.ma_hang_hoa = str;
-											if (str[0] == 'A')
-											{
-												for (int i = 0; i < ad.quan_li_ds_hang_hoa.ds_ao.size(); i++)
-												{
-													if (str == ad.quan_li_ds_hang_hoa.ds_ao.at(i).ma_hh)
-													{
-														tien = ad.quan_li_ds_hang_hoa.ds_ao.at(i).gia;
-														k->data.thong_tin_hang.ten_hh = ad.quan_li_ds_hang_hoa.ds_ao.at(i).ten_hh;
-														k->data.thong_tin_hang.gia = ad.quan_li_ds_hang_hoa.ds_ao.at(i).gia;
-														k->data.thong_tin_hang.size = ad.quan_li_ds_hang_hoa.ds_ao.at(i).size;
-														break;
-													}
-												}
-											}
-											else
-											{
-												for (int i = 0; i < ad.quan_li_ds_hang_hoa.ds_quan.size(); i++)
-												{
-													if (k->data.ma_hang_hoa == ad.quan_li_ds_hang_hoa.ds_quan.at(i).ma_hh)
-													{
-														tien = ad.quan_li_ds_hang_hoa.ds_quan.at(i).gia;
-														k->data.thong_tin_hang.ten_hh = ad.quan_li_ds_hang_hoa.ds_quan.at(i).ten_hh;
-														k->data.thong_tin_hang.gia = ad.quan_li_ds_hang_hoa.ds_quan.at(i).gia;
-														k->data.thong_tin_hang.size = ad.quan_li_ds_hang_hoa.ds_quan.at(i).size;
-														break;
-													}
-												}
-											}
-											if (k->data.ma_kh.substr(0, 2) == "DO")
-											{
-												k->data.tong_tien = (tien * k->data.sl_mua) * 0.01;
-												k->data.giam_gia_theo_hang = 0.01;
-											}
-											else if (k->data.ma_kh.substr(0, 2) == "BA")
-											{
-												k->data.tong_tien = (tien * k->data.sl_mua) * 0.03;
-												k->data.giam_gia_theo_hang = 0.03;
-											}
-											else if (k->data.ma_kh.substr(0, 2) == "VA")
-											{
-												k->data.tong_tien = (tien * k->data.sl_mua) * 0.05;
-												k->data.giam_gia_theo_hang = 0.05;
-											}
-											else if (k->data.ma_kh.substr(0, 2) == "KC")
-											{
-												k->data.tong_tien = (tien * k->data.sl_mua) * 0.1;
-												k->data.giam_gia_theo_hang = 0.1;
-											}
-											else
-											{
-												k->data.tong_tien = tien * k->data.sl_mua;
-												k->data.giam_gia_theo_hang = 0;
-											}
-											break;
-										}
-									}
-									xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
-									if (khung_chon_tiep_tuc_sua_tt() == true)
+									if (k->data.ma_hoa_don == b)
 									{
-										box(90, 15, 81, 21, 0, 0, 7, "");
+										long long tien = 0;
+										duyet_cay_sua_thong_tin_hh(ad.quan_li_ds_kh.t, b, k->data.ma_kh, str, ad.quan_li_ds_hang_hoa);
+										k->data.ma_hang_hoa = str;
+										if (str[0] == 'A')
+										{
+											for (int i = 0; i < ad.quan_li_ds_hang_hoa.ds_ao.size(); i++)
+											{
+												if (str == ad.quan_li_ds_hang_hoa.ds_ao.at(i).ma_hh)
+												{
+													tien = ad.quan_li_ds_hang_hoa.ds_ao.at(i).gia;
+													k->data.thong_tin_hang.ten_hh = ad.quan_li_ds_hang_hoa.ds_ao.at(i).ten_hh;
+													k->data.thong_tin_hang.gia = ad.quan_li_ds_hang_hoa.ds_ao.at(i).gia;
+													k->data.thong_tin_hang.size = ad.quan_li_ds_hang_hoa.ds_ao.at(i).size;
+													break;
+												}
+											}
+										}
+										else
+										{
+											for (int i = 0; i < ad.quan_li_ds_hang_hoa.ds_quan.size(); i++)
+											{
+												if (k->data.ma_hang_hoa == ad.quan_li_ds_hang_hoa.ds_quan.at(i).ma_hh)
+												{
+													tien = ad.quan_li_ds_hang_hoa.ds_quan.at(i).gia;
+													k->data.thong_tin_hang.ten_hh = ad.quan_li_ds_hang_hoa.ds_quan.at(i).ten_hh;
+													k->data.thong_tin_hang.gia = ad.quan_li_ds_hang_hoa.ds_quan.at(i).gia;
+													k->data.thong_tin_hang.size = ad.quan_li_ds_hang_hoa.ds_quan.at(i).size;
+													break;
+												}
+											}
+										}
+										if (k->data.ma_kh.substr(0, 2) == "DO")
+										{
+											k->data.tong_tien = (tien * k->data.sl_mua) * 0.01;
+											k->data.giam_gia_theo_hang = 0.01;
+										}
+										else if (k->data.ma_kh.substr(0, 2) == "BA")
+										{
+											k->data.tong_tien = (tien * k->data.sl_mua) * 0.03;
+											k->data.giam_gia_theo_hang = 0.03;
+										}
+										else if (k->data.ma_kh.substr(0, 2) == "VA")
+										{
+											k->data.tong_tien = (tien * k->data.sl_mua) * 0.05;
+											k->data.giam_gia_theo_hang = 0.05;
+										}
+										else if (k->data.ma_kh.substr(0, 2) == "KC")
+										{
+											k->data.tong_tien = (tien * k->data.sl_mua) * 0.1;
+											k->data.giam_gia_theo_hang = 0.1;
+										}
+										else
+										{
+											k->data.tong_tien = tien * k->data.sl_mua;
+											k->data.giam_gia_theo_hang = 0;
+										}
 										break;
 									}
-									else
-									{
-										box(50, 1, 156, 51, 0, 0, 7, "");
-										return;
-									}
+								}
+								xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
+								if (khung_chon_tiep_tuc_sua_tt() == true)
+								{
+									box(90, 15, 81, 21, 0, 0, 7, "");
+									break;
+								}
+								else
+								{
+									box(50, 1, 156, 51, 0, 0, 7, "");
+									return;
 								}
 							}
 							if (huy == true)
@@ -2300,40 +2286,38 @@ void menu_sua_tt_hd(string b, Admin& ad)
 							xu_li_1_muc_sua(str, 118, 28, sua, huy, thoat);
 							str[0] = toupper(str[0]);
 							str[1] = toupper(str[1]);
-							if (sua == true)
+							while (sua == true)
 							{
-								while (true)
+								if (check_dinh_dang_ma_kh(str) == false)
 								{
-									if (check_dinh_dang_ma_kh(str) == false)
-									{
-										box(124, 24, 46, 2, 12, 0, 7, "                                             ");
-										gotoXY(125, 27);
-										SetColor(12);
-										cout << "Khach hang khong ton tai!";
-										SetColor(7);
-										xu_li_1_muc_sua(str, 118, 28, sua, huy, thoat);
-										str[0] = toupper(str[0]);
-										str[1] = toupper(str[1]);
-										continue;
-									}
-									if (check_ma_kh(str, ad.quan_li_ds_kh.t) == false || check_dinh_dang_ma_kh(str) == false)
-									{
-										box(124, 24, 46, 2, 12, 0, 7, "                                             ");
-										gotoXY(125, 27);
-										SetColor(12);
-										cout << "Khach hang khong ton tai!";
-										SetColor(7);
-										xu_li_1_muc_sua(str, 118, 28, sua, huy, thoat);
-										str[0] = toupper(str[0]);
-										str[1] = toupper(str[1]);
-										continue;
-									}
-									else
-									{
-										box(124, 24, 46, 2, 11, 0, 7, str);
-										gotoXY(125, 27);
-										cout << "                         ";
-										for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+									box(124, 24, 46, 2, 12, 0, 7, "                                             ");
+									gotoXY(125, 27);
+									SetColor(12);
+									cout << "Khach hang khong ton tai!";
+									SetColor(7);
+									xu_li_1_muc_sua(str, 118, 28, sua, huy, thoat);
+									str[0] = toupper(str[0]);
+									str[1] = toupper(str[1]);
+									continue;
+								}
+								if (check_ma_kh(str, ad.quan_li_ds_kh.t) == false || check_dinh_dang_ma_kh(str) == false)
+								{
+									box(124, 24, 46, 2, 12, 0, 7, "                                             ");
+									gotoXY(125, 27);
+									SetColor(12);
+									cout << "Khach hang khong ton tai!";
+									SetColor(7);
+									xu_li_1_muc_sua(str, 118, 28, sua, huy, thoat);
+									str[0] = toupper(str[0]);
+									str[1] = toupper(str[1]);
+									continue;
+								}
+								else
+								{
+									box(124, 24, 46, 2, 11, 0, 7, str);
+									gotoXY(125, 27);
+									cout << "                         ";
+									for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 										{
 											if (k->data.ma_hoa_don == b)
 											{
@@ -2370,20 +2354,18 @@ void menu_sua_tt_hd(string b, Admin& ad)
 												break;
 											}
 										}
-										xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
-										if (khung_chon_tiep_tuc_sua_tt() == true)
-										{
-											box(90, 15, 83, 23, 0, 0, 7, "");
-											vi_tri_y = 1;
-											break;
-										}
-										else
-										{
-											box(50, 1, 156, 51, 0, 0, 7, "");
-											return;
-										}
+									xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
+									if (khung_chon_tiep_tuc_sua_tt() == true)
+									{
+										box(90, 15, 83, 23, 0, 0, 7, "");
+										vi_tri_y = 1;
+										break;
 									}
-
+									else
+									{
+										box(50, 1, 156, 51, 0, 0, 7, "");
+										return;
+									}
 								}
 							}
 							if (huy == true)
@@ -2412,9 +2394,7 @@ void menu_sua_tt_hd(string b, Admin& ad)
 							gotoXY(118, 25);
 							SetColor(7);
 							xu_li_1_muc_sua(str, 118, 25, sua, huy, thoat);
-							if (sua == true)
-						{
-							while (true)
+							while (sua == true)
 							{
 								if (check_date(str) == false)
 								{
@@ -2454,8 +2434,6 @@ void menu_sua_tt_hd(string b, Admin& ad)
 									}
 								}
 							}
-							break;
-						}
 							if (huy == true)
 							{
 								box(50, 13, 156, 40, 0, 0, 7, "");
@@ -2482,47 +2460,44 @@ void menu_sua_tt_hd(string b, Admin& ad)
 							box(106, 24, 77, 2, 11, 0, 7, "");
 							SetColor(7);
 							xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
-							if (sua == true)
+							while (sua == true)
 							{
-								while (true)
+								if (check_trang_thai(str) == false)
 								{
-									if (check_trang_thai(str) == false)
+									str.clear();
+									box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
+									gotoXY(109, 27);
+									SetColor(12);
+									cout << "Trang thai khong phu hop!";
+									gotoXY(107, 25);
+									SetColor(7);
+									xu_li_1_muc_sua(str, 118, 25, sua, huy, thoat);
+								}
+								else
+								{
+									box(70, 15, 115, 20, 11, 0, 7, str);
+									gotoXY(109, 27);
+									cout << "                          ";
+									for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 									{
-										str.clear();
-										box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
-										gotoXY(109, 27);
-										SetColor(12);
-										cout << "Trang thai khong phu hop!";
-										gotoXY(107, 25);
-										SetColor(7);
-										xu_li_1_muc_sua(str, 118, 25, sua, huy, thoat);
+										if (k->data.ma_hoa_don == b)
+										{
+											duyet_cay_sua_thong_tin_trang_thai(ad.quan_li_ds_kh.t, b, k->data.ma_kh, str);
+											k->data.trang_thai = str;
+											break;
+										}
+									}
+									xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
+									if (khung_chon_tiep_tuc_sua_tt() == true)
+									{
+										box(70, 14, 130, 38, 0, 0, 7, "");
+										gotoXY(85, vi_tri_y);
+										break;
 									}
 									else
 									{
-										box(70, 15, 115, 20, 11, 0, 7, str);
-										gotoXY(109, 27);
-										cout << "                          ";
-										for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
-										{
-											if (k->data.ma_hoa_don == b)
-											{
-												duyet_cay_sua_thong_tin_trang_thai(ad.quan_li_ds_kh.t, b, k->data.ma_kh, str);
-												k->data.trang_thai = str;
-												break;
-											}
-										}
-										xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
-										if (khung_chon_tiep_tuc_sua_tt() == true)
-										{
-											box(70, 14, 130, 38, 0, 0, 7, "");
-											gotoXY(85, vi_tri_y);
-											break;
-										}
-										else
-										{
-											box(50, 1, 156, 51, 0, 0, 7, "");
-											return;
-										}
+										box(50, 1, 156, 51, 0, 0, 7, "");
+										return;
 									}
 								}
 							}
@@ -2585,42 +2560,40 @@ void menu_sua_tt_hd(string b, Admin& ad)
 							box(106, 24, 77, 2, 11, 0, 7, "");
 							SetColor(7);
 							xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
-							if (sua == true)
+							while (true)
 							{
-								while (true)
+								if (check_So(str) == false)
 								{
-									if (check_So(str) == false)
-									{
-										str.clear();
-										sua = false;
-										box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
-										gotoXY(109, 27);
-										SetColor(12);
-										cout << "So luong mua khong phu hop!";
-										SetColor(7);
-										xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
-										continue;
-									}
-									if ( stoi (str) >  sl)
-									{
-										str.clear();
-										sua = false;
-										box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
-										gotoXY(109, 27);
-										SetColor(12);
-										cout << "So luong ton kho khong du!";
-										SetColor(7);
-										xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
-										continue;
-									}
-									else
-									{
-										box(70, 15, 115, 20, 11, 0, 7, str);
-										gotoXY(109, 27);
-										cout << "                          ";
-										break;
-									}
-									for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
+									str.clear();
+									sua = false;
+									box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
+									gotoXY(109, 27);
+									SetColor(12);
+									cout << "So luong mua khong phu hop!";
+									SetColor(7);
+									xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
+									continue;
+								}
+								if ( stoi (str) >  sl)
+								{
+									str.clear();
+									sua = false;
+									box(106, 24, 77, 2, 12, 0, 7, "                                                                            ");
+									gotoXY(109, 27);
+									SetColor(12);
+									cout << "So luong ton kho khong du!";
+									SetColor(7);
+									xu_li_1_muc_sua(str, 107, 25, sua, huy, thoat);
+									continue;
+								}
+								else
+								{
+									box(70, 15, 115, 20, 11, 0, 7, str);
+									gotoXY(109, 27);
+									cout << "                          ";
+									break;
+								}
+								for (node_hoa_don* k = ad.quan_li_ds_hoa_don_xuat.pHead; k != NULL; k = k->pNext)
 									{
 										if (k->data.ma_hoa_don == b)
 										{
@@ -2637,7 +2610,7 @@ void menu_sua_tt_hd(string b, Admin& ad)
 											break;
 										}
 									}
-									if (tam_mahh[0] == 'Q')
+								if (tam_mahh[0] == 'Q')
 									{
 										for (int i = 0; i < ad.quan_li_ds_hang_hoa.ds_quan.size(); i++)
 										{
@@ -2648,7 +2621,7 @@ void menu_sua_tt_hd(string b, Admin& ad)
 											}
 										}
 									}
-									else
+								else
 									{
 										for (int i = 0; i < ad.quan_li_ds_hang_hoa.ds_ao.size(); i++)
 										{
@@ -2659,18 +2632,17 @@ void menu_sua_tt_hd(string b, Admin& ad)
 											}
 										}
 									}
-									xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
-									if (khung_chon_tiep_tuc_sua_tt() == true)
-									{
-										box(70, 14, 130, 38, 0, 0, 7, "");
-										gotoXY(85, vi_tri_y);
-										break;
-									}
-									else
-									{
-										box(50, 1, 156, 51, 0, 0, 7, "");
-										return;
-									}
+								xep_hang_khach_hang_theo_tien(ad.quan_li_ds_kh.t);
+								if (khung_chon_tiep_tuc_sua_tt() == true)
+								{
+									box(70, 14, 130, 38, 0, 0, 7, "");
+									gotoXY(85, vi_tri_y);
+									break;
+								}
+								else
+								{
+									box(50, 1, 156, 51, 0, 0, 7, "");
+									return;
 								}
 							}
 							if (huy == true)
