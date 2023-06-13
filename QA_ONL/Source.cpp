@@ -151,24 +151,19 @@ void NLR(TREE t)
 int main()
 {
 	Admin ad;
-	string b;
 	load_full(ad);
-	chuong_trinh(ad);
-	
-	//sp_moi(ad.quan_li_ds_hoa_don_nhap,ad.quan_li_ds_hang_hoa);
-	//cout << ad.quan_li_ds_hang_hoa.ds_ao.size();
-	//dang_nhap(ad.quan_li_ds_kh.t,makh);
-	//SetWindowSize(209, 54);
-	//ShowScrollbar(0);
-	//ve_khung_console();
-	//thread th2(ve_chu_QAOL);
-	//thread th1(dang_nhap);
-	//th2.join();
-	//th1.join();
+	ve_khung_console();
+//	xuat_sua_ds_hoa_don_ban(ad);
+//	chuong_trinh(ad);
+	xuat_sua_ds_hoa_don_nhap(ad);
+//	khung_xac_nhan_xoa();
+
 	system("pause");
 	return 0; 
 }
-
+//01
+//23
+ 
 
 // lên   72
 // xuống 80

@@ -327,7 +327,8 @@ bool check_Sdt(string& a)
 	{
 		return false;
 	}
-	else {
+	else 
+	{
 		return true;
 	}
 }
@@ -410,7 +411,6 @@ bool kt_trung_ma_kh(string a, TREE t)
 	else
 	{
 		return false;
-		
 	}
 }
 
@@ -629,7 +629,6 @@ void while_nhap_ngay(string& a)
 		cout << "Nhap ngay khong hop le. Nhap lai:"; getline(cin, a);
 	}
 }
-
 
 bool check_trung_sdt(string a, TREE t)
 {

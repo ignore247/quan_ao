@@ -15,7 +15,8 @@ using namespace std;
 
 // ============================ HÀNG HÓA ======================================//
 
-struct HangHoa {
+struct HangHoa 
+{
 	string ma_hh;
 	string ten_hh;
 	int soLuongTonKho;
@@ -194,7 +195,4 @@ struct Admin
 };
 typedef struct Admin Admin;
 
-void test()
-{
-	
-}
+
