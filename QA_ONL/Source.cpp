@@ -155,9 +155,17 @@ int main()
 	ve_khung_console();
 //	xuat_sua_ds_hoa_don_ban(ad);
 //	chuong_trinh(ad);
-	xuat_sua_ds_hoa_don_nhap(ad);
+//	xuat_sua_ds_hoa_don_nhap(ad);
 //	khung_xac_nhan_xoa();
-
+//	khung_chon_doi_bo_loc() = true;
+	string size,luaChonNgayThang,ngay_min,ngay_max,thang;
+	bool a = false;
+	bool b = false;
+	bool c = false;
+	int y = 0;
+//	menu_chon_ngay_thang(luaChonNgayThang, thang, ngay_min, ngay_max,a,b,c,y);
+//	khung_chon_bo_loc(size, luaChonNgayThang, ngay_min, ngay_max, thang,a);
+	loc_hoa_don(size, luaChonNgayThang, thang, ngay_min, ngay_max,a);
 	system("pause");
 	return 0; 
 }
@@ -170,3 +178,9 @@ int main()
 // trái  75
 // phải  77
 // enter 13
+
+//vi_tri_y - 7,
+//vi_tri_y - 4,
+//vi_tri_y - 1,
+//vi_tri_y + 2,
+//vi_tri_y + 5,

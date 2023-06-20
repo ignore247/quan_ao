@@ -4,7 +4,7 @@
 #include <mutex>
 
 mutex bk;
-void xu_li_nhap_1_chuoi(string &a, bool &xuong, bool &len, int vi_tri_x_goc, int vi_tri_y, int luaChon)
+void xu_li_nhap_1_chuoi(string &a, bool &xuong, bool &len,bool &qua_trai, bool &qua_phai, int vi_tri_x_goc, int vi_tri_y, int luaChon)
 {
 	
 		bool cl = true;
@@ -38,7 +38,8 @@ void xu_li_nhap_1_chuoi(string &a, bool &xuong, bool &len, int vi_tri_x_goc, int
 					{
  						if (vi_tri_x == vi_tri_x_goc)
 						{
-							continue; 
+							qua_trai = true;
+							return;
 						}
 						gotoXY(--vi_tri_x, vi_tri_y);
 						continue;
@@ -47,7 +48,8 @@ void xu_li_nhap_1_chuoi(string &a, bool &xuong, bool &len, int vi_tri_x_goc, int
 					{
 						if (vi_tri_x == vi_tri_x_goc + a.length())
 						{
-							continue;
+							qua_phai = true;
+							return;
 						}
 						gotoXY(++vi_tri_x, vi_tri_y);
 						continue;
@@ -71,11 +73,12 @@ void xu_li_nhap_1_chuoi(string &a, bool &xuong, bool &len, int vi_tri_x_goc, int
 							int vi_tri_xoa = vi_tri_x - vi_tri_x_goc - 1;// vị trí xóa là vị trí con trỏ  -1 
 							a.erase(vi_tri_xoa, 1);
 							vi_tri_x = vi_tri_x_goc + vi_tri_xoa;	// cập nhật lại con trỏ
-							gotoXY(vi_tri_x, vi_tri_y);
+							gotoXY(vi_tri_x_goc, vi_tri_y);
 							for (int i = 0; i < a.length() + 1; i++)
 							{
 								cout << " ";
 							}
+							
 							gotoXY(vi_tri_x_goc, vi_tri_y);
 							cout << a;
 							gotoXY(vi_tri_x, vi_tri_y); // đưa con trỏ về chỗ vừa xóa
@@ -86,12 +89,7 @@ void xu_li_nhap_1_chuoi(string &a, bool &xuong, bool &len, int vi_tri_x_goc, int
 								int vi_tri_them = vi_tri_x - vi_tri_x_goc; // vị trí thêm là vị trí con trỏ 
 								gotoXY(vi_tri_x, 38);
 								a.insert(a.begin() + vi_tri_them, c);
-								vi_tri_x = vi_tri_x_goc + vi_tri_them + 1;		// cập nhật lại con trỏ
-								gotoXY(vi_tri_x, vi_tri_y);
-								for (int i = 0; i < a.length(); i++)
-								{
-									cout << " ";
-								}
+								vi_tri_x = vi_tri_x_goc + vi_tri_them + 1;		// cập nhật lại con trỏ					
 								gotoXY(vi_tri_x_goc, vi_tri_y);
 								cout << a;
 								gotoXY(vi_tri_x, vi_tri_y); // đưa con trỏ về chỗ vừa thêm
@@ -913,7 +911,753 @@ void dang_nhap(TREE t, string makh)
 	cout << "Dang nhap thanh cong!";
 
 }
+
 //============== Hóa đơn ===========================
+void menu_chon_ngay_thang(string& luaChonNgayThang, string& thang_nam, string& ngay_min, string& ngay_max, bool& da_chon_menu, bool& qua_trai, bool& qua_phai, int &y)
+{
+	int vi_tri_y = 20;
+	int vi_tri_x = 65;
+	y = vi_tri_y - 10 + 2;
+	bool cl = true;
+	gotoXY(vi_tri_x + 60, vi_tri_y);
+	SetColor(7);
+	cout << "Lua chon thoi gian: ";
+	box(vi_tri_x + 82, vi_tri_y - 10 + 2, 24, 2, 11, 70, 7, "Tat ca");
+	box(vi_tri_x + 82, vi_tri_y - 7 + 2, 24, 2, 11, 0, 7, " Ngay thang nam cu the");
+	box(vi_tri_x + 82, vi_tri_y - 4 + 2, 24, 2, 11, 0, 7, "Theo thang");
+	box(vi_tri_x + 82, vi_tri_y - 1 + 2, 24, 2, 11, 0, 7, "Theo nam");
+	box(vi_tri_x + 82, vi_tri_y + 2 + 2, 24, 2, 11, 0, 7, "Theo ngay hien tai");
+	box(vi_tri_x + 82, vi_tri_y + 5 + 2, 24, 2, 11, 0, 7, "Theo khoang ngay");
+	while (true)
+	{
+		if (_kbhit())
+		{
+			char c = _getch();
+			cl = true;// đã bấm
+			//================ Xử lí 4 phím mũi tên ==============
+			if (c == -32)
+			{
+				cl = true;
+				c = _getch();
+				if (c == 80)
+				{
+					if (y == vi_tri_y - 10 + 2)
+					{
+						y = vi_tri_y - 7 + 2;
+						box(vi_tri_x + 82, vi_tri_y - 10 + 2, 24, 2, 11, 0, 7, "Tat ca");
+						box(vi_tri_x + 82, vi_tri_y - 7 + 2, 24, 2, 11, 70, 7, " Ngay thang nam cu the");
+					}
+					else if (y == vi_tri_y - 7 + 2)
+					{
+						y = vi_tri_y - 4 + 2;
+						box(vi_tri_x + 82, vi_tri_y - 7 + 2, 24, 2, 11, 0, 7, " Ngay thang nam cu the");
+						box(vi_tri_x + 82, vi_tri_y - 4 + 2, 24, 2, 11, 70, 7, "Theo thang");
+						continue;
+					}
+					else if (y == vi_tri_y - 4 + 2)
+					{
+						y = vi_tri_y - 1 + 2;
+						box(vi_tri_x + 82, vi_tri_y - 4 + 2, 24, 2, 11, 0, 7, "Theo thang");
+						box(vi_tri_x + 82, vi_tri_y - 1 + 2, 24, 2, 11, 70, 7, "Theo nam");
+						continue;
+					}
+					else if (y == vi_tri_y - 1 + 2)
+					{
+						y = vi_tri_y + 2 + 2;
+						box(vi_tri_x + 82, vi_tri_y - 1 + 2, 24, 2, 11, 0, 7, "Theo nam");
+						box(vi_tri_x + 82, vi_tri_y + 2 + 2, 24, 2, 11, 70, 7, "Theo ngay hien tai");
+						continue;
+					}
+					else if (y == vi_tri_y + 2 + 2)
+					{
+						y = vi_tri_y + 5 + 2;
+						box(vi_tri_x + 82, vi_tri_y + 2 + 2, 24, 2, 11, 0, 7, "Theo ngay hien tai");
+						box(vi_tri_x + 82, vi_tri_y + 5 + 2, 24, 2, 11, 70, 7, "Theo khoang ngay");
+						continue;
+					}
+					else if (y == vi_tri_y + 5 + 2)
+					{
+						y = vi_tri_y - 10 + 2;
+						box(vi_tri_x + 82, vi_tri_y + 5 + 2, 24, 2, 11, 0, 7, "Theo khoang ngay");
+						box(vi_tri_x + 82, vi_tri_y - 10 + 2, 24, 2, 11, 70, 7, "Tat ca");
+						continue;
+					}
+				}
+				else if (c == 72)
+				{
+					if (y == vi_tri_y - 10 + 2)
+					{
+						y = vi_tri_y + 5 + 2;
+						box(vi_tri_x + 82, vi_tri_y - 10 + 2, 24, 2, 11, 0, 7, "Tat ca");
+						box(vi_tri_x + 82, vi_tri_y + 5 + 2, 24, 2, 11, 70, 7, "Theo khoang ngay");
+						continue;
+					}
+					else if (y == vi_tri_y - 7 + 2)
+					{
+						y = vi_tri_y - 10 + 2;
+						box(vi_tri_x + 82, vi_tri_y - 7 + 2, 24, 2, 11, 0, 7, " Ngay thang nam cu the");
+						box(vi_tri_x + 82, vi_tri_y - 10 + 2, 24, 2, 11, 70, 7, "Tat ca");
+						continue;
+					}
+					else if (y == vi_tri_y + 5 + 2)
+					{
+						y = vi_tri_y + 2 + 2;
+						box(vi_tri_x + 82, vi_tri_y + 5 + 2, 24, 2, 11, 0, 7, "Theo khoang ngay");
+						box(vi_tri_x + 82, vi_tri_y + 2 + 2, 24, 2, 11, 70, 7, "Theo ngay hien tai");
+						continue;
+					}
+					else if (y == vi_tri_y + 2 + 2)
+					{
+						y = vi_tri_y - 1 + 2;
+						box(vi_tri_x + 82, vi_tri_y + 2 + 2, 24, 2, 11, 0, 7, "Theo ngay hien tai");
+						box(vi_tri_x + 82, vi_tri_y - 1 + 2, 24, 2, 11, 70, 7, "Theo nam");
+						continue;
+					}
+					else if (y == vi_tri_y - 1 + 2)
+					{
+						y = vi_tri_y - 4 + 2;
+						box(vi_tri_x + 82, vi_tri_y - 1 + 2, 24, 2, 11, 0, 7, "Theo nam");
+						box(vi_tri_x + 82, vi_tri_y - 4 + 2, 24, 2, 11, 70, 7, "Theo thang");
+						continue;
+					}
+					else if (y == vi_tri_y - 4 + 2)
+					{
+						y = vi_tri_y - 7 + 2;
+						box(vi_tri_x + 82, vi_tri_y - 4 + 2, 24, 2, 11, 0, 7, "Theo thang");
+						box(vi_tri_x + 82, vi_tri_y - 7 + 2, 24, 2, 11, 70, 7, " Ngay thang nam cu the");
+						continue;
+					}
+				}
+				else if (c == 75)
+				{
+					qua_trai = true;
+					return;
+				}
+				else if (c == 77)
+				{
+					qua_phai = true;
+					return;
+				}
+			}
+			else if (c == 13)
+			{
+				if (y == vi_tri_y - 10 + 2)
+				{
+					da_chon_menu = true;
+					luaChonNgayThang = "Tat ca";
+					box(vi_tri_x + 60, vi_tri_y - 10 + 2, 46, 17, 0, 0, 7, "");
+					SetColor(7);
+					return;
+				}
+				if (y == vi_tri_y - 7 + 2)
+				{
+					da_chon_menu = true;
+					luaChonNgayThang = "Ngay thang nam cu the";
+					box(vi_tri_x + 60, vi_tri_y - 10 + 2, 46, 17, 0, 0, 7, "");
+					SetColor(7);
+					return;
+				}
+				else if (y == vi_tri_y - 4 + 2)
+				{
+					da_chon_menu = true;
+					luaChonNgayThang = "Thang";
+					box(vi_tri_x + 60, vi_tri_y - 10 + 2, 46, 17, 0, 0, 7, "");
+					return;
+				}
+				else if (y == vi_tri_y - 1 + 2)
+				{
+					da_chon_menu = true;
+					luaChonNgayThang = "Nam";
+					box(vi_tri_x + 60, vi_tri_y - 10 + 2, 46, 17, 0, 0, 7, "");
+					return;
+				}
+				else if (y == vi_tri_y + 2 + 2)
+				{
+					da_chon_menu = true;
+					luaChonNgayThang = "Ngay hien tai";
+					box(vi_tri_x + 60, vi_tri_y - 10 + 2, 46, 17, 0, 0, 7, "");
+					return;
+				}
+				else if (y == vi_tri_y + 5 + 2)
+				{
+					da_chon_menu = true;
+					luaChonNgayThang = "Khoang ngay";
+					box(vi_tri_x + 60, vi_tri_y - 10 + 2, 46, 17, 0, 0, 7, "");
+					return;
+				}
+			}
+		}
+	}
+}
+
+void khung_chon_bo_loc(string &size, string &luaChonNgayThang, string &thang_nam, string &ngay_min, string &ngay_max,bool &da_chon_menu)
+{
+	int vi_tri_y = 20;
+	int vi_tri_x = 70;
+	int vi_tri_x_xn = 70;
+	int vi_tri_x_cl = 130;
+	int vi_tri_y_xn = 50;
+	int vi_tri_y_cl = 50;
+	bool qua_trai_size = false;
+	bool qua_phai_size = false;
+	bool len_size = false;
+	bool xuong_size = false;
+	bool qua_trai_thang_nam = false;
+	bool qua_phai_thang_nam = false;
+	bool len_thang_nam = false;
+	bool xuong_thang_nam = false;
+	bool qua_trai_menu = false;
+	bool qua_phai_menu = false;
+	bool xuong_nhap_menu = false;
+	bool len_nhap_menu = false;
+	int toa_do_menu = 0;
+	box(60, 8, 135, 27, 11, 0, 7, "");
+	SetColor(7);
+	gotoXY(vi_tri_x, vi_tri_y + 2); cout << "- Tat ca";
+	gotoXY(vi_tri_x, vi_tri_y + 3); cout << "- Ao   : S/M/L";
+	gotoXY(vi_tri_x, vi_tri_y + 4); cout << "- Quan : 26 -> 36";
+	gotoXY(vi_tri_x, vi_tri_y);
+	cout << "SIZE : ";
+	box(vi_tri_x + 9, vi_tri_y - 1,25,2, 11, 0, 7, "");
+	SetColor(7);
+	gotoXY(vi_tri_x + 10, vi_tri_y);
+	cout << size;
+	box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 0, 7, "  Xac nhan");
+	box(vi_tri_x_cl, vi_tri_y_cl, 11, 2, 11, 0, 7, "  Chon lai");
+	box(190, 50, 10, 2, 11, 0, 7, "  Thoat");
+	while (true)
+	{
+		if (da_chon_menu == false)
+		{
+			SetColor(7);
+			gotoXY(vi_tri_x - 5 + 60, vi_tri_y);
+			cout << "Lua chon thoi gian: ";
+			box(vi_tri_x - 5 + 82, vi_tri_y - 10 + 2, 24, 2, 11, 0, 7, "Tat ca");
+			box(vi_tri_x - 5 + 82, vi_tri_y - 7 + 2, 24, 2, 11, 0, 7, " Ngay thang nam cu the");
+			box(vi_tri_x - 5 + 82, vi_tri_y - 4 + 2, 24, 2, 11, 0, 7, "Theo thang");
+			box(vi_tri_x - 5 + 82, vi_tri_y - 1 + 2, 24, 2, 11, 0, 7, "Theo nam");
+			box(vi_tri_x - 5 + 82, vi_tri_y + 2 + 2, 24, 2, 11, 0, 7, "Theo ngay hien tai");
+			box(vi_tri_x - 5 + 82, vi_tri_y + 5 + 2, 24, 2, 11, 0, 7, "Theo khoang ngay");
+			xu_li_nhap_1_chuoi(size, xuong_size, len_size, qua_trai_size, qua_phai_size, vi_tri_x + 10, vi_tri_y, 1);
+			while (true)
+			{
+				if (qua_trai_size == true)
+				{
+					qua_trai_size = false;
+					box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
+				}
+				else if (qua_phai_size == true)
+				{
+					qua_phai_size = false;
+					menu_chon_ngay_thang(luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu, qua_trai_menu, qua_phai_menu,toa_do_menu);
+					if (da_chon_menu == true)
+					{
+						break;
+					}
+					else if (qua_trai_menu == true)
+					{
+						qua_trai_menu = false;
+						xu_li_nhap_1_chuoi(size, xuong_size, len_size, qua_trai_size, qua_phai_size, vi_tri_x + 10, vi_tri_y, 1);
+					}
+					else if (qua_phai_menu == true)
+					{
+						qua_phai_menu = false;
+						return;
+					}
+				}
+				else if (xuong_size == true || len_size == true)
+				{
+					xuong_size = false;
+					len_size = false;
+					return;
+				}
+			}
+		}
+		else if (da_chon_menu == true)
+		{
+			if (luaChonNgayThang == "Khoang ngay")
+			{
+				box(vi_tri_x - 10 + 50 + 19, vi_tri_y - 1, 25, 2, 11, 0, 7, "");
+				box(vi_tri_x - 10 + 50 + 27 + 23, vi_tri_y - 1, 25, 2, 11, 0, 7, "");
+				SetColor(7);
+				gotoXY(vi_tri_x - 10 + 50 + 20, vi_tri_y);
+				cout << ngay_min;
+				gotoXY(vi_tri_x - 10 + 50 + 27 + 24, vi_tri_y);
+				cout << ngay_max;
+				gotoXY(vi_tri_x - 10 + 50, vi_tri_y);
+				cout << "Nhap thoi gian: Tu";
+				gotoXY(vi_tri_x - 10 + 50 + 26 + 20, vi_tri_y);
+				cout << "den";
+				int toa_do_nhap = vi_tri_x - 10 + 50 + 20;
+				while (true)
+				{
+					if (toa_do_nhap == vi_tri_x - 10 + 50 + 20)
+					{
+						xu_li_nhap_1_chuoi(ngay_min, xuong_nhap_menu, len_nhap_menu, qua_trai_menu, qua_phai_menu, vi_tri_x - 10 + 50 + 20, vi_tri_y, 1);
+						if (qua_phai_menu == true)
+						{
+							toa_do_nhap = vi_tri_x - 10 + 50 + 27 + 24;
+							qua_phai_menu = false;
+						}
+						else if (qua_trai_menu == true)
+						{
+							toa_do_nhap = vi_tri_x + 10;
+							qua_trai_menu = false;
+						}
+						else if (xuong_nhap_menu == true || len_nhap_menu == true)
+						{
+							xuong_nhap_menu = false;
+							len_nhap_menu = false;
+							return;
+						}
+					}
+					else if (toa_do_nhap == vi_tri_x - 10 + 50 + 27 + 24)
+					{
+						xu_li_nhap_1_chuoi(ngay_max, xuong_nhap_menu, len_nhap_menu, qua_trai_menu, qua_phai_menu, vi_tri_x - 10 + 50 + 27 + 24, vi_tri_y, 1);
+						if (qua_phai_menu == true)
+						{
+							toa_do_nhap = vi_tri_x + 10;
+							qua_phai_menu = false;
+						}
+						else if (qua_trai_menu == true)
+						{
+							toa_do_nhap = vi_tri_x - 10 + 50 + 20;
+							qua_trai_menu = false;
+						}
+						else if (xuong_nhap_menu == true || len_nhap_menu == true)
+						{
+							xuong_nhap_menu = false;
+							len_nhap_menu = false;
+							return;
+						}
+					}
+					else if (toa_do_nhap == vi_tri_x + 10)
+					{
+						xu_li_nhap_1_chuoi(size, xuong_size, len_size, qua_trai_size, qua_phai_size, vi_tri_x + 10, vi_tri_y, 1);
+						if (qua_trai_size == true)
+						{
+							qua_trai_size = false;
+							toa_do_nhap = vi_tri_x - 10 + 50 + 27 + 24;
+						}
+						else if (qua_phai_size == true)
+						{
+							qua_phai_size = false;
+							toa_do_nhap = vi_tri_x - 10 + 50 + 20;
+						}
+						else if (len_size == true || xuong_size == true)
+						{
+							len_size = false;
+							xuong_size = false;
+							return;
+						}
+					}
+				}	
+			}
+			else if (luaChonNgayThang == "Ngay thang nam cu the")
+			{
+				box(vi_tri_x - 5 + 60 + 35, vi_tri_y - 1, 25, 2, 11, 0, 7, "");
+				SetColor(7);
+				gotoXY(vi_tri_x - 5 + 60, vi_tri_y);
+				cout << "Nhap ngay thang nam (dd/mm/yyyy): ";
+				gotoXY(vi_tri_x - 5 + 60 + 36, vi_tri_y);
+				cout << thang_nam;
+				int toa_do_nhap = vi_tri_x -5 + 60 + 36;
+				while (true)
+				{
+					if (toa_do_nhap == vi_tri_x - 5 + 60 + 36)
+					{
+						xu_li_nhap_1_chuoi(thang_nam, xuong_nhap_menu, len_nhap_menu, qua_trai_menu, qua_phai_menu, vi_tri_x - 5 + 60 + 36, vi_tri_y, 1);
+						if (qua_trai_menu == true || qua_phai_menu == true)
+						{
+							toa_do_nhap = vi_tri_x + 10;
+							qua_trai_menu = false;
+							qua_phai_menu = true;
+						}
+						else if (len_nhap_menu == true || xuong_nhap_menu == true)
+						{
+							xuong_nhap_menu = false;
+							len_nhap_menu = false;
+							return;
+						}
+					}
+					else if (toa_do_nhap == vi_tri_x + 10)
+					{
+						xu_li_nhap_1_chuoi(size, xuong_size, len_size, qua_trai_size, qua_phai_size, vi_tri_x + 10, vi_tri_y, 1);
+						if (qua_trai_size == true || qua_phai_size == true)
+						{
+							qua_trai_size = false;
+							qua_phai_size = false;
+							toa_do_nhap = vi_tri_x - 5 + 60 + 36;
+						}
+						else if (len_size == true || xuong_size == true)
+						{
+							len_size = false;
+							xuong_size = false;
+							return;
+						}
+					}
+				}
+			}
+			else if (luaChonNgayThang == "Thang")
+			{
+				SetColor(7);
+				gotoXY(vi_tri_x - 5 + 60, vi_tri_y);
+				cout << "Nhap thang: ";
+				box(vi_tri_x - 5 + 60 + 14, vi_tri_y - 1, 25, 2, 11, 0, 7, "");
+				gotoXY(vi_tri_x - 5 + 60 + 15, vi_tri_y);
+				SetColor(7);
+				cout << thang_nam;
+				int toa_do_nhap = vi_tri_x - 5 + 60 + 15;
+				while (true)
+				{
+					if (toa_do_nhap == vi_tri_x - 5 + 60 + 15)
+					{
+						xu_li_nhap_1_chuoi(thang_nam, xuong_nhap_menu, len_nhap_menu, qua_trai_menu, qua_phai_menu, vi_tri_x - 5 + 60 + 15, vi_tri_y, 1);
+						if (qua_trai_menu == true || qua_phai_menu == true)
+						{
+							toa_do_nhap = vi_tri_x + 10;
+							qua_trai_menu = false;
+							qua_phai_menu = true;
+						}
+						else if (len_nhap_menu == true || xuong_nhap_menu == true)
+						{
+							xuong_nhap_menu = false;
+							len_nhap_menu = false;
+							return;
+						}
+					}
+					else if (toa_do_nhap == vi_tri_x + 10)
+					{
+						xu_li_nhap_1_chuoi(size, xuong_size, len_size, qua_trai_size, qua_phai_size, vi_tri_x + 10, vi_tri_y, 1);
+						if (qua_trai_size == true || qua_phai_size == true)
+						{
+							qua_trai_size = false;
+							qua_phai_size = false;
+							toa_do_nhap = vi_tri_x - 5 + 60 + 15;
+						}
+						else if (len_size == true || xuong_size == true)
+						{
+							len_size = false;
+							xuong_size = false;
+							return;
+						}
+					}
+				}
+			}
+			else if (luaChonNgayThang == "Nam")
+			{
+				SetColor(7);
+				gotoXY(vi_tri_x - 5 + 60, vi_tri_y);
+				cout << "Nhap nam: ";
+				box(vi_tri_x - 5 + 60 + 12, vi_tri_y - 1, 25, 2, 11, 0, 7, "");
+				SetColor(7);
+				gotoXY(vi_tri_x - 5 + 60 + 13, vi_tri_y);
+				cout << thang_nam;
+				int toa_do_nhap = vi_tri_x - 5 + 60 + 13;
+				while (true)
+				{
+					if (toa_do_nhap == vi_tri_x - 5 + 60 + 13)
+					{
+						xu_li_nhap_1_chuoi(thang_nam, xuong_nhap_menu, len_nhap_menu, qua_trai_menu, qua_phai_menu, vi_tri_x - 5 + 60 + 13, vi_tri_y, 1);
+						if (qua_trai_menu == true || qua_phai_menu == true)
+						{
+							toa_do_nhap = vi_tri_x + 10;
+							qua_trai_menu = false;
+							qua_phai_menu = true;
+						}
+						else if (len_nhap_menu == true || xuong_nhap_menu == true)
+						{
+							xuong_nhap_menu = false;
+							len_nhap_menu = false;
+							return;
+						}
+					}
+					else if (toa_do_nhap == vi_tri_x + 10)
+					{
+						xu_li_nhap_1_chuoi(size, xuong_size, len_size, qua_trai_size, qua_phai_size, vi_tri_x + 10, vi_tri_y, 1);
+						if (qua_trai_size == true || qua_phai_size == true)
+						{
+							qua_trai_size = false;
+							qua_phai_size = false;
+							toa_do_nhap = vi_tri_x - 5 + 60 + 13;
+						}
+						else if (len_size == true || xuong_size == true)
+						{
+							len_size = false;
+							xuong_size = false;
+							return;
+						}
+					}
+				}
+			}
+			else if (luaChonNgayThang == "Ngay hien tai")
+			{
+				box(vi_tri_x - 5 + 60 + 17, vi_tri_y - 1, 25, 2, 11, 0, 7, "");
+				SetColor(7);
+				gotoXY(vi_tri_x - 5 + 60, vi_tri_y);
+				cout << "Ngay hien tai: ";
+				thoiGianThuc(thang_nam);
+				gotoXY(vi_tri_x - 5 + 60 + 18, vi_tri_y);
+				cout << thang_nam;
+				xu_li_nhap_1_chuoi(size, xuong_size, len_size, qua_trai_size, qua_phai_size, vi_tri_x + 10, vi_tri_y, 1);
+				if (qua_trai_size == true || qua_phai_size == true)
+				{
+					qua_trai_size = false;
+					qua_phai_size = false;
+					return;
+				}
+				else if (len_size == true || xuong_size == true)
+				{
+					len_size = false;
+					xuong_size = false;
+					return;
+				}
+			
+			}
+			else if (luaChonNgayThang == "Tat ca")
+			{
+				box(vi_tri_x - 5 + 60 + 14, vi_tri_y - 1, 25, 2, 11, 0, 7, "Tat ca");
+				SetColor(7);
+				gotoXY(vi_tri_x - 5 + 60, vi_tri_y);
+				cout << "Ngay thang: ";
+				xu_li_nhap_1_chuoi(size, xuong_size, len_size, qua_trai_size, qua_phai_size, vi_tri_x + 10, vi_tri_y, 1);
+				if (qua_trai_size == true || qua_phai_size == true)
+				{
+					qua_trai_size = false;
+					qua_phai_size = false;
+					return;
+				}
+				else if (len_size == true || xuong_size == true)
+				{
+					len_size = false;
+					xuong_size = false;
+					return;
+				}
+			}
+		}
+	}
+}
+
+void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, string& ngay_min, string& ngay_max, bool &chon_thoat_trong_bo_loc)
+{
+	int vi_tri_x_xn = 70;
+	int vi_tri_x_cl = 130;
+	int vi_tri_y_xn = 50;
+	int vi_tri_y_cl = 50;
+	bool da_chon_menu = false;
+	bool kt = true;
+	int toa_do_o = vi_tri_x_xn;
+	khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max,da_chon_menu);
+	box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
+	box(vi_tri_x_cl, vi_tri_y_cl, 11, 2, 11, 0, 7, "  Chon lai");
+	box(190, 50, 10, 2, 11, 0, 7, "  Thoat");
+	while (true)
+	{
+			if (_kbhit())
+			{
+				char c = _getch();
+				if (c == -32)
+				{
+					kt = true;// đã bấm
+					c = _getch();
+					if (c == 72 || c == 80)
+					{
+						khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max,da_chon_menu);
+						toa_do_o = vi_tri_x_xn;
+						box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
+					}
+					else if (c == 77) // trái 
+					{
+						if (toa_do_o == vi_tri_x_xn)
+						{
+							toa_do_o = vi_tri_x_cl;
+							box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 0, 7, "  Xac nhan");
+							box(vi_tri_x_cl, vi_tri_y_cl, 11, 2, 11, 70, 7, "  Chon lai");
+						}
+						else if (toa_do_o == vi_tri_x_cl)
+						{
+							toa_do_o = 190;
+							box(190, 50, 10, 2, 11, 70, 7, "  Thoat");
+							box(vi_tri_x_cl, vi_tri_y_cl, 11, 2, 11, 0, 7, "  Chon lai");
+						}
+						else if (toa_do_o == 190)
+						{
+							toa_do_o = vi_tri_x_xn;
+							box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
+							box(190, 50, 10, 2, 11, 0, 7, "  Thoat");
+						}
+					}
+					else if (c == 75)
+					{
+						if (toa_do_o == vi_tri_x_xn)
+						{
+							toa_do_o = 190;
+							box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 0, 7, "  Xac nhan");
+							box(190, 50, 10, 2, 11, 0, 7, "  Thoat");
+						}
+						else if (toa_do_o == 190)
+						{
+							toa_do_o = vi_tri_x_cl;
+							box(vi_tri_x_cl, vi_tri_y_cl, 11, 2, 11, 70, 7, "  Chon lai");
+							box(190, 50, 10, 2, 11, 0, 7, "  Thoat");
+						}
+						else if (toa_do_o == vi_tri_x_cl)
+						{
+							toa_do_o = vi_tri_x_xn;
+							box(vi_tri_x_cl, vi_tri_y_cl, 11, 2, 11, 0, 7, "  Chon lai");
+							box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
+						}
+					}
+				}
+				else if (c == 13)
+				{
+					if (toa_do_o == vi_tri_x_xn)
+					{
+						if (da_chon_menu == false)
+						{
+							SetColor(12);
+							gotoXY(70, 29);
+							cout << "Hay chon thoi gian";
+							gotoXY(70, 30);
+							cout << "An mui ten len hoac xuong de tiep tuc!";
+						}
+						else if (da_chon_menu == true)
+						{
+							size[0] = toupper(size[0]);
+							if (check_size_ao(size) == false && check_size_quan(size) == false && size != "Tat ca")
+							{
+								SetColor(12);
+								gotoXY(70, 29);
+								cout << "Size da chon khong phu hop!";
+								gotoXY(70, 30);
+								cout << "An mui ten len hoac xuong de tiep tuc!";
+								system("pause");
+								size.clear();
+								khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+								size[0] = toupper(size[0]);
+								continue;
+							}
+							if (luaChonNgayThang == "Khoang ngay")
+							{
+								if (check_date(ngay_min) == false && check_date(ngay_max) == false)
+								{
+									SetColor(12);
+									gotoXY(70, 29);
+									cout << "Ngay thu nhat va thu hai da chon khong phu hop!";
+									gotoXY(70, 30);
+									cout << "An mui ten len hoac xuong de tiep tuc!";
+									system("pause");
+									ngay_min.clear();
+									ngay_max.clear();
+									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									continue;
+								}
+								else if (check_date(ngay_min) == false)
+								{
+									SetColor(12);
+									gotoXY(70, 29);
+									cout << "Ngay thu nhat da chon khong phu hop!";
+									gotoXY(70, 30);
+									cout << "An mui ten len hoac xuong de tiep tuc!";
+									system("pause");
+									ngay_min.clear();
+									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									size[0] = toupper(size[0]);
+								}
+								else if (check_date(ngay_max) == false)
+								{
+									SetColor(12);
+									gotoXY(70, 29);
+									cout << "Ngay thu hai da chon khong phu hop!";
+									gotoXY(70, 30);
+									cout << "An mui ten len hoac xuong de tiep tuc!";
+									system("pause");
+									ngay_max.clear();
+									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									continue;
+								}
+							}
+							else if (luaChonNgayThang == "Ngay thang nam cu the")
+							{
+								if (check_date(thang_nam) == false)
+								{
+									SetColor(12);
+									gotoXY(70, 29);
+									cout << "Ngay da chon da chon khong phu hop!";
+									gotoXY(70, 30);
+									cout << "An mui ten len hoac xuong de tiep tuc!";
+									system("pause");
+									ngay_min.clear();
+									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									continue;
+								}
+							}
+							else if (luaChonNgayThang == "Thang")
+							{
+								if (check_So(thang_nam) == false)
+								{
+									SetColor(12);
+									gotoXY(70, 29);
+									cout << "Thang da chon da chon khong phu hop!";
+									gotoXY(70, 30);
+									cout << "An mui ten len hoac xuong de tiep tuc!";
+									system("pause");
+									thang_nam.clear();
+									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									continue;
+								}
+								if (stoi(thang_nam) > 12)
+								{
+									SetColor(12);
+									gotoXY(70, 29);
+									cout << "Ngay da chon da chon khong phu hop!";
+									gotoXY(70, 30);
+									cout << "An mui ten len hoac xuong de tiep tuc!";
+									system("pause");
+									thang_nam.clear();
+									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									continue;
+								}
+							}
+							else if (luaChonNgayThang == "Nam")
+							{
+								if (check_So(thang_nam) == false)
+								{
+									SetColor(12);
+									gotoXY(70, 29);
+									cout << "Nam da chon da chon khong phu hop!";
+									gotoXY(70, 30);
+									cout << "An mui ten len hoac xuong de tiep tuc!";
+									system("pause");
+									thang_nam.clear();
+									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									continue;
+								}
+							}
+						}
+					}
+					else if (toa_do_o == vi_tri_x_cl)
+					{
+						size.clear();
+						luaChonNgayThang.clear();
+						thang_nam.clear();
+						ngay_min.clear();
+						ngay_max.clear();
+						da_chon_menu = false;
+						khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max,da_chon_menu);
+						khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+						toa_do_o = vi_tri_x_xn;
+						box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
+					}
+					else if (toa_do_o == 190)
+					{
+						chon_thoat_trong_bo_loc = true;
+						return;
+					}
+				}
+			}
+	}
+}
 
 //===== Nhập=======
 void ve_nhap_bang_hoa_don_nhap_hang( HoaDon a, ds_hoa_don b, DS_Hang_Hoa c)
@@ -1406,14 +2150,16 @@ void ve_nhap_hoa_don_ban_hang(HoaDon a, ds_hoa_don b, DS_Hang_Hoa c, ds_khach_ha
 }
 
 // === Sửa ====
-void xu_li_trong_luc_nhap(string& a, int vi_tri_x_nhap_chuoi, int vi_tri_y_nhap_chuoi, int &vi_tri_x, int vi_tri_x_sua, int vi_tri_x_huy,int vi_tri_y_sua,int vi_tri_y_huy)
+void xu_li_trong_luc_nhap_sua(string& a, int vi_tri_x_nhap_chuoi, int vi_tri_y_nhap_chuoi, int &vi_tri_x, int vi_tri_x_sua, int vi_tri_x_huy,int vi_tri_y_sua,int vi_tri_y_huy)
 {
 	bool xuong = false;
 	bool len = false;
+	bool trai = false;
+	bool phai = false;
 	box(vi_tri_x_sua, vi_tri_y_sua, 10, 2, 11, 0, 7, " Sua");
 	box(vi_tri_x_huy, vi_tri_y_huy, 10, 2, 11, 0, 7, " Huy sua");
-	xu_li_nhap_1_chuoi(a, xuong, len, vi_tri_x_nhap_chuoi, vi_tri_y_nhap_chuoi, 1);
-	if (xuong == true)
+	xu_li_nhap_1_chuoi(a, xuong, len, trai, phai, vi_tri_x_nhap_chuoi, vi_tri_y_nhap_chuoi, 1);
+	if (xuong == true || trai == true || phai == true)
 	{
 		box(vi_tri_x_sua, vi_tri_y_sua, 10, 2, 11, 70, 7, " Sua");
 		vi_tri_x = 70;
@@ -1433,7 +2179,7 @@ void xu_li_1_muc_sua(string &a, int vi_tri_x_nhap_chuoi, int vi_tri_y_nhap_chuoi
 	int vi_tri_x_huy = 130;
 	int vi_tri_y_sua = 50;
 	int vi_tri_y_huy = 50;
-	xu_li_trong_luc_nhap(a, vi_tri_x_nhap_chuoi, vi_tri_y_nhap_chuoi, vi_tri_x, vi_tri_x_sua, vi_tri_x_huy, vi_tri_y_sua, vi_tri_y_huy);
+	xu_li_trong_luc_nhap_sua(a, vi_tri_x_nhap_chuoi, vi_tri_y_nhap_chuoi, vi_tri_x, vi_tri_x_sua, vi_tri_x_huy, vi_tri_y_sua, vi_tri_y_huy);
 	while (true)
 	{
 		if (_kbhit())
@@ -1451,7 +2197,7 @@ void xu_li_1_muc_sua(string &a, int vi_tri_x_nhap_chuoi, int vi_tri_y_nhap_chuoi
 						box(vi_tri_x_sua, vi_tri_y_sua, 10, 2, 11, 0, 7, " Sua");
 						box(vi_tri_x_huy, vi_tri_y_huy, 10, 2, 11, 0, 7, " Huy sua");
 						box(190, 50, 10, 2, 11, 0, 7, "  Thoat");
-						xu_li_trong_luc_nhap(a, vi_tri_x_nhap_chuoi, vi_tri_y_nhap_chuoi,vi_tri_x, vi_tri_x_sua, vi_tri_x_huy, vi_tri_y_sua, vi_tri_y_huy);
+						xu_li_trong_luc_nhap_sua(a, vi_tri_x_nhap_chuoi, vi_tri_y_nhap_chuoi,vi_tri_x, vi_tri_x_sua, vi_tri_x_huy, vi_tri_y_sua, vi_tri_y_huy);
 						continue;
 					}
 				}
@@ -1649,6 +2395,74 @@ bool khung_chon_tiep_tuc_sua_tt()
 					{
 						vi_tri_x = 102;
 						box(102, 29, 20, 4, 11, 70, 10, "Tiep tuc chinh sua");
+						box(140, 29, 19, 4, 11, 0, 10, "Thoat");
+						continue;
+					}
+				}
+			}
+			else if (c == 13)
+			{
+				if (vi_tri_x == 102)
+				{
+					return true;
+				}
+				else if (vi_tri_x == 140)
+				{
+					return false;
+				}
+			}
+		}
+}
+
+bool khung_chon_doi_bo_loc()
+{
+	bool cl = true;
+	int vi_tri_x = 102;
+	box(90, 14, 81, 21, 11, 0, 7, "");
+	gotoXY(117, 21);
+	SetColor(12);
+	cout << "Khong co hoa don theo bo loc!";
+	box(102, 29, 20, 4, 11, 70, 10, "Doi bo loc");
+	box(140, 29, 19, 4, 11, 0, 10, "Thoat");
+	while (true)
+		if (_kbhit())
+		{
+			char c = _getch();
+			cl = true;
+			if (c == -32)
+			{
+				cl = true;
+				c = _getch();
+				if (c == 77)
+				{
+					if (vi_tri_x == 102)
+					{
+						vi_tri_x = 140;
+						box(102, 29, 20, 4, 11, 0, 10, "Doi bo loc");
+						box(140, 29, 19, 4, 11, 70, 10, "Thoat");
+						continue;
+					}
+					else if (vi_tri_x == 140)
+					{
+						vi_tri_x = 102;
+						box(102, 29, 20, 4, 11, 70, 10, "Doi bo loc");
+						box(140, 29, 19, 4, 11, 0, 10, "Thoat");
+						continue;
+					}
+				}
+				else if (c == 75)
+				{
+					if (vi_tri_x == 102)
+					{
+						vi_tri_x = 140;
+						box(102, 29, 20, 4, 11, 0, 10, "Doi bo loc");
+						box(140, 29, 19, 4, 11, 70, 10, "Thoat");
+						continue;
+					}
+					else if (vi_tri_x == 140)
+					{
+						vi_tri_x = 102;
+						box(102, 29, 20, 4, 11, 70, 10, "Doi bo loc");
 						box(140, 29, 19, 4, 11, 0, 10, "Thoat");
 						continue;
 					}
@@ -2749,41 +3563,589 @@ void sua_tt_hd(Admin& ad)
 }
 
 //=== Xuất === 
-void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_tam)
+void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_tam, string size, string ngay_min, string ngay_max, string luaChonNgayThang, string thang_nam , long long& tong_tien)
 {
-	int dem = 0;
-	if (ad.quan_li_ds_hoa_don_nhap.sl % 4 == 0)
+	int vi_tri_x = 0;
+	int vi_tri_y = 0;
+	if (size == "Tat ca" && luaChonNgayThang == "Tat ca")
 	{
-		trang = (ad.quan_li_ds_hoa_don_nhap.sl / 4);
+		int dem = 0;
+		if (ad.quan_li_ds_hoa_don_nhap.sl % 4 == 0)
+		{
+			trang = (ad.quan_li_ds_hoa_don_nhap.sl / 4);
+		}
+		else
+		{
+			trang = (ad.quan_li_ds_hoa_don_nhap.sl / 4) + 1;
+		}
+		vector <HoaDon> tam;
+		for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+		{
+			dem++;
+			if (trang - ds_tam.size() == 1)
+			{
+				if (dem > ds_tam.size() * 4)
+				{
+					if (k->pNext == NULL)
+					{
+						tam.push_back(k->data);
+						ds_tam.push_back(tam);
+						tam.clear();
+						break;
+					}
+					tam.push_back(k->data);
+					continue;
+				}
+			}
+			tam.push_back(k->data);
+			if (tam.size() == 4)
+			{
+				ds_tam.push_back(tam);
+				tam.clear();
+			}
+			tong_tien += k->data.tong_tien;
+		}
+	}
+	else if ( size == "Tat ca")
+	{
+		if (luaChonNgayThang == "Thang")
+		{
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				if (stoi(thang_nam) == stoi(k->data.ngay_lap_hd.substr(3, 2)))
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size() ; i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
+		}
+		else if (luaChonNgayThang == "Nam")
+		{
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				if (stoi(thang_nam) == stoi(k->data.ngay_lap_hd.substr(6, 4)) )
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
+		}
+		else if (luaChonNgayThang == "Ngay thang nam cu the")
+		{
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				if (thang_nam == k->data.ngay_lap_hd)
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
+		}
+		else if (luaChonNgayThang == "Ngay thang nam cu the")
+		{
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			string str;
+			thoiGianThuc(str);
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				if (str == k->data.ngay_lap_hd)
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
+		}
+		else if (luaChonNgayThang == "Khoang ngay")
+		{
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			int min = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_min);
+			int max = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_max);
+			int tam3 = 0;
+			string str;
+			thoiGianThuc(str);
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				tam3 = tinh_giay_cua_ngay_nhap_tu_nam_1900(k->data.ngay_lap_hd);
+				if (min <= tam3 && tam3 <= max)
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
+		}
 	}
 	else
 	{
-		trang = (ad.quan_li_ds_hoa_don_nhap.sl / 4) + 1;
-	}
-	vector <HoaDon> tam;
-	for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
-	{
-		dem++;
-		if (trang - ds_tam.size() == 1)
+		if (luaChonNgayThang == "Thang")
 		{
-			if (dem > ds_tam.size() * 4)
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
 			{
-				if (k->pNext == NULL)
+				if (stoi(thang_nam) == stoi(k->data.ngay_lap_hd.substr(3, 2)) && size == k->data.thong_tin_hang.size)
 				{
 					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
 					ds_tam.push_back(tam);
 					tam.clear();
-					break;
 				}
-				tam.push_back(k->data);
-				continue;
 			}
 		}
-		tam.push_back(k->data);
-		if (tam.size() == 4)
+		else if (luaChonNgayThang == "Nam")
 		{
-			ds_tam.push_back(tam);
-			tam.clear();
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				if (stoi(thang_nam) == stoi(k->data.ngay_lap_hd.substr(6, 4)) && size == k->data.thong_tin_hang.size)
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
+		}
+		else if (luaChonNgayThang == "Ngay thang nam cu the")
+		{
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				if (thang_nam == k->data.ngay_lap_hd && size == k->data.thong_tin_hang.size)
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
+		}
+		else if (luaChonNgayThang == "Ngay hien tai")
+		{
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			string str;
+			thoiGianThuc(str);
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				if (str == k->data.ngay_lap_hd && size == k->data.thong_tin_hang.size)
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
+		}
+		else if (luaChonNgayThang == "Khoang ngay")
+		{
+			vector <HoaDon> ds_co_dk;
+			vector <HoaDon> tam;
+			int min = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_min);
+			int max = tinh_giay_cua_ngay_nhap_tu_nam_1900(ngay_max);
+			int tam3 = 0;
+			string str;
+			thoiGianThuc(str);
+			for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+			{
+				tam3 = tinh_giay_cua_ngay_nhap_tu_nam_1900(k->data.ngay_lap_hd);
+				if (min <= tam3 && tam3 <= max && size == k->data.thong_tin_hang.size)
+				{
+					tam.push_back(k->data);
+					tong_tien += k->data.tong_tien;
+				}
+			}
+			if (ds_co_dk.size() == 0)
+			{
+				gotoXY(vi_tri_x, vi_tri_y);
+				cout << "Khong co hoa don theo tim kiem";
+			}
+			int dem = 0;
+			if (ds_co_dk.size() % 4 == 0)
+			{
+				trang = (ds_co_dk.size() / 4);
+			}
+			else
+			{
+				trang = (ds_co_dk.size() / 4) + 1;
+			}
+			for (int i = 0; i < ds_co_dk.size(); i++)
+			{
+				dem++;
+				if (trang - ds_tam.size() == 1)
+				{
+					if (dem > ds_tam.size() * 4)
+					{
+						if (i == ds_co_dk.size() - 1)
+						{
+							tam.push_back(ds_co_dk.at(i));
+							ds_tam.push_back(tam);
+							tam.clear();
+							break;
+						}
+						tam.push_back(ds_co_dk.at(i));
+						continue;
+					}
+				}
+				tam.push_back(ds_co_dk.at(i));
+				if (tam.size() == 4)
+				{
+					ds_tam.push_back(tam);
+					tam.clear();
+				}
+			}
 		}
 	}
 }
@@ -2890,7 +4252,7 @@ void xuat_1_trang_hd_nhap_hang(int trang_ht, vector < vector <HoaDon> > ds_tam)
 	}
 }
 
-void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon> >& ds_tam, bool& qua_trang, bool& lui_trang, bool& thoat,int &trang)
+void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon> >& ds_tam, bool& qua_trang, bool& lui_trang, bool& thoat,int &trang, string luaChonNgayThang, string size, string ngay_min, string ngay_max, string thang_nam, long long &tong_tien)
 {
 	bool kt = true;
 	bool cl = true;
@@ -3089,7 +4451,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3098,7 +4460,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3107,7 +4469,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3116,7 +4478,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(3).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3289,7 +4651,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3298,7 +4660,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3307,7 +4669,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3448,7 +4810,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3457,7 +4819,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3567,7 +4929,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3837,7 +5199,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3846,7 +5208,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3855,7 +5217,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -3864,7 +5226,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(3).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -4110,7 +5472,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -4119,7 +5481,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -4128,7 +5490,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -4342,7 +5704,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -4351,7 +5713,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size, ngay_min, ngay_max, luaChonNgayThang, thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -4534,7 +5896,7 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 						{
 							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
 							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
 							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
@@ -4561,7 +5923,6 @@ void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon
 	}
 }
 
-
 void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 {
 	int trang_ht = 1;
@@ -4570,16 +5931,28 @@ void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 	bool qua_trang = false;
 	bool lui_trang = false;
 	bool thoat = false;
+	bool chon_thoat_trong_bo_loc = false;
+	string luaChonNgayThang;
+	string size;
+	string ngay_min;
+	string ngay_max;
+	string thang_nam;
+	long long tong_tien;
+	loc_hoa_don(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max,chon_thoat_trong_bo_loc);
+	if (chon_thoat_trong_bo_loc == true)
+	{
+		return;
+	}
 	vector < vector <HoaDon> > ds_tam;
-	lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+	lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 	if (trang == 1)
 	{
 			xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 			box(118, 42, 5, 2, 0, 0, 0, "");
 			box(118 + 13, 42, 5, 2, 0, 0, 0, "");
-			xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang);
+			xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
 			ds_tam.clear();
-			lay_ds_trang_hd_nhap(ad, trang, ds_tam);
+			lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
 			if (thoat == true) // thoát
 			{
 				thoat == false;
@@ -4590,7 +5963,7 @@ void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 	else
 	{
 		xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-		xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang);
+		xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
 		while (true)
 		{
 			if (lui_trang == true) // mũi tên trái
@@ -4602,7 +5975,7 @@ void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 					lui_trang = false;
 					trang_ht = trang;
 					xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang);
+					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
 				}
 				else
 				{
@@ -4611,7 +5984,7 @@ void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 					lui_trang = false;
 					trang_ht--;
 					xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang);
+					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
 				}
 			}
 			else if (qua_trang == true) // mũi tên phải 
@@ -4623,7 +5996,7 @@ void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 					qua_trang = false;
 					trang_ht = 1;
 					xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang);
+					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
 				}
 				else
 				{
@@ -4632,7 +6005,7 @@ void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 					qua_trang = false;
 					trang_ht++;
 					xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang);
+					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
 				}
 			}
 			else if (thoat == true) // thoát
@@ -6467,6 +7840,11 @@ void xuat_sua_ds_hoa_don_ban(Admin& ad)
 	bool qua_trang = false;
 	bool lui_trang = false;
 	bool thoat = false;
+	string luaChonNgayThang;
+	string size;
+	string ngay_min;
+	string ngay_max;
+	string thang_nam;
 	vector < vector <HoaDon> > ds_tam;
 	lay_ds_trang_hd_ban(ad, trang, ds_tam);
 	if (trang == 1)
