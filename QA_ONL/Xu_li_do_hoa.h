@@ -1111,7 +1111,7 @@ void khung_chon_bo_loc(string &size, string &luaChonNgayThang, string &thang_nam
 	bool xuong_nhap_menu = false;
 	bool len_nhap_menu = false;
 	int toa_do_menu = 0;
-	box(60, 8, 135, 27, 11, 0, 7, "");
+	box(60, 8, 140, 27, 11, 0, 7, "");
 	SetColor(7);
 	gotoXY(vi_tri_x, vi_tri_y + 2); cout << "- Tat ca";
 	gotoXY(vi_tri_x, vi_tri_y + 3); cout << "- Ao   : S/M/L";
@@ -1446,6 +1446,7 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 	int vi_tri_y_cl = 50;
 	bool da_chon_menu = false;
 	bool kt = true;
+	bool cl = true;
 	int toa_do_o = vi_tri_x_xn;
 	khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max,da_chon_menu);
 	box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
@@ -1520,21 +1521,74 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 							cout << "Hay chon thoi gian";
 							gotoXY(70, 30);
 							cout << "An mui ten len hoac xuong de tiep tuc!";
+							while (true)
+							{
+								if (_kbhit())
+								{
+									char c = _getch();
+									cl = true;// đã bấm
+									if (c == -32)
+									{
+										cl = true;// đã bấm
+										c = _getch();
+										if (c == 80 || c == 72)
+										{
+											break;
+										}
+										else
+										{
+											continue;
+										}
+
+									}
+									else
+									{
+										continue;
+									}
+								}
+							}
 						}
 						else if (da_chon_menu == true)
 						{
-							size[0] = toupper(size[0]);
-							if (check_size_ao(size) == false && check_size_quan(size) == false && size != "Tat ca")
+							chuanHoa(size);
+							if (check_size_ao(size) == false && check_size_quan(size) == false && size != "Tat Ca")
 							{
 								SetColor(12);
 								gotoXY(70, 29);
 								cout << "Size da chon khong phu hop!";
 								gotoXY(70, 30);
 								cout << "An mui ten len hoac xuong de tiep tuc!";
-								system("pause");
+								while (true)
+								{
+									if (_kbhit())
+									{
+										char c = _getch();
+										cl = true;// đã bấm
+										if (c == -32)
+										{
+											cl = true;// đã bấm
+											c = _getch();
+											if (c == 80 || c == 72)
+											{
+												break;
+											}
+											else
+											{
+												continue;
+											}
+
+										}
+										else
+										{
+											continue;
+										}
+									}
+								}
 								size.clear();
 								khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
-								size[0] = toupper(size[0]);
+								chuanHoa(size);
+								toa_do_o = vi_tri_x_xn;
+								box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
 								continue;
 							}
 							if (luaChonNgayThang == "Khoang ngay")
@@ -1546,10 +1600,37 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 									cout << "Ngay thu nhat va thu hai da chon khong phu hop!";
 									gotoXY(70, 30);
 									cout << "An mui ten len hoac xuong de tiep tuc!";
-									system("pause");
+									while (true)
+									{
+										if (_kbhit())
+										{
+											char c = _getch();
+											cl = true;// đã bấm
+											if (c == -32)
+											{
+												cl = true;// đã bấm
+												c = _getch();
+												if (c == 80 || c == 72)
+												{
+													break;
+												}
+												else
+												{
+													continue;
+												}
+
+											}
+											else
+											{
+												continue;
+											}
+										}
+									}
 									ngay_min.clear();
 									ngay_max.clear();
 									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									toa_do_o = vi_tri_x_xn;
+									box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
 									continue;
 								}
 								else if (check_date(ngay_min) == false)
@@ -1559,10 +1640,37 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 									cout << "Ngay thu nhat da chon khong phu hop!";
 									gotoXY(70, 30);
 									cout << "An mui ten len hoac xuong de tiep tuc!";
-									system("pause");
-									ngay_min.clear();
+									while (true)
+									{
+										if (_kbhit())
+										{
+											char c = _getch();
+											cl = true;// đã bấm
+											if (c == -32)
+											{
+												cl = true;// đã bấm
+												c = _getch();
+												if (c == 80 || c == 72)
+												{
+													break;
+												}
+												else
+												{
+													continue;
+												}
+
+											}
+											else
+											{
+												continue;
+											}
+										}
+									}									ngay_min.clear();
 									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
 									size[0] = toupper(size[0]);
+									toa_do_o = vi_tri_x_xn;
+									box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
+									continue;
 								}
 								else if (check_date(ngay_max) == false)
 								{
@@ -1571,11 +1679,40 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 									cout << "Ngay thu hai da chon khong phu hop!";
 									gotoXY(70, 30);
 									cout << "An mui ten len hoac xuong de tiep tuc!";
-									system("pause");
+									while (true)
+									{
+										if (_kbhit())
+										{
+											char c = _getch();
+											cl = true;// đã bấm
+											if (c == -32)
+											{
+												cl = true;// đã bấm
+												c = _getch();
+												if (c == 80 || c == 72)
+												{
+													break;
+												}
+												else
+												{
+													continue;
+												}
+
+											}
+											else
+											{
+												continue;
+											}
+										}
+									}
 									ngay_max.clear();
 									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									toa_do_o = vi_tri_x_xn;
+									box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
 									continue;
 								}
+								box(60, 8, 135, 44, 0, 0, 7, "");
+								return;
 							}
 							else if (luaChonNgayThang == "Ngay thang nam cu the")
 							{
@@ -1586,11 +1723,40 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 									cout << "Ngay da chon da chon khong phu hop!";
 									gotoXY(70, 30);
 									cout << "An mui ten len hoac xuong de tiep tuc!";
-									system("pause");
+									while (true)
+									{
+										if (_kbhit())
+										{
+											char c = _getch();
+											cl = true;// đã bấm
+											if (c == -32)
+											{
+												cl = true;// đã bấm
+												c = _getch();
+												if (c == 80 || c == 72)
+												{
+													break;
+												}
+												else
+												{
+													continue;
+												}
+
+											}
+											else
+											{
+												continue;
+											}
+										}
+									}
 									ngay_min.clear();
 									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									toa_do_o = vi_tri_x_xn;
+									box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
 									continue;
 								}
+								box(60, 8, 135, 44, 0, 0, 7, "");
+								return;
 							}
 							else if (luaChonNgayThang == "Thang")
 							{
@@ -1601,9 +1767,36 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 									cout << "Thang da chon da chon khong phu hop!";
 									gotoXY(70, 30);
 									cout << "An mui ten len hoac xuong de tiep tuc!";
-									system("pause");
+									while (true)
+									{
+										if (_kbhit())
+										{
+											char c = _getch();
+											cl = true;// đã bấm
+											if (c == -32)
+											{
+												cl = true;// đã bấm
+												c = _getch();
+												if (c == 80 || c == 72)
+												{
+													break;
+												}
+												else
+												{
+													continue;
+												}
+
+											}
+											else
+											{
+												continue;
+											}
+										}
+									}
 									thang_nam.clear();
 									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									toa_do_o = vi_tri_x_xn;
+									box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
 									continue;
 								}
 								if (stoi(thang_nam) > 12)
@@ -1613,11 +1806,40 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 									cout << "Ngay da chon da chon khong phu hop!";
 									gotoXY(70, 30);
 									cout << "An mui ten len hoac xuong de tiep tuc!";
-									system("pause");
+									while (true)
+									{
+										if (_kbhit())
+										{
+											char c = _getch();
+											cl = true;// đã bấm
+											if (c == -32)
+											{
+												cl = true;// đã bấm
+												c = _getch();
+												if (c == 80 || c == 72)
+												{
+													break;
+												}
+												else
+												{
+													continue;
+												}
+
+											}
+											else
+											{
+												continue;
+											}
+										}
+									}
 									thang_nam.clear();
 									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									toa_do_o = vi_tri_x_xn;
+									box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
 									continue;
 								}
+								box(60, 8, 135, 44, 0, 0, 7, "");
+								return;
 							}
 							else if (luaChonNgayThang == "Nam")
 							{
@@ -1628,11 +1850,45 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 									cout << "Nam da chon da chon khong phu hop!";
 									gotoXY(70, 30);
 									cout << "An mui ten len hoac xuong de tiep tuc!";
-									system("pause");
+									while (true)
+									{
+										if (_kbhit())
+										{
+											char c = _getch();
+											cl = true;// đã bấm
+											if (c == -32)
+											{
+												cl = true;// đã bấm
+												c = _getch();
+												if (c == 80 || c == 72)
+												{
+													break;
+												}
+												else
+												{
+													continue;
+												}
+
+											}
+											else
+											{
+												continue;
+											}
+										}
+									}
 									thang_nam.clear();
 									khung_chon_bo_loc(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max, da_chon_menu);
+									toa_do_o = vi_tri_x_xn;
+									box(vi_tri_x_xn, vi_tri_y_xn, 11, 2, 11, 70, 7, "  Xac nhan");
 									continue;
 								}
+								box(60, 8, 135, 44, 0, 0, 7, "");
+								return;
+							}
+							else
+							{
+								box(60, 8, 135, 44, 0, 0, 7, "");
+								return;
 							}
 						}
 					}
@@ -1652,6 +1908,7 @@ void loc_hoa_don(string& size, string& luaChonNgayThang, string& thang_nam, stri
 					else if (toa_do_o == 190)
 					{
 						chon_thoat_trong_bo_loc = true;
+						box(60, 8, 135, 44, 0, 0, 7, "");
 						return;
 					}
 				}
@@ -2418,6 +2675,7 @@ bool khung_chon_doi_bo_loc()
 {
 	bool cl = true;
 	int vi_tri_x = 102;
+	box(59, 2, 145, 50, 0, 0, 0, "");
 	box(90, 14, 81, 21, 11, 0, 7, "");
 	gotoXY(117, 21);
 	SetColor(12);
@@ -3616,14 +3874,13 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			{
 				if (stoi(thang_nam) == stoi(k->data.ngay_lap_hd.substr(3, 2)))
 				{
-					tam.push_back(k->data);
+					ds_co_dk.push_back(k->data);
 					tong_tien += k->data.tong_tien;
 				}
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -3668,14 +3925,13 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			{
 				if (stoi(thang_nam) == stoi(k->data.ngay_lap_hd.substr(6, 4)) )
 				{
-					tam.push_back(k->data);
+					ds_co_dk.push_back(k->data);
 					tong_tien += k->data.tong_tien;
 				}
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -3720,14 +3976,13 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			{
 				if (thang_nam == k->data.ngay_lap_hd)
 				{
-					tam.push_back(k->data);
+					ds_co_dk.push_back(k->data);
 					tong_tien += k->data.tong_tien;
 				}
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -3764,7 +4019,7 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 				}
 			}
 		}
-		else if (luaChonNgayThang == "Ngay thang nam cu the")
+		else if (luaChonNgayThang == "Ngay hien tai")
 		{
 			vector <HoaDon> ds_co_dk;
 			vector <HoaDon> tam;
@@ -3774,14 +4029,13 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			{
 				if (str == k->data.ngay_lap_hd)
 				{
-					tam.push_back(k->data);
+					ds_co_dk.push_back(k->data);
 					tong_tien += k->data.tong_tien;
 				}
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -3838,8 +4092,7 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -3877,6 +4130,57 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			}
 		}
 	}
+	else if (luaChonNgayThang == "Tat ca")
+	{
+		vector <HoaDon> ds_co_dk;
+		vector <HoaDon> tam;
+		for (node_hoa_don* k = ad.quan_li_ds_hoa_don_nhap.pHead; k != NULL; k = k->pNext)
+		{
+			if (size == k->data.thong_tin_hang.size)
+			{
+				ds_co_dk.push_back(k->data);
+				tong_tien += k->data.tong_tien;
+			}
+		}
+		if (ds_co_dk.size() == 0)
+		{
+			return;
+		}
+		int dem = 0;
+		if (ds_co_dk.size() % 4 == 0)
+		{
+			trang = (ds_co_dk.size() / 4);
+		}
+		else
+		{
+			trang = (ds_co_dk.size() / 4) + 1;
+		}
+		for (int i = 0; i < ds_co_dk.size(); i++)
+		{
+			dem++;
+			if (trang - ds_tam.size() == 1)
+			{
+				if (dem > ds_tam.size() * 4)
+				{
+					if (i == ds_co_dk.size() - 1)
+					{
+						tam.push_back(ds_co_dk.at(i));
+						ds_tam.push_back(tam);
+						tam.clear();
+						break;
+					}
+					tam.push_back(ds_co_dk.at(i));
+					continue;
+				}
+			}
+			tam.push_back(ds_co_dk.at(i));
+			if (tam.size() == 4)
+			{
+				ds_tam.push_back(tam);
+				tam.clear();
+			}
+		}
+	}
 	else
 	{
 		if (luaChonNgayThang == "Thang")
@@ -3887,14 +4191,13 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			{
 				if (stoi(thang_nam) == stoi(k->data.ngay_lap_hd.substr(3, 2)) && size == k->data.thong_tin_hang.size)
 				{
-					tam.push_back(k->data);
+					ds_co_dk.push_back(k->data);
 					tong_tien += k->data.tong_tien;
 				}
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -3939,14 +4242,13 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			{
 				if (stoi(thang_nam) == stoi(k->data.ngay_lap_hd.substr(6, 4)) && size == k->data.thong_tin_hang.size)
 				{
-					tam.push_back(k->data);
+					ds_co_dk.push_back(k->data);
 					tong_tien += k->data.tong_tien;
 				}
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -3997,8 +4299,7 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -4045,14 +4346,13 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 			{
 				if (str == k->data.ngay_lap_hd && size == k->data.thong_tin_hang.size)
 				{
-					tam.push_back(k->data);
+					ds_co_dk.push_back(k->data);
 					tong_tien += k->data.tong_tien;
 				}
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -4103,14 +4403,13 @@ void lay_ds_trang_hd_nhap(Admin ad, int& trang, vector < vector <HoaDon> >& ds_t
 				tam3 = tinh_giay_cua_ngay_nhap_tu_nam_1900(k->data.ngay_lap_hd);
 				if (min <= tam3 && tam3 <= max && size == k->data.thong_tin_hang.size)
 				{
-					tam.push_back(k->data);
+					ds_co_dk.push_back(k->data);
 					tong_tien += k->data.tong_tien;
 				}
 			}
 			if (ds_co_dk.size() == 0)
 			{
-				gotoXY(vi_tri_x, vi_tri_y);
-				cout << "Khong co hoa don theo tim kiem";
+				return;
 			}
 			int dem = 0;
 			if (ds_co_dk.size() % 4 == 0)
@@ -4233,10 +4532,6 @@ void xuat_hoa_don_nhap_hang(int vi_tri_x, int vi_tri_y, HoaDon a, int mau_khung)
 void xuat_1_trang_hd_nhap_hang(int trang_ht, vector < vector <HoaDon> > ds_tam)
 {
 	int tt = 0;
-	box(118, 45, 5, 2, 11, 1, 11, " <<");
-	box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
-	box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-	box(190, 50, 10, 2, 11, 3, 11, "  Esc");
 	for (int i = 0; i < 2; i++)
 	{
 		for (int j = 0; j < 2; j++)
@@ -4252,1669 +4547,2042 @@ void xuat_1_trang_hd_nhap_hang(int trang_ht, vector < vector <HoaDon> > ds_tam)
 	}
 }
 
-void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon> >& ds_tam, bool& qua_trang, bool& lui_trang, bool& thoat,int &trang, string luaChonNgayThang, string size, string ngay_min, string ngay_max, string thang_nam, long long &tong_tien)
+void xu_li_1_trang_hd_nhap_hang(Admin& ad, int trang_ht, vector < vector <HoaDon> >& ds_tam, bool& qua_trang, bool& lui_trang, bool& thoat,int &trang, string luaChonNgayThang, string size, string ngay_min, string ngay_max, string thang_nam, long long &tong_tien, bool &chon_lai_bo_loc)
 {
 	bool kt = true;
 	bool cl = true;
 	int vi_tri_x = 65;
 	int vi_tri_y = 7;
+	SetColor(12);
 	gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
 	xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-	if (ds_tam.size() == 1)
+	while (true)
 	{
-		if (ds_tam.at(trang_ht - 1).size() == 4)
+		if (ds_tam.size() == 1)
 		{
-			while (kt == true)
+			box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+			box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+			box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+			if (ds_tam.at(trang_ht - 1).size() == 4)
 			{
-				if (_kbhit())
+				while (kt == true)
 				{
-					char c = _getch();
-					//============== Xử lí 4 phím mũi tên ============================
-					if (c == -32)
+					if (_kbhit())
 					{
-						cl = true;// đã bấm
-						c = _getch();
-						if (c == 77) // phải
+						char c = _getch();
+						//============== Xử lí 4 phím mũi tên ============================
+						if (c == -32)
+						{
+							cl = true;// đã bấm
+							c = _getch();
+							if (c == 77) // phải
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 135;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 24)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								}
+ 								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+							}
+							else if (c == 75) // trái 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 150;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 24)
+								{
+									vi_tri_x = 65;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+							}
+							else if (c == 80) // xuống
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 24)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+							}
+							else if (c == 72) // lên 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 24)
+								{
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+							}
+						}
+						//================== Xử lí enter =================================
+						else if (c == 13)
 						{
 							if (vi_tri_x == 65 && vi_tri_y == 7)
 							{
-								vi_tri_x = 135;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 135 && vi_tri_y == 7)
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 65 && vi_tri_y == 24)
 							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 135 && vi_tri_y == 24)
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
- 							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(3).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-						}
-						else if (c == 75) // trái 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
 								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+								break;
 							}
-							else if (vi_tri_x == 135 && vi_tri_y == 24)
+							else if (vi_tri_x == 150 && vi_tri_y == 50)
 							{
-								vi_tri_x = 65;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								chon_lai_bo_loc = true;
+								return;
 							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
+							else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
 							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								thoat = true;
+								return;
 							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(130, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 80) // xuống
-						{
-							if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 24)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 72) // lên 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 24)
-							{
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-						}
-					}
-					//================== Xử lí enter =================================
-					else if (c == 13)
-					{
-						if (vi_tri_x == 65 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 135 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 65 && vi_tri_y == 24)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 135 && vi_tri_y == 24)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(3).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
-						{
-							thoat = true;
-							return;
 						}
 					}
 				}
 			}
-		}
-		else if (ds_tam.at(trang_ht - 1).size() == 3)
-		{
-			while (kt == true)
+			else if (ds_tam.at(trang_ht - 1).size() == 3)
 			{
-				if (_kbhit())
+				while (kt == true)
 				{
-					char c = _getch();
-					//============== Xử lí 4 phím mũi tên ============================
-					if (c == -32)
+					if (_kbhit())
 					{
-						cl = true;// đã bấm
-						c = _getch();
-						if (c == 77) // phải
+						char c = _getch();
+						//============== Xử lí 4 phím mũi tên ============================
+						if (c == -32)
+						{
+							cl = true;// đã bấm
+							c = _getch();
+							if (c == 77) // phải
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 135;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 190;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+							}
+							else if (c == 75) // trái 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 150;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								}
+							}
+							else if (c == 80) // xuống
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+							}
+							else if (c == 72) // lên 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+							}
+						}
+						//================== Xử lí enter =================================
+						else if (c == 13)
 						{
 							if (vi_tri_x == 65 && vi_tri_y == 7)
 							{
-								vi_tri_x = 135;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 135 && vi_tri_y == 7)
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 65 && vi_tri_y == 24)
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-						}
-						else if (c == 75) // trái 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
 								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								box(150, 50, 20, 2, 11, 3, 11, " Chon lai bo loc");
+								break;
 							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
+							else if (vi_tri_x == 150 && vi_tri_y == 50)
 							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								chon_lai_bo_loc = true;
+								return;
 							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
+							else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								thoat = true;
+								return;
 							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 80) // xuống
-						{
-							if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 72) // lên 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-						}
-					}
-					//================== Xử lí enter =================================
-					else if (c == 13)
-					{
-						if (vi_tri_x == 65 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 135 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 65 && vi_tri_y == 24)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
-						{
-							thoat = true;
-							return;
 						}
 					}
 				}
 			}
-		}
-		else if (ds_tam.at(trang_ht - 1).size() == 2)
-		{
-			while (kt == true)
+			else if (ds_tam.at(trang_ht - 1).size() == 2)
 			{
-				if (_kbhit())
+				while (kt == true)
 				{
-					char c = _getch();
-					//============== Xử lí 4 phím mũi tên ============================
-					if (c == -32)
+					if (_kbhit())
 					{
-						cl = true;// đã bấm
-						c = _getch();
-						if (c == 77) // phải
+						char c = _getch();
+						//============== Xử lí 4 phím mũi tên ============================
+						if (c == -32)
+						{
+							cl = true;// đã bấm
+							c = _getch();
+							if (c == 77) // phải
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 135;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 190;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+							}
+							else if (c == 75) // trái 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 150;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								}
+							}
+							else if (c == 80) // xuống
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+							}
+							else if (c == 72) // lên 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								}
+							}
+						}
+						//================== Xử lí enter =================================
+						else if (c == 13)
 						{
 							if (vi_tri_x == 65 && vi_tri_y == 7)
 							{
-								vi_tri_x = 135;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-						}
-						else if (c == 75) // trái 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
 								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 135 && vi_tri_y == 7)
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 80) // xuống
-						{
-							if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
 								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
+							else if (vi_tri_x == 150 && vi_tri_y == 50)
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								chon_lai_bo_loc = true;
+								return;
 							}
-						}
-						else if (c == 72) // lên 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
+							else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
 							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								thoat = true;
+								return;
 							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-					}
-					//================== Xử lí enter =================================
-					else if (c == 13)
-					{
-						if (vi_tri_x == 65 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 135 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
-						{
-							thoat = true;
-							return;
 						}
 					}
 				}
 			}
-		}
-		else if (ds_tam.at(trang_ht - 1).size() == 1)
-		{
-			while (kt == true)
+			else if (ds_tam.at(trang_ht - 1).size() == 1)
 			{
-				if (_kbhit())
+				while (kt == true)
 				{
-					char c = _getch();
-					//============== Xử lí 4 phím mũi tên ============================
-					if (c == -32)
+					if (_kbhit())
 					{
-						cl = true;// đã bấm
-						c = _getch();
-						if (c == 77) // phải
+						char c = _getch();
+						//============== Xử lí 4 phím mũi tên ============================
+						if (c == -32)
+						{
+							cl = true;// đã bấm
+							c = _getch();
+							if (c == 77) // phải
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 190;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+							}
+							else if (c == 75) // trái 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 150;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								}
+							}
+							else if (c == 80) // xuống
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+							}
+							else if (c == 72) // lên 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								}
+							}
+						}
+						//================== Xử lí enter =================================
+						else if (c == 13)
 						{
 							if (vi_tri_x == 65 && vi_tri_y == 7)
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-						}
-						else if (c == 75) // trái 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
 								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
+							else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								thoat = true;
+								return;
 							}
-						}
-						else if (c == 80) // xuống
-						{
-							if (vi_tri_x == 65 && vi_tri_y == 7)
+							else if (vi_tri_x == 150 && vi_tri_y == 50) // thoát
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								chon_lai_bo_loc = true;
+								return;
 							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-						}
-						else if (c == 72) // lên 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-					}
-					//================== Xử lí enter =================================
-					else if (c == 13)
-					{
-						if (vi_tri_x == 65 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
-						{
-							thoat = true;
-							return;
 						}
 					}
 				}
 			}
-		}
 
-	}
-	else
-	{
-		if (ds_tam.at(trang_ht - 1).size() == 4)
+		}
+		else
 		{
-			while (kt == true)
+			box(118, 45, 5, 2, 11, 1, 11, " <<");
+			box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+			box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+			box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+			box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+			if (ds_tam.at(trang_ht - 1).size() == 4)
 			{
-				if (_kbhit())
+				while (kt == true)
 				{
-					char c = _getch();
-					//============== Xử lí 4 phím mũi tên ============================
-					if (c == -32)
+					if (_kbhit())
 					{
-						cl = true;// đã bấm
-						c = _getch();
-						if (c == 77) // phải
+						char c = _getch();
+						//============== Xử lí 4 phím mũi tên ============================
+						if (c == -32)
 						{
-							if (vi_tri_x == 65 && vi_tri_y == 7)
+							cl = true;// đã bấm
+							c = _getch();
+							if (c == 77) // phải
 							{
-								vi_tri_x = 135;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 24)
-							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 118 + 13;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 135;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 24)
+								{
+									vi_tri_x = 118;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 118 + 13;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
 
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 190;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
 							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+							else if (c == 75) // trái 
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 150;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 118;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 24)
+								{
+									vi_tri_x = 65;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
 							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
+							else if (c == 80) // xuống
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 118;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									box(118, 45, 5, 2, 11, 1, 12, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 24)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
+									box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+							}
+							else if (c == 72) // lên 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 24)
+								{
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								}
 							}
 						}
-						else if (c == 75) // trái 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 118;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 24)
-							{
-								vi_tri_x = 65;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 80) // xuống
+						//================== Xử lí enter =================================
+						else if (c == 13)
 						{
 							if (vi_tri_x == 65 && vi_tri_y == 7)
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
-							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 135 && vi_tri_y == 7)
 							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 24)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
 								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 72) // lên 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
 								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 24)
-							{
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
 							}
 							else if (vi_tri_x == 65 && vi_tri_y == 24)
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 24, ds_tam.at(trang_ht - 1).at(3), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
 								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
 							}
-						}
-					}
-					//================== Xử lí enter =================================
-					else if (c == 13)
-					{
-						if (vi_tri_x == 65 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 135 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 65 && vi_tri_y == 24)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 135 && vi_tri_y == 24)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(3).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 118 && vi_tri_y == 45) // lùi trang
-						{
-							lui_trang = true;
-							return;
-						}
-						else if (vi_tri_x == 118 + 13 && vi_tri_y == 45) // qua trang
-						{
-							qua_trang = true;
-							return;
-						}
-						else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
-						{
-							thoat = true;
-							return;
+							else if (vi_tri_x == 135 && vi_tri_y == 24)
+							{
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(3).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+							}
+							else if (vi_tri_x == 118 && vi_tri_y == 45) // lùi trang
+							{
+								lui_trang = true;
+								return;
+							}
+							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45) // qua trang
+							{
+								qua_trang = true;
+								return;
+							}
+							else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
+							{
+								thoat = true;
+								return;
+							}
+							else if (vi_tri_x == 150 && vi_tri_y == 50) // thoát
+							{
+								chon_lai_bo_loc = true;
+								return;
+							}
 						}
 					}
 				}
 			}
-		}
-		else if (ds_tam.at(trang_ht - 1).size() == 3)
-		{
-			while (kt == true)
+			else if (ds_tam.at(trang_ht - 1).size() == 3)
 			{
-				if (_kbhit())
+				while (kt == true)
 				{
-					char c = _getch();
-					//============== Xử lí 4 phím mũi tên ============================
-					if (c == -32)
+					if (_kbhit())
 					{
-						cl = true;// đã bấm
-						c = _getch();
-						if (c == 77) // phải
+						char c = _getch();
+						//============== Xử lí 4 phím mũi tên ============================
+						if (c == -32)
+						{
+							cl = true;// đã bấm
+							c = _getch();
+							if (c == 77) // phải
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 135;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 118;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 118 + 13;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 190;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+							}
+							else if (c == 75) // trái 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 150;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 118;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+							}
+							else if (c == 80) // xuống
+							{
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+								else if (vi_tri_x == 60 && vi_tri_y == 24)
+								{
+									vi_tri_x = 118;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+							}
+							else if (c == 72) // lên 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 24)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 24;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								}
+							}
+						}
+						//================== Xử lí enter =================================
+						else if (c == 13)
 						{
 							if (vi_tri_x == 65 && vi_tri_y == 7)
 							{
-								vi_tri_x = 135;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 135 && vi_tri_y == 7)
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 65 && vi_tri_y == 24)
 							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 118 + 13;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-						}
-						else if (c == 75) // trái 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 118;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
 								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 80) // xuống
-						{
-							if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
-							}
-							else if (vi_tri_x == 60 && vi_tri_y == 24)
-							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
 								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 72) // lên 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
 								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+							else if (vi_tri_x == 118 && vi_tri_y == 45) // lùi trang
 							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								lui_trang = true;
+								return;
 							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
+							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45) // qua trang
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								qua_trang = true;
+								return;
 							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
+							else if (vi_tri_x == 150 && vi_tri_y == 50)
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								chon_lai_bo_loc = true;
+								return;
 							}
-							else if (vi_tri_x == 65 && vi_tri_y == 24)
+							else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 11);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								thoat = true;
+								return;
 							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 24;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 24, ds_tam.at(trang_ht - 1).at(2), 12);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-							}
-						}
-					}
-					//================== Xử lí enter =================================
-					else if (c == 13)
-					{
-						if (vi_tri_x == 65 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 135 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 65 && vi_tri_y == 24)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(2).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 118 && vi_tri_y == 45) // lùi trang
-						{
-							lui_trang = true;
-							return;
-						}
-						else if (vi_tri_x == 118 + 13 && vi_tri_y == 45) // qua trang
-						{
-							qua_trang = true;
-							return;
-						}
-						else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
-						{
-							thoat = true;
-							return;
 						}
 					}
 				}
 			}
-		}
-		else if (ds_tam.at(trang_ht - 1).size() == 2)
-		{
-			while (kt == true)
+			else if (ds_tam.at(trang_ht - 1).size() == 2)
 			{
-				if (_kbhit())
+				while (kt == true)
 				{
-					char c = _getch();
-					//============== Xử lí 4 phím mũi tên ============================
-					if (c == -32)
+					if (_kbhit())
 					{
-						cl = true;// đã bấm
-						c = _getch();
-						if (c == 77) // phải
+						char c = _getch();
+						//============== Xử lí 4 phím mũi tên ============================
+						if (c == -32)
 						{
-							if (vi_tri_x == 65 && vi_tri_y == 7)
+							cl = true;// đã bấm
+							c = _getch();
+							if (c == 77) // phải
 							{
-								vi_tri_x = 135;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 118 + 13;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 135;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 118;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 118 + 13;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
 
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 190;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
 							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+							else if (c == 75) // trái 
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 150;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 118;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
 							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
+							else if (c == 80) // xuống
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 118;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+							}
+							else if (c == 72) // lên 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 135;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 135 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
 							}
 						}
-						else if (c == 75) // trái 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 118;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 80) // xuống
+						//================== Xử lí enter =================================
+						else if (c == 13)
 						{
 							if (vi_tri_x == 65 && vi_tri_y == 7)
 							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
 							else if (vi_tri_x == 135 && vi_tri_y == 7)
 							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 72) // lên 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 135;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 12);
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size, ngay_min, ngay_max, luaChonNgayThang, thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
 								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
+								box(118, 45, 5, 2, 11, 1, 11, " <<");
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
+								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
-							else if (vi_tri_x == 135 && vi_tri_y == 7)
+							else if (vi_tri_x == 118 && vi_tri_y == 45) // lùi trang
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(135, 7, ds_tam.at(trang_ht - 1).at(1), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								lui_trang = true;
+								return;
 							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
+							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45) // qua trang
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								qua_trang = true;
+								return;
 							}
-						}
-					}
-					//================== Xử lí enter =================================
-					else if (c == 13)
-					{
-						if (vi_tri_x == 65 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 135 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(1).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size, ngay_min, ngay_max, luaChonNgayThang, thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 118 && vi_tri_y == 45) // lùi trang
-						{
-							lui_trang = true;
-							return;
-						}
-						else if (vi_tri_x == 118 + 13 && vi_tri_y == 45) // qua trang
-						{
-							qua_trang = true;
-							return;
-						}
-						else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
-						{
-							thoat = true;
-							return;
+							else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
+							{
+								thoat = true;
+								return;
+							}
+							else if (vi_tri_x == 150 && vi_tri_y == 50)
+							{
+								chon_lai_bo_loc = true;
+								return;
+							}
 						}
 					}
 				}
 			}
-		}
-		else if (ds_tam.at(trang_ht - 1).size() == 1)
-		{
-			while (kt == true)
+			else if (ds_tam.at(trang_ht - 1).size() == 1)
 			{
-				if (_kbhit())
+				while (kt == true)
 				{
-					char c = _getch();
-					//============== Xử lí 4 phím mũi tên ============================
-					if (c == -32)
+					if (_kbhit())
 					{
-						cl = true;// đã bấm
-						c = _getch();
-						if (c == 77) // phải
+						char c = _getch();
+						//============== Xử lí 4 phím mũi tên ============================
+						if (c == -32)
 						{
-							if (vi_tri_x == 65 && vi_tri_y == 7)
+							cl = true;// đã bấm
+							c = _getch();
+							if (c == 77) // phải
 							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 118 + 13;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 118;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 118 + 13;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
 
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 190;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
 							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+							else if (c == 75) // trái 
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 150;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 118;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
 							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
+							else if (c == 80) // xuống
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 118;
+									vi_tri_y = 45;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(118, 45, 5, 2, 11, 70, 11, " <<");
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 150;
+									vi_tri_y = 50;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									box(150, 50, 20, 2, 11, 70, 11, " Chon lai bo loc");
+								}
+							}
+							else if (c == 72) // lên 
+							{
+								if (vi_tri_x == 190 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(190, 50, 10, 2, 11, 3, 11, "  Esc");
+									box(118 + 13, 45, 5, 2, 11, 70, 11, " >>");
+								}
+								else if (vi_tri_x == 150 && vi_tri_y == 50)
+								{
+									vi_tri_x = 118 + 13;
+									vi_tri_y = 45;
+									Sleep(200);
+									box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+									box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
+								}
+								else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+								{
+									vi_tri_x = 65;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 118 && vi_tri_y == 45)
+								{
+									vi_tri_x = 60;
+									vi_tri_y = 7;
+									Sleep(200);
+									box(118, 45, 5, 2, 11, 1, 11, " <<");
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								}
+								else if (vi_tri_x == 65 && vi_tri_y == 7)
+								{
+									vi_tri_x = 190;
+									vi_tri_y = 50;
+									Sleep(200);
+									xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
+									box(190, 50, 10, 2, 11, 70, 11, "  Esc");
+								}
 							}
 						}
-						else if (c == 75) // trái 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 118;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 80) // xuống
+						//================== Xử lí enter =================================
+						else if (c == 13)
 						{
 							if (vi_tri_x == 65 && vi_tri_y == 7)
 							{
-								vi_tri_x = 118;
-								vi_tri_y = 45;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(118, 45, 5, 2, 11, 1, 12, " <<");
-							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
+								menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
+								ds_tam.clear();
+								lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+								xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
 								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-							else if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
-							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
+								box(118 + 6, 45, 6, 2, 11, 1, 11, " " + to_string(trang_ht));
 								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
-							}
-						}
-						else if (c == 72) // lên 
-						{
-							if (vi_tri_x == 190 && vi_tri_y == 50)
-							{
-								vi_tri_x = 118 + 13;
-								vi_tri_y = 45;
-								Sleep(200);
 								box(190, 50, 10, 2, 11, 3, 11, "  Esc");
-								box(118 + 13, 45, 5, 2, 11, 1, 12, " >>");
+								box(150, 50, 20, 2, 11, 0, 11, " Chon lai bo loc");
+								break;
 							}
-							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45)
+							else if (vi_tri_x == 118 && vi_tri_y == 45) // lùi trang
 							{
-								vi_tri_x = 65;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(118 + 13, 45, 5, 2, 11, 1, 11, " >>");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								lui_trang = true;
+								return;
 							}
-							else if (vi_tri_x == 118 && vi_tri_y == 45)
+							else if (vi_tri_x == 118 + 13 && vi_tri_y == 45) // qua trang
 							{
-								vi_tri_x = 60;
-								vi_tri_y = 7;
-								Sleep(200);
-								box(118, 45, 5, 2, 11, 1, 11, " <<");
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
+								qua_trang = true;
+								return;
 							}
-							else if (vi_tri_x == 65 && vi_tri_y == 7)
+							else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
 							{
-								vi_tri_x = 190;
-								vi_tri_y = 50;
-								Sleep(200);
-								xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 11);
-								box(190, 50, 10, 2, 11, 3, 12, "  Esc");
+								thoat = true;
+								return;
 							}
-						}
-					}
-					//================== Xử lí enter =================================
-					else if (c == 13)
-					{
-						if (vi_tri_x == 65 && vi_tri_y == 7)
-						{
-							menu_sua_tt_hd(ds_tam.at(trang_ht - 1).at(0).ma_hoa_don, ad);
-							ds_tam.clear();
-							lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-							xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-							xuat_hoa_don_nhap_hang(65, 7, ds_tam.at(trang_ht - 1).at(0), 12);
-							gotoXY(98, 5); cout << "BAN CO MUON SUA HOA DON NAY? AN ENTER DE SUA HOA DON!";
-						}
-						else if (vi_tri_x == 118 && vi_tri_y == 45) // lùi trang
-						{
-							lui_trang = true;
-							return;
-						}
-						else if (vi_tri_x == 118 + 13 && vi_tri_y == 45) // qua trang
-						{
-							qua_trang = true;
-							return;
-						}
-						else if (vi_tri_x == 190 && vi_tri_y == 50) // thoát
-						{
-							thoat = true;
-							return;
+							else if (vi_tri_x == 150 && vi_tri_y == 50)
+							{
+								chon_lai_bo_loc = true;
+								return;
+							}
 						}
 					}
 				}
@@ -5931,6 +6599,7 @@ void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 	bool qua_trang = false;
 	bool lui_trang = false;
 	bool thoat = false;
+	bool chon_lai_bo_loc = false;
 	bool chon_thoat_trong_bo_loc = false;
 	string luaChonNgayThang;
 	string size;
@@ -5938,81 +6607,122 @@ void xuat_sua_ds_hoa_don_nhap(Admin& ad)
 	string ngay_max;
 	string thang_nam;
 	long long tong_tien;
-	loc_hoa_don(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max,chon_thoat_trong_bo_loc);
-	if (chon_thoat_trong_bo_loc == true)
+	while (true)
 	{
-		return;
-	}
-	vector < vector <HoaDon> > ds_tam;
-	lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
-	if (trang == 1)
-	{
+		loc_hoa_don(size, luaChonNgayThang, thang_nam, ngay_min, ngay_max,chon_thoat_trong_bo_loc);
+		if (chon_thoat_trong_bo_loc == true)
+		{
+			box(59, 2, 145, 50, 0, 0, 0, "");
+			return;
+		}
+		vector < vector <HoaDon> > ds_tam;
+		lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+		if (ds_tam.size() == 0)
+		{
+			if (khung_chon_doi_bo_loc() == true)
+			{
+				size.clear();
+				luaChonNgayThang.clear();
+				thang_nam.clear();
+				ngay_min.clear();
+				ngay_max.clear();
+				continue;
+			}
+			else
+			{
+				box(59, 2, 145, 50, 0, 0, 0, "");
+				return;
+			}
+		}
+		if (trang == 1)
+		{
+			box(59, 2, 145, 50, 0, 0, 0, "");
 			xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-			box(118, 42, 5, 2, 0, 0, 0, "");
-			box(118 + 13, 42, 5, 2, 0, 0, 0, "");
-			xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
-			ds_tam.clear();
-			lay_ds_trang_hd_nhap(ad, trang, ds_tam,size,ngay_min,ngay_max,luaChonNgayThang,thang_nam,tong_tien);
+			xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang,luaChonNgayThang, size, ngay_min, ngay_max, thang_nam, tong_tien,chon_lai_bo_loc);
 			if (thoat == true) // thoát
 			{
-				thoat == false;
+				thoat = false;
 				box(59, 5, 145, 53, 0, 0, 0, "");
 				return;
 			}
-	}
-	else
-	{
-		xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-		xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
-		while (true)
-		{
-			if (lui_trang == true) // mũi tên trái
+			else if (chon_lai_bo_loc == true)
 			{
-				if (trang_ht == 1)
-				{
-					Sleep(200);
-					box(60, 7, 134, 45, 0, 0, 7, ""); // xóa hiển thị ds đã in
-					lui_trang = false;
-					trang_ht = trang;
-					xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
-				}
-				else
-				{
-					Sleep(200);
-					box(60, 7, 134, 45, 0, 0, 7, "");
-					lui_trang = false;
-					trang_ht--;
-					xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
-				}
-			}
-			else if (qua_trang == true) // mũi tên phải 
-			{
-				if (trang_ht == trang)
-				{
-					Sleep(200);
-					box(60, 7, 134, 45, 0, 0, 7, "");
-					qua_trang = false;
-					trang_ht = 1;
-					xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
-				}
-				else
-				{
-					Sleep(200);
-					box(60, 7, 134, 40, 0, 0, 7, "");
-					qua_trang = false;
-					trang_ht++;
-					xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
-					xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat,trang, size, ngay_min, ngay_max, luaChonNgayThang, thang_nam, tong_tien);
-				}
-			}
-			else if (thoat == true) // thoát
-			{
-				thoat == false;
+				size.clear();
+				luaChonNgayThang.clear();
+				thang_nam.clear();
+				ngay_min.clear();
+				ngay_max.clear();
+				chon_lai_bo_loc = false;
 				box(59, 2, 145, 50, 0, 0, 0, "");
-				return;
+				continue;
+			}
+		}
+		else
+		{
+			box(59, 2, 145, 50, 0, 0, 0, "");
+			xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+			xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat, trang, luaChonNgayThang, size, ngay_min, ngay_max, thang_nam, tong_tien, chon_lai_bo_loc);
+			while (true)
+			{
+				if (lui_trang == true) // mũi tên trái
+				{
+					if (trang_ht == 1)
+					{
+						Sleep(200);
+						box(60, 7, 134, 45, 0, 0, 7, ""); // xóa hiển thị ds đã in
+						lui_trang = false;
+						trang_ht = trang;
+						xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+						xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat, trang, luaChonNgayThang, size, ngay_min, ngay_max, thang_nam, tong_tien, chon_lai_bo_loc);
+					}
+					else
+					{
+						Sleep(200);
+						box(60, 7, 134, 45, 0, 0, 7, "");
+						lui_trang = false;
+						trang_ht--;
+						xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+						xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat, trang, luaChonNgayThang, size, ngay_min, ngay_max, thang_nam, tong_tien, chon_lai_bo_loc);
+					}
+				}
+				else if (qua_trang == true) // mũi tên phải 
+				{
+					if (trang_ht == trang)
+					{
+						Sleep(200);
+						box(60, 7, 134, 45, 0, 0, 7, "");
+						qua_trang = false;
+						trang_ht = 1;
+						xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+						xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat, trang, luaChonNgayThang, size, ngay_min, ngay_max, thang_nam, tong_tien, chon_lai_bo_loc);
+					}
+					else
+					{
+						Sleep(200);
+						box(60, 7, 134, 40, 0, 0, 7, "");
+						qua_trang = false;
+						trang_ht++;
+						xuat_1_trang_hd_nhap_hang(trang_ht, ds_tam);
+						xu_li_1_trang_hd_nhap_hang(ad, trang_ht, ds_tam, qua_trang, lui_trang, thoat, trang, luaChonNgayThang, size, ngay_min, ngay_max, thang_nam, tong_tien, chon_lai_bo_loc);
+					}
+				}
+				else if (thoat == true) // thoát
+				{
+					thoat = false;
+					box(59, 2, 145, 50, 0, 0, 0, "");
+					return;
+				}
+				else if (chon_lai_bo_loc == true) 
+				{
+					size.clear();
+					luaChonNgayThang.clear();
+					thang_nam.clear();
+					ngay_min.clear();
+					ngay_max.clear();
+					box(59, 2, 145, 50, 0, 0, 0, "");
+					chon_lai_bo_loc = false;
+					break;
+				}
 			}
 		}
 	}
